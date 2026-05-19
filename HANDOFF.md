@@ -1,6 +1,6 @@
 # Stelar Platform — Handoff
 
-**Updated:** 2026-05-19 (Phase 4 prep complete: images pushed)  
+**Updated:** 2026-05-19 (Phase 4 deploy in progress)  
 **Host:** Azure VM `gemmaco-key` · eastus2 · Standard_E8s_v3  
 **Repo:** `/mnt/gemma4/stelar-platform` → `git@github.com:robs46859-eng/stelar-platform.git`  
 **Branch:** `main` (protected) · `staging` (integration buffer)
@@ -15,7 +15,7 @@
 | 1 — VM Infrastructure | ✅ Complete | Ollama 0.24, Gemma 4 26B loaded, inference bridge active |
 | 2 — Azure Cloud | ✅ Complete | All infra provisioned, all 10 DB schemas created, all secrets in KV |
 | 3 — Core Services | ✅ Complete | Gateway live + responding, stelarpeople TS, Bicep, Arkham, hermes paths |
-| 4 — Deploy to Container Apps | 🟡 Ready to deploy | Images pushed to ACR; run Container Apps deployment |
+| 4 — Deploy to Container Apps | 🟡 In progress | Images pushed; first deploy timed out on gateway revision; gateway identity roles added; redeploy running |
 | 5 — Web Apps | 🟡 Partial | stelarvacay-web scaffolded; stelargem-web, stelarpeople-web, dashboard not started |
 | 6 — AiSquad | 🟡 Partial | Paths fixed, monitors not wired, Chrome sandbox broken |
 | 7 — Security | ❌ Not started | Private endpoints, VNET integration |
@@ -74,6 +74,23 @@ Completed 2026-05-19:
   - `acrstelarprod.azurecr.io/stelarvacay-web:latest`
   - `acrstelarprod.azurecr.io/stelarpeople-api:latest`
 
+## Phase 4 Deploy Attempt — In Progress
+
+Started 2026-05-19 from the local Mac because the Azure VM does not have Azure CLI installed (`az: command not found`).
+
+Operational notes:
+- Copied `infra/containerapps/*.bicep` from the VM repo to `/private/tmp/stelar-containerapps` on the Mac.
+- Installed Bicep CLI v0.43.8 at `~/.azure/bin/bicep`; Azure CLI now reports the Bicep version correctly.
+- Ran `az deployment group create` against `rg-stelar-prod` with `main.bicep`.
+- First deployment created the `fullstack-gateway` Container App shell but timed out before a revision was provisioned (`ContainerAppOperationError: Operation expired`).
+- The likely cause was missing managed identity permissions on the newly created gateway identity.
+- Added gateway system identity `cde15954-206f-4bdf-bee4-ff6979aace89` roles:
+  - `AcrPull` on `acrstelarprod`
+  - `Key Vault Secrets User` on `kv-stelar-prod`
+- Redeploy was started after the role assignments.
+
+Do not run `infra/containerapps/deploy.sh` on the VM until Azure CLI is installed there. Run deployment from a machine with Azure CLI + Bicep, or install `az` on `gemmaco-key` first.
+
 ## Immediate Next Steps (Phase 4 — Deploy)
 
 ### 1. Deploy all services to Azure Container Apps
@@ -87,7 +104,7 @@ az deployment group create \
   --parameters containerAppsEnvName=cae-stelar-prod keyVaultName=kv-stelar-prod
 ```
 
-**Prerequisite status:** Complete — all four `:latest` images are in `acrstelarprod`.
+**Prerequisite status:** Complete — all four `:latest` images are in `acrstelarprod`. Gateway identity has `AcrPull` and `Key Vault Secrets User`; later app identities may need the same roles if their first revisions time out.
 
 ### 2. Wire gateway DATABASE_URL env var in Bicep
 Complete — `POSTGRES-URL-PSYCOPG` exists in Key Vault and `fullstack-gateway.bicep` maps it to `DATABASE_URL`.

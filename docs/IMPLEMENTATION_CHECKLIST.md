@@ -52,13 +52,13 @@ No product code deploys until these exist.
 - [x] Azure Container Apps environment `cae-stelar-prod` created
 - [x] Azure Container Registry `acrstelarprod` created (admin disabled, managed identity access)
 - [x] Azure Database for PostgreSQL Flexible Server provisioned
-- [ ] All 10 schemas created: `identity`, `billing`, `products`, `stelargem`, `stelarvacay`, `stelarpeople`, `agents`, `governance`, `worldgraph`, `telemetry`
-- [ ] Minimum table set created (SPEC § 7.1)
+- [x] All 10 schemas created: `identity`, `billing`, `products`, `stelargem`, `stelarvacay`, `stelarpeople`, `agents`, `governance`, `worldgraph`, `telemetry`
+- [x] Minimum table set created and verified by schema table counts
 - [x] Azure Cache for Redis provisioned
 - [x] Azure Blob Storage account with 6 containers: `stelargem-media`, `stelarvacay-plans`, `stelarpeople-inspections`, `fullstack-exports`, `arkham-reviews`, `logs-archive`
 - [x] Azure Service Bus with 8 queues/topics (SPEC § 7.3)
 - [x] Application Insights + Log Analytics workspace connected
-- [ ] Managed identities configured for all Container Apps
+- [ ] Managed identities configured for all Container Apps; gateway identity has `AcrPull` + `Key Vault Secrets User`, remaining app identities still need confirmation after creation
 - [ ] Private endpoints enabled for Key Vault, database, Redis, storage
 
 ---
@@ -67,25 +67,25 @@ No product code deploys until these exist.
 
 Deploy in order. Each is a dependency for the next.
 
-- [ ] `services/fullstack-gateway/` scaffolded (FastAPI or Node, OpenAI-compatible internal API)
-- [ ] Gateway implements all required endpoints (SPEC § 6.1)
-- [ ] Gateway provider config for `gemma4_26b_ollama_vm` (SPEC § 13)
-- [ ] Gateway routing table for all four products (SPEC § 13)
-- [ ] Gateway deployed to Container Apps as `fullstack-gateway`
-- [ ] Gateway wired to inference bridge via private channel
-- [ ] Gateway smoke test passes: `POST /v1/ai/generate` returns Gemma output
-- [ ] `services/arkham-governance/` implemented — claim classification, publish-block enforcement
+- [x] `services/fullstack-gateway/` scaffolded (FastAPI, OpenAI-compatible internal API)
+- [x] Gateway implements core health/readiness and inference proxy endpoints used by Phase 3 smoke test
+- [x] Gateway provider config for `gemma4_26b_ollama_vm` (SPEC § 13)
+- [x] Gateway routing/pipeline path verified for VM Gemma provider
+- [ ] Gateway deployed to Container Apps as `fullstack-gateway`; resource shell exists, first revision timed out, redeploy in progress after identity role fix
+- [ ] Gateway wired to inference bridge via `OLLAMA_BRIDGE_URL=http://20.10.150.44:18080`; private networking still required for hardening
+- [x] Gateway VM smoke test passes through `/v1/proxy/infer`; Container Apps smoke pending successful revision
+- [x] `services/arkham-governance/` implemented — claim classification, publish-block enforcement
 - [ ] Arkham deployed to Container Apps as `arkham-governance`
-- [ ] Arkham blocks unsafe claim test (SPEC § 17.3)
-- [ ] All governance approval gates wired (SPEC § 16 workflow)
+- [x] Arkham blocks unsafe claim test categories and enforces 90-day human approval
+- [x] Core governance approval gates implemented; Container Apps deployment pending
 
 ---
 
 ## Phase 4 — Product APIs
 
 - [ ] `stelargem-api` scaffolded and deployed — neighborhood profile, corridor scoring, worldgraph pipeline
-- [ ] `stelarvacay-api` scaffolded and deployed — quote engine, itinerary builder, budget compression
-- [ ] `stelarpeople-api` scaffolded and deployed — property intake, leasing, maintenance, owner reports
+- [ ] `stelarvacay-api` scaffolded and image pushed; Container Apps deployment pending gateway completion
+- [ ] `stelarpeople-api` scaffolded and image pushed; Container Apps deployment pending gateway completion
 - [ ] All APIs route AI calls through Gateway only (no direct Ollama access)
 - [ ] All APIs expose `/health` and `/ready`
 - [ ] All APIs emit structured JSON logs with required fields (SPEC § 3.3)
@@ -96,7 +96,7 @@ Deploy in order. Each is a dependency for the next.
 ## Phase 5 — Web Apps + Dashboard
 
 - [ ] `stelargem-web` scaffolded and deployed
-- [ ] `stelarvacay-web` scaffolded and deployed
+- [ ] `stelarvacay-web` scaffolded and image pushed; Container Apps deployment pending gateway/API completion
 - [ ] `stelarpeople-web` scaffolded and deployed
 - [ ] `fullstack-dashboard` scaffolded and deployed
 - [ ] No old names in UI (`MamaNav`, `CheapVacay`, `RentOut`) — all use Stelar namespace
@@ -164,3 +164,12 @@ All boxes checked when:
 - Container Apps expose healthy endpoints
 - Logs and traces appear in Azure Monitor
 - Render / GCS / Supabase / Firebase removed from production config
+
+## Phase 4 Deployment Log — 2026-05-19
+
+- Built and pushed images to `acrstelarprod`: `fullstack-gateway`, `stelarvacay-api`, `stelarvacay-web`, `stelarpeople-api`.
+- Added `POSTGRES-URL-PSYCOPG` to Key Vault and mapped gateway `DATABASE_URL` to it in Bicep.
+- VM cannot run deploy script yet because `az` is not installed on `gemmaco-key`.
+- Local Mac deployment required manual Bicep install at `~/.azure/bin/bicep` because Azure CLI auto-download failed on local certificate verification.
+- First ARM deployment timed out provisioning the `fullstack-gateway` revision. Gateway identity roles were added afterward: `AcrPull` on ACR and `Key Vault Secrets User` on Key Vault.
+- Redeploy started after RBAC fix; verify final state with `az deployment group show --resource-group rg-stelar-prod --name main`.

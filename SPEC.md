@@ -15,6 +15,16 @@
 
 ---
 
+## 0.1 Current Deployment Status — 2026-05-19
+
+Phase 4 deployment preparation is complete: Docker images are pushed to Azure Container Registry and Bicep templates are committed. Deployment is being run from the local Mac because `gemmaco-key` does not currently have Azure CLI installed.
+
+Operational deltas from target state:
+- `fullstack-gateway` Container App resource exists, but first revision provisioning timed out before managed identity roles were added.
+- Gateway system identity `cde15954-206f-4bdf-bee4-ff6979aace89` now has `AcrPull` on `acrstelarprod` and `Key Vault Secrets User` on `kv-stelar-prod`.
+- Remaining Container App identities may need the same role assignments once created.
+- The gateway currently points at `http://20.10.150.44:18080`; this works only if VM/network/firewall rules allow it and should be replaced with a private channel for production hardening.
+
 ## 1. Purpose
 
 This specification defines the Azure-first implementation for the Stelar product ecosystem powered by Gemma 4 through Ollama. The architecture removes Render, GCS, Supabase, and Firebase from the production path and replaces them with Microsoft Azure services wherever practical.

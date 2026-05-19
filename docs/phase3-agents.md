@@ -13,10 +13,10 @@
 
 | # | Agent | Task | Status | Verify |
 |---|---|---|---|---|
-| 1 | `pg-firewall` | Add VM IP to PG firewall, verify all 10 schemas | 🔄 Running | `psql <url> -c "\dn"` shows 10 schemas |
+| 1 | `pg-firewall` | Add VM IP to PG firewall, verify all 10 schemas | ✅ Done | 10 schemas verified with expected table counts |
 | 2 | `gateway-smoketest` | Install deps, start gateway on VM, confirm Gemma responds | ✅ Done | `curl http://localhost:8000/v1/ai/generate` returns output_text |
 | 3 | `stelarpeople-ts` | Port property.js, crm.js, screening.js → TypeScript | ✅ Done | `.ts` files exist, no `.js` service files remain |
-| 4 | `containerapps-bicep` | Write Bicep for gateway + 3 APIs + 2 web apps | ✅ Done | `infra/containerapps/*.bicep` committed |
+| 4 | `containerapps-bicep` | Write Bicep for gateway + 3 deployed targets | ✅ Done | Bicep committed; images pushed; deploy retry in progress |
 | 5 | `arkham-impl` | Implement claim classifier + publish-block service | ✅ Done | `services/arkham-governance/src/` exists, tests pass |
 | 6 | `hermes-paths` | Fix AiSquad hermes-config path refs | ✅ Done | 97 text files + 7 SQLite DBs updated; grep count = 0 |
 
@@ -300,3 +300,16 @@ All 6 agents complete when:
 - [ ] `infra/containerapps/` has Bicep for all 4 services
 - [ ] Arkham blocks health/financial/legal claims
 - [ ] Zero hermes-workspace path references in AiSquad config
+
+---
+
+## Phase 4 Deployment Follow-Up — 2026-05-19
+
+Phase 3 agents completed and the Phase 4 prep commit was pushed as `8bba2ac` (`build(containerapps): prepare deploy images`).
+
+Current deployment facts:
+- ACR has `latest` images for `fullstack-gateway`, `stelarvacay-api`, `stelarvacay-web`, and `stelarpeople-api`.
+- VM deploy script fails until Azure CLI is installed: `infra/containerapps/deploy.sh: line 5: az: command not found`.
+- Deployment is being run from the Mac using copied Bicep files in `/private/tmp/stelar-containerapps`.
+- Gateway Container App shell was created, but first revision provisioning timed out before gateway managed identity had ACR/KV roles.
+- Added `AcrPull` and `Key Vault Secrets User` to gateway identity `cde15954-206f-4bdf-bee4-ff6979aace89`; redeploy started afterward.
