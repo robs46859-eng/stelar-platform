@@ -32,12 +32,12 @@ VM and model are running. Remaining items harden and extend the inference surfac
 - [x] `gemma4:26b` installed (17 GB, Q4_K_M, 25.8B params)
 - [x] Stale partial blobs cleaned (~10 GB reclaimed)
 - [x] SSH from Mac configured (`arkham_key` injected via VMAccess, `gemmaco-key` alias)
-- [ ] Lock Ollama to `127.0.0.1:11434` — set `OLLAMA_HOST=127.0.0.1:11434` in systemd, verify with `ss -ltnp`
-- [ ] Install inference bridge at `/opt/fullstack-ollama-bridge` (SPEC § 10)
-- [ ] Inference bridge systemd service enabled and active
-- [ ] Bridge secret loaded from file or Key Vault (not hardcoded)
-- [ ] Bridge health check passes: `curl http://127.0.0.1:18080/health`
-- [ ] Bridge generate endpoint tested end-to-end through Ollama
+- [x] Lock Ollama to `127.0.0.1:11434` — set `OLLAMA_HOST=127.0.0.1:11434` in systemd, verify with `ss -ltnp`
+- [x] Install inference bridge at `/opt/fullstack-ollama-bridge` (SPEC § 10)
+- [x] Inference bridge systemd service enabled and active
+- [x] Bridge secret loaded from file or Key Vault (not hardcoded)
+- [x] Bridge health check passes: `curl http://127.0.0.1:18080/health`
+- [x] Bridge generate endpoint tested end-to-end through Ollama
 
 ---
 

@@ -1,0 +1,17 @@
+[Unit]
+Description=FullStack Ollama Bridge
+After=network-online.target ollama.service
+Requires=ollama.service
+
+[Service]
+WorkingDirectory=/opt/fullstack-ollama-bridge
+ExecStart=/opt/fullstack-ollama-bridge/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 18080
+Restart=always
+RestartSec=3
+Environment="OLLAMA_URL=http://127.0.0.1:11434"
+Environment="OLLAMA_MODEL=gemma4:26b"
+ExecStartPre=/bin/bash -c 'echo OLLAMA_BRIDGE_SHARED_SECRET=$(cat /etc/fullstack-bridge.secret) > /run/bridge-env'
+EnvironmentFile=-/run/bridge-env
+
+[Install]
+WantedBy=multi-user.target
