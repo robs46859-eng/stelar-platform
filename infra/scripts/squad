@@ -1,0 +1,172 @@
+#!/usr/bin/env bash
+# squad — FullStack AiSquad worker agent manager
+# Manages worker agents as named tmux sessions with persistent logs.
+#
+# Usage:
+#   squad list                  list all known workers and their status
+#   squad start <worker>        start a worker in a background tmux session
+#   squad stop <worker>         stop a running worker
+#   squad restart <worker>      stop then start a worker
+#   squad logs <worker>         tail the worker's live log (Ctrl-C to exit)
+#   squad attach <worker>       attach to the worker's tmux session interactively
+#   squad status <worker>       one-line status for a specific worker
+#   squad ps                    show only running workers (tmux sessions)
+
+SQUAD_ROOT="/mnt/gemma4/stelar-platform"
+WORKERS_DIR="$SQUAD_ROOT/infra/scripts/workers"
+LOGS_DIR="$SQUAD_ROOT/.squad/logs"
+SESSION_PREFIX="squad"
+
+_session_name() { echo "${SESSION_PREFIX}-${1//:/-}"; }
+
+_is_running() {
+  tmux has-session -t "$(_session_name "$1")" 2>/dev/null
+}
+
+_worker_file() {
+  local name="$1"
+  local path="$WORKERS_DIR/${name//:/-}.sh"
+  [ -f "$path" ] && echo "$path" || echo ""
+}
+
+cmd_list() {
+  printf "%-30s %-12s %s\n" "WORKER" "STATUS" "LOG"
+  printf "%-30s %-12s %s\n" "------" "------" "---"
+  for f in "$WORKERS_DIR"/*.sh; do
+    [ -f "$f" ] || continue
+    base=$(basename "$f" .sh)
+    name="${base//-/:}"
+    # restore first colon for display only
+    display="$name"
+    log="$LOGS_DIR/${base}.log"
+    if _is_running "$name"; then
+      status="running"
+    elif [ -f "$log" ]; then
+      status="stopped"
+    else
+      status="idle"
+    fi
+    printf "%-30s %-12s %s\n" "$display" "$status" "${log##$SQUAD_ROOT/}"
+  done
+}
+
+cmd_ps() {
+  echo "Running squad sessions:"
+  tmux list-sessions 2>/dev/null | grep "^${SESSION_PREFIX}-" || echo "  (none)"
+}
+
+cmd_start() {
+  local worker="$1"
+  [ -z "$worker" ] && { echo "Usage: squad start <worker>"; exit 1; }
+
+  local wfile
+  wfile=$(_worker_file "$worker")
+  [ -z "$wfile" ] && { echo "Unknown worker: $worker"; echo "Run 'squad list' to see available workers."; exit 1; }
+
+  if _is_running "$worker"; then
+    echo "Worker '$worker' is already running. Use 'squad attach $worker' to view it."
+    exit 0
+  fi
+
+  local session
+  session=$(_session_name "$worker")
+  local logfile="$LOGS_DIR/${worker//:/-}.log"
+
+  echo "Starting worker: $worker"
+  echo "  Session : $session"
+  echo "  Log     : $logfile"
+
+  tmux new-session -d -s "$session" \
+    "bash '$wfile' 2>&1 | tee -a '$logfile'; echo '[squad] worker exited'; read"
+
+  sleep 0.3
+  if _is_running "$worker"; then
+    echo "  Status  : running"
+  else
+    echo "  Status  : failed to start — check log: $logfile"
+    exit 1
+  fi
+}
+
+cmd_stop() {
+  local worker="$1"
+  [ -z "$worker" ] && { echo "Usage: squad stop <worker>"; exit 1; }
+
+  if ! _is_running "$worker"; then
+    echo "Worker '$worker' is not running."
+    exit 0
+  fi
+
+  tmux kill-session -t "$(_session_name "$worker")"
+  echo "Stopped: $worker"
+}
+
+cmd_restart() {
+  local worker="$1"
+  [ -z "$worker" ] && { echo "Usage: squad restart <worker>"; exit 1; }
+  cmd_stop "$worker" 2>/dev/null || true
+  sleep 1
+  cmd_start "$worker"
+}
+
+cmd_logs() {
+  local worker="$1"
+  [ -z "$worker" ] && { echo "Usage: squad logs <worker>"; exit 1; }
+  local logfile="$LOGS_DIR/${worker//:/-}.log"
+  [ ! -f "$logfile" ] && { echo "No log yet for '$worker'. Has it been started?"; exit 1; }
+  echo "=== $worker log (Ctrl-C to exit) ==="
+  tail -f "$logfile"
+}
+
+cmd_attach() {
+  local worker="$1"
+  [ -z "$worker" ] && { echo "Usage: squad attach <worker>"; exit 1; }
+  if ! _is_running "$worker"; then
+    echo "Worker '$worker' is not running. Start it with: squad start $worker"
+    exit 1
+  fi
+  echo "Attaching to $worker — detach with Ctrl-B D"
+  tmux attach-session -t "$(_session_name "$worker")"
+}
+
+cmd_status() {
+  local worker="$1"
+  [ -z "$worker" ] && { echo "Usage: squad status <worker>"; exit 1; }
+  local wfile
+  wfile=$(_worker_file "$worker")
+  [ -z "$wfile" ] && { echo "Unknown worker: $worker"; exit 1; }
+  local logfile="$LOGS_DIR/${worker//:/-}.log"
+  if _is_running "$worker"; then
+    local lines=0
+    [ -f "$logfile" ] && lines=$(wc -l < "$logfile")
+    echo "$worker  running  (log lines: $lines)  session: $(_session_name "$worker")"
+  elif [ -f "$logfile" ]; then
+    echo "$worker  stopped  last log: $logfile"
+  else
+    echo "$worker  idle  (never started)"
+  fi
+}
+
+case "${1:-list}" in
+  list)    cmd_list ;;
+  ps)      cmd_ps ;;
+  start)   cmd_start "$2" ;;
+  stop)    cmd_stop "$2" ;;
+  restart) cmd_restart "$2" ;;
+  logs)    cmd_logs "$2" ;;
+  attach)  cmd_attach "$2" ;;
+  status)  cmd_status "$2" ;;
+  *)
+    echo "squad — FullStack AiSquad worker manager"
+    echo ""
+    echo "Commands:"
+    echo "  squad list              all workers and status"
+    echo "  squad ps                running workers only"
+    echo "  squad start  <worker>   start a worker"
+    echo "  squad stop   <worker>   stop a worker"
+    echo "  squad restart <worker>  stop then start"
+    echo "  squad logs   <worker>   tail live log"
+    echo "  squad attach <worker>   attach to tmux session"
+    echo "  squad status <worker>   one-line status"
+    ;;
+esac

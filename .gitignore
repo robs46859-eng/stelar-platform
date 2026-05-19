@@ -39,3 +39,5 @@ Thumbs.db
 
 # Ollama model blobs (managed separately)
 /ollama/
+.squad/logs/
+.squad/results/
