@@ -18,7 +18,7 @@
 | 3 | `stelarpeople-ts` | Port property.js, crm.js, screening.js → TypeScript | ✅ Done | `.ts` files exist, no `.js` service files remain |
 | 4 | `containerapps-bicep` | Write Bicep for gateway + 3 APIs + 2 web apps | ✅ Done | `infra/containerapps/*.bicep` committed |
 | 5 | `arkham-impl` | Implement claim classifier + publish-block service | ✅ Done | `services/arkham-governance/src/` exists, tests pass |
-| 6 | `hermes-paths` | Fix AiSquad hermes-config path refs | 🔄 Running | No grep hits for `/home/azureuser/hermes-workspace` |
+| 6 | `hermes-paths` | Fix AiSquad hermes-config path refs | ✅ Done | 97 text files + 7 SQLite DBs updated; grep count = 0 |
 
 ---
 
