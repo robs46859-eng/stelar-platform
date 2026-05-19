@@ -10,15 +10,15 @@
 
 Establishes the invariants everything else inherits.
 
-- [ ] `commit-msg` hook enforcing `feat|fix|chore|sec|docs(scope): message`
-- [ ] `pre-commit` hook blocking staged `.env`, `*.credentials.json`, `auth.json`, and private key patterns
-- [ ] `staging` branch created off `main`
-- [ ] `CODEOWNERS` — Arkham review required for `services/fullstack-aisquad/**` and `docs/**`
-- [ ] `CONTRIBUTING.md` — branch strategy, commit format, approval gate rules
-- [ ] `services/arkham-governance/` scaffolded with hard-block rule definitions (SPEC § 8.3, § 16)
-- [ ] Publish-block policy document committed: no auto-post, no health/legal/financial claims without review
+- [x] `commit-msg` hook enforcing `feat|fix|chore|sec|docs(scope): message`
+- [x] `pre-commit` hook blocking staged `.env`, `*.credentials.json`, `auth.json`, and private key patterns
+- [x] `staging` branch created off `main`
+- [x] `CODEOWNERS` — Arkham review required for `services/fullstack-aisquad/**` and `docs/**`
+- [x] `CONTRIBUTING.md` — branch strategy, commit format, approval gate rules
+- [x] `services/arkham-governance/` scaffolded with hard-block rule definitions (SPEC § 8.3, § 16)
+- [x] Publish-block policy document committed: no auto-post, no health/legal/financial claims without review
 - [ ] Credentials on VM (`~/.credentials-ig.json`, `~/.credentials-stan.json`) flagged for Key Vault migration
-- [ ] Verify `.gitignore` covers all credential and runtime state patterns
+- [x] Verify `.gitignore` covers all credential and runtime state patterns
 
 ---
 
