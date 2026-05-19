@@ -1,6 +1,6 @@
 # Stelar Platform — Handoff
 
-**Updated:** 2026-05-19 (Phase 3 complete)  
+**Updated:** 2026-05-19 (Phase 4 prep complete: images pushed)  
 **Host:** Azure VM `gemmaco-key` · eastus2 · Standard_E8s_v3  
 **Repo:** `/mnt/gemma4/stelar-platform` → `git@github.com:robs46859-eng/stelar-platform.git`  
 **Branch:** `main` (protected) · `staging` (integration buffer)
@@ -15,7 +15,7 @@
 | 1 — VM Infrastructure | ✅ Complete | Ollama 0.24, Gemma 4 26B loaded, inference bridge active |
 | 2 — Azure Cloud | ✅ Complete | All infra provisioned, all 10 DB schemas created, all secrets in KV |
 | 3 — Core Services | ✅ Complete | Gateway live + responding, stelarpeople TS, Bicep, Arkham, hermes paths |
-| 4 — Deploy to Container Apps | 🔴 Not started | Bicep ready; needs `az deployment group create` |
+| 4 — Deploy to Container Apps | 🟡 Ready to deploy | Images pushed to ACR; run Container Apps deployment |
 | 5 — Web Apps | 🟡 Partial | stelarvacay-web scaffolded; stelargem-web, stelarpeople-web, dashboard not started |
 | 6 — AiSquad | 🟡 Partial | Paths fixed, monitors not wired, Chrome sandbox broken |
 | 7 — Security | ❌ Not started | Private endpoints, VNET integration |
@@ -62,6 +62,18 @@ export BACKEND_MODE="self_hosted"
 
 ---
 
+## Phase 4 Prep — Complete ✅
+
+Completed 2026-05-19:
+- Added Key Vault secret `POSTGRES-URL-PSYCOPG` for gateway SQLAlchemy/psycopg URLs.
+- Patched `infra/containerapps/fullstack-gateway.bicep` to inject `DATABASE_URL` from `POSTGRES-URL-PSYCOPG`.
+- Added Dockerfiles for `stelarvacay-api`, `stelarvacay-web`, and `stelarpeople-api`.
+- Built and pushed ACR images:
+  - `acrstelarprod.azurecr.io/fullstack-gateway:latest`
+  - `acrstelarprod.azurecr.io/stelarvacay-api:latest`
+  - `acrstelarprod.azurecr.io/stelarvacay-web:latest`
+  - `acrstelarprod.azurecr.io/stelarpeople-api:latest`
+
 ## Immediate Next Steps (Phase 4 — Deploy)
 
 ### 1. Deploy all services to Azure Container Apps
@@ -75,19 +87,10 @@ az deployment group create \
   --parameters containerAppsEnvName=cae-stelar-prod keyVaultName=kv-stelar-prod
 ```
 
-**Prerequisite:** Build and push Docker images for each service:
-```bash
-# Gateway
-docker build -t acrstelarprod.azurecr.io/fullstack-gateway:latest services/fullstack-gateway/
-az acr login --name acrstelarprod
-docker push acrstelarprod.azurecr.io/fullstack-gateway:latest
-
-# Repeat for stelarvacay-api, stelarvacay-web, stelarpeople-api
-```
+**Prerequisite status:** Complete — all four `:latest` images are in `acrstelarprod`.
 
 ### 2. Wire gateway DATABASE_URL env var in Bicep
-The Bicep uses Key Vault ref `POSTGRES-URL` but the gateway needs `postgresql+psycopg://` driver prefix.
-Fix: either add a second KV secret `POSTGRES-URL-PSYCOPG` with the prefixed URL, or patch the gateway to handle both.
+Complete — `POSTGRES-URL-PSYCOPG` exists in Key Vault and `fullstack-gateway.bicep` maps it to `DATABASE_URL`.
 
 ### 3. Build remaining web apps (Phase 5)
 - `stelarpeople-web` — React property management dashboard
@@ -151,7 +154,6 @@ No auto-posting for the first 90 days.
 | Issue | Severity | Fix |
 |---|---|---|
 | Gateway runs on VM port 8500 (not in Container Apps yet) | High | Deploy via Bicep in Phase 4 |
-| Gateway DATABASE_URL needs `postgresql+psycopg://` prefix, KV secret uses `postgresql://` | Medium | Add `POSTGRES-URL-PSYCOPG` secret or patch gateway config |
 | `family-companion` process occupies port 8000 on VM | Low | Doesn't affect gateway (using 8500); irrelevant after Container Apps deploy |
 | Gateway venv at `/tmp/gw-venv` — lost on VM reboot | Low | Rebuild with `python3 -m venv /tmp/gw-venv && /tmp/gw-venv/bin/pip install -e .` |
 | fullstack-gateway .github/workflows deploy to GKE (from layer8) | Low | Replace with Container Apps deploy YAML |

@@ -13,7 +13,7 @@ resource gatewayApp 'Microsoft.App/containerApps@2023-05-01' = {
       ingress: { external: false, targetPort: 8000 }
       registries: [{ server: '${acrName}.azurecr.io', identity: 'system' }]
       secrets: [
-        { name: 'postgres-url', keyVaultUrl: 'https://${keyVaultName}.vault.azure.net/secrets/POSTGRES-URL', identity: 'system' }
+        { name: 'postgres-url', keyVaultUrl: 'https://${keyVaultName}.vault.azure.net/secrets/POSTGRES-URL-PSYCOPG', identity: 'system' }
         { name: 'redis-url', keyVaultUrl: 'https://${keyVaultName}.vault.azure.net/secrets/REDIS-URL', identity: 'system' }
         { name: 'ollama-bridge-secret', keyVaultUrl: 'https://${keyVaultName}.vault.azure.net/secrets/OLLAMA-BRIDGE-SHARED-SECRET', identity: 'system' }
         { name: 'fullstack-api-key', keyVaultUrl: 'https://${keyVaultName}.vault.azure.net/secrets/FULLSTACK-INTERNAL-API-KEY', identity: 'system' }
@@ -25,7 +25,7 @@ resource gatewayApp 'Microsoft.App/containerApps@2023-05-01' = {
         name: 'fullstack-gateway'
         image: '${acrName}.azurecr.io/fullstack-gateway:latest'
         env: [
-          { name: 'POSTGRES_URL', secretRef: 'postgres-url' }
+          { name: 'DATABASE_URL', secretRef: 'postgres-url' }
           { name: 'REDIS_URL', secretRef: 'redis-url' }
           { name: 'OLLAMA_BRIDGE_URL', value: 'http://20.10.150.44:18080' }
           { name: 'OLLAMA_BRIDGE_SHARED_SECRET', secretRef: 'ollama-bridge-secret' }
