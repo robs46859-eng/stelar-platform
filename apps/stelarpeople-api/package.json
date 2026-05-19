@@ -1,0 +1,25 @@
+{
+  "name": "stelarpeople-api",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.11.3",
+    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "tsx": "^4.6.2",
+    "@types/express": "^4.17.21",
+    "@types/pg": "^8.10.9",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/cors": "^2.8.17",
+    "@types/node": "^20.11.0"
+  }
+}
