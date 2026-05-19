@@ -1,15 +1,16 @@
 # FullStack AiSquad Naming Contract
 
-This repo is for **FullStack AiSquad** and **Hermes Agent** work.
+This service is for **FullStack AiSquad** marketing and growth operations in the Stelar / FullStack Azure deployment.
 
 ## Canonical product names
 
 Use these names in all new UI, docs, skills, prompts, tests, review comments, and handoffs:
 
 - **FullStack AiSquad**
-- **Hermes Agent**
+- **FullStack Gateway**
+- **Arkham Governance Sidecar**
 - **Swarm**
-- **Hermes Kanban**
+- **Approval Queue**
 - **HERMES_HOME**
 - `~/.hermes`
 
@@ -17,31 +18,31 @@ Use these names in all new UI, docs, skills, prompts, tests, review comments, an
 
 Do **not** introduce these in new work unless quoting legacy history or compatibility behavior:
 
-- FullStack AiSquad
-- Hermes Agent
-- Claude swarm
-- Claude-native paths
-- `HERMES_HOME`
-- `~/.hermes`
+- MamaNav
+- CheapVacay
+- RentOut
+- ProjectMama
+- direct public Ollama access
+- auto-publish without review
 
 ## Legacy compatibility rule
 
-If older code, docs, tests, or handoffs contain Claude-era wording, treat it as legacy residue.
+If older code, docs, tests, or handoffs contain Hermes-era, MamaNav, CheapVacay, RentOut, or ProjectMama wording, treat it as legacy residue.
 
 Default action:
-- normalize it to Claude naming
+- normalize it to Stelar / FullStack / Arkham naming
 - preserve old wording only when explicitly documenting migration or backwards compatibility
 
 ## Runtime/path rules
 
-For Claude-native runtime work, prefer:
+For FullStack AiSquad runtime work, prefer:
 
 - `HERMES_HOME`
 - `~/.hermes/profiles/<workerId>`
 - `claude`
 - Hermes worker sessions
 
-Do not suggest Claude-specific runtime wrappers or profile paths for live FullStack AiSquad behavior.
+Do not expose raw Ollama endpoints or bypass Arkham Governance for live FullStack AiSquad behavior.
 
 ## Swarm/UI language rules
 
@@ -56,7 +57,7 @@ Avoid:
 
 ## Reviewer rule
 
-Any PR or patch that introduces new Claude-branded naming into FullStack AiSquad should be treated as a regression unless it is:
+Any PR or patch that introduces old product names or bypasses governance in FullStack AiSquad should be treated as a regression unless it is:
 - a legacy compatibility note
 - a migration guide
 - a quoted historical artifact
@@ -64,7 +65,7 @@ Any PR or patch that introduces new Claude-branded naming into FullStack AiSquad
 ## Agent instruction rule
 
 When an agent is working in this repo:
-- assume Claude naming is canonical
-- rewrite Claude-era references to Claude by default
-- do not invent Claude-branded paths, products, or wrapper guidance
-- if uncertain, prefer repo-native Claude terminology over historical aliases
+- assume Stelar / FullStack / Arkham naming is canonical
+- rewrite legacy product references to current names by default
+- do not invent public model endpoints or auto-publish paths
+- if uncertain, prefer the repository SPEC.md terminology

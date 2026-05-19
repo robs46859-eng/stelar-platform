@@ -1,6 +1,6 @@
 # FullStack AiSquad Agent Contract
 
-This workspace uses semantic Hermes swarm workers, not numbered-only lanes. The source of truth for routing is `swarm.yaml`; each worker also has a matching profile under `~/.hermes/profiles/<worker-id>/`, a role skill `<worker-id>-core`, and a wrapper in `~/.local/bin/`.
+This service uses semantic FullStack AiSquad workers, not numbered-only lanes. The source of truth for routing is `swarm.yaml`; each worker also has a matching profile under `~/.hermes/profiles/<worker-id>/`, a role skill `<worker-id>-core`, and a wrapper in `~/.local/bin/`.
 
 ## Current semantic roster
 
@@ -89,7 +89,13 @@ This workspace uses semantic Hermes swarm workers, not numbered-only lanes. The 
 ## Operating rules
 
 - Keep `swarm.yaml`, profile `config.yaml`, profile core skills, and wrappers aligned when changing a worker.
-- Prefer GBrain-first lookup for context-sensitive RAZSOC/Hermes/workflow decisions.
+- Prefer GBrain-first lookup for context-sensitive RAZSOC/FullStack AiSquad/workflow decisions.
 - Builder implements; Reviewer gates; QA verifies behavior; Orchestrator routes and enforces greenlight.
 - Revenue, Media, and Product swarms operate as independent pipelines with their own orchestrators, triggers, and approval gates.
-- Do not enable optional Hermes plugins globally unless the task explicitly needs them; record plugin/toolset alignment in `swarm.yaml` first.
+- Do not enable optional runtime plugins globally unless the task explicitly needs them; record plugin/toolset alignment in `swarm.yaml` first.
+
+## Non-negotiable publishing rule
+
+```text
+No external post, email, affiliate claim, landing page, sales copy, public product claim, health-touching copy, travel safety claim, legal/property claim, or partner outreach may publish without Arkham Governance review and human approval.
+```

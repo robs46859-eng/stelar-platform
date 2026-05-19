@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 
 API_KEY = "AIzaSyAWvtb-VCUC433SgxTNF93SZZIla_mLrC0"
 BASE_URL = "https://www.googleapis.com/youtube/v3"
-OUTPUT_DIR = "/home/azureuser/hermes-workspace/memory/signal-engagement/raw-signals"
+OUTPUT_DIR = "/home/azureuser/fullstack-aisquad/memory/signal-engagement/raw-signals"
 
 SEARCH_QUERIES = [
     "first time mom",

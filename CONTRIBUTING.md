@@ -1,5 +1,37 @@
 # Contributing to Stelar Platform
 
+
+## Repository Layout
+
+The production monorepo root is `/mnt/gemma4/stelar-platform` on the Azure VM managed disk.
+
+Key paths:
+- `services/fullstack-aisquad/` — FullStack AiSquad service root. This replaces the legacy nested `services/fullstack-aisquad/hermes-workspace/` layout.
+- `services/fullstack-aisquad/hermes-config/` — runtime profiles, sessions, memories, and local agent config. Treat this as sensitive runtime state unless a file is explicitly promoted to source.
+- `services/fullstack-gateway/` — required next service to expose the OpenAI-compatible internal API.
+- `services/arkham-governance/` — publish safety, compliance review, and human approval gates.
+- `services/ollama-bridge/` — VM-local bridge pattern for controlled Ollama access.
+
+Do not reintroduce the `hermes-workspace` directory as an application root. New AiSquad code, docs, scripts, triggers, and package metadata belong directly under `services/fullstack-aisquad/`.
+
+## Graphify
+
+This repo uses graphify for local architecture context.
+
+Before architecture or cross-module questions:
+
+```bash
+cat graphify-out/GRAPH_REPORT.md
+```
+
+After modifying code files:
+
+```bash
+graphify update .
+```
+
+On the Azure VM, `graphify` is installed as an alias to `nodesify-graphify`.
+
 ## Branch Strategy
 
 ```

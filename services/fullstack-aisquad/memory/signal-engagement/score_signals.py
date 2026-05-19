@@ -15,7 +15,7 @@ FEED_FILES = {
     "sleeptrain": "/tmp/sleeptrain.xml",
 }
 
-OUTPUT_DIR = "/home/azureuser/hermes-workspace/memory/signal-engagement/raw-signals"
+OUTPUT_DIR = "/home/azureuser/fullstack-aisquad/memory/signal-engagement/raw-signals"
 
 # --- Signal pattern keyword groups ---
 BUY_INTENT_PATTERNS = [

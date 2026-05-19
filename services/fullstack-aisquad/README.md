@@ -5,16 +5,28 @@ description: FullStack AiSquad — AI Agent Swarm Infrastructure
 
 # FullStack AiSquad — AI Agent Swarm Infrastructure
 
-Autonomous AI agent workspace with semantic swarm architecture. 48 specialized workers across 5 swarms, each with dedicated triggers, profiles, CLI wrappers, and approval gates.
+FullStack AiSquad is the Stelar / FullStack 45-agent marketing and growth layer. It runs revenue, product, media, engagement, compliance, funnel, and partnership workflows behind Arkham Governance review and human approval gates.
 
 ## Mission (Active)
 
-**4th Trimester Operating Manual** — Ship a 12-week postpartum digital guide (mobile PDF + 90-min audio) for first-time moms on Stan Store.
-- **Target:** 100 paid units before kill check
-- **Kill criteria:** <30 organic sales/cycle after 3 cycles
-- **ICP:** "Prepared Paige" — 29–36yo, $90K–200K income, iPhone-first
-- **Status:** Phase 1 (signal collection) complete. 83 signals collected (14 ENGAGE, 69 WATCH).
-- **See:** `missions/4th-trimester-manual.md`, `missions/HANDOFF.md`
+Operate the Stelar / FullStack growth system with approval-gated agent workflows. FullStack AiSquad drafts, researches, plans, and prepares outbound work; Arkham Governance and human approval decide what can publish or send.
+
+Required agent groups:
+
+1. Base orchestration agents.
+2. Revenue agents.
+3. Product agents.
+4. Media agents.
+5. Engagement agents.
+6. Compliance Reviewer.
+7. Funnel Manager.
+8. Partnership Scout.
+
+Non-negotiable publishing rule:
+
+```text
+No external post, email, affiliate claim, landing page, sales copy, public product claim, health-touching copy, travel safety claim, legal/property claim, or partner outreach may publish without Arkham Governance review and human approval.
+```
 
 ## Quick Start
 

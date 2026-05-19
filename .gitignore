@@ -41,3 +41,17 @@ Thumbs.db
 /ollama/
 .squad/logs/
 .squad/results/
+
+# FullStack AiSquad generated/runtime-heavy state
+services/fullstack-aisquad/hermes-config/logs/
+services/fullstack-aisquad/hermes-config/sessions/
+services/fullstack-aisquad/hermes-config/sandboxes/
+services/fullstack-aisquad/hermes-config/image_cache/
+services/fullstack-aisquad/hermes-config/images/
+services/fullstack-aisquad/hermes-config/node/
+services/fullstack-aisquad/hermes-config/lsp/
+services/fullstack-aisquad/hermes-config/hermes-agent/
+services/fullstack-aisquad/hermes-config/*.db
+services/fullstack-aisquad/hermes-config/*.db-shm
+services/fullstack-aisquad/hermes-config/*.db-wal
+.graphify/

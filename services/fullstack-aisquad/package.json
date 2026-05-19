@@ -1,7 +1,7 @@
 {
   "name": "fullstack-aisquad",
   "version": "2.3.0",
-  "description": "Desktop workspace for Hermes Agent — chat, orchestration, and multi-agent coding pipelines",
+  "description": "FullStack AiSquad marketing and growth agent layer with approval-gated publishing",
   "author": "Eric (https://github.com/outsourc-e)",
   "license": "MIT",
   "private": true,

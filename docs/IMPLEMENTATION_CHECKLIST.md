@@ -17,7 +17,7 @@ Establishes the invariants everything else inherits.
 - [x] `CONTRIBUTING.md` — branch strategy, commit format, approval gate rules
 - [x] `services/arkham-governance/` scaffolded with hard-block rule definitions (SPEC § 8.3, § 16)
 - [x] Publish-block policy document committed: no auto-post, no health/legal/financial claims without review
-- [ ] Credentials on VM (`~/.credentials-ig.json`, `~/.credentials-stan.json`) flagged for Key Vault migration
+- [x] Credentials on VM flagged for Key Vault migration; `IG-CREDENTIALS` copied to Key Vault from `~/hermes-workspace/.credentials-ig.json`
 - [x] Verify `.gitignore` covers all credential and runtime state patterns
 
 ---
@@ -48,7 +48,7 @@ No product code deploys until these exist.
 - [x] Azure Resource Group `rg-stelar-prod` in `eastus2`
 - [x] Azure Key Vault `kv-stelar-prod` with RBAC enabled
 - [x] All required secrets stored in Key Vault (SPEC § 8.1): `gemmaco-key`, `POSTGRES-URL`, `REDIS-URL`, `SERVICEBUS-CONNECTION`, `BLOB-STORAGE-CONNECTION`, `JWT-SIGNING-KEY`, `FULLSTACK-INTERNAL-API-KEY`, `OLLAMA-BRIDGE-SHARED-SECRET`
-- [ ] VM credentials migrated from `~/.credentials-*.json` to Key Vault
+- [ ] VM credentials migrated from `~/.credentials-*.json` to Key Vault; `IG-CREDENTIALS` is complete, remaining Stan credential still needs confirmation
 - [x] Azure Container Apps environment `cae-stelar-prod` created
 - [x] Azure Container Registry `acrstelarprod` created (admin disabled, managed identity access)
 - [x] Azure Database for PostgreSQL Flexible Server provisioned
@@ -108,13 +108,15 @@ Deploy in order. Each is a dependency for the next.
 
 ## Phase 6 — FullStack AiSquad
 
-- [ ] AiSquad paths updated to reflect repo location (`/mnt/gemma4/stelar-platform/services/fullstack-aisquad`)
-- [ ] `hermes` config.yaml paths corrected for new repo location
+- [x] AiSquad paths updated to reflect repo location (`/mnt/gemma4/stelar-platform/services/fullstack-aisquad`)
+- [x] Node 20 installed on VM for AiSquad tooling
+- [x] Graphify CLI installed and aliased as `graphify`
+- [ ] `hermes` config.yaml paths corrected for new repo location; runtime state still contains historical `/home/azureuser/hermes-workspace` references
 - [ ] Instagram Chrome sandbox fixed (`/new` session reload or headless flag)
 - [ ] LinkedIn monitor reactivated
 - [ ] Phase 1 signal collection completed (all 4 monitors active)
 - [ ] Phase 2 product creation started (4th Trimester Manual)
-- [ ] AiSquad wired to Arkham Governance for all outbound content
+- [ ] AiSquad wired to Arkham Governance for all outbound content; README and AGENTS.md now document the hard publishing rule
 - [ ] AiSquad wired to FullStack Gateway for all Gemma calls
 - [ ] Hard approval gates enforced — no auto-post in first 90 days
 - [ ] Revenue swarm activated when product is live

@@ -889,7 +889,7 @@ Recommended monorepo layout:
   /services
     /fullstack-gateway
     /arkham-governance
-    /fullstack-aisquad
+    /fullstack-aisquad        # FullStack AiSquad service root; no nested hermes-workspace app root
     /ollama-bridge
   /packages
     /shared-types
@@ -908,6 +908,38 @@ Recommended monorepo layout:
     /launch
   SPEC.md
 ```
+
+### 14.1 Graphify Knowledge Graph
+
+The repo keeps a local graphify knowledge graph under `graphify-out/`.
+
+Required workflow:
+
+```bash
+# Before architecture or cross-module work
+cat graphify-out/GRAPH_REPORT.md
+
+# After code edits
+graphify update .
+```
+
+The Azure VM has Node 20 and `@nodesify/graphify` installed. The `graphify` command is an alias to `nodesify-graphify`.
+
+### 14.2 FullStack AiSquad Path Standard
+
+FullStack AiSquad lives at:
+
+```text
+services/fullstack-aisquad/
+```
+
+The former nested workspace path is retired:
+
+```text
+services/fullstack-aisquad/hermes-workspace/
+```
+
+All new AiSquad application code, scripts, agent docs, triggers, package metadata, and launch notes belong in the service root. Runtime profile/session state may remain under `services/fullstack-aisquad/hermes-config/` until promoted or migrated.
 
 Branch standards:
 
