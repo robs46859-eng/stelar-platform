@@ -45,19 +45,19 @@ VM and model are running. Remaining items harden and extend the inference surfac
 
 No product code deploys until these exist.
 
-- [ ] Azure Resource Group `rg-stelar-prod` in `eastus2`
-- [ ] Azure Key Vault `kv-stelar-prod` with RBAC enabled
-- [ ] All required secrets stored in Key Vault (SPEC § 8.1): `gemmaco-key`, `POSTGRES-URL`, `REDIS-URL`, `SERVICEBUS-CONNECTION`, `BLOB-STORAGE-CONNECTION`, `JWT-SIGNING-KEY`, `FULLSTACK-INTERNAL-API-KEY`, `OLLAMA-BRIDGE-SHARED-SECRET`
+- [x] Azure Resource Group `rg-stelar-prod` in `eastus2`
+- [x] Azure Key Vault `kv-stelar-prod` with RBAC enabled
+- [x] All required secrets stored in Key Vault (SPEC § 8.1): `gemmaco-key`, `POSTGRES-URL`, `REDIS-URL`, `SERVICEBUS-CONNECTION`, `BLOB-STORAGE-CONNECTION`, `JWT-SIGNING-KEY`, `FULLSTACK-INTERNAL-API-KEY`, `OLLAMA-BRIDGE-SHARED-SECRET`
 - [ ] VM credentials migrated from `~/.credentials-*.json` to Key Vault
-- [ ] Azure Container Apps environment `cae-stelar-prod` created
-- [ ] Azure Container Registry `acrstelarprod` created (admin disabled, managed identity access)
-- [ ] Azure Database for PostgreSQL Flexible Server provisioned
+- [x] Azure Container Apps environment `cae-stelar-prod` created
+- [x] Azure Container Registry `acrstelarprod` created (admin disabled, managed identity access)
+- [x] Azure Database for PostgreSQL Flexible Server provisioned
 - [ ] All 10 schemas created: `identity`, `billing`, `products`, `stelargem`, `stelarvacay`, `stelarpeople`, `agents`, `governance`, `worldgraph`, `telemetry`
 - [ ] Minimum table set created (SPEC § 7.1)
-- [ ] Azure Cache for Redis provisioned
-- [ ] Azure Blob Storage account with 6 containers: `stelargem-media`, `stelarvacay-plans`, `stelarpeople-inspections`, `fullstack-exports`, `arkham-reviews`, `logs-archive`
-- [ ] Azure Service Bus with 8 queues/topics (SPEC § 7.3)
-- [ ] Application Insights + Log Analytics workspace connected
+- [x] Azure Cache for Redis provisioned
+- [x] Azure Blob Storage account with 6 containers: `stelargem-media`, `stelarvacay-plans`, `stelarpeople-inspections`, `fullstack-exports`, `arkham-reviews`, `logs-archive`
+- [x] Azure Service Bus with 8 queues/topics (SPEC § 7.3)
+- [x] Application Insights + Log Analytics workspace connected
 - [ ] Managed identities configured for all Container Apps
 - [ ] Private endpoints enabled for Key Vault, database, Redis, storage
 
