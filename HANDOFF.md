@@ -1,135 +1,102 @@
 # Stelar Platform — Handoff
 
-**Updated:** 2026-05-19  
+**Updated:** 2026-05-19 (Phase 3 complete)  
 **Host:** Azure VM `gemmaco-key` · eastus2 · Standard_E8s_v3  
 **Repo:** `/mnt/gemma4/stelar-platform` → `git@github.com:robs46859-eng/stelar-platform.git`  
 **Branch:** `main` (protected) · `staging` (integration buffer)
 
 ---
 
-## Current Phase: 2 Complete → 3 In Progress
+## Current Phase: 3 Complete → 4 Next
 
 | Phase | Status | Summary |
 |---|---|---|
 | 0 — Governance | ✅ Complete | Hooks, CODEOWNERS, Arkham scaffold, branch strategy |
 | 1 — VM Infrastructure | ✅ Complete | Ollama 0.24, Gemma 4 26B loaded, inference bridge active |
 | 2 — Azure Cloud | ✅ Complete | All infra provisioned, all 10 DB schemas created, all secrets in KV |
-| 3 — Core Services | 🟡 Scaffolded, not deployed | Gateway + product APIs exist, not running in Container Apps yet |
-| 4 — Product APIs | 🟡 Scaffolded | stelarvacay-api, stelarpeople-api in repo, not deployed |
-| 5 — Web Apps | ❌ Not started | stelarvacay-web scaffolded; stelargem-web, stelarpeople-web, dashboard not started |
-| 6 — AiSquad | 🟡 Partial | Paths correct, monitors not wired, hermes config paths stale |
-| 7 — Security | ❌ Not started | |
+| 3 — Core Services | ✅ Complete | Gateway live + responding, stelarpeople TS, Bicep, Arkham, hermes paths |
+| 4 — Deploy to Container Apps | 🔴 Not started | Bicep ready; needs `az deployment group create` |
+| 5 — Web Apps | 🟡 Partial | stelarvacay-web scaffolded; stelargem-web, stelarpeople-web, dashboard not started |
+| 6 — AiSquad | 🟡 Partial | Paths fixed, monitors not wired, Chrome sandbox broken |
+| 7 — Security | ❌ Not started | Private endpoints, VNET integration |
 | 8 — Launch | ❌ Not started | |
 
 ---
 
-## What Was Done in This Session (2026-05-19)
+## Phase 3 — Complete ✅
 
-### Git / GitHub
-- Created public repo: `https://github.com/robs46859-eng/stelar-platform`
-- Generated SSH key on VM (`~/.ssh/id_ed25519`), registered on GitHub account `robs46859-eng`
-- Removed a committed Node.js binary (118 MB) from all 10 commits via `git filter-branch`
-- Pushed `main` and `staging` branches
+All 6 agents finished 2026-05-19. Summary:
 
-### Credentials & Key Vault
-- `STAN-CREDENTIALS` updated in Key Vault with actual password (`stelartechos@gmail.com`)
-- All 13 required secrets now in `kv-stelar-prod` — confirmed via `az keyvault secret list`
+| Agent | Result |
+|---|---|
+| `pg-firewall` | Firewall rule `allow-vm-gemmaco` added; all 10 schemas verified (agents:3, billing:3, governance:6, identity:3, products:1, stelargem:4, stelarpeople:9, stelarvacay:5, telemetry:3, worldgraph:2) |
+| `gateway-smoketest` | `fullstack-gateway` running on VM port 8500; fixed 5 bugs (config indent, gemini stub, pipeline registry, ollama bridge path/header, alembic); Gemma responds end-to-end |
+| `stelarpeople-ts` | `property.ts`, `crm.ts`, `screening.ts` ported; no `.js` files in `src/services/`; all tables prefixed `stelarpeople.` |
+| `containerapps-bicep` | `infra/containerapps/` has 6 Bicep files (main + 4 apps + managed-identity) + `deploy.sh` |
+| `arkham-impl` | `/review` blocks `health_claim`, `financial_claim`, `legal_claim`, `auto_publish`; `/publish-check` enforces 90-day human approval |
+| `hermes-paths` | 109 files fixed (97 text + 7 SQLite DBs + 1 WAL); 881 DB rows updated; zero grep hits for old path |
 
-### PostgreSQL Schemas
-- All 10 schemas created via `infra/scripts/stelar-schemas.sql`
-- Schemas: `identity` · `billing` · `products` · `stelargem` · `stelarvacay` · `stelarpeople` · `agents` · `governance` · `worldgraph` · `telemetry`
-- Migration ran exit 0 on VM; SQL file committed to `infra/scripts/stelar-schemas.sql`
-- **Known issue:** post-migration SELECT verification times out from VM — PG firewall may need VM IP added for read queries (write path works)
+**Gateway live (for testing on VM):**
+```
+tenant:   stelar
+key:      ak_live_68b5f5c879fac993.68680c376e05ddced3bec1e1c0971f8c16667f306d180d7f
+endpoint: http://localhost:8500/v1/proxy/infer
+scope:    inference:invoke
+model:    gemma4:26b
+```
 
-### Legacy Repo Audit
-- Audited `rentout`, `cheapvacay`, `layer8` repos
-- Migration map committed to `docs/ghspec.md`
+To restart gateway after VM reboot:
+```bash
+ssh -i ~/.ssh/id_ed25519 azureuser@20.10.150.44
+cd /mnt/gemma4/stelar-platform/services/fullstack-gateway
 
-### Services Scaffolded (committed to main)
+export DATABASE_URL="$(az keyvault secret show --vault-name kv-stelar-prod --name POSTGRES-URL --query value -o tsv | sed 's|postgresql://|postgresql+psycopg://|')"
+export REDIS_URL="$(az keyvault secret show --vault-name kv-stelar-prod --name REDIS-URL --query value -o tsv | sed 's|redis://|rediss://|;s|?ssl=true||')"
+export OLLAMA_BRIDGE_URL="http://127.0.0.1:18080"
+export OLLAMA_BRIDGE_SHARED_SECRET="$(az keyvault secret show --vault-name kv-stelar-prod --name OLLAMA-BRIDGE-SHARED-SECRET --query value -o tsv)"
+export DEFAULT_PROVIDER="gemma4_26b_ollama_vm"
+export BACKEND_MODE="self_hosted"
 
-**`services/fullstack-gateway/`** (commit `c38dba3`) — ported from `layer8`
-- Full inference pipeline: auth → policy → rate-limit → plugin → cache → route → audit
-- `app/providers/ollama.py` — NEW: calls inference bridge at `http://127.0.0.1:18080/generate`
-- `app/core/config.py` — patched: `ollama_bridge_url`, `ollama_bridge_shared_secret`, default provider = `gemma4_26b_ollama_vm`
-- Alembic migrations for `governance` schema tables
-- Tests from layer8 preserved
-- **Not yet deployed to Container Apps**
-
-**`apps/stelarvacay-api/`** (commit `5a3a63a`) — ported from `cheapvacay`
-- Complete budget engine: `planner.ts`, `seasonal.ts`, Amadeus live fare integration
-- Firebase fully removed; JWT auth via `jsonwebtoken`
-- `src/services/gateway.ts` — calls FullStack Gateway for all Gemma requests
-- PostgreSQL persistence with `stelarvacay.` schema prefix
-- **Not yet deployed**
-
-**`apps/stelarvacay-web/`** (commit `5a3a63a`) — ported from `cheapvacay`
-- All React components: PlannerForm, QuoteCard, AdvicePanel, DestinationRail, Hero, SavedPlans, SiteFooter
-- Firebase/AppCheck removed; auth via `localStorage` JWT token
-- Branded as StelarVacay throughout
-- **Not yet deployed**
-
-**`apps/stelarpeople-api/`** (commit `a2a8a20`) — ported from `rentout`
-- Property, CRM, screening, market, demographics JS service files (from rentout)
-- TypeScript scaffold: `config.ts`, `db/client.ts`, `services/gateway.ts`, `server.ts`
-- Dataset JSON schemas + AI prompt templates for market/demographic/SEO extraction
-- **Service files still in JS** — TS port of `property.js`, `crm.js`, `screening.js` is next step
-- **Not yet deployed**
+/tmp/gw-venv/bin/uvicorn app.main:app --port 8500 --host 0.0.0.0 &
+```
 
 ---
 
-## Immediate Next Steps (Phase 3 — ordered by dependency)
+## Immediate Next Steps (Phase 4 — Deploy)
 
-### 1. Verify PostgreSQL schemas are readable
-Add the VM's public IP to the Azure PostgreSQL firewall allow-list:
+### 1. Deploy all services to Azure Container Apps
 ```bash
-az postgres flexible-server firewall-rule create \
+cd /mnt/gemma4/stelar-platform
+bash infra/containerapps/deploy.sh
+# OR directly:
+az deployment group create \
   --resource-group rg-stelar-prod \
-  --name pg-stelar-prod \
-  --rule-name allow-vm \
-  --start-ip-address 20.10.150.44 \
-  --end-ip-address 20.10.150.44
+  --template-file infra/containerapps/main.bicep \
+  --parameters containerAppsEnvName=cae-stelar-prod keyVaultName=kv-stelar-prod
 ```
-Then confirm: `psql <url> -c "\dn"`
 
-### 2. Install gateway deps and smoke-test locally on VM
+**Prerequisite:** Build and push Docker images for each service:
 ```bash
-cd /mnt/gemma4/stelar-platform/services/fullstack-gateway
-pip install -e ".[dev]"
-# Set env vars from Key Vault, then:
-uvicorn app.main:app --port 8000
-curl http://localhost:8000/health
-curl -X POST http://localhost:8000/v1/ai/generate \
-  -H "Content-Type: application/json" \
-  -d '{"messages":[{"role":"user","content":"hello"}]}'
+# Gateway
+docker build -t acrstelarprod.azurecr.io/fullstack-gateway:latest services/fullstack-gateway/
+az acr login --name acrstelarprod
+docker push acrstelarprod.azurecr.io/fullstack-gateway:latest
+
+# Repeat for stelarvacay-api, stelarvacay-web, stelarpeople-api
 ```
-Expected: Gemma 4 response proxied through the bridge.
 
-### 3. Port stelarpeople service layer to TypeScript
-`apps/stelarpeople-api/src/services/property.js` → `property.ts`  
-`apps/stelarpeople-api/src/services/crm.js` → `crm.ts`  
-`apps/stelarpeople-api/src/services/screening.js` → `screening.ts`  
-Change: drop SQLite dual-mode calls, PostgreSQL only, add `stelarpeople.` schema prefix.
+### 2. Wire gateway DATABASE_URL env var in Bicep
+The Bicep uses Key Vault ref `POSTGRES-URL` but the gateway needs `postgresql+psycopg://` driver prefix.
+Fix: either add a second KV secret `POSTGRES-URL-PSYCOPG` with the prefixed URL, or patch the gateway to handle both.
 
-### 4. Build Container Apps deployment configs
-Create `infra/containerapps/` Bicep or YAML for:
-- `fullstack-gateway` — port 8000, internal ingress only
-- `stelarvacay-api` — port 3000, external ingress
-- `stelarvacay-web` — static or port 4173, external ingress
-- `stelarpeople-api` — port 3847, external ingress
+### 3. Build remaining web apps (Phase 5)
+- `stelarpeople-web` — React property management dashboard
+- `stelargem-web` — neighborhood graph explorer
+- `fullstack-dashboard` — operator/admin dashboard
 
-Each needs:
-- Managed identity → Key Vault reference for secrets
-- `POSTGRES_URL`, `REDIS_URL`, `JWT_SIGNING_KEY`, `FULLSTACK_INTERNAL_API_KEY` from KV
-- Gateway additionally needs `OLLAMA_BRIDGE_URL`, `OLLAMA_BRIDGE_SHARED_SECRET`
-
-### 5. Implement Arkham Governance service
-`services/arkham-governance/` — claim classifier + publish-block enforcement  
-Rules are defined in `services/arkham-governance/rules/hard-blocks.yaml`  
-Must block test in SPEC § 17.3 before any AiSquad activation
-
-### 6. Fix AiSquad hermes config paths
-`services/fullstack-aisquad/hermes-config/` still references `/home/azureuser/hermes-workspace`  
-Update all `config.yaml` path refs to `/mnt/gemma4/stelar-platform/services/fullstack-aisquad`
+### 4. AiSquad wiring (Phase 6)
+- Fix Chrome sandbox: `--no-sandbox` flag or run in Docker with proper kernel caps
+- Connect AiSquad agent calls → Gateway `POST /v1/proxy/infer` with `inference:invoke` key
 
 ---
 
@@ -137,16 +104,17 @@ Update all `config.yaml` path refs to `/mnt/gemma4/stelar-platform/services/full
 
 ```
 Internet
-  └── Azure Container Apps ingress
-        ├── stelarvacay-api     (:3000)   → fullstack-gateway → VM:18080 → Ollama:11434
-        ├── stelarvacay-web     (static)
-        ├── stelarpeople-api    (:3847)   → fullstack-gateway → VM:18080 → Ollama:11434
-        └── fullstack-gateway   (:8000)   → VM inference bridge (127.0.0.1:18080)
+  └── Azure Container Apps ingress (cae-stelar-prod)
+        ├── stelarvacay-api     (:3000) external  → fullstack-gateway → VM:18080 → Ollama
+        ├── stelarvacay-web     (:4173) external
+        ├── stelarpeople-api    (:3847) external  → fullstack-gateway → VM:18080 → Ollama
+        └── fullstack-gateway   (:8000) internal  → VM inference bridge (127.0.0.1:18080)
 
 VM (gemmaco-key · 20.10.150.44)
-  ├── /mnt/gemma4/stelar-platform     ← monorepo
+  ├── /mnt/gemma4/stelar-platform     ← monorepo (git pull here)
   ├── /mnt/gemma4/ollama               ← Gemma 4 26B model weights
   ├── /opt/fullstack-ollama-bridge     ← Python inference bridge (:18080)
+  ├── /tmp/gw-venv                     ← gateway Python venv
   └── Ollama                           ← bound to 127.0.0.1:11434
 ```
 
@@ -163,10 +131,11 @@ VM (gemmaco-key · 20.10.150.44)
 | Redis | via `REDIS-URL` in Key Vault |
 | Inference bridge | `http://127.0.0.1:18080` (on VM only) |
 | Ollama | `http://127.0.0.1:11434` (on VM only) |
+| Gateway (VM local) | `http://localhost:8500/v1/proxy/infer` |
 
 ## Secrets in Key Vault (`kv-stelar-prod`)
 
-All 13 required secrets present: `APPINSIGHTS-CONNECTION-STRING` · `APPINSIGHTS-INSTRUMENTATION-KEY` · `BLOB-STORAGE-CONNECTION` · `FULLSTACK-INTERNAL-API-KEY` · `gemmaco-key` · `IG-CREDENTIALS` · `JWT-SIGNING-KEY` · `OLLAMA-BRIDGE-SHARED-SECRET` · `POSTGRES-ADMIN-PASSWORD` · `POSTGRES-URL` · `REDIS-URL` · `SERVICEBUS-CONNECTION` · `STAN-CREDENTIALS`
+All 13 required secrets: `APPINSIGHTS-CONNECTION-STRING` · `APPINSIGHTS-INSTRUMENTATION-KEY` · `BLOB-STORAGE-CONNECTION` · `FULLSTACK-INTERNAL-API-KEY` · `gemmaco-key` · `IG-CREDENTIALS` · `JWT-SIGNING-KEY` · `OLLAMA-BRIDGE-SHARED-SECRET` · `POSTGRES-ADMIN-PASSWORD` · `POSTGRES-URL` · `REDIS-URL` · `SERVICEBUS-CONNECTION` · `STAN-CREDENTIALS`
 
 ## Non-Negotiable Publishing Rule
 
@@ -181,9 +150,10 @@ No auto-posting for the first 90 days.
 
 | Issue | Severity | Fix |
 |---|---|---|
-| PostgreSQL read queries time out from VM | Medium | Add VM IP to PG firewall rule |
-| stelarpeople-api services still in JS | Medium | Port to TS in Phase 3 |
-| hermes-config paths reference old workspace | Medium | Run path migration pass |
-| fullstack-gateway .env.example in repo | Low | `git rm services/fullstack-gateway/.env.example` |
-| gateway .github/workflows deploy to GKE (from layer8) | Low | Replace with Container Apps deploy YAML |
+| Gateway runs on VM port 8500 (not in Container Apps yet) | High | Deploy via Bicep in Phase 4 |
+| Gateway DATABASE_URL needs `postgresql+psycopg://` prefix, KV secret uses `postgresql://` | Medium | Add `POSTGRES-URL-PSYCOPG` secret or patch gateway config |
+| `family-companion` process occupies port 8000 on VM | Low | Doesn't affect gateway (using 8500); irrelevant after Container Apps deploy |
+| Gateway venv at `/tmp/gw-venv` — lost on VM reboot | Low | Rebuild with `python3 -m venv /tmp/gw-venv && /tmp/gw-venv/bin/pip install -e .` |
+| fullstack-gateway .github/workflows deploy to GKE (from layer8) | Low | Replace with Container Apps deploy YAML |
 | Instagram Chrome sandbox broken | High (AiSquad) | Fix before activating monitors |
+| S3 / SQS startup check failures (legacy AWS code) | Low | Remove or stub these checks — not used in Azure deployment |
