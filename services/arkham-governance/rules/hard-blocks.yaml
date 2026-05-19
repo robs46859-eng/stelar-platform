@@ -1,0 +1,72 @@
+# Arkham Governance — Hard Block Rules
+# Any content matching these rules is BLOCKED and cannot proceed to publish
+# without explicit human approval. No agent may bypass these rules.
+
+version: 1
+policy: hard_block_unless_approved
+
+blocks:
+  - id: health_claim
+    description: Any claim about health, medical, or wellness outcomes
+    patterns:
+      - "cure"
+      - "treat"
+      - "diagnose"
+      - "medical advice"
+      - "clinically proven"
+      - "guaranteed.*health"
+      - "eliminates.*pain"
+    channels: [public_post, email, landing_page, social, partner_outreach]
+    requires: [rn_ibclc_review, human_approval]
+
+  - id: financial_claim
+    description: Guarantees of financial outcomes or investment returns
+    patterns:
+      - "guaranteed.*income"
+      - "guaranteed.*sales"
+      - "risk.free.*money"
+      - "you will earn"
+      - "passive income guaranteed"
+    channels: [all]
+    requires: [human_approval]
+
+  - id: legal_property_claim
+    description: Legal or property compliance statements
+    patterns:
+      - "legally required"
+      - "compliant with.*law"
+      - "tenant.*rights"
+      - "eviction.*guarantee"
+    channels: [all]
+    requires: [lawyer_review, human_approval]
+
+  - id: travel_safety_claim
+    description: Travel safety or security assurances
+    patterns:
+      - "guaranteed.*safe"
+      - "no.*crime"
+      - "completely.*secure"
+      - "risk.free.*travel"
+    channels: [all]
+    requires: [human_approval]
+
+  - id: auto_publish
+    description: No agent-authored content may publish without human approval
+    applies_to: [all_outbound]
+    first_90_days: absolute_block
+    after_90_days: requires_human_approval
+
+  - id: affiliate_link
+    description: No affiliate link or partner code may be created or published
+    applies_to: [all_outbound]
+    requires: [partner_approval, human_approval]
+
+  - id: scraped_private_data
+    description: No content derived from scraped private user data
+    applies_to: [all_outbound]
+    requires: [human_approval]
+
+  - id: platform_spam
+    description: No bulk outreach, burner accounts, or platform automation
+    applies_to: [all_channels]
+    block: absolute

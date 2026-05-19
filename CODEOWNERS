@@ -1,0 +1,27 @@
+# Stelar Platform — Code Owners
+# These owners are required reviewers for changes in their areas.
+# Arkham Governance reviews all agent output paths and documentation.
+
+# Global fallback
+*                                           @stelar/platform-lead
+
+# Governance sidecar — Arkham reviews its own changes
+/services/arkham-governance/**              @stelar/arkham @stelar/platform-lead
+
+# AiSquad — all agent config and output paths require Arkham sign-off
+/services/fullstack-aisquad/**             @stelar/arkham @stelar/platform-lead
+
+# Docs — governance, security, and launch docs require Arkham review
+/docs/**                                    @stelar/arkham @stelar/platform-lead
+
+# Infra — all infrastructure changes require platform lead
+/infra/**                                   @stelar/platform-lead
+
+# Gateway — core routing changes require gateway and platform lead
+/services/fullstack-gateway/**              @stelar/gateway-lead @stelar/platform-lead
+
+# Packages — shared packages require platform lead
+/packages/**                                @stelar/platform-lead
+
+# Spec is owned by platform lead only
+/SPEC.md                                    @stelar/platform-lead

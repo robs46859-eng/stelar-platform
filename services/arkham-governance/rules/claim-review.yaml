@@ -1,0 +1,35 @@
+# Arkham Governance — Claim Review Triggers
+# Any agent output touching these topics routes through Arkham before queue
+
+version: 1
+
+review_triggers:
+  - topic: health_wellness
+    products: [fullstack-aisquad, stelarpeople, stelargem, stelarvacay]
+    reviewer: compliance-reviewer
+    escalate_to: human_approval
+
+  - topic: property_legal
+    products: [stelarpeople, fullstack-aisquad]
+    reviewer: compliance-reviewer
+    escalate_to: [lawyer_review, human_approval]
+
+  - topic: travel_safety
+    products: [stelarvacay, fullstack-aisquad]
+    reviewer: compliance-reviewer
+    escalate_to: human_approval
+
+  - topic: financial_projection
+    products: [all]
+    reviewer: compliance-reviewer
+    escalate_to: human_approval
+
+  - topic: partner_outreach
+    products: [fullstack-aisquad]
+    reviewer: compliance-reviewer
+    escalate_to: human_approval
+
+  - topic: public_copy
+    products: [all]
+    reviewer: compliance-reviewer
+    gate: publish-gate
