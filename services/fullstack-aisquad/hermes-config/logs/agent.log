@@ -1327,9 +1327,9 @@
 2026-05-15 11:46:46,820 INFO tools.file_tools: Creating new local environment for task default...
 2026-05-15 11:46:47,030 INFO tools.environments.base: Session snapshot created (session=1118df99de82, cwd=/home/azureuser)
 2026-05-15 11:46:47,030 INFO tools.file_tools: local environment ready for task default
-2026-05-15 11:46:47,475 INFO run_agent: tool search_files failed (0.65s): {"total_count": 0, "error": "Path not found: /home/azureuser/hermes-workspace/revenue-swarm"}
+2026-05-15 11:46:47,475 INFO run_agent: tool search_files failed (0.65s): {"total_count": 0, "error": "Path not found: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/revenue-swarm"}
 2026-05-15 11:46:50,087 INFO run_agent: tool search_files completed (3.27s, 7698 chars)
-2026-05-15 11:46:50,090 WARNING [20260515_113407_8d54fb] run_agent: Tool search_files returned error (0.65s): {"total_count": 0, "error": "Path not found: /home/azureuser/hermes-workspace/revenue-swarm"}
+2026-05-15 11:46:50,090 WARNING [20260515_113407_8d54fb] run_agent: Tool search_files returned error (0.65s): {"total_count": 0, "error": "Path not found: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/revenue-swarm"}
 2026-05-15 11:46:50,124 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-19 (_call):130420794443456 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 11:46:55,050 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-19 (_call):130420794443456 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 11:46:55,051 INFO [20260515_113407_8d54fb] run_agent: API call #2: model=qwen/qwen3.6-plus provider=openrouter in=20058 out=195 total=20253 latency=4.9s
@@ -1439,7 +1439,7 @@
 2026-05-15 12:03:15,058 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-144 (_call):130420549076672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 12:04:07,882 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-144 (_call):130420549076672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 12:04:07,883 INFO [20260515_113407_8d54fb] run_agent: API call #23: model=qwen/qwen3.6-plus provider=openrouter in=68285 out=2833 total=71118 latency=52.8s
-2026-05-15 12:04:09,971 INFO hermes.lint.lsp: lsp[yaml-language-server] active for /home/azureuser/hermes-workspace
+2026-05-15 12:04:09,971 INFO hermes.lint.lsp: lsp[yaml-language-server] active for /mnt/gemma4/stelar-platform/services/fullstack-aisquad
 2026-05-15 12:04:11,468 INFO [20260515_113407_8d54fb] run_agent: tool patch completed (3.58s, 9867 chars)
 2026-05-15 12:04:11,513 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-157 (_call):130420794443456 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 12:04:22,536 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-157 (_call):130420794443456 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
@@ -1495,7 +1495,7 @@
 2026-05-15 12:10:19,726 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-495 (_call):130420540683968 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 12:10:19,727 INFO [20260515_113407_8d54fb] run_agent: API call #36: model=qwen/qwen3.6-plus provider=openrouter in=84844 out=2105 total=86949 latency=41.4s
 2026-05-15 12:10:19,802 INFO agent.lsp.install: [install] npm install --prefix /home/azureuser/.hermes/lsp typescript-language-server typescript
-2026-05-15 12:10:21,402 INFO hermes.lint.lsp: lsp[typescript] active for /home/azureuser/hermes-workspace
+2026-05-15 12:10:21,402 INFO hermes.lint.lsp: lsp[typescript] active for /mnt/gemma4/stelar-platform/services/fullstack-aisquad
 2026-05-15 12:10:27,778 INFO [20260515_113407_8d54fb] run_agent: tool execute_code completed (8.04s, 127 chars)
 2026-05-15 12:10:27,979 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-504 (_call):130420523898560 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 12:10:36,554 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-504 (_call):130420523898560 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
@@ -1658,7 +1658,7 @@
 2026-05-15 12:46:08,573 INFO [20260515_113407_8d54fb] tools.file_tools: Creating new local environment for task default...
 2026-05-15 12:46:08,786 INFO [20260515_113407_8d54fb] tools.environments.base: Session snapshot created (session=ccb87f5400b0, cwd=/home/azureuser)
 2026-05-15 12:46:08,787 INFO [20260515_113407_8d54fb] tools.file_tools: local environment ready for task default
-2026-05-15 12:46:09,417 WARNING [20260515_113407_8d54fb] run_agent: Tool search_files returned error (0.84s): {"total_count": 0, "error": "Path not found: /home/azureuser/hermes-workspace/domain-hunter"}
+2026-05-15 12:46:09,417 WARNING [20260515_113407_8d54fb] run_agent: Tool search_files returned error (0.84s): {"total_count": 0, "error": "Path not found: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/domain-hunter"}
 2026-05-15 12:46:09,468 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-1044 (_call):130420523898560 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 12:46:12,700 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-1044 (_call):130420523898560 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 12:46:12,700 INFO [20260515_113407_8d54fb] run_agent: API call #63: model=qwen/qwen3.6-plus provider=openrouter in=120852 out=70 total=120922 latency=3.2s
@@ -2225,11 +2225,11 @@
 2026-05-15 13:33:07,796 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-253 (_call):133301784258240 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 13:33:10,353 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-253 (_call):133301784258240 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 13:33:10,354 INFO [20260515_133208_3b9f47] run_agent: API call #16: model=qwen/qwen3.6-plus provider=openrouter in=31598 out=39 total=31637 latency=2.6s
-2026-05-15 13:33:10,784 WARNING [20260515_133208_3b9f47] run_agent: Tool read_file returned error (0.42s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /home/azureuser/hermes-workspace/memory/domain-hunter", "similar_
+2026-05-15 13:33:10,784 WARNING [20260515_133208_3b9f47] run_agent: Tool read_file returned error (0.42s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/domain-hunter", "similar_
 2026-05-15 13:33:10,814 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-256 (_call):133301784258240 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 13:34:22,135 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-256 (_call):133301784258240 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 13:34:22,136 INFO [20260515_133208_3b9f47] run_agent: API call #17: model=qwen/qwen3.6-plus provider=openrouter in=31728 out=3880 total=35608 latency=71.3s
-2026-05-15 13:34:22,608 INFO hermes.lint.lsp: lsp[pyright] active for /home/azureuser/hermes-workspace
+2026-05-15 13:34:22,608 INFO hermes.lint.lsp: lsp[pyright] active for /mnt/gemma4/stelar-platform/services/fullstack-aisquad
 2026-05-15 13:34:24,613 INFO [20260515_133208_3b9f47] hermes.lint.lsp: lsp[pyright] 7 diags (hermes-workspace/scripts/domain-hunter-pipeline.py)
 2026-05-15 13:34:24,614 INFO [20260515_133208_3b9f47] run_agent: tool write_file completed (2.47s, 425 chars)
 2026-05-15 13:34:24,642 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-262 (_call):133301775865536 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
@@ -2533,7 +2533,7 @@
 2026-05-15 15:04:35,248 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-780 (_call):133301222241984 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 15:05:17,924 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-780 (_call):133301222241984 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 15:05:17,925 INFO [20260515_131917_9f15b5] run_agent: API call #72: model=qwen/qwen3.6-plus provider=openrouter in=123086 out=2011 total=125097 latency=42.7s
-2026-05-15 15:05:19,101 INFO hermes.lint.lsp: lsp[yaml-language-server] active for /home/azureuser/hermes-workspace
+2026-05-15 15:05:19,101 INFO hermes.lint.lsp: lsp[yaml-language-server] active for /mnt/gemma4/stelar-platform/services/fullstack-aisquad
 2026-05-15 15:05:20,759 INFO [20260515_131917_9f15b5] run_agent: tool execute_code completed (2.83s, 126 chars)
 2026-05-15 15:05:20,813 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-792 (_call):133302067386048 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 15:05:27,435 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-792 (_call):133302067386048 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
@@ -2668,11 +2668,11 @@
 2026-05-15 15:32:38,205 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-986 (_call):133301826221760 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 15:32:44,770 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-986 (_call):133301826221760 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 15:32:44,771 INFO [20260515_131917_9f15b5] run_agent: API call #96: model=qwen/qwen3.6-plus provider=openrouter in=157151 out=219 total=157370 latency=6.6s
-2026-05-15 15:32:44,988 WARNING [20260515_131917_9f15b5] run_agent: Tool patch returned error (0.21s): {"success": false, "error": "Failed to read file: /home/azureuser/hermes-workspace/triggers/engagement/trigger-map.yaml"}
+2026-05-15 15:32:44,988 WARNING [20260515_131917_9f15b5] run_agent: Tool patch returned error (0.21s): {"success": false, "error": "Failed to read file: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/triggers/engagement/trigger-map.yaml"}
 2026-05-15 15:32:45,056 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-988 (_call):133301826221760 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 15:32:48,334 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-988 (_call):133301826221760 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 15:32:48,335 INFO [20260515_131917_9f15b5] run_agent: API call #97: model=qwen/qwen3.6-plus provider=openrouter in=157416 out=42 total=157458 latency=3.3s
-2026-05-15 15:32:48,599 WARNING [20260515_131917_9f15b5] run_agent: Tool terminal returned error (0.26s): {"output": "cat: /home/azureuser/hermes-workspace/triggers/engagement/trigger-map.yaml: No such file or directory", "exit_code": 1, "error": null}
+2026-05-15 15:32:48,599 WARNING [20260515_131917_9f15b5] run_agent: Tool terminal returned error (0.26s): {"output": "cat: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/triggers/engagement/trigger-map.yaml: No such file or directory", "exit_code": 1, "error": null}
 2026-05-15 15:32:48,666 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-990 (_call):133301826221760 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 15:33:31,960 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-990 (_call):133301826221760 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus
 2026-05-15 15:33:31,961 INFO [20260515_131917_9f15b5] run_agent: API call #98: model=qwen/qwen3.6-plus provider=openrouter in=157514 out=2271 total=159785 latency=43.3s
@@ -3832,12 +3832,12 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 18:33:38,576 INFO [20260515_183334_11a4aa] agent.auxiliary_client: Auxiliary auto-detect: using main provider openrouter (nvidia/nemotron-3-super-120b-a12b:free)
 2026-05-15 18:33:38,602 INFO [20260515_183334_11a4aa] agent.auxiliary_client: Auxiliary auto-detect: using main provider openrouter (nvidia/nemotron-3-super-120b-a12b:free)
 2026-05-15 18:33:38,612 INFO [20260515_183334_11a4aa] tools.web_tools: Processing extracted content with LLM (parallel)...
-2026-05-15 18:33:38,613 WARNING [20260515_183334_11a4aa] tools.web_tools: /home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
-2026-05-15 18:33:38,613 WARNING [20260515_183334_11a4aa] tools.web_tools: /home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:33:38,613 WARNING [20260515_183334_11a4aa] tools.web_tools: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md (no content to process)
+2026-05-15 18:33:38,613 WARNING [20260515_183334_11a4aa] tools.web_tools: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/icp-prepared-paige.md (no content to process)
 2026-05-15 18:33:38,614 WARNING [20260515_183334_11a4aa] run_agent: Tool web_extract returned error (0.05s): {
   "results": [
     {
-      "url": "/home/azureuser/hermes-workspace/missions/research-brief.md",
+      "url": "/mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md",
       "title": "",
       "content": "",
       "error": "Blocked: URL targets a private or internal ne
@@ -3849,12 +3849,12 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 18:33:45,859 INFO [20260515_183334_11a4aa] agent.auxiliary_client: Auxiliary auto-detect: using main provider openrouter (nvidia/nemotron-3-super-120b-a12b:free)
 2026-05-15 18:33:45,883 INFO [20260515_183334_11a4aa] agent.auxiliary_client: Auxiliary auto-detect: using main provider openrouter (nvidia/nemotron-3-super-120b-a12b:free)
 2026-05-15 18:33:45,893 INFO [20260515_183334_11a4aa] tools.web_tools: Processing extracted content with LLM (parallel)...
-2026-05-15 18:33:45,894 WARNING [20260515_183334_11a4aa] tools.web_tools: file:///home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
-2026-05-15 18:33:45,895 WARNING [20260515_183334_11a4aa] tools.web_tools: file:///home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:33:45,894 WARNING [20260515_183334_11a4aa] tools.web_tools: file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md (no content to process)
+2026-05-15 18:33:45,895 WARNING [20260515_183334_11a4aa] tools.web_tools: file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/icp-prepared-paige.md (no content to process)
 2026-05-15 18:33:45,895 WARNING [20260515_183334_11a4aa] run_agent: Tool web_extract returned error (0.05s): {
   "results": [
     {
-      "url": "file:///home/azureuser/hermes-workspace/missions/research-brief.md",
+      "url": "file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md",
       "title": "",
       "content": "",
       "error": "Blocked: URL targets a private or inte
@@ -4010,11 +4010,11 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 18:38:04,944 INFO [20260515_183802_180c48] agent.auxiliary_client: Auxiliary auto-detect: using main provider openrouter (nvidia/nemotron-3-super-120b-a12b:free)
 2026-05-15 18:38:04,968 INFO [20260515_183802_180c48] agent.auxiliary_client: Auxiliary auto-detect: using main provider openrouter (nvidia/nemotron-3-super-120b-a12b:free)
 2026-05-15 18:38:04,977 INFO [20260515_183802_180c48] tools.web_tools: Processing extracted content with LLM (parallel)...
-2026-05-15 18:38:04,978 WARNING [20260515_183802_180c48] tools.web_tools: /home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
+2026-05-15 18:38:04,978 WARNING [20260515_183802_180c48] tools.web_tools: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md (no content to process)
 2026-05-15 18:38:04,979 WARNING [20260515_183802_180c48] run_agent: Tool web_extract returned error (0.05s): {
   "results": [
     {
-      "url": "/home/azureuser/hermes-workspace/missions/research-brief.md",
+      "url": "/mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md",
       "title": "",
       "content": "",
       "error": "Blocked: URL targets a private or internal ne
@@ -4031,12 +4031,12 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 18:38:06,250 INFO [20260515_183801_6b0715] agent.auxiliary_client: Auxiliary auto-detect: using main provider openrouter (nvidia/nemotron-3-super-120b-a12b:free)
 2026-05-15 18:38:06,273 INFO [20260515_183801_6b0715] agent.auxiliary_client: Auxiliary auto-detect: using main provider openrouter (nvidia/nemotron-3-super-120b-a12b:free)
 2026-05-15 18:38:06,283 INFO [20260515_183801_6b0715] tools.web_tools: Processing extracted content with LLM (parallel)...
-2026-05-15 18:38:06,284 WARNING [20260515_183801_6b0715] tools.web_tools: file:///home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
-2026-05-15 18:38:06,285 WARNING [20260515_183801_6b0715] tools.web_tools: file:///home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:38:06,284 WARNING [20260515_183801_6b0715] tools.web_tools: file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md (no content to process)
+2026-05-15 18:38:06,285 WARNING [20260515_183801_6b0715] tools.web_tools: file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/icp-prepared-paige.md (no content to process)
 2026-05-15 18:38:06,285 WARNING [20260515_183801_6b0715] run_agent: Tool web_extract returned error (0.05s): {
   "results": [
     {
-      "url": "file:///home/azureuser/hermes-workspace/missions/research-brief.md",
+      "url": "file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md",
       "title": "",
       "content": "",
       "error": "Blocked: URL targets a private or inte
@@ -4193,12 +4193,12 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 18:43:51,759 INFO [20260515_184348_abda0f] agent.auxiliary_client: Auxiliary auto-detect: using main provider openrouter (nvidia/nemotron-3-super-120b-a12b:free)
 2026-05-15 18:43:51,783 INFO [20260515_184348_abda0f] agent.auxiliary_client: Auxiliary auto-detect: using main provider openrouter (nvidia/nemotron-3-super-120b-a12b:free)
 2026-05-15 18:43:51,793 INFO [20260515_184348_abda0f] tools.web_tools: Processing extracted content with LLM (parallel)...
-2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] tools.web_tools: /home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
-2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] tools.web_tools: /home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] tools.web_tools: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md (no content to process)
+2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] tools.web_tools: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/icp-prepared-paige.md (no content to process)
 2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] run_agent: Tool web_extract returned error (0.05s): {
   "results": [
     {
-      "url": "/home/azureuser/hermes-workspace/missions/research-brief.md",
+      "url": "/mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md",
       "title": "",
       "content": "",
       "error": "Blocked: URL targets a private or internal ne
@@ -4618,12 +4618,12 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 19:16:32,569 INFO [20260515_191038_1e5d84] run_agent: API call #2: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=7245 out=3028 total=10273 latency=313.8s
 2026-05-15 19:16:32,576 WARNING [20260515_191038_1e5d84] tools.tts_tool: TTS text too long for provider edge (7385 chars), truncating to 5000
 2026-05-15 19:16:32,577 INFO [20260515_191038_1e5d84] tools.tts_tool: Generating speech with Edge TTS...
-2026-05-15 19:16:52,775 INFO [20260515_191038_1e5d84] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week01_audio.mp3 (2,019,600 bytes, provider: edge)
+2026-05-15 19:16:52,775 INFO [20260515_191038_1e5d84] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week01_audio.mp3 (2,019,600 bytes, provider: edge)
 2026-05-15 19:16:52,775 INFO [20260515_191038_1e5d84] run_agent: tool text_to_speech completed (20.20s, 234 chars)
 2026-05-15 19:16:52,796 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-395 (_call):128768999933632 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:17:00,969 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-395 (_call):128768999933632 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:17:00,969 INFO [20260515_191038_1e5d84] run_agent: API call #3: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=9158 out=111 total=9269 latency=8.2s
-2026-05-15 19:17:00,976 WARNING [20260515_191038_1e5d84] run_agent: Tool read_file returned error (0.00s): {"error": "Cannot read binary file '/home/azureuser/hermes-workspace/missions/drafts/week01_audio.mp3' (.mp3). Use vision_analyze for images, or terminal to inspect binary files."}
+2026-05-15 19:17:00,976 WARNING [20260515_191038_1e5d84] run_agent: Tool read_file returned error (0.00s): {"error": "Cannot read binary file '/mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week01_audio.mp3' (.mp3). Use vision_analyze for images, or terminal to inspect binary files."}
 2026-05-15 19:17:00,993 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-396 (_call):128768999933632 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:17:07,185 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-396 (_call):128768999933632 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:17:07,185 INFO [20260515_191038_1e5d84] run_agent: API call #4: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=9267 out=479 total=9746 latency=6.2s
@@ -4757,7 +4757,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 19:22:39,937 INFO [20260515_192145_258775] run_agent: API call #3: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=7781 out=2330 total=10111 latency=34.2s
 2026-05-15 19:22:39,946 WARNING [20260515_192145_258775] tools.tts_tool: TTS text too long for provider edge (9332 chars), truncating to 5000
 2026-05-15 19:22:39,947 INFO [20260515_192145_258775] tools.tts_tool: Generating speech with Edge TTS...
-2026-05-15 19:22:51,619 INFO [20260515_192145_258775] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week02_audio.mp3 (2,093,184 bytes, provider: edge)
+2026-05-15 19:22:51,619 INFO [20260515_192145_258775] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week02_audio.mp3 (2,093,184 bytes, provider: edge)
 2026-05-15 19:22:51,620 INFO [20260515_192145_258775] run_agent: tool text_to_speech completed (11.67s, 234 chars)
 2026-05-15 19:22:51,641 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-493 (_call):128768999933632 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:22:58,723 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-493 (_call):128768999933632 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
@@ -4768,7 +4768,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 19:23:30,583 INFO [20260515_192146_a5a6d1] run_agent: API call #2: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=7323 out=2241 total=9564 latency=100.7s
 2026-05-15 19:23:30,594 WARNING [20260515_192146_a5a6d1] tools.tts_tool: TTS text too long for provider edge (8210 chars), truncating to 5000
 2026-05-15 19:23:30,595 INFO [20260515_192146_a5a6d1] tools.tts_tool: Generating speech with Edge TTS...
-2026-05-15 19:23:45,339 INFO [20260515_192146_a5a6d1] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week03_audio.mp3 (2,046,960 bytes, provider: edge)
+2026-05-15 19:23:45,339 INFO [20260515_192146_a5a6d1] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week03_audio.mp3 (2,046,960 bytes, provider: edge)
 2026-05-15 19:23:45,340 INFO [20260515_192146_a5a6d1] run_agent: tool text_to_speech completed (14.75s, 234 chars)
 2026-05-15 19:23:45,357 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-495 (_call):128768991540928 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:23:54,417 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-495 (_call):128768991540928 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
@@ -4788,7 +4788,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 19:25:44,397 INFO [20260515_192146_cff275] run_agent: API call #2: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=7176 out=2011 total=9187 latency=235.1s
 2026-05-15 19:25:44,403 WARNING [20260515_192146_cff275] tools.tts_tool: TTS text too long for provider edge (7916 chars), truncating to 5000
 2026-05-15 19:25:44,404 INFO [20260515_192146_cff275] tools.tts_tool: Generating speech with Edge TTS...
-2026-05-15 19:25:56,494 INFO [20260515_192146_cff275] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week04_audio.mp3 (2,027,088 bytes, provider: edge)
+2026-05-15 19:25:56,494 INFO [20260515_192146_cff275] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week04_audio.mp3 (2,027,088 bytes, provider: edge)
 2026-05-15 19:25:56,495 INFO [20260515_192146_cff275] run_agent: tool text_to_speech completed (12.09s, 234 chars)
 2026-05-15 19:25:56,512 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-497 (_call):128768983148224 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:26:12,339 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-497 (_call):128768983148224 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
@@ -4935,14 +4935,14 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 19:31:02,906 INFO [20260515_192942_b83430] run_agent: API call #2: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=7369 out=2102 total=9471 latency=72.1s
 2026-05-15 19:31:02,913 WARNING [20260515_192942_b83430] tools.tts_tool: TTS text too long for provider edge (8808 chars), truncating to 5000
 2026-05-15 19:31:02,914 INFO [20260515_192942_b83430] tools.tts_tool: Generating speech with Edge TTS...
-2026-05-15 19:31:03,398 INFO [20260515_192943_347c9e] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week07_audio.mp3 (2,076,480 bytes, provider: edge)
+2026-05-15 19:31:03,398 INFO [20260515_192943_347c9e] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week07_audio.mp3 (2,076,480 bytes, provider: edge)
 2026-05-15 19:31:03,398 INFO [20260515_192943_347c9e] run_agent: tool text_to_speech completed (13.50s, 234 chars)
 2026-05-15 19:31:03,435 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-602 (_call):128768983148224 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:31:10,444 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-602 (_call):128768983148224 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:31:10,445 INFO [20260515_192943_347c9e] run_agent: API call #3: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=9194 out=506 total=9700 latency=7.0s
 2026-05-15 19:31:10,491 INFO [20260515_192943_347c9e] run_agent: Turn ended: reason=text_response(finish_reason=stop) model=nvidia/nemotron-3-super-120b-a12b:free api_calls=3/50 budget=3/50 tool_turns=2 last_msg_role=assistant response_len=958 session=20260515_192943_347c9e
 2026-05-15 19:31:10,492 INFO run_agent: OpenAI client closed (agent_close, shared=True, tcp_force_closed=0) thread=ThreadPoolExecutor-36_2:128769545197248 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
-2026-05-15 19:31:19,430 INFO [20260515_192942_b83430] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week06_audio.mp3 (2,041,200 bytes, provider: edge)
+2026-05-15 19:31:19,430 INFO [20260515_192942_b83430] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week06_audio.mp3 (2,041,200 bytes, provider: edge)
 2026-05-15 19:31:19,430 INFO [20260515_192942_b83430] run_agent: tool text_to_speech completed (16.52s, 234 chars)
 2026-05-15 19:31:19,454 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-604 (_call):128768999933632 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:31:33,718 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-604 (_call):128768999933632 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
@@ -4953,7 +4953,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 19:31:49,156 INFO [20260515_192942_f8dac1] run_agent: API call #3: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=7493 out=2067 total=9560 latency=85.0s
 2026-05-15 19:31:49,162 WARNING [20260515_192942_f8dac1] tools.tts_tool: TTS text too long for provider edge (8833 chars), truncating to 5000
 2026-05-15 19:31:49,163 INFO [20260515_192942_f8dac1] tools.tts_tool: Generating speech with Edge TTS...
-2026-05-15 19:31:58,386 INFO [20260515_192942_f8dac1] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week05_audio.mp3 (2,006,352 bytes, provider: edge)
+2026-05-15 19:31:58,386 INFO [20260515_192942_f8dac1] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week05_audio.mp3 (2,006,352 bytes, provider: edge)
 2026-05-15 19:31:58,386 INFO [20260515_192942_f8dac1] run_agent: tool text_to_speech completed (9.23s, 234 chars)
 2026-05-15 19:31:58,406 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-606 (_call):128768991540928 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:32:12,039 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-606 (_call):128768991540928 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
@@ -5262,10 +5262,10 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 19:45:26,964 INFO [20260515_194402_6fddbd] run_agent: API call #2: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=8867 out=3135 total=12002 latency=77.9s
 2026-05-15 19:45:26,976 WARNING [20260515_194402_6fddbd] tools.tts_tool: TTS text too long for provider edge (13138 chars), truncating to 5000
 2026-05-15 19:45:26,977 INFO [20260515_194402_6fddbd] tools.tts_tool: Generating speech with Edge TTS...
-2026-05-15 19:45:41,669 INFO [20260515_194402_d67757] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week09_audio.mp3 (2,086,272 bytes, provider: edge)
+2026-05-15 19:45:41,669 INFO [20260515_194402_d67757] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week09_audio.mp3 (2,086,272 bytes, provider: edge)
 2026-05-15 19:45:41,669 INFO [20260515_194402_d67757] run_agent: tool text_to_speech completed (18.52s, 234 chars)
 2026-05-15 19:45:41,688 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-822 (_call):128768974755520 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
-2026-05-15 19:45:44,820 INFO [20260515_194402_6fddbd] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week10_audio.mp3 (2,151,504 bytes, provider: edge)
+2026-05-15 19:45:44,820 INFO [20260515_194402_6fddbd] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week10_audio.mp3 (2,151,504 bytes, provider: edge)
 2026-05-15 19:45:44,822 INFO [20260515_194402_6fddbd] run_agent: tool text_to_speech completed (17.85s, 234 chars)
 2026-05-15 19:45:44,840 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-824 (_call):128768890894016 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:45:56,937 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-820 (_call):128768983148224 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
@@ -5350,7 +5350,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 19:52:01,790 INFO [20260515_195015_1ac40f] run_agent: API call #3: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=8165 out=2329 total=10494 latency=72.5s
 2026-05-15 19:52:01,797 WARNING [20260515_195015_1ac40f] tools.tts_tool: TTS text too long for provider edge (9935 chars), truncating to 5000
 2026-05-15 19:52:01,798 INFO [20260515_195015_1ac40f] tools.tts_tool: Generating speech with Edge TTS...
-2026-05-15 19:52:14,193 INFO [20260515_195015_1ac40f] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week12_audio.mp3 (2,176,992 bytes, provider: edge)
+2026-05-15 19:52:14,193 INFO [20260515_195015_1ac40f] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week12_audio.mp3 (2,176,992 bytes, provider: edge)
 2026-05-15 19:52:14,194 INFO [20260515_195015_1ac40f] run_agent: tool text_to_speech completed (12.40s, 234 chars)
 2026-05-15 19:52:14,212 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-859 (_call):128768991540928 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:52:18,404 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-846 (_call):128769008326336 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
@@ -5369,7 +5369,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 19:53:09,168 INFO [20260515_195014_cb291b] run_agent: API call #2: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=8363 out=6552 total=14915 latency=167.8s
 2026-05-15 19:53:09,175 WARNING [20260515_195014_cb291b] tools.tts_tool: TTS text too long for provider edge (12607 chars), truncating to 5000
 2026-05-15 19:53:09,176 INFO [20260515_195014_cb291b] tools.tts_tool: Generating speech with Edge TTS...
-2026-05-15 19:53:27,804 INFO [20260515_195014_cb291b] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week08_audio.mp3 (2,443,392 bytes, provider: edge)
+2026-05-15 19:53:27,804 INFO [20260515_195014_cb291b] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week08_audio.mp3 (2,443,392 bytes, provider: edge)
 2026-05-15 19:53:27,804 INFO [20260515_195014_cb291b] run_agent: tool text_to_speech completed (18.63s, 234 chars)
 2026-05-15 19:53:27,827 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-871 (_call):128769016719040 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:54:06,830 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-871 (_call):128769016719040 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
@@ -5380,7 +5380,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 19:54:22,060 INFO [20260515_195015_9e4bee] run_agent: API call #4: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=11048 out=2429 total=13477 latency=88.3s
 2026-05-15 19:54:22,066 WARNING [20260515_195015_9e4bee] tools.tts_tool: TTS text too long for provider edge (9460 chars), truncating to 5000
 2026-05-15 19:54:22,067 INFO [20260515_195015_9e4bee] tools.tts_tool: Generating speech with Edge TTS...
-2026-05-15 19:54:39,091 INFO [20260515_195015_9e4bee] tools.tts_tool: TTS audio saved: /home/azureuser/hermes-workspace/missions/drafts/week11_audio.mp3 (2,026,224 bytes, provider: edge)
+2026-05-15 19:54:39,091 INFO [20260515_195015_9e4bee] tools.tts_tool: TTS audio saved: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week11_audio.mp3 (2,026,224 bytes, provider: edge)
 2026-05-15 19:54:39,092 INFO [20260515_195015_9e4bee] run_agent: tool text_to_speech completed (17.03s, 234 chars)
 2026-05-15 19:54:39,111 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-873 (_call):128769008326336 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 19:55:08,343 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-873 (_call):128769008326336 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
@@ -5841,7 +5841,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 21:22:41,678 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-1224 (_call):128769008326336 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 21:22:53,207 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-1224 (_call):128769008326336 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 21:22:53,208 INFO [20260515_211615_a1002b] run_agent: API call #26: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=53447 out=228 total=53675 latency=11.5s
-2026-05-15 21:22:53,652 WARNING [20260515_211615_a1002b] run_agent: Tool read_file returned error (0.44s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /home/azureuser/hermes-workspace/missions/drafts", "similar_files
+2026-05-15 21:22:53,652 WARNING [20260515_211615_a1002b] run_agent: Tool read_file returned error (0.44s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts", "similar_files
 2026-05-15 21:22:53,692 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-1227 (_call):128769008326336 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 21:23:05,316 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-1210 (_call):128768974755520 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free
 2026-05-15 21:23:05,316 INFO [20260515_211616_7563ce] run_agent: API call #33: model=nvidia/nemotron-3-super-120b-a12b:free provider=openrouter in=13292 out=634 total=13926 latency=51.2s
@@ -6449,7 +6449,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-16 16:45:12,918 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-5 (_call):131325847656128 provider=openrouter base_url=https://openrouter.ai/api/v1 model=deepseek/deepseek-v4-pro
 2026-05-16 16:45:12,919 INFO [20260516_163016_481975] run_agent: API call #1: model=deepseek/deepseek-v4-pro provider=openrouter in=21176 out=345 total=21521 latency=9.5s
 2026-05-16 16:45:12,926 INFO [20260516_163016_481975] tools.file_tools: Creating new local environment for task default...
-2026-05-16 16:45:13,136 INFO [20260516_163016_481975] tools.environments.base: Session snapshot created (session=515f6641957a, cwd=/home/azureuser/hermes-workspace)
+2026-05-16 16:45:13,136 INFO [20260516_163016_481975] tools.environments.base: Session snapshot created (session=515f6641957a, cwd=/mnt/gemma4/stelar-platform/services/fullstack-aisquad)
 2026-05-16 16:45:13,137 INFO [20260516_163016_481975] tools.file_tools: local environment ready for task default
 2026-05-16 16:45:15,773 INFO [20260516_163016_481975] run_agent: tool search_files completed (2.85s, 18 chars)
 2026-05-16 16:45:17,990 INFO [20260516_163016_481975] run_agent: tool search_files completed (1.21s, 73 chars)
@@ -7076,7 +7076,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-16 17:34:56,726 INFO run_agent: OpenAI client closed (stream_request_complete, shared=False, tcp_force_closed=0) thread=Thread-801 (_call):131325361108672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=deepseek/deepseek-v4-pro
 2026-05-16 17:34:56,727 INFO [20260516_163016_481975] run_agent: API call #68: model=deepseek/deepseek-v4-pro provider=openrouter in=137664 out=146 total=137810 latency=16.5s cache=1152/137664 (1%)
 2026-05-16 17:34:56,746 INFO [20260516_163016_481975] tools.terminal_tool: Creating new local environment for task default...
-2026-05-16 17:34:56,958 INFO [20260516_163016_481975] tools.environments.base: Session snapshot created (session=e71ef4d0b3de, cwd=/home/azureuser/hermes-workspace)
+2026-05-16 17:34:56,958 INFO [20260516_163016_481975] tools.environments.base: Session snapshot created (session=e71ef4d0b3de, cwd=/mnt/gemma4/stelar-platform/services/fullstack-aisquad)
 2026-05-16 17:34:56,958 INFO [20260516_163016_481975] tools.terminal_tool: local environment ready for task default
 2026-05-16 17:34:58,862 INFO [20260516_163016_481975] run_agent: tool terminal completed (2.12s, 959 chars)
 2026-05-16 17:34:58,921 INFO run_agent: OpenAI client created (chat_completion_stream_request, shared=False) thread=Thread-804 (_call):131325361108672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=deepseek/deepseek-v4-pro

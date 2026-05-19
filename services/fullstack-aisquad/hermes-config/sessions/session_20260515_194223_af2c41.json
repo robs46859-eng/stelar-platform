@@ -202,9 +202,9 @@
     {
       "role": "assistant",
       "content": "",
-      "reasoning": "We need to produce audio for week10 draft. The draft file is at /home/azureuser/hermes-workspace/missions/drafts/week10.md. We need to read its content, then convert to speech using text_to_speech, and save as /home/azureuser/hermes-workspace/missions/drafts/week10_audio.mp3.\n\nSteps:\n1. Read the draft file.\n2. Use text_to_speech with the text, specifying output_path.\n3. Then provide a summary.\n\nLet's first read the file.\n\n",
+      "reasoning": "We need to produce audio for week10 draft. The draft file is at /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week10.md. We need to read its content, then convert to speech using text_to_speech, and save as /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week10_audio.mp3.\n\nSteps:\n1. Read the draft file.\n2. Use text_to_speech with the text, specifying output_path.\n3. Then provide a summary.\n\nLet's first read the file.\n\n",
       "finish_reason": "tool_calls",
-      "reasoning_content": "We need to produce audio for week10 draft. The draft file is at /home/azureuser/hermes-workspace/missions/drafts/week10.md. We need to read its content, then convert to speech using text_to_speech, and save as /home/azureuser/hermes-workspace/missions/drafts/week10_audio.mp3.\n\nSteps:\n1. Read the draft file.\n2. Use text_to_speech with the text, specifying output_path.\n3. Then provide a summary.\n\nLet's first read the file.\n\n",
+      "reasoning_content": "We need to produce audio for week10 draft. The draft file is at /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week10.md. We need to read its content, then convert to speech using text_to_speech, and save as /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week10_audio.mp3.\n\nSteps:\n1. Read the draft file.\n2. Use text_to_speech with the text, specifying output_path.\n3. Then provide a summary.\n\nLet's first read the file.\n\n",
       "tool_calls": [
         {
           "id": "chatcmpl-tool-822aeafb085ec147",
@@ -213,7 +213,7 @@
           "type": "function",
           "function": {
             "name": "read_file",
-            "arguments": "{\"path\": \"/home/azureuser/hermes-workspace/missions/drafts/week10.md\"}"
+            "arguments": "{\"path\": \"/mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week10.md\"}"
           }
         }
       ]

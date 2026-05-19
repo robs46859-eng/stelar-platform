@@ -960,7 +960,7 @@
   "messages": [
     {
       "role": "user",
-      "content": "Create a PRD for the 4th Trimester Operating Manual based on the research brief at /home/azureuser/hermes-workspace/missions/research-brief.md"
+      "content": "Create a PRD for the 4th Trimester Operating Manual based on the research brief at /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md"
     }
   ]
 }

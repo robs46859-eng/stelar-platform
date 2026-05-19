@@ -94,11 +94,11 @@
 2026-05-13 17:50:31,645 WARNING agent.title_generator: Title generation failed: No LLM provider configured for task=title_generation provider=auto. Run: hermes setup
 2026-05-15 02:45:20,356 WARNING gateway.run: No user allowlists configured. All unauthorized users will be denied. Set GATEWAY_ALLOW_ALL_USERS=true in ~/.hermes/.env to allow open access, or configure platform allowlists (e.g., TELEGRAM_ALLOWED_USERS=your_id).
 2026-05-15 02:45:20,512 WARNING gateway.platforms.api_server: [Api_Server] ⚠️  No API key configured (API_SERVER_KEY / platforms.api_server.key). All requests will be accepted without authentication. Set an API key for production deployments to prevent unauthorized access to sessions, responses, and cron jobs.
-2026-05-15 11:46:50,090 WARNING [20260515_113407_8d54fb] run_agent: Tool search_files returned error (0.65s): {"total_count": 0, "error": "Path not found: /home/azureuser/hermes-workspace/revenue-swarm"}
+2026-05-15 11:46:50,090 WARNING [20260515_113407_8d54fb] run_agent: Tool search_files returned error (0.65s): {"total_count": 0, "error": "Path not found: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/revenue-swarm"}
 2026-05-15 12:05:56,183 WARNING [20260515_113407_8d54fb] run_agent: Tool terminal returned error (60.06s): {"output": "", "exit_code": -1, "error": "BLOCKED: User denied. Do NOT retry.", "status": "blocked"}
 2026-05-15 12:31:31,435 WARNING [20260515_113407_8d54fb] run_agent: Tool patch returned error (0.00s): {"error": "path required"}
 2026-05-15 12:33:50,879 WARNING [20260515_113407_8d54fb] run_agent: Tool execute_code returned error (1.42s): {"status": "error", "output": "Created trigger-map.yaml\n\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_tu5y7vq6/script.py\", line 162, in <module>\n    \"migration
-2026-05-15 12:46:09,417 WARNING [20260515_113407_8d54fb] run_agent: Tool search_files returned error (0.84s): {"total_count": 0, "error": "Path not found: /home/azureuser/hermes-workspace/domain-hunter"}
+2026-05-15 12:46:09,417 WARNING [20260515_113407_8d54fb] run_agent: Tool search_files returned error (0.84s): {"total_count": 0, "error": "Path not found: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/domain-hunter"}
 2026-05-15 12:47:32,694 WARNING cli: Agent thread still alive after interrupt (thread 130420794443456). Daemon thread will be cleaned up on exit.
 2026-05-15 12:59:51,422 WARNING [20260515_113407_8d54fb] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=Thread-1070 (run_agent):130420794443456 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 429: Provider returned error
 2026-05-15 12:59:51,422 WARNING [20260515_113407_8d54fb] run_agent: Retrying API call in 2.701779666862594s (attempt 1/3) thread=Thread-1070 (run_agent):130420794443456 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'qwen/qwen3.6-plus is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Alibaba', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
@@ -123,7 +123,7 @@
 2026-05-15 13:32:08,911 WARNING [20260515_131917_9f15b5] agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
 2026-05-15 13:32:09,147 WARNING [20260515_131917_9f15b5] agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
 2026-05-15 13:32:09,149 WARNING [20260515_131917_9f15b5] run_agent: No auxiliary LLM provider for compression — summaries will be unavailable.
-2026-05-15 13:33:10,784 WARNING [20260515_133208_3b9f47] run_agent: Tool read_file returned error (0.42s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /home/azureuser/hermes-workspace/memory/domain-hunter", "similar_
+2026-05-15 13:33:10,784 WARNING [20260515_133208_3b9f47] run_agent: Tool read_file returned error (0.42s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/domain-hunter", "similar_
 2026-05-15 13:34:37,273 WARNING [20260515_133208_3b9f47] run_agent: Tool patch returned error (0.21s): {"success": false, "error": "old_string and new_string are identical"}
 2026-05-15 13:35:18,032 WARNING run_agent: Unrepairable tool_call arguments for write_file — replaced with empty object (was: {"content": "#!/usr/bin/env bash\n# ── Domain Hunter Pipeline Cron Runner ──────)
 2026-05-15 13:35:43,033 WARNING [20260515_131917_9f15b5] run_agent: Tool process returned error (0.00s): {"error": "session_id is required for poll"}
@@ -140,8 +140,8 @@
 2026-05-15 15:09:16,819 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (3.21s): {"status": "error", "output": "\n--- stderr ---\n  File \"/tmp/hermes_sandbox_fqwx1sf5/script.py\", line 83\n    print(\"\\n=== CREDENTIALS GUID\n          ^\nSyntaxError: unterminated string literal 
 2026-05-15 15:11:34,340 WARNING [20260515_151016_55d3fe] run_agent: Tool skill_manage returned error (0.03s): {"success": false, "error": "Could not find a match for old_string in the file\n\nDid you mean one of these sections?\n 209| 11. If extending an existing swarm's triggers, the dispatch script's `build
 2026-05-15 15:31:05,504 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (3.21s): {"status": "error", "output": "\n--- stderr ---\n  File \"/tmp/hermes_sandbox_fcp00dod/script.py\", line 334\n    \"\"\")\n       ^\nSyntaxError: f-string: empty expression not allowed\n", "tool_calls
-2026-05-15 15:32:44,988 WARNING [20260515_131917_9f15b5] run_agent: Tool patch returned error (0.21s): {"success": false, "error": "Failed to read file: /home/azureuser/hermes-workspace/triggers/engagement/trigger-map.yaml"}
-2026-05-15 15:32:48,599 WARNING [20260515_131917_9f15b5] run_agent: Tool terminal returned error (0.26s): {"output": "cat: /home/azureuser/hermes-workspace/triggers/engagement/trigger-map.yaml: No such file or directory", "exit_code": 1, "error": null}
+2026-05-15 15:32:44,988 WARNING [20260515_131917_9f15b5] run_agent: Tool patch returned error (0.21s): {"success": false, "error": "Failed to read file: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/triggers/engagement/trigger-map.yaml"}
+2026-05-15 15:32:48,599 WARNING [20260515_131917_9f15b5] run_agent: Tool terminal returned error (0.26s): {"output": "cat: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/triggers/engagement/trigger-map.yaml: No such file or directory", "exit_code": 1, "error": null}
 2026-05-15 15:49:40,208 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (0.81s): {"status": "error", "output": "swarm.yaml updated: 9 revenue workers + linkedin-monitor marked as 'sleeping'\n\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_pgxzr3t
 2026-05-15 15:49:58,905 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (1.21s): {"status": "error", "output": "[OK] IG credentials saved securely at .credentials-ig.json\n  [!] Permissions set to 600 (owner-read/write only)\n\n--- stderr ---\nTraceback (most recent call last):\n 
 2026-05-15 15:50:05,743 WARNING run_agent: Unrepairable tool_call arguments for execute_code — replaced with empty object (was: {"code": "from hermes_tools import write_file, terminal\n\nplan_content = \"\"\")
@@ -271,21 +271,21 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 18:28:23,695 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.87s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
 2026-05-15 18:32:10,051 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.87s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
 2026-05-15 18:33:15,878 WARNING [20260515_172006_9b1e26] run_agent: Tool delegate_task returned error (0.00s): {"error": "Too many tasks: 12 provided, but max_concurrent_children is 3. Either reduce the task count, split into multiple delegate_task calls, or increase delegation.max_concurrent_children in confi
-2026-05-15 18:33:38,613 WARNING [20260515_183334_11a4aa] tools.web_tools: /home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
-2026-05-15 18:33:38,613 WARNING [20260515_183334_11a4aa] tools.web_tools: /home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:33:38,613 WARNING [20260515_183334_11a4aa] tools.web_tools: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md (no content to process)
+2026-05-15 18:33:38,613 WARNING [20260515_183334_11a4aa] tools.web_tools: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/icp-prepared-paige.md (no content to process)
 2026-05-15 18:33:38,614 WARNING [20260515_183334_11a4aa] run_agent: Tool web_extract returned error (0.05s): {
   "results": [
     {
-      "url": "/home/azureuser/hermes-workspace/missions/research-brief.md",
+      "url": "/mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md",
       "title": "",
       "content": "",
       "error": "Blocked: URL targets a private or internal ne
-2026-05-15 18:33:45,894 WARNING [20260515_183334_11a4aa] tools.web_tools: file:///home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
-2026-05-15 18:33:45,895 WARNING [20260515_183334_11a4aa] tools.web_tools: file:///home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:33:45,894 WARNING [20260515_183334_11a4aa] tools.web_tools: file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md (no content to process)
+2026-05-15 18:33:45,895 WARNING [20260515_183334_11a4aa] tools.web_tools: file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/icp-prepared-paige.md (no content to process)
 2026-05-15 18:33:45,895 WARNING [20260515_183334_11a4aa] run_agent: Tool web_extract returned error (0.05s): {
   "results": [
     {
-      "url": "file:///home/azureuser/hermes-workspace/missions/research-brief.md",
+      "url": "file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md",
       "title": "",
       "content": "",
       "error": "Blocked: URL targets a private or inte
@@ -298,20 +298,20 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 18:34:40,442 WARNING [20260515_183335_dac2ee] run_agent: Tool web_extract returned error (0.51s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
 2026-05-15 18:34:41,785 WARNING [20260515_183336_fe5a7c] run_agent: Tool web_extract returned error (0.00s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
 2026-05-15 18:34:44,838 WARNING [20260515_183336_fe5a7c] run_agent: Tool web_extract returned error (0.06s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
-2026-05-15 18:38:04,978 WARNING [20260515_183802_180c48] tools.web_tools: /home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
+2026-05-15 18:38:04,978 WARNING [20260515_183802_180c48] tools.web_tools: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md (no content to process)
 2026-05-15 18:38:04,979 WARNING [20260515_183802_180c48] run_agent: Tool web_extract returned error (0.05s): {
   "results": [
     {
-      "url": "/home/azureuser/hermes-workspace/missions/research-brief.md",
+      "url": "/mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md",
       "title": "",
       "content": "",
       "error": "Blocked: URL targets a private or internal ne
-2026-05-15 18:38:06,284 WARNING [20260515_183801_6b0715] tools.web_tools: file:///home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
-2026-05-15 18:38:06,285 WARNING [20260515_183801_6b0715] tools.web_tools: file:///home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:38:06,284 WARNING [20260515_183801_6b0715] tools.web_tools: file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md (no content to process)
+2026-05-15 18:38:06,285 WARNING [20260515_183801_6b0715] tools.web_tools: file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/icp-prepared-paige.md (no content to process)
 2026-05-15 18:38:06,285 WARNING [20260515_183801_6b0715] run_agent: Tool web_extract returned error (0.05s): {
   "results": [
     {
-      "url": "file:///home/azureuser/hermes-workspace/missions/research-brief.md",
+      "url": "file:///mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md",
       "title": "",
       "content": "",
       "error": "Blocked: URL targets a private or inte
@@ -323,12 +323,12 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 [Tool loop warning: sa
 2026-05-15 18:39:24,444 WARNING [20260515_183801_4419b4] run_agent: Tool web_extract returned error (0.02s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
 2026-05-15 18:43:08,302 WARNING [20260515_172006_9b1e26] run_agent: Tool delegate_task returned error (0.00s): {"error": "Too many tasks: 6 provided, but max_concurrent_children is 3. Either reduce the task count, split into multiple delegate_task calls, or increase delegation.max_concurrent_children in config
-2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] tools.web_tools: /home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
-2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] tools.web_tools: /home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] tools.web_tools: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md (no content to process)
+2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] tools.web_tools: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/icp-prepared-paige.md (no content to process)
 2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] run_agent: Tool web_extract returned error (0.05s): {
   "results": [
     {
-      "url": "/home/azureuser/hermes-workspace/missions/research-brief.md",
+      "url": "/mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md",
       "title": "",
       "content": "",
       "error": "Blocked: URL targets a private or internal ne
@@ -347,7 +347,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 19:14:18,834 WARNING [20260515_191038_1e5d84] run_agent: Stream stale for 180s (threshold 180s) — no chunks received. model=nvidia/nemotron-3-super-120b-a12b:free context=~5,444 tokens. Killing connection.
 2026-05-15 19:14:18,987 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=sa-0-1f3992d8 depth=1 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=180.23s ttfb=- upstream=[cf-ray=9fc4729e6c7a8eaa-IAD server=cloudflare]
 2026-05-15 19:16:32,576 WARNING [20260515_191038_1e5d84] tools.tts_tool: TTS text too long for provider edge (7385 chars), truncating to 5000
-2026-05-15 19:17:00,976 WARNING [20260515_191038_1e5d84] run_agent: Tool read_file returned error (0.00s): {"error": "Cannot read binary file '/home/azureuser/hermes-workspace/missions/drafts/week01_audio.mp3' (.mp3). Use vision_analyze for images, or terminal to inspect binary files."}
+2026-05-15 19:17:00,976 WARNING [20260515_191038_1e5d84] run_agent: Tool read_file returned error (0.00s): {"error": "Cannot read binary file '/mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts/week01_audio.mp3' (.mp3). Use vision_analyze for images, or terminal to inspect binary files."}
 2026-05-15 19:22:39,946 WARNING [20260515_192145_258775] tools.tts_tool: TTS text too long for provider edge (9332 chars), truncating to 5000
 2026-05-15 19:23:30,594 WARNING [20260515_192146_a5a6d1] tools.tts_tool: TTS text too long for provider edge (8210 chars), truncating to 5000
 2026-05-15 19:24:49,388 WARNING [20260515_192146_cff275] run_agent: Stream stale for 180s (threshold 180s) — no chunks received. model=nvidia/nemotron-3-super-120b-a12b:free context=~5,056 tokens. Killing connection.
@@ -375,7 +375,7 @@ TypeError: '>' not supported between instances of 'str' and 'int'
 2026-05-15 21:17:41,963 WARNING [20260515_211616_7563ce] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": 1, "error": null}
 2026-05-15 21:19:09,389 WARNING [20260515_211616_7563ce] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": 1, "error": null}
 2026-05-15 21:19:38,247 WARNING [20260515_211616_7563ce] run_agent: Tool terminal returned error (0.27s): {"output": "Reading package lists...\nE: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)\nE: Unable to lock directory /var/lib/apt/lists/\nW: Problem unlinking the file
-2026-05-15 21:22:53,652 WARNING [20260515_211615_a1002b] run_agent: Tool read_file returned error (0.44s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /home/azureuser/hermes-workspace/missions/drafts", "similar_files
+2026-05-15 21:22:53,652 WARNING [20260515_211615_a1002b] run_agent: Tool read_file returned error (0.44s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/drafts", "similar_files
 2026-05-15 21:26:16,675 WARNING tools.delegate_tool: Subagent 0 timed out after 600.0s
 2026-05-15 21:26:16,680 WARNING [20260515_190245_1e03c6] run_agent: Tool delegate_task returned error (601.40s): {"results": [{"task_index": 0, "status": "timeout", "summary": null, "error": "Subagent timed out after 600.0s with 28 API call(s) completed — likely stuck on a slow API call or unresponsive network r
 2026-05-15 21:27:33,071 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=sa-0-50257888 depth=1 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=263.84s ttfb=- upstream=[cf-ray=9fc533beea10ccb9-IAD server=cloudflare]

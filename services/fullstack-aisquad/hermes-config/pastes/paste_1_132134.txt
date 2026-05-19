@@ -117,13 +117,13 @@ bolster the products/services  sold with customized marketing materials/samples 
   ┊ 🐍 preparing execute_code…
   ┊ 🐍 exec      from hermes_tools import write_file, terminal  1.3s
   ┊ 📖 preparing read_file…
-  ┊ 📖 read      /home/azureuser/hermes-workspace/swarm.yaml  0.9s
+  ┊ 📖 read      /mnt/gemma4/stelar-platform/services/fullstack-aisquad/swarm.yaml  0.9s
   ┊ 📖 preparing read_file…
-  ┊ 📖 read      /home/azureuser/hermes-workspace/swarm.yaml  0.8s
+  ┊ 📖 read      /mnt/gemma4/stelar-platform/services/fullstack-aisquad/swarm.yaml  0.8s
   ┊ 🔧 preparing patch…
   ┊ 🔧 patch       2.6s
   ┊ review diff
-a//home/azureuser/hermes-workspace/swarm.yaml → b//home/azureuser/hermes-workspace/swarm.yaml
+a//mnt/gemma4/stelar-platform/services/fullstack-aisquad/swarm.yaml → b//mnt/gemma4/stelar-platform/services/fullstack-aisquad/swarm.yaml
 @@ -1584,3 +1584,52 @@
    pluginToolsets: []
    mcpServers: []

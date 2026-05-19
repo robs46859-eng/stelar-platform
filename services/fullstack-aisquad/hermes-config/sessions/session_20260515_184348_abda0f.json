@@ -77,7 +77,7 @@
           "type": "function",
           "function": {
             "name": "web_extract",
-            "arguments": "{\"urls\": [\"/home/azureuser/hermes-workspace/missions/research-brief.md\", \"/home/azureuser/hermes-workspace/memory/icp-prepared-paige.md\"]}"
+            "arguments": "{\"urls\": [\"/mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md\", \"/mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/icp-prepared-paige.md\"]}"
           }
         }
       ]
@@ -85,7 +85,7 @@
     {
       "role": "tool",
       "name": "web_extract",
-      "content": "{\n  \"results\": [\n    {\n      \"url\": \"/home/azureuser/hermes-workspace/missions/research-brief.md\",\n      \"title\": \"\",\n      \"content\": \"\",\n      \"error\": \"Blocked: URL targets a private or internal network address\"\n    },\n    {\n      \"url\": \"/home/azureuser/hermes-workspace/memory/icp-prepared-paige.md\",\n      \"title\": \"\",\n      \"content\": \"\",\n      \"error\": \"Blocked: URL targets a private or internal network address\"\n    }\n  ]\n}",
+      "content": "{\n  \"results\": [\n    {\n      \"url\": \"/mnt/gemma4/stelar-platform/services/fullstack-aisquad/missions/research-brief.md\",\n      \"title\": \"\",\n      \"content\": \"\",\n      \"error\": \"Blocked: URL targets a private or internal network address\"\n    },\n    {\n      \"url\": \"/mnt/gemma4/stelar-platform/services/fullstack-aisquad/memory/icp-prepared-paige.md\",\n      \"title\": \"\",\n      \"content\": \"\",\n      \"error\": \"Blocked: URL targets a private or internal network address\"\n    }\n  ]\n}",
       "tool_call_id": "chatcmpl-tool-84be1e8dd9141bcf"
     },
     {

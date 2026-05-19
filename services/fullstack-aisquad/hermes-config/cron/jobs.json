@@ -35,7 +35,7 @@
       "deliver": "local",
       "origin": null,
       "enabled_toolsets": null,
-      "workdir": "/home/azureuser/hermes-workspace"
+      "workdir": "/mnt/gemma4/stelar-platform/services/fullstack-aisquad"
     },
     {
       "id": "080c61a11d1c",
@@ -72,7 +72,7 @@
       "deliver": "local",
       "origin": null,
       "enabled_toolsets": null,
-      "workdir": "/home/azureuser/hermes-workspace"
+      "workdir": "/mnt/gemma4/stelar-platform/services/fullstack-aisquad"
     }
   ],
   "updated_at": "2026-05-15T10:55:56.748374+00:00"
