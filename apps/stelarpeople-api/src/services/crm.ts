@@ -1,4 +1,7 @@
-import { execute, queryAll, queryOne } from "../db.js";
+import { execute, queryAll, queryOne } from "../db/client.js";
+
+interface Prospect { id: string; name: string; email?: string; phone?: string; stage: string; notes?: string; asset_id?: string; }
+interface ProspectActivity { id: string; prospect_id: string; activity_type: string; notes?: string; }
 
 export const CRM_STAGE_ORDER = [
   "Lead",
@@ -11,7 +14,7 @@ export const CRM_STAGE_ORDER = [
   "Closed Lost",
 ];
 
-function normalizeStage(stage) {
+function normalizeStage(stage: string): string {
   const input = String(stage || "").trim().toLowerCase();
   const match = CRM_STAGE_ORDER.find((candidate) => candidate.toLowerCase() === input);
   if (!match) {
@@ -20,7 +23,7 @@ function normalizeStage(stage) {
   return match;
 }
 
-function normalizeActivityStatus(status) {
+function normalizeActivityStatus(status: string): string {
   const input = String(status || "pending").trim().toLowerCase();
   if (!["pending", "done", "canceled"].includes(input)) {
     throw new Error("Invalid activity status. Expected pending, done, or canceled");
@@ -28,15 +31,15 @@ function normalizeActivityStatus(status) {
   return input;
 }
 
-function mapProspect(row) {
+function mapProspect(row: Record<string, unknown>): Record<string, unknown> {
   return {
     ...row,
     full_name: [row.first_name, row.last_name].filter(Boolean).join(" "),
-    budget_monthly: row.budget_cents != null ? row.budget_cents / 100 : null,
+    budget_monthly: row.budget_cents != null ? (row.budget_cents as number) / 100 : null,
   };
 }
 
-function baseProspectQuery() {
+function baseProspectQuery(): string {
   return `
     SELECT
       p.*,
@@ -48,34 +51,34 @@ function baseProspectQuery() {
       sa.gross_monthly_income_cents,
       (
         SELECT ca.activity_type
-        FROM crm_activities ca
+        FROM stelarpeople.crm_activities ca
         WHERE ca.prospect_id = p.id AND ca.status = 'pending'
         ORDER BY COALESCE(ca.scheduled_for, ca.created_at), ca.id
         LIMIT 1
       ) AS next_activity_type,
       (
         SELECT ca.scheduled_for
-        FROM crm_activities ca
+        FROM stelarpeople.crm_activities ca
         WHERE ca.prospect_id = p.id AND ca.status = 'pending'
         ORDER BY COALESCE(ca.scheduled_for, ca.created_at), ca.id
         LIMIT 1
       ) AS next_activity_at,
       (
         SELECT ca.summary
-        FROM crm_activities ca
+        FROM stelarpeople.crm_activities ca
         WHERE ca.prospect_id = p.id AND ca.status = 'pending'
         ORDER BY COALESCE(ca.scheduled_for, ca.created_at), ca.id
         LIMIT 1
       ) AS next_activity_summary
-    FROM crm_prospects p
-    LEFT JOIN assets a ON p.asset_id = a.id
-    LEFT JOIN units u ON p.unit_id = u.id
-    LEFT JOIN screening_applications sa ON sa.prospect_id = p.id
+    FROM stelarpeople.crm_prospects p
+    LEFT JOIN stelarpeople.assets a ON p.asset_id = a.id
+    LEFT JOIN stelarpeople.units u ON p.unit_id = u.id
+    LEFT JOIN stelarpeople.screening_applications sa ON sa.prospect_id = p.id
   `;
 }
 
 export async function listCrmPipeline() {
-  const prospects = (await queryAll(`
+  const prospects = (await queryAll<Record<string, unknown>>(`
     ${baseProspectQuery()}
     ORDER BY
       CASE p.stage
@@ -93,15 +96,15 @@ export async function listCrmPipeline() {
       p.id DESC
   `)).map(mapProspect);
 
-  const activities = await queryAll(`
+  const activities = await queryAll<Record<string, unknown>>(`
     SELECT
       ca.*,
       p.prospect_id,
       p.first_name,
       p.last_name,
       p.stage
-    FROM crm_activities ca
-    JOIN crm_prospects p ON p.id = ca.prospect_id
+    FROM stelarpeople.crm_activities ca
+    JOIN stelarpeople.crm_prospects p ON p.id = ca.prospect_id
     ORDER BY
       CASE ca.status WHEN 'pending' THEN 0 WHEN 'done' THEN 1 ELSE 2 END,
       COALESCE(ca.scheduled_for, ca.created_at),
@@ -111,7 +114,7 @@ export async function listCrmPipeline() {
   const stages = await Promise.all(
     CRM_STAGE_ORDER.map(async (stage) => ({
       stage,
-      count: Number((await queryOne(`SELECT COUNT(*) AS count FROM crm_prospects WHERE stage = ?`, [stage], `SELECT COUNT(*) AS count FROM crm_prospects WHERE stage = $1`)).count || 0),
+      count: Number(((await queryOne<Record<string, unknown>>(`SELECT COUNT(*) AS count FROM stelarpeople.crm_prospects WHERE stage = $1`, [stage])) || {}).count || 0),
     })),
   );
 
@@ -132,27 +135,28 @@ export async function listCrmPipeline() {
   };
 }
 
-export async function createProspect(input) {
+export async function createProspect(input: Record<string, unknown>) {
   const firstName = String(input.first_name || "").trim();
   const lastName = String(input.last_name || "").trim();
   if (!firstName || !lastName) {
     throw new Error("first_name and last_name are required");
   }
 
-  const stage = normalizeStage(input.stage || "Lead");
+  const stage = normalizeStage(String(input.stage || "Lead"));
   const prospectId = input.prospect_id || `LEAD-${Date.now()}`;
   const budgetMonthly = input.budget_monthly == null ? null : Number(input.budget_monthly);
-  const budgetCents = Number.isFinite(budgetMonthly) ? Math.round(budgetMonthly * 100) : null;
+  const budgetCents = Number.isFinite(budgetMonthly) ? Math.round((budgetMonthly as number) * 100) : null;
   const desiredBedrooms = input.desired_bedrooms == null ? null : Number(input.desired_bedrooms);
   const screeningScore = input.screening_score == null ? null : Number(input.screening_score);
 
   const result = await execute(
     `
-      INSERT INTO crm_prospects (
+      INSERT INTO stelarpeople.crm_prospects (
         prospect_id, first_name, last_name, email, phone, source, stage,
         desired_bedrooms, desired_move_in, budget_cents, assigned_agent,
         asset_id, unit_id, application_status, screening_score, last_contact_at, notes, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, CURRENT_TIMESTAMP)
+      RETURNING id
     `,
     [
       prospectId,
@@ -173,29 +177,20 @@ export async function createProspect(input) {
       input.last_contact_at || null,
       input.notes || null,
     ],
-    `
-      INSERT INTO crm_prospects (
-        prospect_id, first_name, last_name, email, phone, source, stage,
-        desired_bedrooms, desired_move_in, budget_cents, assigned_agent,
-        asset_id, unit_id, application_status, screening_score, last_contact_at, notes, updated_at
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, CURRENT_TIMESTAMP)
-      RETURNING id
-    `,
   );
 
-  const id = result.lastInsertRowid || result.rows?.[0]?.id;
+  const id = (result as unknown as { rows?: Array<{ id: unknown }> }).rows?.[0]?.id;
 
   // Auto-log intake activity
   await execute(
-    `INSERT INTO crm_activities (prospect_id, activity_type, status, owner, summary) VALUES (?, ?, ?, ?, ?)`,
+    `INSERT INTO stelarpeople.crm_activities (prospect_id, activity_type, status, owner, summary) VALUES ($1, $2, $3, $4, $5)`,
     [Number(id), "intake", "done", input.assigned_agent || null, `Prospect created via ${input.source || "manual"}`],
-    `INSERT INTO crm_activities (prospect_id, activity_type, status, owner, summary) VALUES ($1, $2, $3, $4, $5)`,
   );
 
   return getProspectById(Number(id));
 }
 
-export async function logProspectActivity(prospectId, input) {
+export async function logProspectActivity(prospectId: number, input: Record<string, unknown>) {
   const prospect = await getProspectById(prospectId);
   if (!prospect) {
     throw new Error("Prospect not found");
@@ -208,97 +203,83 @@ export async function logProspectActivity(prospectId, input) {
 
   await execute(
     `
-      INSERT INTO crm_activities (
+      INSERT INTO stelarpeople.crm_activities (
         prospect_id, activity_type, status, scheduled_for, completed_at, owner, summary
-      ) VALUES (?, ?, ?, ?, ?, ?, ?)
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7)
     `,
     [
       prospectId,
       activityType,
-      normalizeActivityStatus(input.status),
+      normalizeActivityStatus(String(input.status || "pending")),
       input.scheduled_for || null,
       input.completed_at || null,
       input.owner || null,
       input.summary || null,
     ],
-    `
-      INSERT INTO crm_activities (
-        prospect_id, activity_type, status, scheduled_for, completed_at, owner, summary
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7)
-    `,
   );
 
   await execute(
-    `UPDATE crm_prospects SET last_contact_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
+    `UPDATE stelarpeople.crm_prospects SET last_contact_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP WHERE id = $1`,
     [prospectId],
-    `UPDATE crm_prospects SET last_contact_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP WHERE id = $1`,
   );
 
   return getProspectById(prospectId);
 }
 
-export async function updateProspectStage(prospectId, input) {
+export async function updateProspectStage(prospectId: number, input: Record<string, unknown>) {
   const prospect = await getProspectById(prospectId);
   if (!prospect) {
     throw new Error("Prospect not found");
   }
 
-  const stage = normalizeStage(input.stage || prospect.stage);
-  const screeningScore = input.screening_score == null ? prospect.screening_score : Number(input.screening_score);
-  const budgetMonthly = input.budget_monthly == null ? prospect.budget_monthly : Number(input.budget_monthly);
-  const budgetCents = Number.isFinite(budgetMonthly) ? Math.round(budgetMonthly * 100) : null;
+  const stage = normalizeStage(String(input.stage || (prospect as Record<string, unknown>).stage));
+  const screeningScore = input.screening_score == null ? (prospect as Record<string, unknown>).screening_score : Number(input.screening_score);
+  const budgetMonthly = input.budget_monthly == null ? (prospect as Record<string, unknown>).budget_monthly : Number(input.budget_monthly);
+  const budgetCents = Number.isFinite(budgetMonthly as number) ? Math.round((budgetMonthly as number) * 100) : null;
 
   await execute(
     `
-      UPDATE crm_prospects
-      SET stage = ?, assigned_agent = ?, application_status = ?, screening_score = ?, budget_cents = ?, last_contact_at = COALESCE(?, last_contact_at), notes = COALESCE(?, notes), updated_at = CURRENT_TIMESTAMP
-      WHERE id = ?
+      UPDATE stelarpeople.crm_prospects
+      SET stage = $1, assigned_agent = $2, application_status = $3, screening_score = $4, budget_cents = $5, last_contact_at = COALESCE($6, last_contact_at), notes = COALESCE($7, notes), updated_at = CURRENT_TIMESTAMP
+      WHERE id = $8
     `,
     [
       stage,
-      input.assigned_agent || prospect.assigned_agent || null,
-      input.application_status || prospect.application_status || null,
-      Number.isFinite(screeningScore) ? screeningScore : null,
+      input.assigned_agent || (prospect as Record<string, unknown>).assigned_agent || null,
+      input.application_status || (prospect as Record<string, unknown>).application_status || null,
+      Number.isFinite(screeningScore as number) ? screeningScore : null,
       budgetCents,
       input.last_contact_at || null,
       input.notes || null,
       prospectId,
     ],
-    `
-      UPDATE crm_prospects
-      SET stage = $1, assigned_agent = $2, application_status = $3, screening_score = $4, budget_cents = $5, last_contact_at = COALESCE($6, last_contact_at), notes = COALESCE($7, notes), updated_at = CURRENT_TIMESTAMP
-      WHERE id = $8
-    `,
   );
 
   return getProspectById(prospectId);
 }
 
 // Called by screening automation to move stage and log activity after a decision
-export async function applyScreeningOutcome(prospectId, decision) {
-  const stageMap = { approved: "Approved", conditional: "Approved", denied: "Closed Lost" };
+export async function applyScreeningOutcome(prospectId: number, decision: string): Promise<void> {
+  const stageMap: Record<string, string> = { approved: "Approved", conditional: "Approved", denied: "Closed Lost" };
   const targetStage = stageMap[decision];
   if (!targetStage) return;
   const prospect = await getProspectById(prospectId);
   if (!prospect) return;
 
   await execute(
-    `UPDATE crm_prospects SET stage = ?, application_status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
+    `UPDATE stelarpeople.crm_prospects SET stage = $1, application_status = $2, updated_at = CURRENT_TIMESTAMP WHERE id = $3`,
     [targetStage, decision, prospectId],
-    `UPDATE crm_prospects SET stage = $1, application_status = $2, updated_at = CURRENT_TIMESTAMP WHERE id = $3`,
   );
   await execute(
-    `INSERT INTO crm_activities (prospect_id, activity_type, status, owner, summary) VALUES (?, ?, ?, ?, ?)`,
+    `INSERT INTO stelarpeople.crm_activities (prospect_id, activity_type, status, owner, summary) VALUES ($1, $2, $3, $4, $5)`,
     [prospectId, "screening_decision", "done", "system", `Auto-decision: ${decision}`],
-    `INSERT INTO crm_activities (prospect_id, activity_type, status, owner, summary) VALUES ($1, $2, $3, $4, $5)`,
   );
 }
 
-export async function getProspectById(prospectId) {
-  const row = await queryOne(
-    `${baseProspectQuery()} WHERE p.id = ?`,
-    [prospectId],
+export async function getProspectById(prospectId: number): Promise<Record<string, unknown> | null> {
+  const row = await queryOne<Record<string, unknown>>(
     `${baseProspectQuery()} WHERE p.id = $1`,
+    [prospectId],
   );
   return row ? mapProspect(row) : null;
 }

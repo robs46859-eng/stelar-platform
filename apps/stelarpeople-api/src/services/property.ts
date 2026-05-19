@@ -1,75 +1,80 @@
-import { execute, queryAll, queryOne } from "../db.js";
+import { execute, queryAll, queryOne } from "../db/client.js";
+
+interface WorkOrder { id: number; asset_id: string; unit_id?: string; title: string; category: string; priority: string; status: string; assigned_to?: string; vendor_name?: string; due_date?: string; estimated_cost_cents?: number; notes?: string; estimated_cost?: number; asset_code?: string; asset_name?: string; unit_number?: string; }
+interface Asset { id: string; asset_id: string; name: string; occupied_units?: number; vacant_units?: number; active_work_orders?: number; }
+interface Unit { id: string; asset_id: string; unit_number: string; status: string; market_rent_cents?: number; market_rent?: number; }
+interface Lease { id: string; unit_id: string; monthly_rent_cents?: number; monthly_rent?: number; deposit_cents?: number; deposit?: number; custom_clauses?: unknown; }
 
 const workOrderStatuses = new Set(["open", "in_progress", "vendor_scheduled", "completed", "canceled"]);
 const workOrderPriorities = new Set(["low", "medium", "high", "urgent"]);
 
-function normalizeWorkOrder(row) {
+function normalizeWorkOrder(row: WorkOrder): WorkOrder {
   return {
     ...row,
-    estimated_cost: row.estimated_cost_cents != null ? row.estimated_cost_cents / 100 : null,
+    estimated_cost: row.estimated_cost_cents != null ? row.estimated_cost_cents / 100 : undefined,
   };
 }
 
 export async function listPropertyManagement() {
-  const assets = await queryAll(`
+  const assets = await queryAll<Asset>(`
     SELECT a.*,
       (
         SELECT COUNT(*)
-        FROM units u
+        FROM stelarpeople.units u
         WHERE u.asset_id = a.id AND COALESCE(u.status, 'vacant') IN ('occupied', 'notice')
       ) AS occupied_units,
       (
         SELECT COUNT(*)
-        FROM units u
+        FROM stelarpeople.units u
         WHERE u.asset_id = a.id AND COALESCE(u.status, 'vacant') = 'vacant'
       ) AS vacant_units,
       (
         SELECT COUNT(*)
-        FROM work_orders wo
+        FROM stelarpeople.work_orders wo
         WHERE wo.asset_id = a.id AND wo.status NOT IN ('completed', 'canceled')
       ) AS active_work_orders,
       (
         SELECT open_tickets
-        FROM maintenance_snapshots m
+        FROM stelarpeople.maintenance_snapshots m
         WHERE m.asset_id = a.id
         ORDER BY m.recorded_at DESC, m.id DESC
         LIMIT 1
       ) AS open_tickets,
       (
         SELECT unresolved_damages
-        FROM maintenance_snapshots m
+        FROM stelarpeople.maintenance_snapshots m
         WHERE m.asset_id = a.id
         ORDER BY m.recorded_at DESC, m.id DESC
         LIMIT 1
       ) AS unresolved_damages
-    FROM assets a
+    FROM stelarpeople.assets a
     ORDER BY a.asset_id
   `);
 
-  const units = await queryAll(`
+  const units = await queryAll<Unit & { asset_code?: string; asset_name?: string }>(`
     SELECT u.*, a.asset_id AS asset_code, a.name AS asset_name
-    FROM units u
-    JOIN assets a ON u.asset_id = a.id
+    FROM stelarpeople.units u
+    JOIN stelarpeople.assets a ON u.asset_id = a.id
     ORDER BY a.asset_id, u.unit_number
   `);
 
-  const leases = await queryAll(`
+  const leases = await queryAll<Lease & { unit_number?: string; asset_code?: string }>(`
     SELECT l.*, u.unit_number, a.asset_id AS asset_code
-    FROM leases l
-    JOIN units u ON l.unit_id = u.id
-    JOIN assets a ON u.asset_id = a.id
+    FROM stelarpeople.leases l
+    JOIN stelarpeople.units u ON l.unit_id = u.id
+    JOIN stelarpeople.assets a ON u.asset_id = a.id
     ORDER BY l.lease_ended_date DESC, l.id DESC
   `);
 
-  const workOrders = (await queryAll(`
+  const workOrders = (await queryAll<WorkOrder>(`
     SELECT
       wo.*,
       a.asset_id AS asset_code,
       a.name AS asset_name,
       u.unit_number
-    FROM work_orders wo
-    JOIN assets a ON wo.asset_id = a.id
-    LEFT JOIN units u ON wo.unit_id = u.id
+    FROM stelarpeople.work_orders wo
+    JOIN stelarpeople.assets a ON wo.asset_id = a.id
+    LEFT JOIN stelarpeople.units u ON wo.unit_id = u.id
     ORDER BY
       CASE wo.priority
         WHEN 'urgent' THEN 0
@@ -96,22 +101,22 @@ export async function listPropertyManagement() {
     work_orders: workOrders,
     summary: {
       open_work_orders: workOrders.filter((row) => !["completed", "canceled"].includes(row.status)).length,
-      ready_units: units.filter((row) => Number(row.make_ready_progress || 0) >= 100).length,
+      ready_units: units.filter((row) => Number((row as unknown as Record<string, unknown>).make_ready_progress || 0) >= 100).length,
       vacant_units: units.filter((row) => row.status === "vacant").length,
     },
   };
 }
 
-function parseJsonSafe(value) {
+function parseJsonSafe(value: unknown): unknown {
   if (value == null || value === "") return null;
   try {
-    return JSON.parse(value);
+    return JSON.parse(value as string);
   } catch {
     return value;
   }
 }
 
-export async function createWorkOrder(input) {
+export async function createWorkOrder(input: Partial<WorkOrder> & Record<string, unknown>) {
   const title = String(input.title || "").trim();
   const category = String(input.category || "").trim();
   const priority = String(input.priority || "medium").trim().toLowerCase();
@@ -131,41 +136,36 @@ export async function createWorkOrder(input) {
   }
 
   const estimatedCost = input.estimated_cost == null ? null : Number(input.estimated_cost);
-  const estimatedCostCents = Number.isFinite(estimatedCost) ? Math.round(estimatedCost * 100) : null;
+  const estimatedCostCents = Number.isFinite(estimatedCost) ? Math.round((estimatedCost as number) * 100) : null;
 
-  const insertSql = `
-    INSERT INTO work_orders (
-      asset_id, unit_id, title, category, priority, status, assigned_to,
-      vendor_name, due_date, estimated_cost_cents, notes, updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
-  `;
-  const pgInsertSql = `
-    INSERT INTO work_orders (
-      asset_id, unit_id, title, category, priority, status, assigned_to,
-      vendor_name, due_date, estimated_cost_cents, notes, updated_at
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, CURRENT_TIMESTAMP)
-    RETURNING id
-  `;
+  const result = await execute(
+    `
+      INSERT INTO stelarpeople.work_orders (
+        asset_id, unit_id, title, category, priority, status, assigned_to,
+        vendor_name, due_date, estimated_cost_cents, notes, updated_at
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, CURRENT_TIMESTAMP)
+      RETURNING id
+    `,
+    [
+      input.asset_id,
+      input.unit_id || null,
+      title,
+      category,
+      priority,
+      status,
+      input.assigned_to || null,
+      input.vendor_name || null,
+      input.due_date || null,
+      estimatedCostCents,
+      input.notes || null,
+    ],
+  );
 
-  const result = await execute(insertSql, [
-    input.asset_id,
-    input.unit_id || null,
-    title,
-    category,
-    priority,
-    status,
-    input.assigned_to || null,
-    input.vendor_name || null,
-    input.due_date || null,
-    estimatedCostCents,
-    input.notes || null,
-  ], pgInsertSql);
-
-  const id = result.lastInsertRowid || result.rows?.[0]?.id;
+  const id = (result as unknown as { rows?: Array<{ id: unknown }> }).rows?.[0]?.id;
   return getWorkOrderById(Number(id));
 }
 
-export async function updateWorkOrder(workOrderId, input) {
+export async function updateWorkOrder(workOrderId: number, input: Partial<WorkOrder> & Record<string, unknown>) {
   const existing = await getWorkOrderById(workOrderId);
   if (!existing) {
     throw new Error("Work order not found");
@@ -181,13 +181,13 @@ export async function updateWorkOrder(workOrderId, input) {
   }
 
   const estimatedCost = input.estimated_cost == null ? existing.estimated_cost : Number(input.estimated_cost);
-  const estimatedCostCents = Number.isFinite(estimatedCost) ? Math.round(estimatedCost * 100) : null;
+  const estimatedCostCents = Number.isFinite(estimatedCost) ? Math.round((estimatedCost as number) * 100) : null;
 
   await execute(
     `
-      UPDATE work_orders
-      SET priority = ?, status = ?, assigned_to = ?, vendor_name = ?, due_date = ?, estimated_cost_cents = ?, notes = ?, updated_at = CURRENT_TIMESTAMP
-      WHERE id = ?
+      UPDATE stelarpeople.work_orders
+      SET priority = $1, status = $2, assigned_to = $3, vendor_name = $4, due_date = $5, estimated_cost_cents = $6, notes = $7, updated_at = CURRENT_TIMESTAMP
+      WHERE id = $8
     `,
     [
       priority,
@@ -199,41 +199,25 @@ export async function updateWorkOrder(workOrderId, input) {
       input.notes ?? existing.notes ?? null,
       workOrderId,
     ],
-    `
-      UPDATE work_orders
-      SET priority = $1, status = $2, assigned_to = $3, vendor_name = $4, due_date = $5, estimated_cost_cents = $6, notes = $7, updated_at = CURRENT_TIMESTAMP
-      WHERE id = $8
-    `,
   );
 
   return getWorkOrderById(workOrderId);
 }
 
-export async function getWorkOrderById(workOrderId) {
-  const rows = await queryAll(
+export async function getWorkOrderById(workOrderId: number): Promise<WorkOrder | null> {
+  const rows = await queryAll<WorkOrder>(
     `
       SELECT
         wo.*,
         a.asset_id AS asset_code,
         a.name AS asset_name,
         u.unit_number
-      FROM work_orders wo
-      JOIN assets a ON wo.asset_id = a.id
-      LEFT JOIN units u ON wo.unit_id = u.id
-      WHERE wo.id = ?
-    `,
-    [workOrderId],
-    `
-      SELECT
-        wo.*,
-        a.asset_id AS asset_code,
-        a.name AS asset_name,
-        u.unit_number
-      FROM work_orders wo
-      JOIN assets a ON wo.asset_id = a.id
-      LEFT JOIN units u ON wo.unit_id = u.id
+      FROM stelarpeople.work_orders wo
+      JOIN stelarpeople.assets a ON wo.asset_id = a.id
+      LEFT JOIN stelarpeople.units u ON wo.unit_id = u.id
       WHERE wo.id = $1
     `,
+    [workOrderId],
   );
   return rows[0] ? normalizeWorkOrder(rows[0]) : null;
 }
