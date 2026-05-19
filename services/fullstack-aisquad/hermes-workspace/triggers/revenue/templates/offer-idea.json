@@ -1,0 +1,11 @@
+{
+  "type": "offer_idea",
+  "source": "manual",
+  "offer": {
+    "workingTitle": "",
+    "buyer": "",
+    "pain": "",
+    "desiredOutcome": ""
+  },
+  "notes": "Describe the service idea."
+}

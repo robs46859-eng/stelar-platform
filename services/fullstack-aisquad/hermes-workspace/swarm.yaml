@@ -1,0 +1,2287 @@
+version: 1
+workers:
+- id: orchestrator
+  name: Orchestrator
+  role: Swarm Orchestrator / Greenlight Gate
+  specialty: mission routing, task decomposition, handoffs, proof contracts, human approval gates
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Decompose missions into safe, proof-bearing work and route to the right specialist while preserving human greenlight control.
+  profile: orchestrator
+  modes:
+  - plan
+  tools:
+  - todo
+  - kanban
+  - delegation
+  - terminal
+  - file
+  - gbrain
+  - session_search
+  - cronjob
+  - skills
+  - clarify
+  - web
+  skills:
+  - orchestrator-core
+  - gstack-for-hermes
+  - gbrain
+  - kanban-orchestrator
+  - subagent-driven-development
+  - writing-plans
+  - requesting-code-review
+  - workspace-dispatch
+  capabilities:
+  - orchestration
+  - decomposition
+  - routing
+  - proof-contracts
+  - greenlight-gate
+  preferredTaskTypes:
+  - orchestration
+  - planning
+  - routing
+  - coordination
+  - handoff
+  greenlightRequiredFor:
+  - merge
+  - publish
+  - destructive
+  - external-send
+  - credential-change
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers:
+  - gbrain
+  wrapper: orchestrator:plan
+- id: km-agent
+  name: KM Agent
+  role: RAZSOC / GBrain Knowledge Steward
+  specialty: RAZSOC, GBrain, Obsidian, TaskNotes, graph health, durable knowledge capture, drift audits
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Keep the operating brain coherent, searchable, and source-of-record aligned without polluting durable knowledge.
+  profile: km-agent
+  modes:
+  - health
+  - curate
+  tools:
+  - gbrain
+  - file
+  - terminal
+  - session_search
+  - skills
+  - todo
+  - cronjob
+  - web
+  skills:
+  - km-agent-core
+  - gbrain
+  - obsidian-markdown
+  - obsidian-cli
+  - obsidian-bases
+  - json-canvas
+  - gstack-for-hermes
+  capabilities:
+  - gbrain
+  - razsoc
+  - obsidian
+  - tasknotes
+  - drift-audit
+  - knowledge-curation
+  preferredTaskTypes:
+  - knowledge
+  - curation
+  - brain-health
+  - drift
+  - documentation
+  greenlightRequiredFor:
+  - delete
+  - purge
+  - bulk-edit
+  - source-of-record-change
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers:
+  - gbrain
+  wrapper: km:health
+- id: builder
+  name: Builder
+  role: Scoped Implementation Agent
+  specialty: focused implementation, tests, small diffs, integration fixes
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Ship scoped product/code slices with tests, minimal diffs, and clear verification evidence.
+  profile: builder
+  modes:
+  - task
+  tools:
+  - terminal
+  - file
+  - browser
+  - web
+  - gbrain
+  - session_search
+  - skills
+  - todo
+  skills:
+  - builder-core
+  - gstack-for-hermes
+  - test-driven-development
+  - systematic-debugging
+  - github-pr-workflow
+  - requesting-code-review
+  - codebase-inspection
+  capabilities:
+  - implementation
+  - code-editing
+  - tests
+  - integration
+  - build-verification
+  preferredTaskTypes:
+  - implementation
+  - bugfix
+  - feature
+  - refactor
+  - integration
+  greenlightRequiredFor:
+  - merge
+  - push
+  - destructive
+  - external-write
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers:
+  - gbrain
+  wrapper: builder:task
+- id: reviewer
+  name: Reviewer
+  role: Independent Review / Merge Gate
+  specialty: security review, logic review, regression detection, quality gates
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Independently review changes and block unsafe, untested, or logically broken work before it lands.
+  profile: reviewer
+  modes:
+  - gate
+  tools:
+  - terminal
+  - file
+  - web
+  - gbrain
+  - session_search
+  - skills
+  skills:
+  - reviewer-core
+  - requesting-code-review
+  - github-code-review
+  - systematic-debugging
+  - gstack-for-hermes
+  - gbrain
+  - codebase-inspection
+  capabilities:
+  - code-review
+  - security-review
+  - regression-analysis
+  - quality-gate
+  - merge-readiness
+  preferredTaskTypes:
+  - review
+  - qa
+  - regression
+  - verification
+  - merge-gate
+  greenlightRequiredFor:
+  - approve-merge
+  - external-comment
+  - destructive
+  reviewRequired: false
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers:
+  - gbrain
+  wrapper: reviewer:gate
+- id: qa
+  name: QA
+  role: Browser / Workflow / CLI Smoke Verification
+  specialty: browser QA, workflow smoke tests, expected-vs-actual checks, regression reproduction
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Verify user-visible behavior with concrete smoke evidence and concise bug reports.
+  profile: qa
+  modes:
+  - smoke
+  tools:
+  - browser
+  - terminal
+  - file
+  - vision
+  - gbrain
+  - session_search
+  - skills
+  - web
+  skills:
+  - qa-core
+  - browser-harness-power-use
+  - dogfood
+  - gstack-for-hermes
+  capabilities:
+  - browser-qa
+  - smoke-verification
+  - regression-reproduction
+  - cli-verification
+  - evidence-capture
+  preferredTaskTypes:
+  - qa
+  - smoke
+  - browser
+  - verification
+  - regression
+  greenlightRequiredFor:
+  - destructive
+  - external-write
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers:
+  - gbrain
+  wrapper: qa:smoke
+- id: researcher
+  name: Researcher
+  role: Brain-first Research / Bounded Autoresearch
+  specialty: GBrain-first lookup, external research, synthesis, source trails, bounded research loops
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Produce decision-grade research with brain-first context, external verification, and explicit uncertainty.
+  profile: researcher
+  modes:
+  - quick
+  - autoresearch
+  tools:
+  - gbrain
+  - web
+  - browser
+  - terminal
+  - file
+  - vision
+  - session_search
+  - skills
+  - todo
+  skills:
+  - researcher-core
+  - gbrain
+  - autoresearch
+  - browser-harness-power-use
+  - gstack-for-hermes
+  - researcher-quick
+  - researcher-autoresearch
+  - arxiv
+  - youtube-content
+  - polymarket
+  capabilities:
+  - research
+  - synthesis
+  - source-verification
+  - gbrain-query
+  - autoresearch
+  preferredTaskTypes:
+  - research
+  - analysis
+  - options
+  - source-review
+  - market-map
+  greenlightRequiredFor:
+  - publish
+  - external-send
+  - long-running-loop
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers:
+  - gbrain
+  wrapper: researcher:quick
+- id: ops-watch
+  name: Ops Watch
+  role: Local Infra / Runtime Health Watch
+  specialty: gateway health, cron, MCP, workspace services, local process status, boring reliability
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Keep Hermes, Workspace, GBrain, gateway, cron, and local services observable and healthy with quiet, low-risk checks.
+  profile: ops-watch
+  modes:
+  - health
+  tools:
+  - terminal
+  - cronjob
+  - file
+  - gbrain
+  - skills
+  - session_search
+  - web
+  skills:
+  - ops-watch-core
+  - gbrain
+  - hermes-agent
+  - systematic-debugging
+  - webhook-subscriptions
+  capabilities:
+  - ops-health
+  - gateway-status
+  - runtime-monitoring
+  - cron
+  - mcp-health
+  - lifecycle-sweep
+  preferredTaskTypes:
+  - ops
+  - health
+  - monitoring
+  - lifecycle
+  - incident-triage
+  greenlightRequiredFor:
+  - restart-service
+  - destructive
+  - config-change
+  - credential-change
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers:
+  - gbrain
+  wrapper: ops:health
+- id: maintainer
+  name: Maintainer
+  role: Upstream Dependency / Patch Hygiene
+  specialty: upstream tracking, local patch hygiene, dependency updates, PR/issue follow-through
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Keep local forks and upstream dependencies healthy without losing local patches or dirty-worktree context.
+  profile: maintainer
+  modes:
+  - check
+  tools:
+  - terminal
+  - file
+  - web
+  - browser
+  - gbrain
+  - session_search
+  - skills
+  skills:
+  - maintainer-core
+  - github-repo-management
+  - github-pr-workflow
+  - github-issues
+  - github-code-review
+  - gbrain
+  - gstack-for-hermes
+  - hermes-agent
+  capabilities:
+  - upstream-tracking
+  - dependency-maintenance
+  - patch-hygiene
+  - git-review
+  - issue-tracking
+  preferredTaskTypes:
+  - maintenance
+  - upstream
+  - dependency
+  - patch
+  - release-notes
+  greenlightRequiredFor:
+  - merge
+  - push
+  - destructive
+  - fork-reset
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers:
+  - gbrain
+  wrapper: maintainer:check
+- id: strategist
+  name: Strategist
+  role: Wedges / Bets / Kill Criteria
+  specialty: operating plans, gstack-style wedges, strategy reviews, decision framing, kill criteria
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Turn ambiguity into crisp wedges, bets, constraints, and kill criteria without over-planning.
+  profile: strategist
+  modes:
+  - review
+  tools:
+  - gbrain
+  - web
+  - session_search
+  - file
+  - skills
+  - todo
+  - clarify
+  skills:
+  - strategist-core
+  - gstack-for-hermes
+  - gbrain
+  - writing-plans
+  - polymarket
+  capabilities:
+  - strategy
+  - planning
+  - ideation
+  - decision-framing
+  - kill-criteria
+  preferredTaskTypes:
+  - strategy
+  - planning
+  - review
+  - ideation
+  - prioritization
+  greenlightRequiredFor:
+  - publish
+  - external-send
+  - irreversible-decision
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers:
+  - gbrain
+  wrapper: strategist:review
+- id: inbox-triage
+  name: Inbox Triage
+  role: Capture / Discard / Route / Task Triage
+  specialty: low-friction inbox processing, capture routing, task/research/defer decisions, durable-context filtering
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Route incoming material into discard, task, research, or durable brain capture with minimal overhead and no junk accumulation.
+  profile: inbox-triage
+  modes:
+  - triage
+  tools:
+  - gbrain
+  - web
+  - file
+  - session_search
+  - todo
+  - skills
+  - terminal
+  skills:
+  - inbox-triage-core
+  - gbrain
+  - obsidian-markdown
+  - gstack-for-hermes
+  - defuddle
+  - youtube-content
+  capabilities:
+  - inbox-triage
+  - capture-routing
+  - task-routing
+  - knowledge-filtering
+  - source-review
+  preferredTaskTypes:
+  - triage
+  - inbox
+  - capture
+  - task-routing
+  - reading-queue
+  greenlightRequiredFor:
+  - delete
+  - purge
+  - publish
+  - external-send
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers:
+  - gbrain
+  wrapper: inbox:triage
+- id: revenue-orchestrator
+  name: Revenue Orchestrator
+  role: Revenue Pipeline Orchestrator / Greenlight Gate
+  specialty: trigger routing, customer pipeline state, offers, approvals, handoffs, revenue workflow control
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Turn revenue triggers into proof-bearing swarm missions while enforcing approval gates for external messages, claims, prices, and customer commitments.
+  profile: revenue-orchestrator
+  modes:
+  - route
+  - pipeline
+  tools:
+  - todo
+  - kanban
+  - delegation
+  - terminal
+  - file
+  - session_search
+  - cronjob
+  - skills
+  - web
+  skills:
+  - revenue-orchestrator-core
+  - revenue-trigger-core
+  - compliance-greenlight
+  - gstack-for-hermes
+  - workspace-dispatch
+  capabilities:
+  - trigger-routing
+  - pipeline-control
+  - greenlight-gate
+  - handoffs
+  - offer-routing
+  preferredTaskTypes:
+  - orchestration
+  - lead-routing
+  - offer-routing
+  - approval
+  - handoff
+  greenlightRequiredFor:
+  - external-send
+  - publish
+  - price-commitment
+  - contract
+  - customer-commitment
+  - credential-change
+  - destructive
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: revenue:orchestrate
+  status: sleeping
+  notes: 'Sleeping: B2B swarm paused. B2C focus (Prepared Paige) takes priority.'
+- id: market-intel
+  name: Market Intel
+  role: Market / Lead Research Agent
+  specialty: niche scans, prospect research, pain-point maps, competitor notes, source-backed opportunity briefs
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Find and qualify reachable B2B opportunities for custom AI widgets, automations, integrations, and consulting with source-backed evidence.
+  profile: market-intel
+  modes:
+  - scan
+  - qualify
+  tools:
+  - web
+  - browser
+  - terminal
+  - file
+  - session_search
+  - skills
+  - todo
+  skills:
+  - market-intel-core
+  - researcher-core
+  - gbrain
+  - defuddle
+  capabilities:
+  - market-research
+  - lead-qualification
+  - competitor-review
+  - source-verification
+  preferredTaskTypes:
+  - research
+  - lead-qualification
+  - market-scan
+  - competitor-review
+  greenlightRequiredFor:
+  - external-send
+  - scraping-at-scale
+  - credential-use
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: market:scan
+  status: sleeping
+  notes: 'Sleeping: B2B swarm paused. B2C focus (Prepared Paige) takes priority.'
+- id: offer-architect
+  name: Offer Architect
+  role: Service Offer / Packaging Agent
+  specialty: productized service design, scopes, pricing options, proof requirements, proposal structure
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Package research and customer needs into sellable, realistic AI service offers with scope, deliverables, price bands, and acceptance criteria.
+  profile: offer-architect
+  modes:
+  - package
+  - proposal
+  tools:
+  - file
+  - terminal
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - offer-architect-core
+  - gstack-for-hermes
+  - compliance-greenlight
+  capabilities:
+  - offer-design
+  - pricing-structure
+  - scope-control
+  - proposal-outline
+  preferredTaskTypes:
+  - offer
+  - proposal
+  - pricing
+  - scope
+  greenlightRequiredFor:
+  - price-commitment
+  - contract
+  - external-send
+  - public-claim
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: offer:design
+  status: sleeping
+  notes: 'Sleeping: B2B swarm paused. B2C focus (Prepared Paige) takes priority.'
+- id: solution-builder
+  name: Solution Builder
+  role: AI Widget / Automation / Integration Builder
+  specialty: prototypes, demos, integration plans, automation specs, technical feasibility, delivery artifacts
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Create scoped demos, implementation plans, widgets, automations, and integration artifacts that support sales and delivery.
+  profile: solution-builder
+  modes:
+  - prototype
+  - build
+  tools:
+  - terminal
+  - file
+  - browser
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - solution-builder-core
+  - builder-core
+  - test-driven-development
+  - systematic-debugging
+  - codebase-inspection
+  capabilities:
+  - implementation
+  - prototype
+  - automation
+  - integration
+  - technical-proof
+  preferredTaskTypes:
+  - implementation
+  - prototype
+  - automation
+  - integration
+  - technical-plan
+  greenlightRequiredFor:
+  - deploy
+  - credential-use
+  - customer-system-write
+  - destructive
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: solution:build
+  status: sleeping
+  notes: 'Sleeping: B2B swarm paused. B2C focus (Prepared Paige) takes priority.'
+- id: listing-manager
+  name: Listing Manager
+  role: Listings / Catalog / Marketplace Agent
+  specialty: service listings, landing copy, portfolio proof, marketplace drafts, SEO-safe descriptions
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Draft and maintain service listings for AI widgets, automations, integrations, and consulting without publishing claims or posts without approval.
+  profile: listing-manager
+  modes:
+  - list
+  - catalog
+  tools:
+  - file
+  - web
+  - browser
+  - session_search
+  - skills
+  - todo
+  skills:
+  - listing-manager-core
+  - compliance-greenlight
+  - gstack-for-hermes
+  capabilities:
+  - listing-copy
+  - catalog
+  - landing-page-outline
+  - marketplace-draft
+  - seo
+  preferredTaskTypes:
+  - listing
+  - copy
+  - catalog
+  - landing-page
+  greenlightRequiredFor:
+  - publish
+  - external-send
+  - public-claim
+  - price-commitment
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: listing:publish
+  status: sleeping
+  notes: 'Sleeping: B2B swarm paused. B2C focus (Prepared Paige) takes priority.'
+- id: growth-promoter
+  name: Growth Promoter
+  role: Promotion / Content / Campaign Agent
+  specialty: campaign drafts, channel plans, social/email copy, lead magnets, ethical outbound preparation
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Create approval-ready promotion plans and campaign assets that drive qualified conversations without spam or unapproved publishing.
+  profile: growth-promoter
+  modes:
+  - promote
+  - campaign
+  tools:
+  - file
+  - web
+  - browser
+  - session_search
+  - skills
+  - todo
+  skills:
+  - growth-promoter-core
+  - compliance-greenlight
+  - defuddle
+  capabilities:
+  - campaign-planning
+  - content-drafts
+  - lead-magnet
+  - outbound-drafts
+  - channel-plan
+  preferredTaskTypes:
+  - promotion
+  - content
+  - campaign
+  - outbound-draft
+  greenlightRequiredFor:
+  - publish
+  - external-send
+  - ads-spend
+  - public-claim
+  - list-upload
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: growth:promote
+  status: sleeping
+  notes: 'Sleeping: B2B swarm paused. B2C focus (Prepared Paige) takes priority.'
+- id: sales-closer
+  name: Sales Closer
+  role: Sales / Discovery / Proposal Agent
+  specialty: lead qualification, discovery questions, proposal drafts, objection handling, close plans, CRM notes
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Move qualified prospects from discovery to proposal to close with truthful, approval-ready drafts and clear next steps.
+  profile: sales-closer
+  modes:
+  - qualify
+  - close
+  tools:
+  - file
+  - web
+  - browser
+  - session_search
+  - skills
+  - todo
+  skills:
+  - sales-closer-core
+  - compliance-greenlight
+  - offer-architect-core
+  capabilities:
+  - sales
+  - discovery
+  - proposal
+  - objection-handling
+  - follow-up-draft
+  preferredTaskTypes:
+  - lead
+  - sales
+  - proposal
+  - discovery
+  - follow-up
+  greenlightRequiredFor:
+  - external-send
+  - price-commitment
+  - contract
+  - customer-commitment
+  - discount
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: sales:close
+  status: sleeping
+  notes: 'Sleeping: B2B swarm paused. B2C focus (Prepared Paige) takes priority.'
+- id: delivery-manager
+  name: Delivery Manager
+  role: Fulfillment / Project Delivery Agent
+  specialty: scope intake, milestones, acceptance criteria, delivery checklists, handoff coordination
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Turn won work into controlled delivery plans, acceptance checks, and handoffs for AI widgets, automations, integrations, and consulting engagements.
+  profile: delivery-manager
+  modes:
+  - deliver
+  - handoff
+  tools:
+  - terminal
+  - file
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - delivery-manager-core
+  - solution-builder-core
+  - qa-core
+  - compliance-greenlight
+  capabilities:
+  - delivery-plan
+  - milestones
+  - acceptance-criteria
+  - handoff
+  - scope-control
+  preferredTaskTypes:
+  - delivery
+  - project-plan
+  - handoff
+  - acceptance
+  greenlightRequiredFor:
+  - customer-commitment
+  - deploy
+  - credential-use
+  - scope-change
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: delivery:manage
+  status: sleeping
+  notes: 'Sleeping: B2B swarm paused. B2C focus (Prepared Paige) takes priority.'
+- id: customer-success
+  name: Customer Success
+  role: Customer Follow-up / Retention Agent
+  specialty: onboarding, check-ins, issue triage, renewal/upsell cues, testimonials/referral drafts
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Provide timely customer follow-up, support triage, renewal signals, and referral/testimonial drafts while keeping all external messages approval-gated.
+  profile: customer-success
+  modes:
+  - followup
+  - support
+  tools:
+  - file
+  - web
+  - browser
+  - session_search
+  - skills
+  - todo
+  skills:
+  - customer-success-core
+  - sales-closer-core
+  - compliance-greenlight
+  capabilities:
+  - customer-success
+  - follow-up
+  - support-triage
+  - retention
+  - upsell-draft
+  preferredTaskTypes:
+  - follow-up
+  - customer-success
+  - support
+  - retention
+  - upsell
+  greenlightRequiredFor:
+  - external-send
+  - refund
+  - discount
+  - public-testimonial
+  - customer-commitment
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: success:followup
+  status: sleeping
+  notes: 'Sleeping: B2B swarm paused. B2C focus (Prepared Paige) takes priority.'
+- id: media-orchestrator
+  name: Media Orchestrator
+  role: Content Pipeline Orchestrator / Greenlight Gate
+  specialty: trigger routing, content pipeline state, approvals, handoffs, media workflow control
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Turn media triggers into proof-bearing swarm missions while enforcing approval gates for publishing, posting, public claims, and platform changes.
+  profile: media-orchestrator
+  modes:
+  - route
+  - pipeline
+  tools:
+  - todo
+  - kanban
+  - delegation
+  - terminal
+  - file
+  - session_search
+  - cronjob
+  - skills
+  - web
+  skills:
+  - media-orchestrator-core
+  - media-trigger-core
+  - compliance-greenlight
+  - gstack-for-hermes
+  - workspace-dispatch
+  capabilities:
+  - trigger-routing
+  - pipeline-control
+  - greenlight-gate
+  - handoffs
+  - content-routing
+  preferredTaskTypes:
+  - orchestration
+  - content-routing
+  - approval
+  - handoff
+  greenlightRequiredFor:
+  - publish
+  - external-send
+  - public-claim
+  - platform-change
+  - credential-change
+  - destructive
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: media:orchestrate
+- id: content-researcher
+  name: Content Researcher
+  role: Topic Research / Trend Discovery Agent
+  specialty: trend analysis, competitor content review, audience insights, keyword research, source-backed content briefs
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Find and validate content opportunities through trend research, competitor analysis, and audience insight with source-backed evidence.
+  profile: content-researcher
+  modes:
+  - research
+  - trends
+  tools:
+  - web
+  - browser
+  - terminal
+  - file
+  - session_search
+  - skills
+  - todo
+  skills:
+  - content-researcher-core
+  - youtube-content
+  - defuddle
+  - gbrain
+  capabilities:
+  - topic-research
+  - trend-discovery
+  - competitor-analysis
+  - keyword-research
+  - audience-insight
+  preferredTaskTypes:
+  - research
+  - trend-analysis
+  - competitor-review
+  - content-brief
+  greenlightRequiredFor:
+  - external-send
+  - scraping-at-scale
+  - credential-use
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: content:research
+- id: content-planner
+  name: Content Planner
+  role: Editorial Calendar / Content Strategy Agent
+  specialty: editorial calendars, multi-channel planning, content sequencing, SEO strategy, content series design
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Transform research briefs and ideas into structured content plans across channels with clear sequencing, hooks, and publishing windows.
+  profile: content-planner
+  modes:
+  - plan
+  - calendar
+  tools:
+  - file
+  - terminal
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - content-planner-core
+  - gstack-for-hermes
+  - writing-plans
+  capabilities:
+  - editorial-planning
+  - content-strategy
+  - channel-planning
+  - seo-strategy
+  - series-design
+  preferredTaskTypes:
+  - planning
+  - calendar
+  - strategy
+  - sequencing
+  greenlightRequiredFor:
+  - publish
+  - external-send
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: content:plan
+- id: content-writer
+  name: Content Writer
+  role: Script / Blog / Social Copy Writer
+  specialty: long-form writing, video scripts, social posts, newsletters, technical writing, A/B copy variants
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Produce compelling, channel-optimized content drafts with authentic voice, verified claims, and SEO structure.
+  profile: content-writer
+  modes:
+  - write
+  - script
+  tools:
+  - file
+  - terminal
+  - web
+  - browser
+  - session_search
+  - skills
+  - todo
+  skills:
+  - content-writer-core
+  - humanizer
+  - defuddle
+  capabilities:
+  - article-writing
+  - script-writing
+  - social-copy
+  - seo-writing
+  - newsletter-writing
+  - copy-variants
+  preferredTaskTypes:
+  - writing
+  - scripting
+  - copy
+  - editing
+  greenlightRequiredFor:
+  - publish
+  - external-send
+  - public-claim
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: content:write
+- id: content-producer
+  name: Content Producer
+  role: Video / Audio / Music / Media Production Agent
+  specialty: video generation, audio production, music creation, animation, TTS, generative media pipelines
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Generate or assemble media content -- video, audio, music, animated visual -- from scripts and production specs.
+  profile: content-producer
+  modes:
+  - produce
+  - generate
+  tools:
+  - terminal
+  - file
+  - browser
+  - web
+  - session_search
+  - skills
+  - todo
+  - vision
+  skills:
+  - content-producer-core
+  - manim-video
+  - heartmula
+  - p5js
+  capabilities:
+  - video-production
+  - audio-production
+  - music-generation
+  - animation
+  - text-to-speech
+  - generative-media
+  preferredTaskTypes:
+  - production
+  - generation
+  - video
+  - audio
+  - music
+  greenlightRequiredFor:
+  - external-send
+  - credential-use
+  - paid-service-use
+  - destructive
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: content:produce
+- id: visual-designer
+  name: Visual Designer
+  role: Thumbnails / Infographics / Visual Asset Agent
+  specialty: thumbnail design, infographics, data visualization, diagrams, cover art, SVG generation, design systems
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Create visual assets -- thumbnails, infographics, diagrams, data visualizations, covers -- optimized for channel specs and accessibility.
+  profile: visual-designer
+  modes:
+  - design
+  - asset
+  tools:
+  - file
+  - terminal
+  - web
+  - browser
+  - session_search
+  - skills
+  - todo
+  - vision
+  skills:
+  - visual-designer-core
+  - baoyu-infographic
+  - architecture-diagram
+  - excalidraw
+  capabilities:
+  - thumbnail-design
+  - infographic-creation
+  - diagram-generation
+  - data-visualization
+  - cover-art
+  preferredTaskTypes:
+  - design
+  - visualization
+  - asset-creation
+  - thumbnail
+  greenlightRequiredFor:
+  - publish
+  - external-send
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: visual:design
+- id: distribution-manager
+  name: Distribution Manager
+  role: Publishing / Channel / Scheduling Agent
+  specialty: channel formatting, SEO preparation, scheduling drafts, platform optimization, UTM tracking
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Format and prepare content for distribution across channels with SEO optimization, platform-specific formatting, and tracking setup.
+  profile: distribution-manager
+  modes:
+  - distribute
+  - schedule
+  tools:
+  - file
+  - web
+  - browser
+  - terminal
+  - session_search
+  - skills
+  - todo
+  skills:
+  - distribution-manager-core
+  - compliance-greenlight
+  capabilities:
+  - channel-formatting
+  - seo-optimization
+  - scheduling
+  - tracking-setup
+  - platform-publish
+  preferredTaskTypes:
+  - distribution
+  - publishing
+  - scheduling
+  - seo
+  greenlightRequiredFor:
+  - publish
+  - external-send
+  - platform-change
+  - ad-spend
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: distribution:manage
+- id: analytics-reviewer
+  name: Analytics Reviewer
+  role: Performance Analysis / Content Audit Agent
+  specialty: content analytics, A/B test analysis, performance reviews, content audits, engagement metrics
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Analyze content performance, audit existing content libraries, and provide data-driven recommendations for future content strategy.
+  profile: analytics-reviewer
+  modes:
+  - analyze
+  - audit
+  tools:
+  - file
+  - web
+  - browser
+  - terminal
+  - session_search
+  - skills
+  - todo
+  skills:
+  - analytics-reviewer-core
+  - qa-core
+  - defuddle
+  capabilities:
+  - performance-analysis
+  - content-audit
+  - ab-testing
+  - metric-tracking
+  - strategy-review
+  preferredTaskTypes:
+  - analysis
+  - audit
+  - review
+  - optimization
+  greenlightRequiredFor:
+  - external-send
+  - destructive
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: analytics:review
+- id: product-orchestrator
+  name: Product Orchestrator
+  role: Product Pipeline Orchestrator / Greenlight Gate
+  specialty: trigger routing, phase control, ideation-to-launch lifecycle, approval gates, cross-role handoffs
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Turn product development triggers into proof-bearing swarm missions across ideation-and-validation or launch-and-optimization flows while enforcing approval gates for releases, announcements, and commitments.
+  profile: product-orchestrator
+  modes:
+  - route
+  - pipeline
+  tools:
+  - todo
+  - kanban
+  - delegation
+  - terminal
+  - file
+  - session_search
+  - cronjob
+  - skills
+  - web
+  skills:
+  - product-orchestrator-core
+  - product-trigger-core
+  - compliance-greenlight
+  - gstack-for-hermes
+  - workspace-dispatch
+  capabilities:
+  - trigger-routing
+  - pipeline-control
+  - greenlight-gate
+  - phase-management
+  - handoffs
+  preferredTaskTypes:
+  - orchestration
+  - ideation
+  - launch
+  - approval
+  - handoff
+  greenlightRequiredFor:
+  - release
+  - publish
+  - external-send
+  - pricing-change
+  - platform-change
+  - public-claim
+  - credential-change
+  - destructive
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: product:orchestrate
+- id: product-manager
+  name: Product Manager
+  role: Problem Framing / Requirements / Roadmap Agent
+  specialty: problem definition, PRD creation, prioritization, roadmapping, stakeholder alignment, success metrics
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Define problems clearly, write actionable requirements, prioritize strategically, and keep the product roadmap focused on outcomes not outputs.
+  profile: product-manager
+  modes:
+  - ideate
+  - plan
+  tools:
+  - file
+  - terminal
+  - web
+  - browser
+  - session_search
+  - skills
+  - todo
+  skills:
+  - product-manager-core
+  - gstack-for-hermes
+  - writing-plans
+  capabilities:
+  - problem-framing
+  - requirements
+  - prioritization
+  - roadmapping
+  - stakeholder-alignment
+  preferredTaskTypes:
+  - ideation
+  - strategy
+  - planning
+  - definition
+  - roadmap
+  greenlightRequiredFor:
+  - external-send
+  - roadmap-commitment
+  - customer-commitment
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: pm:frame
+- id: product-experience-director
+  name: Product Experience Director
+  role: UX Strategy / Experience Vision Agent
+  specialty: user journey mapping, experience audits, design system alignment, usability research, accessibility
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Define and protect the user experience -- from journey mapping to accessibility -- ensuring the product feels as good as it functions.
+  profile: product-experience-director
+  modes:
+  - vision
+  - audit
+  tools:
+  - file
+  - terminal
+  - web
+  - browser
+  - vision
+  - session_search
+  - skills
+  - todo
+  skills:
+  - product-experience-director-core
+  - excalidraw
+  - sketch
+  - design-md
+  capabilities:
+  - ux-strategy
+  - journey-mapping
+  - experience-audit
+  - usability-research
+  - accessibility
+  preferredTaskTypes:
+  - experience
+  - design-vision
+  - usability
+  - audit
+  - journey
+  greenlightRequiredFor:
+  - external-send
+  - publish
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: ped:vision
+- id: product-engineer
+  name: Product Engineer
+  role: Technical Feasibility / Architecture / Delivery Agent
+  specialty: feasibility assessment, system design, API contracts, implementation planning, deployment strategy, feature flags
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Assess what is technically possible, design the architecture, plan the build, and coordinate delivery with quality and reliability.
+  profile: product-engineer
+  modes:
+  - assess
+  - build
+  tools:
+  - terminal
+  - file
+  - browser
+  - web
+  - session_search
+  - skills
+  - todo
+  - delegation
+  skills:
+  - product-engineer-core
+  - builder-core
+  - test-driven-development
+  - systematic-debugging
+  - codebase-inspection
+  - architecture-diagram
+  capabilities:
+  - feasibility-assessment
+  - system-design
+  - implementation
+  - deployment
+  - feature-flags
+  preferredTaskTypes:
+  - engineering
+  - architecture
+  - implementation
+  - deployment
+  - assessment
+  greenlightRequiredFor:
+  - deploy
+  - destructive
+  - credential-use
+  - migration
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: pe:build
+- id: product-marketing-manager
+  name: Product Marketing Manager
+  role: GTM Strategy / Positioning / Launch Comms Agent
+  specialty: positioning, messaging, go-to-market planning, competitive differentiation, launch narratives, customer education
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Position the product clearly, craft compelling launch narratives, and coordinate go-to-market activities across channels.
+  profile: product-marketing-manager
+  modes:
+  - position
+  - launch
+  tools:
+  - file
+  - terminal
+  - web
+  - browser
+  - session_search
+  - skills
+  - todo
+  skills:
+  - product-marketing-core
+  - compliance-greenlight
+  - defuddle
+  capabilities:
+  - positioning
+  - messaging
+  - gtm-planning
+  - competitive-intel
+  - launch-communications
+  preferredTaskTypes:
+  - marketing
+  - positioning
+  - launch-comms
+  - gtm
+  - messaging
+  greenlightRequiredFor:
+  - publish
+  - external-send
+  - public-claim
+  - ad-spend
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: pmm:launch
+- id: project-manager
+  name: Project Manager
+  role: Milestone Tracking / Resource Coordination Agent
+  specialty: project planning, milestone tracking, risk management, cross-team coordination, timeline management, go-no-go decisions
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Keep the ship moving on time -- track milestones, manage resources, surface risks early, and coordinate cross-team dependencies.
+  profile: project-manager
+  modes:
+  - track
+  - coordinate
+  tools:
+  - todo
+  - kanban
+  - terminal
+  - file
+  - web
+  - session_search
+  - skills
+  skills:
+  - project-manager-core
+  - gstack-for-hermes
+  - kanban-orchestrator
+  capabilities:
+  - milestone-tracking
+  - resource-coordination
+  - risk-management
+  - status-reporting
+  - go-no-go
+  preferredTaskTypes:
+  - tracking
+  - coordination
+  - risk
+  - milestone
+  - reporting
+  greenlightRequiredFor:
+  - external-send
+  - timeline-commitment
+  - scope-change
+  - resource-allocation
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: md:track
+- id: product-qa
+  name: Product QA
+  role: Quality Assurance / Release Verification Agent
+  specialty: test strategy, release verification, usability testing coordination, bug triage, quality metrics, accessibility testing
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Protect product quality -- from test strategy through release verification -- with clear evidence, metrics, and a firm sign-off or blocking decision.
+  profile: product-qa
+  modes:
+  - test
+  - verify
+  tools:
+  - browser
+  - terminal
+  - file
+  - vision
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - product-qa-core
+  - qa-core
+  - browser-harness-power-use
+  capabilities:
+  - test-strategy
+  - release-verification
+  - bug-triage
+  - usability-coordination
+  - quality-metrics
+  preferredTaskTypes:
+  - qa
+  - testing
+  - verification
+  - bug-triage
+  - quality
+  greenlightRequiredFor:
+  - release
+  - destructive
+  - external-write
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: qa:verify
+- id: brand-visionary
+  name: Brand Visionary
+  role: Brand Identity / Sales Samples / Prospective Client Materials Agent
+  specialty: brand concepts, custom landing pages, prospect-specific pitch decks, tailored case studies, logo directions, sales kits, ROI demonstrations
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Transform generic domain concepts into compelling, prospect-specific brand visions with customized marketing materials, sales samples, and client-tailored pitch packages.
+  profile: brand-visionary
+  modes:
+  - brand
+  - pitch
+  tools:
+  - file
+  - terminal
+  - web
+  - browser
+  - vision
+  - session_search
+  - skills
+  - todo
+  skills:
+  - brand-visionary-core
+  - humanizer
+  - defuddle
+  capabilities:
+  - brand-concepts
+  - pitch-materials
+  - sales-samples
+  - prospect-customization
+  - case-studies
+  - roi-demonstration
+  preferredTaskTypes:
+  - branding
+  - pitch
+  - sales-materials
+  - prospect-outreach
+  - case-study
+  greenlightRequiredFor:
+  - publish
+  - external-send
+  - prospect-outreach
+  - public-claim
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: bv:brand
+- id: signal-orchestrator
+  name: Signal Orchestrator
+  role: Central Engagement Swarm Coordinator
+  specialty: signal deduplication, ICP scoring, priority routing, engagement queue management
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Route buying signals from platform monitors through ICP scoring and into the engagement pipeline with speed and accuracy.
+  profile: signal-orchestrator
+  modes:
+  - orchestration
+  - scoring
+  - routing
+  tools:
+  - file
+  - terminal
+  - todo
+  - session_search
+  - skills
+  - cronjob
+  skills:
+  - signal-orchestrator-core
+  - icp-prepared-paige
+  - kanban-orchestrator
+  capabilities:
+  - signal-deduplication
+  - ICP-scoring
+  - priority-queue
+  - engagement-timing
+  preferredTaskTypes:
+  - routing
+  - scoring
+  - orchestration
+  greenlightRequiredFor:
+  - external-post
+  - direct-message
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: signal:orchestrate
+- id: reddit-monitor
+  name: Reddit Monitor
+  role: Reddit Parenting Community Signal Detector
+  specialty: subreddit monitoring, keyword tracking, thread analysis, sentiment scoring
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Continuously monitor r/BabyBumps, r/beyondthebump, r/breastfeeding, r/sleeptrain for Prepared Paige buying signals.
+  profile: reddit-monitor
+  modes:
+  - monitor
+  - scan
+  tools:
+  - web
+  - browser
+  - file
+  - terminal
+  - session_search
+  - skills
+  skills:
+  - reddit-monitor-core
+  - icp-prepared-paige
+  - humanizer
+  capabilities:
+  - subreddit-polling
+  - keyword-tracking
+  - thread-analysis
+  - sentiment-scoring
+  preferredTaskTypes:
+  - monitoring
+  - signal-detection
+  - reddit
+  greenlightRequiredFor:
+  - scraping-at-scale
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: reddit:monitor
+- id: youtube-monitor
+  name: YouTube Monitor
+  role: YouTube Pregnancy/Parenting Content Monitor
+  specialty: video detection via RSS, comment analysis, competitor channel tracking
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Monitor YouTube pregnancy/parenting videos and comments for Prepared Paige buying signals.
+  profile: youtube-monitor
+  modes:
+  - monitor
+  - scan
+  tools:
+  - web
+  - browser
+  - file
+  - terminal
+  - skills
+  skills:
+  - youtube-monitor-core
+  - icp-prepared-paige
+  - humanizer
+  capabilities:
+  - video-detection
+  - comment-scraping
+  - channel-tracking
+  preferredTaskTypes:
+  - video-monitoring
+  - comment-analysis
+  greenlightRequiredFor:
+  - scraping-at-scale
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: yt:monitor
+- id: linkedin-monitor
+  name: LinkedIn Monitor
+  role: LinkedIn Career & Funding Signal Monitor
+  specialty: profile tracking, post monitoring, company update analysis, competitive intelligence
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Monitor LinkedIn for career transitions, funding announcements, and work-life discussions relevant to Prepared Paige ICP or competitor tracking.
+  profile: linkedin-monitor
+  modes:
+  - monitor
+  - scan
+  tools:
+  - browser
+  - web
+  - file
+  - skills
+  skills:
+  - linkedin-monitor-core
+  - icp-prepared-paige
+  - humanizer
+  capabilities:
+  - profile-tracking
+  - post-monitoring
+  - company-analysis
+  preferredTaskTypes:
+  - competitive-intel
+  - career-tracking
+  greenlightRequiredFor:
+  - external-contact
+  - connection-request
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: linkedin:monitor
+  status: sleeping
+  notes: 'Sleeping: wait until YouTube active. Will be reactivated later.'
+- id: quora-monitor
+  name: Quora Monitor
+  role: Quora Parenting Question Monitor
+  specialty: question tracking, answer scoring, topic monitoring
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Monitor Quora for high-intent parenting questions matching Prepared Paige ICP jobs-to-be-done.
+  profile: quora-monitor
+  modes:
+  - monitor
+  - scan
+  tools:
+  - browser
+  - web
+  - file
+  - terminal
+  - skills
+  skills:
+  - quora-monitor-core
+  - icp-prepared-paige
+  - humanizer
+  capabilities:
+  - question-tracking
+  - answer-scoring
+  - topic-monitoring
+  preferredTaskTypes:
+  - question-monitoring
+  - answer-analysis
+  greenlightRequiredFor:
+  - external-post
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: quora:monitor
+- id: instagram-monitor
+  name: Instagram Monitor
+  role: Instagram Reels & Carousel Signal Monitor
+  specialty: hashtag monitoring, comment detection, save-proxy signals, review queue management
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Detect Prepared Paige buying signals across Instagram Reels, carousels, and comments -- her PRIMARY platform.
+  profile: instagram-monitor
+  modes:
+  - monitor
+  - scan
+  tools:
+  - browser
+  - web
+  - file
+  - skills
+  - vision
+  skills:
+  - instagram-monitor-core
+  - icp-prepared-paige
+  - humanizer
+  capabilities:
+  - hashtag-monitoring
+  - comment-detection
+  - review-queue-management
+  preferredTaskTypes:
+  - social-monitoring
+  - hashtag-tracking
+  greenlightRequiredFor:
+  - external-post
+  - direct-message
+  - account-action
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: ig:monitor
+- id: engagement-writer
+  name: Engagement Writer
+  role: Authentic Response Writer
+  specialty: context-aware comment generation, humanization, platform-specific tone adaptation
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Write authentic, human-quality responses to high-scoring buying signals -- no AI slop, no pitches, no fake engagement.
+  profile: engagement-writer
+  modes:
+  - write
+  - respond
+  tools:
+  - file
+  - browser
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - engagement-writer-core
+  - humanizer
+  - icp-prepared-paige
+  capabilities:
+  - comment-generation
+  - humanization
+  - context-synthesis
+  preferredTaskTypes:
+  - writing
+  - response-drafting
+  greenlightRequiredFor:
+  - post-comment
+  - direct-message
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: engage:write
+- id: compliance-reviewer
+  name: Compliance Reviewer
+  role: Health/Medical Compliance Auditor
+  specialty: evidence verification, claim auditing, disclaimer enforcement, legal-review gate
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Audit every external-facing claim against an evidence ledger. Cite source for any medical/nutritional/safety statement. Ban absolutes. Enforce lawyer-reviewed disclaimer on every health-touching product, page, and post. Hard block, not advisory.
+  profile: compliance-reviewer
+  modes:
+  - audit
+  - block
+  tools:
+  - file
+  - browser
+  - web
+  - terminal
+  - session_search
+  - skills
+  skills:
+  - compliance-reviewer-core
+  - icp-prepared-paige
+  capabilities:
+  - evidence-verification
+  - claim-auditing
+  - disclaimer-enforcement
+  - legal-compliance
+  preferredTaskTypes:
+  - compliance
+  - audit
+  - legal-review
+  greenlightRequiredFor:
+  - override-block
+  - legal-review
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: compliance:review
+- id: funnel-manager
+  name: Funnel Manager
+  role: Email Funnel and Nurture Sequence Architect
+  specialty: lead-magnet design, email automation, ConvertKit/Kit flows, abandoned-cart, post-purchase sequences, revenue-per-subscriber tracking
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Own the lead-magnet to email-capture to nurture to purchase path. Maintain welcome sequence, weekly broadcast, abandoned-cart, and post-purchase flows. Draft every email for human approval. Report list growth, open rate, click-through, and revenue per subscriber.
+  profile: funnel-manager
+  modes:
+  - nurture
+  - flow
+  tools:
+  - file
+  - web
+  - browser
+  - terminal
+  - session_search
+  - skills
+  - todo
+  skills:
+  - funnel-manager-core
+  - icp-prepared-paige
+  - humanizer
+  capabilities:
+  - email-flow-design
+  - nurture-sequence
+  - list-growth
+  - conversion-optimization
+  - revenue-tracking
+  preferredTaskTypes:
+  - email-marketing
+  - funnel-optimization
+  - nurture-drafting
+  greenlightRequiredFor:
+  - email-send
+  - list-upload
+  - automation-change
+  - public-claim
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: funnel:nurture
+- id: partnership-scout
+  name: Partnership Scout
+  role: Influencer / Expert Partner Finder and Outreach Drafter
+  specialty: IBCLC and doula identification, micro-mom-influencer outreach (5K-50K), affiliate roster management, attribution tracking, co-creation pipeline
+  model: openrouter/inclusionai/ring-2.6-1t:free
+  mission: Find and warm-outreach-draft to IBCLCs, postpartum doulas, small mom-influencers, and complementary creators. Manage affiliate roster with attribution links, payout tracking, and quarterly check-ins.
+  profile: partnership-scout
+  modes:
+  - outreach
+  - manage
+  tools:
+  - web
+  - browser
+  - file
+  - session_search
+  - skills
+  - todo
+  skills:
+  - partnership-scout-core
+  - icp-prepared-paige
+  - humanizer
+  capabilities:
+  - partner-research
+  - outreach-drafting
+  - affiliate-management
+  - relationship-nurturing
+  - payout-tracking
+  preferredTaskTypes:
+  - partner-research
+  - affiliate-drafting
+  - relationship-nurturing
+  greenlightRequiredFor:
+  - external-send
+  - affiliate-link-create
+  - payout-approve
+  - public-announcement
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: partner:scout
+- id: llm-integrator
+  name: LLM Integrator
+  role: Local LLM Integration Specialist
+  specialty: Integrate Gemma 4 26M into fscompanion and connect with Navigate Mama Android app
+  model: openrouter/openchat/openchat-7b:free
+  mission: Deploy local Gemma 4 26M model, create API endpoint, and integrate with Android app
+  profile: llm-integrator
+  modes:
+  - integrate
+  tools:
+  - terminal
+  - file
+  - web
+  - session_search
+  - skills
+  - gbrain
+  - todo
+  skills:
+  - llm-integration-core
+  - gstack-for-hermes
+  capabilities:
+  - llm-integration
+  - local-model-deployment
+  - api-creation
+  - mobile-integration
+  preferredTaskTypes:
+  - llm-integration
+  - model-deployment
+  - api-endpoint-creation
+  - android-integration
+  greenlightRequiredFor:
+  - model-download
+  - docker-volume-mount
+  - api-endpoint-exposure
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: llm:integrate
+- id: family-backend-integrator
+  name: Family Backend Integrator
+  role: FastAPI / Gemma / Android Contract Integrator
+  specialty: FastAPI Android endpoints, Gemma local routing, response contracts, backend smoke stability
+  model: gemma4:26b
+  mission: Make the backend shippable for Android and local Gemma workflows.
+  profile: family-backend-integrator
+  modes:
+  - integrate
+  - harden
+  tools:
+  - terminal
+  - file
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - family-backend-integrator-core
+  - builder-core
+  - systematic-debugging
+  - codebase-inspection
+  capabilities:
+  - fastapi
+  - ollama-routing
+  - android-api-contracts
+  - backend-smoke
+  preferredTaskTypes:
+  - backend
+  - api
+  - llm-integration
+  - smoke-fix
+  greenlightRequiredFor:
+  - deploy
+  - destructive
+  - credential-use
+  - database-reset
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: fc:backend
+- id: family-android-integrator
+  name: Family Android Integrator
+  role: Navigate Mama Android / Retrofit / Room Sync Integrator
+  specialty: Retrofit services, repositories, ViewModels, Android UI wiring, Room-backed offline sync
+  model: gemma4:26b
+  mission: Connect the Android app to the family-companion backend while preserving offline-first behavior.
+  profile: family-android-integrator
+  modes:
+  - integrate
+  - verify
+  tools:
+  - terminal
+  - file
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - family-android-integrator-core
+  - builder-core
+  - test-driven-development
+  - codebase-inspection
+  capabilities:
+  - android
+  - retrofit
+  - room
+  - viewmodel
+  - offline-sync
+  preferredTaskTypes:
+  - android
+  - mobile-api
+  - room-sync
+  - ui-integration
+  greenlightRequiredFor:
+  - deploy
+  - destructive
+  - credential-use
+  - database-reset
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: fc:android
+- id: family-db-migration
+  name: Family DB Migration
+  role: Postgres / Alembic Migration Owner
+  specialty: SQLAlchemy models, Alembic migrations, seed data, migration-safe verification
+  model: gemma4:26b
+  mission: Turn manual database bootstraps into repeatable migrations and safe local seed workflows.
+  profile: family-db-migration
+  modes:
+  - migrate
+  - verify
+  tools:
+  - terminal
+  - file
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - family-db-migration-core
+  - systematic-debugging
+  - test-driven-development
+  capabilities:
+  - postgres
+  - alembic
+  - sqlalchemy
+  - seed-data
+  preferredTaskTypes:
+  - database
+  - migration
+  - model-schema
+  - seed-data
+  greenlightRequiredFor:
+  - destructive
+  - database-reset
+  - drop-table
+  - production-data-change
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: fc:db
+- id: family-qa-smoke
+  name: Family QA Smoke
+  role: Backend / Android / Ollama Smoke Gate
+  specialty: End-to-end smoke tests, API probes, build checks, exact reproduction commands
+  model: gemma4:26b
+  mission: Produce proof that local Ollama, backend APIs, database flows, and Android build paths are shippable.
+  profile: family-qa-smoke
+  modes:
+  - smoke
+  - gate
+  tools:
+  - browser
+  - terminal
+  - file
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - family-qa-smoke-core
+  - qa-core
+  - browser-harness-power-use
+  - systematic-debugging
+  capabilities:
+  - smoke-tests
+  - api-probes
+  - android-build
+  - release-gate
+  preferredTaskTypes:
+  - qa
+  - smoke
+  - regression
+  - release-readiness
+  greenlightRequiredFor:
+  - deploy
+  - destructive
+  - credential-use
+  - database-reset
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: fc:qa
+- id: family-release-docs
+  name: Family Release Docs
+  role: Runbook / Demo / Ship Checklist Owner
+  specialty: Developer runbooks, demo scripts, hackathon writeup, release checklist, command truth
+  model: gemma4:26b
+  mission: Keep the merger checklist, demo docs, and operator commands accurate enough for handoff.
+  profile: family-release-docs
+  modes:
+  - document
+  - prepare
+  tools:
+  - terminal
+  - file
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - family-release-docs-core
+  - writing-plans
+  - gstack-for-hermes
+  capabilities:
+  - runbooks
+  - demo-script
+  - ship-checklist
+  - release-notes
+  preferredTaskTypes:
+  - docs
+  - release
+  - demo
+  - handoff
+  greenlightRequiredFor:
+  - external-send
+  - publish
+  - public-announcement
+  - credential-use
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: fc:release

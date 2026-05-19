@@ -1,0 +1,11 @@
+{
+  "type": "channel_update",
+  "source": "webhook",
+  "content": {
+    "platform": "youtube | twitter | blog | newsletter | podcast",
+    "event": "new_post | algorithm_change | milestone | policy_update",
+    "details": {}
+  },
+  "channel": "",
+  "notes": ""
+}

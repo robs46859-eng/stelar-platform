@@ -1,0 +1,14 @@
+{
+  "type": "product_update",
+  "source": "manual",
+  "feature": {
+    "update_type": "deprecation | enhancement | policy_change | ui_change",
+    "affected_features": [],
+    "customer_impact": "none | low | medium | high",
+    "migration_needed": false,
+    "communication_channels": []
+  },
+  "product": {},
+  "stakeholders": {},
+  "notes": ""
+}

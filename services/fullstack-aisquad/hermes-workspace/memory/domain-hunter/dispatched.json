@@ -1,0 +1,13 @@
+{
+  "domains": [
+    "shipai.io"
+  ],
+  "last_dispatched": {
+    "domain": "shipai.io",
+    "verdicts": [
+      "product",
+      "revenue"
+    ],
+    "at": "2026-05-15T13:35:52.731458"
+  }
+}

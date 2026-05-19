@@ -1,0 +1,14 @@
+{
+  "type": "lead_created",
+  "source": "manual",
+  "lead": {
+    "company": "",
+    "contact": "",
+    "email": "",
+    "url": "",
+    "need": "",
+    "budget": "",
+    "timeline": ""
+  },
+  "notes": "Paste lead context here."
+}

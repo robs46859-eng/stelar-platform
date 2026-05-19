@@ -1,0 +1,12 @@
+{
+  "type": "trend_alert",
+  "source": "cron",
+  "content": {
+    "category": "technology | business | culture | science",
+    "timeframe": "24h | 7d | 30d",
+    "keywords": [],
+    "source_urls": []
+  },
+  "channel": "",
+  "notes": ""
+}

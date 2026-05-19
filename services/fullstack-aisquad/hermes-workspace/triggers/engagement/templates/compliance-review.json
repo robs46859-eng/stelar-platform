@@ -1,0 +1,18 @@
+{
+  "type": "compliance_review",
+  "source": "compliance-reviewer",
+  "content": {
+    "content_path": "",
+    "content_type": "comment | email | social-post | landing-page",
+    "platform": "",
+    "author": "",
+    "claims_to_verify": [],
+    "has_medical_content": false,
+    "has_nutritional_content": false,
+    "has_safety_content": false,
+    "disclaimer_present": false,
+    "banned_words_found": []
+  },
+  "stakeholders": {},
+  "notes": "Content requires compliance audit before publication."
+}

@@ -1,0 +1,11 @@
+{
+  "type": "engagement_queue_ready",
+  "source": "signal-orchestrator",
+  "queue": {
+    "signals_count": 0,
+    "priority_signals": [],
+    "platforms": []
+  },
+  "stakeholders": {},
+  "notes": "Signals ready for engagement writer."
+}

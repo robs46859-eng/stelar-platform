@@ -1,0 +1,18 @@
+{
+  "type": "feature_release",
+  "source": "manual",
+  "feature": {
+    "name": "",
+    "version": "",
+    "release_type": "major | minor | patch",
+    "release_date": "",
+    "feature_flags": [],
+    "rollback_plan": ""
+  },
+  "product": {
+    "product_line": "",
+    "affected_customers": ""
+  },
+  "stakeholders": {},
+  "notes": ""
+}

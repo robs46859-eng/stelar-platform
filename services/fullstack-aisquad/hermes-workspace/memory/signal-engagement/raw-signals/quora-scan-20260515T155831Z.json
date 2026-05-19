@@ -1,0 +1,382 @@
+{
+  "scan_id": "quora-20260515T155831Z",
+  "scanner": "quora-monitor",
+  "scan_timestamp": "2026-05-15T15:58:31Z",
+  "mode": "listen-only",
+  "icp": "Prepared Paige — 29-36yo first-time pregnant/postpartum (0-12 weeks), $90K-200K, iPhone-first, values feeling prepared, buys digital products to avoid research time",
+  "scoring_criteria": {
+    "direct_icp_job_to_be_done": "+25 (buying intent)",
+    "first_time_mom_mention": "+20",
+    "frustration_overwhelm": "+15",
+    "zero_to_two_answers": "+15 (response opportunity)",
+    "time_sensitive_topic": "+15 (sleep, breastfeeding, pain)",
+    "quora_users_skew_educated": "+5",
+    "engagement_threshold": "70+ triggers engagement, 40-69 watch-list"
+  },
+  "signals": [
+    {
+      "url": "https://www.quora.com/What-s-something-I-should-know-or-try-and-remember-as-a-first-time-mom-I-found-out-last-week-that-I-am-almost-8-weeks-pregnant-and-I-don-t-want-to-mess-this-up",
+      "question": "What's something I should know or try and remember as a first time mom? I found out last week that I am almost 8 weeks pregnant, and I don't want to mess this up.",
+      "estimated_answers": 9,
+      "timestamp_indicators": "8 weeks pregnant — pre-birth, preparing",
+      "topic_area": "first time mom preparation",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 20,
+        "frustration_overwhelm": 15,
+        "zero_to_two_answers": 0,
+        "time_sensitive_topic": 10,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 75,
+      "action": "engage",
+      "rationale": "Perfect ICP match — explicitly first-time mom, 8 weeks pregnant, expresses anxiety about 'messing this up.' Pre-birth purchasing window. Many existing answers but high intent."
+    },
+    {
+      "url": "https://www.quora.com/How-do-I-ease-the-horrible-pain-of-breastfeeding-a-2-week-old",
+      "question": "How to ease the horrible pain of breastfeeding a 2-week-old",
+      "estimated_answers": 7,
+      "timestamp_indicators": "2-week-old baby — postpartum week 2",
+      "topic_area": "breastfeeding pain",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 0,
+        "frustration_overwhelm": 15,
+        "zero_to_two_answers": 0,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 60,
+      "action": "watch-list",
+      "rationale": "High pain signal, 2-week postpartum — prime ICP window. 'Horrible pain' language shows desperation. Good for breastfeeding pain relief digital product positioning."
+    },
+    {
+      "url": "https://www.quora.com/How-do-I-get-my-newborn-to-sleep-in-his-crib-He-is-3-weeks-old-and-starts-crying-every-time-I-try-to-lay-him-down-at-night-We-dont-have-trouble-during-the-day",
+      "question": "How do I get my newborn to sleep in his crib? He is 3 weeks old and starts crying every time I try to lay him down at night. We don't have trouble during the day.",
+      "estimated_answers": 11,
+      "timestamp_indicators": "3-week-old baby — postpartum week 3",
+      "topic_area": "newborn sleep",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 0,
+        "frustration_overwhelm": 15,
+        "zero_to_two_answers": 0,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 60,
+      "action": "watch-list",
+      "rationale": "Classic sleep deprivation scenario at 3 weeks — exactly when Prepared Paige buys sleep solutions. Specific problem (crib transition) is highly addressable."
+    },
+    {
+      "url": "https://www.quora.com/How-do-I-know-if-my-baby-is-getting-enough-breast-milk-I-m-just-a-little-anxious-since-I-am-a-new-mom-and-have-never-breast-fed-before",
+      "question": "How do I know if my baby is getting enough breast milk? I'm just a little anxious since I am a new mom and have never breast fed before.",
+      "estimated_answers": 7,
+      "timestamp_indicators": "new mom, first time breastfeeding",
+      "topic_area": "breastfeeding adequacy",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 20,
+        "frustration_overwhelm": 15,
+        "zero_to_two_answers": 0,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 80,
+      "action": "engage",
+      "rationale": "TOP SIGNAL — first-time mom, actively breastfeeding anxiety, never breastfed before. This is peak ICP vulnerability. High buying intent for breastfeeding guides and reassurance products."
+    },
+    {
+      "url": "https://www.quora.com/What-are-the-most-important-things-to-pack-in-your-hospital-bag-when-having-your-first-baby",
+      "question": "What are the most important things to pack in your hospital bag when having your first baby?",
+      "estimated_answers": 11,
+      "timestamp_indicators": "first baby — pre-birth preparation",
+      "topic_area": "hospital bag preparation",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 20,
+        "frustration_overwhelm": 5,
+        "zero_to_two_answers": 0,
+        "time_sensitive_topic": 10,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 65,
+      "action": "watch-list",
+      "rationale": "First baby + hospital bag = pre-birth preparation. Watch-list because many answers exist already, but good for checklist/product tie-in."
+    },
+    {
+      "url": "https://www.quora.com/Is-breast-feeding-supposed-to-hurt-or-am-I-doing-it-wrong",
+      "question": "Is breast feeding supposed to hurt, or am I doing it wrong?",
+      "estimated_answers": "moderate",
+      "timestamp_indicators": "currently breastfeeding, early stage",
+      "topic_area": "breastfeeding technique",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 0,
+        "frustration_overwhelm": 15,
+        "zero_to_two_answers": 5,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 65,
+      "action": "watch-list",
+      "rationale": "'Am I doing it wrong' — classic Prepared Paige self-doubt. Pain + confusion = purchase trigger. Strong watch-list candidate."
+    },
+    {
+      "url": "https://www.quora.com/What-are-some-tips-for-a-first-time-mom",
+      "question": "What are some tips for a first time mom?",
+      "estimated_answers": "moderate-high",
+      "timestamp_indicators": "first time mom — pre or post birth",
+      "topic_area": "general first time mom",
+      "scores": {
+        "direct_icp_job_to_be_done": 20,
+        "first_time_mom_mention": 20,
+        "frustration_overwhelm": 0,
+        "zero_to_two_answers": 0,
+        "time_sensitive_topic": 0,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 45,
+      "action": "passive-monitor",
+      "rationale": "Broad, generic question — lower urgency. Still first-time mom signal but lacks the acute pain-point that drives purchases."
+    },
+    {
+      "url": "https://www.quora.com/How-can-a-pregnant-person-prepare-for-labor-and-delivery",
+      "question": "How can a pregnant person prepare for labor and delivery?",
+      "estimated_answers": "moderate",
+      "timestamp_indicators": "currently pregnant",
+      "topic_area": "labor preparation",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 0,
+        "frustration_overwhelm": 5,
+        "zero_to_two_answers": 0,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 50,
+      "action": "watch-list",
+      "rationale": "Good pre-birth preparation question. Lacks explicit first-time mom language but preparation intent is strong."
+    },
+    {
+      "url": "https://www.quora.com/Im-a-first-time-mom-and-Im-feeling-overwhelmed-What-are-some-things-I-can-do-to-take-care-of-myself",
+      "question": "I'm a first time mom and I'm feeling overwhelmed. What are some things I can do to take care of myself?",
+      "estimated_answers": 2,
+      "timestamp_indicators": "current first-time mom",
+      "topic_area": "postpartum overwhelm self-care",
+      "scores": {
+        "direct_icp_job_to_be_done": 20,
+        "first_time_mom_mention": 20,
+        "frustration_overwhelm": 15,
+        "zero_to_two_answers": 15,
+        "time_sensitive_topic": 10,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 85,
+      "action": "engage",
+      "rationale": "HIGHEST SCORE — first-time mom + overwhelmed + only 2 answers = massive opportunity. Postpartum mental health + self-care = high digital product affinity."
+    },
+    {
+      "url": "https://www.quora.com/What-are-the-signs-that-my-baby-is-not-getting-enough-milk-during-breastfeeding",
+      "question": "What are the signs that my baby is not getting enough milk during breastfeeding?",
+      "estimated_answers": 9,
+      "timestamp_indicators": "actively breastfeeding",
+      "topic_area": "breastfeeding adequacy",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 0,
+        "frustration_overwhelm": 10,
+        "zero_to_two_answers": 0,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 55,
+      "action": "watch-list",
+      "rationale": "Breastfeeding anxiety signal. Not explicitly first-time but milk supply worry is universal. Watch for follow-up questions."
+    },
+    {
+      "url": "https://www.quora.com/How-can-I-establish-a-good-breastfeeding-routine-with-my-newborn-baby",
+      "question": "How can I establish a good breastfeeding routine with my newborn baby",
+      "estimated_answers": 3,
+      "timestamp_indicators": "newborn phase",
+      "topic_area": "breastfeeding routine",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 0,
+        "frustration_overwhelm": 5,
+        "zero_to_two_answers": 15,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 65,
+      "action": "watch-list",
+      "rationale": "Only 3 answers — low competition. Routine-building = Prepared Paige love language. Good watch-list for product tie-in."
+    },
+    {
+      "url": "https://www.quora.com/How-do-you-make-a-schedule-for-my-1-month-old-baby-so-that-I-can-sleep-at-night",
+      "question": "How to make a schedule for my 1-month-old baby so that I can sleep at night",
+      "estimated_answers": 18,
+      "timestamp_indicators": "1-month-old baby",
+      "topic_area": "baby sleep schedule",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 0,
+        "frustration_overwhelm": 15,
+        "zero_to_two_answers": 0,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 60,
+      "action": "watch-list",
+      "rationale": "Sleep deprivation at 1 month — classic purchase window. High answer count means harder to stand out but the intent is strong."
+    },
+    {
+      "url": "https://www.quora.com/What-should-I-do-if-my-baby-has-a-fever-or-other-signs-of-illness",
+      "question": "What should I do if my baby has a fever or other signs of illness?",
+      "estimated_answers": "moderate",
+      "timestamp_indicators": "sick baby concern",
+      "topic_area": "newborn health emergency",
+      "scores": {
+        "direct_icp_job_to_be_done": 20,
+        "first_time_mom_mention": 0,
+        "frustration_overwhelm": 15,
+        "zero_to_two_answers": 0,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 55,
+      "action": "watch-list",
+      "rationale": "Acute worry signal — but fever/illness questions typically get medical answers, not product-aligned ones. Watch-list only."
+    },
+    {
+      "url": "https://www.quora.com/Im-expecting-my-first-child-and-Im-feeling-overwhelmed-What-are-some-things-that-I-can-do-to-prepare-for-motherhood",
+      "question": "I'm expecting my first child and I'm feeling overwhelmed. What are some things that I can do to prepare for motherhood?",
+      "estimated_answers": 2,
+      "timestamp_indicators": "expecting first child — pre-birth",
+      "topic_area": "pregnancy preparation overwhelm",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 20,
+        "frustration_overwhelm": 15,
+        "zero_to_two_answers": 15,
+        "time_sensitive_topic": 10,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 90,
+      "action": "engage",
+      "rationale": "HIGHEST SIGNAL — expecting first baby + overwhelmed + only 2 answers. This is the quintessential Prepared Paige moment. Maximum buying intent for preparation products."
+    },
+    {
+      "url": "https://www.quora.com/What-are-the-best-breastfeeding-solutions-for-first-time-mothers",
+      "question": "What are the best breastfeeding solutions for first-time mothers?",
+      "estimated_answers": 3,
+      "timestamp_indicators": "first-time mother, pre or early breastfeeding",
+      "topic_area": "breastfeeding products/solutions",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 20,
+        "frustration_overwhelm": 5,
+        "zero_to_two_answers": 15,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 85,
+      "action": "engage",
+      "rationale": "PERFECT MATCH — first-time mothers + solutions + breastfeeding + only 3 answers. 'Solutions' language indicates buying mindset. Prime engagement target."
+    },
+    {
+      "url": "https://www.quora.com/What-are-some-practical-breastfeeding-tips-for-new-moms-to-make-the-process-easier-and-more-comfortable",
+      "question": "What are some practical breastfeeding tips for new moms to make the process easier and more comfortable?",
+      "estimated_answers": 2,
+      "timestamp_indicators": "new mom, early breastfeeding",
+      "topic_area": "breastfeeding tips",
+      "scores": {
+        "direct_icp_job_to_be_done": 20,
+        "first_time_mom_mention": 10,
+        "frustration_overwhelm": 5,
+        "zero_to_two_answers": 15,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 70,
+      "action": "engage",
+      "rationale": "Only 2 answers + comfort-seeking behavior. 'Easier and more comfortable' language signals willingness to pay for solutions."
+    },
+    {
+      "url": "https://www.quora.com/How-do-I-start-breastfeeding-properly",
+      "question": "How to start breastfeeding properly",
+      "estimated_answers": 1,
+      "timestamp_indicators": "about to start or just starting",
+      "topic_area": "breastfeeding technique",
+      "scores": {
+        "direct_icp_job_to_be_done": 25,
+        "first_time_mom_mention": 0,
+        "frustration_overwhelm": 5,
+        "zero_to_two_answers": 15,
+        "time_sensitive_topic": 15,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 65,
+      "action": "watch-list",
+      "rationale": "Only 1 person wants answers — extremely low competition. Basic technique question that Prepared Paige would ask. Good value add opportunity."
+    },
+    {
+      "url": "https://www.quora.com/What-essentials-did-you-pack-in-your-hospital-bag-for-birth",
+      "question": "What essentials did you pack in your hospital bag for birth?",
+      "estimated_answers": "moderate",
+      "timestamp_indicators": "pre-birth preparation",
+      "topic_area": "hospital bag checklist",
+      "scores": {
+        "direct_icp_job_to_be_done": 20,
+        "first_time_mom_mention": 0,
+        "frustration_overwhelm": 0,
+        "zero_to_two_answers": 0,
+        "time_sensitive_topic": 10,
+        "quora_users_skew_educated": 5
+      },
+      "total_score": 35,
+      "action": "passive-monitor",
+      "rationale": "Lower intent — checklist questions. Not first-time specific or overwhelmed. Passive monitor status."
+    }
+  ],
+  "summary": {
+    "total_signals_found": 18,
+    "engage_70_plus": 6,
+    "watch_list_40_to_69": 10,
+    "passive_monitor_below_40": 2,
+    "top_topics_by_intent": [
+      "breastfeeding adequacy and pain",
+      "first-time mom overwhelm",
+      "newborn sleep problems",
+      "hospital bag preparation",
+      "labor and delivery prep"
+    ],
+    "highest_scoring_signals": [
+      {
+        "score": 90,
+        "url": "quora.com/Im-expecting-my-first-child-and-Im-feeling-overwhelmed...",
+        "brief": "Expecting first baby + overwhelmed + 2 answers"
+      },
+      {
+        "score": 85,
+        "url": "quora.com/Im-a-first-time-mom-and-Im-feeling-overwhelmed...",
+        "brief": "First-time mom overwhelmed + 2 answers"
+      },
+      {
+        "score": 85,
+        "url": "quora.com/What-are-the-best-breastfeeding-solutions-for-first-time-mothers",
+        "brief": "First-time mothers breastfeeding solutions + 3 answers"
+      },
+      {
+        "score": 80,
+        "url": "quora.com/How-do-I-know-if-my-baby-is-getting-enough-breast-milk...",
+        "brief": "New mom breastfeeding anxiety + never breastfed before"
+      },
+      {
+        "score": 75,
+        "url": "quora.com/What-s-something-I-should-know-as-a-first-time-mom-8-weeks-pregnant...",
+        "brief": "8 weeks pregnant + first-time mom + anxiety"
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "workerId": "quora-monitor",
+  "profile": "quora-monitor",
+  "name": "Quora Monitor",
+  "role": "Quora Parenting Question Monitor",
+  "state": "idle",
+  "mission": "Monitor Quora for high-intent parenting questions matching Prepared Paige ICP jobs-to-be-done.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T15:04:22.710537Z",
+  "checkpoint": null
+}

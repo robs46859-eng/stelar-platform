@@ -1,0 +1,46 @@
+version: 1
+greenlight: External sends, publishing, ads spend, price commitments, contracts, refunds, discounts, and customer system changes require human approval.
+triggers:
+  market_scan:
+  - market-intel
+  - offer-architect
+  - revenue-orchestrator
+  lead_created:
+  - market-intel
+  - sales-closer
+  - revenue-orchestrator
+  offer_idea:
+  - market-intel
+  - offer-architect
+  - solution-builder
+  proposal_request:
+  - sales-closer
+  - offer-architect
+  - solution-builder
+  - revenue-orchestrator
+  build_request:
+  - delivery-manager
+  - solution-builder
+  list_offer:
+  - listing-manager
+  - offer-architect
+  promote_offer:
+  - growth-promoter
+  - sales-closer
+  closed_won:
+  - delivery-manager
+  - solution-builder
+  - customer-success
+  follow_up_due:
+  - customer-success
+  - sales-closer
+  customer_issue:
+  - customer-success
+  - delivery-manager
+  - solution-builder
+  domain_flip:
+  - offer-architect
+  - listing-manager
+  - market-intel
+  - sales-closer
+  - revenue-orchestrator

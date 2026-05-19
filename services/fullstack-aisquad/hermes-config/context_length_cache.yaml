@@ -1,0 +1,2 @@
+context_lengths:
+  gemma4:26b@http://localhost:11434/v1: 262144

@@ -1,0 +1,14 @@
+{
+  "type": "signal_detected",
+  "source": "monitor",
+  "signal": {
+    "platform": "",
+    "url": "",
+    "author": "",
+    "content": "",
+    "matched_patterns": [],
+    "score": 0
+  },
+  "stakeholders": {},
+  "notes": "Signal detected by platform monitor."
+}

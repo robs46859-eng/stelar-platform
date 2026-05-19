@@ -1,0 +1,42 @@
+version: 1
+greenlight: All external posts, comments, DMs, connection requests, email sends, affiliate agreements, and public engagement require human approval. No automated posting, emailing, or outreach. Compliance reviewer is a hard block -- nothing health-touching goes live without approval.
+triggers:
+  signal_detected:
+  - signal-orchestrator
+  - engagement-writer
+  reddit_signal:
+  - reddit-monitor
+  - signal-orchestrator
+  youtube_signal:
+  - youtube-monitor
+  - signal-orchestrator
+  linkedin_signal:
+  - linkedin-monitor
+  - signal-orchestrator
+  quora_signal:
+  - quora-monitor
+  - signal-orchestrator
+  instagram_signal:
+  - instagram-monitor
+  - signal-orchestrator
+  compliance_review:
+  - compliance-reviewer
+  funnel_flow_active:
+  - funnel-manager
+  - signal-orchestrator
+  partner_opportunity:
+  - partnership-scout
+  - signal-orchestrator
+  affiliate_review:
+  - partnership-scout
+  - compliance-reviewer
+  engagement_queue_ready:
+  - engagement-writer
+  - signal-orchestrator
+  competitor_update:
+  - linkedin-monitor
+  - signal-orchestrator
+  campaign_review:
+  - engagement-writer
+  - compliance-reviewer
+  - signal-orchestrator

@@ -1,0 +1,15 @@
+{
+  "type": "linkedin_signal",
+  "source": "linkedin-monitor",
+  "signal": {
+    "profile_url": "",
+    "post_url": "",
+    "name": "",
+    "content": "",
+    "signal_type": "career_change",
+    "matched_patterns": [],
+    "score": 0
+  },
+  "stakeholders": {},
+  "notes": "LinkedIn career or work-life signal detected."
+}

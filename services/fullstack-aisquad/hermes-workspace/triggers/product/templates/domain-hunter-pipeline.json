@@ -1,0 +1,21 @@
+{
+  "type": "domain_acquisition",
+  "source": "domain-hunter-pipeline",
+  "feature": {
+    "domain": "",
+    "score": 0,
+    "service_score": 0,
+    "tld": "",
+    "length": 0,
+    "is_dictionary": false,
+    "has_history": false,
+    "estimated_value": "",
+    "target_vertical": "",
+    "prospective_clients": [],
+    "business_ideas": [],
+    "verdict": "",
+    "registrar": ""
+  },
+  "stakeholders": {},
+  "notes": "Discovered by domain hunter pipeline. Verdict indicates product potential."
+}

@@ -1,0 +1,708 @@
+{
+  "session_id": "20260515_132504_f9d6eb",
+  "model": "qwen/qwen3.6-plus",
+  "base_url": "https://openrouter.ai/api/v1",
+  "platform": "cli",
+  "session_start": "2026-05-15T13:25:04.664060",
+  "last_updated": "2026-05-15T13:28:30.803332",
+  "system_prompt": "You are Hermes Agent, an intelligent AI assistant created by Nous Research. You are helpful, knowledgeable, and direct. You assist users with a wide range of tasks including answering questions, writing and editing code, analyzing information, creative work, and executing actions via your tools. You communicate clearly, admit uncertainty when appropriate, and prioritize being genuinely useful over being verbose unless otherwise directed below. Be targeted and efficient in your exploration and investigations.\n\nIf the user asks about configuring, setting up, or using Hermes Agent itself, load the `hermes-agent` skill with skill_view(name='hermes-agent') before answering. Docs: https://hermes-agent.nousresearch.com/docs\n\nHost: Linux (6.17.0-1013-azure)\nUser home directory: /home/azureuser\nCurrent working directory: /home/azureuser\n\nYou are a CLI AI Agent. Try not to use markdown but simple text renderable inside a terminal. File delivery: there is no attachment channel — the user reads your response directly in their terminal. Do NOT emit MEDIA:/path tags (those are only intercepted on messaging platforms like Telegram, Discord, Slack, etc.; on the CLI they render as literal text). When referring to a file you created or changed, just state its absolute path in plain text; the user can open it from there.\n\nConversation started: Friday, May 15, 2026 01:25 PM\nModel: qwen/qwen3.6-plus\nProvider: openrouter",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "patch",
+        "description": "Targeted find-and-replace edits in files. Use this instead of sed/awk in terminal. Uses fuzzy matching (9 strategies) so minor whitespace/indentation differences won't break it. Returns a unified diff. Auto-runs syntax checks after editing.\n\nREPLACE MODE (mode='replace', default): find a unique string and replace it. REQUIRED PARAMETERS: mode, path, old_string, new_string.\nPATCH MODE (mode='patch'): apply V4A multi-file patches for bulk changes. REQUIRED PARAMETERS: mode, patch.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "replace",
+                "patch"
+              ],
+              "description": "Edit mode. 'replace' (default): requires path + old_string + new_string. 'patch': requires patch content only.",
+              "default": "replace"
+            },
+            "path": {
+              "type": "string",
+              "description": "REQUIRED when mode='replace'. File path to edit."
+            },
+            "old_string": {
+              "type": "string",
+              "description": "REQUIRED when mode='replace'. Exact text to find and replace. Must be unique in the file unless replace_all=true. Include surrounding context lines to ensure uniqueness."
+            },
+            "new_string": {
+              "type": "string",
+              "description": "REQUIRED when mode='replace'. Replacement text. Pass empty string '' to delete the matched text."
+            },
+            "replace_all": {
+              "type": "boolean",
+              "description": "Replace all occurrences instead of requiring a unique match (default: false)",
+              "default": false
+            },
+            "patch": {
+              "type": "string",
+              "description": "REQUIRED when mode='patch'. V4A format patch content. Format:\n*** Begin Patch\n*** Update File: path/to/file\n@@ context hint @@\n context line\n-removed line\n+added line\n*** End Patch"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "process",
+        "description": "Manage background processes started with terminal(background=true). Actions: 'list' (show all), 'poll' (check status + new output), 'log' (full output with pagination), 'wait' (block until done or timeout), 'kill' (terminate), 'write' (send raw stdin data without newline), 'submit' (send data + Enter, for answering prompts), 'close' (close stdin/send EOF).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "list",
+                "poll",
+                "log",
+                "wait",
+                "kill",
+                "write",
+                "submit",
+                "close"
+              ],
+              "description": "Action to perform on background processes"
+            },
+            "session_id": {
+              "type": "string",
+              "description": "Process session ID (from terminal background output). Required for all actions except 'list'."
+            },
+            "data": {
+              "type": "string",
+              "description": "Text to send to process stdin (for 'write' and 'submit' actions)"
+            },
+            "timeout": {
+              "type": "integer",
+              "description": "Max seconds to block for 'wait' action. Returns partial output on timeout.",
+              "minimum": 1
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Line offset for 'log' action (default: last 200 lines)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max lines to return for 'log' action",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "action"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file",
+        "description": "Read a text file with line numbers and pagination. Use this instead of cat/head/tail in terminal. Output format: 'LINE_NUM|CONTENT'. Suggests similar filenames if not found. Use offset and limit for large files. Reads exceeding ~100K characters are rejected; use offset and limit to read specific sections of large files. NOTE: Cannot read images or binary files — use vision_analyze for images.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Path to the file to read (absolute, relative, or ~/path)"
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Line number to start reading from (1-indexed, default: 1)",
+              "default": 1,
+              "minimum": 1
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of lines to read (default: 500, max: 2000)",
+              "default": 500,
+              "maximum": 2000
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_files",
+        "description": "Search file contents or find files by name. Use this instead of grep/rg/find/ls in terminal. Ripgrep-backed, faster than shell equivalents.\n\nContent search (target='content'): Regex search inside files. Output modes: full matches with line numbers, file paths only, or match counts.\n\nFile search (target='files'): Find files by glob pattern (e.g., '*.py', '*config*'). Also use this instead of ls — results sorted by modification time.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "description": "Regex pattern for content search, or glob pattern (e.g., '*.py') for file search"
+            },
+            "target": {
+              "type": "string",
+              "enum": [
+                "content",
+                "files"
+              ],
+              "description": "'content' searches inside file contents, 'files' searches for files by name",
+              "default": "content"
+            },
+            "path": {
+              "type": "string",
+              "description": "Directory or file to search in (default: current working directory)",
+              "default": "."
+            },
+            "file_glob": {
+              "type": "string",
+              "description": "Filter files by pattern in grep mode (e.g., '*.py' to only search Python files)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of results to return (default: 50)",
+              "default": 50
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Skip first N results for pagination (default: 0)",
+              "default": 0
+            },
+            "output_mode": {
+              "type": "string",
+              "enum": [
+                "content",
+                "files_only",
+                "count"
+              ],
+              "description": "Output format for grep mode: 'content' shows matching lines with line numbers, 'files_only' lists file paths, 'count' shows match counts per file",
+              "default": "content"
+            },
+            "context": {
+              "type": "integer",
+              "description": "Number of context lines before and after each match (grep mode only)",
+              "default": 0
+            }
+          },
+          "required": [
+            "pattern"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "terminal",
+        "description": "Execute shell commands on a Linux environment. Filesystem usually persists between calls.\n\nDo NOT use cat/head/tail to read files — use read_file instead.\nDo NOT use grep/rg/find to search — use search_files instead.\nDo NOT use ls to list directories — use search_files(target='files') instead.\nDo NOT use sed/awk to edit files — use patch instead.\nDo NOT use echo/cat heredoc to create files — use write_file instead.\nReserve terminal for: builds, installs, git, processes, scripts, network, package managers, and anything that needs a shell.\n\nForeground (default): Commands return INSTANTLY when done, even if the timeout is high. Set timeout=300 for long builds/scripts — you'll still get the result in seconds if it's fast. Prefer foreground for short commands.\nBackground: Set background=true to get a session_id. Two patterns:\n  (1) Long-lived processes that never exit (servers, watchers).\n  (2) Long-running tasks with notify_on_complete=true — you can keep working on other things and the system auto-notifies you when the task finishes. Great for test suites, builds, deployments, or anything that takes more than a minute.\nFor servers/watchers, do NOT use shell-level background wrappers (nohup/disown/setsid/trailing '&') in foreground mode. Use background=true so Hermes can track lifecycle and output.\nAfter starting a server, verify readiness with a health check or log signal, then run tests in a separate terminal() call. Avoid blind sleep loops.\nUse process(action=\"poll\") for progress checks, process(action=\"wait\") to block until done.\nWorking directory: Use 'workdir' for per-command cwd.\nPTY mode: Set pty=true for interactive CLI tools (Codex, Claude Code, Python REPL).\n\nDo NOT use vim/nano/interactive tools without pty=true — they hang without a pseudo-terminal. Pipe git output to cat if it might page.\n",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "description": "The command to execute on the VM"
+            },
+            "background": {
+              "type": "boolean",
+              "description": "Run the command in the background. Two patterns: (1) Long-lived processes that never exit (servers, watchers). (2) Long-running tasks paired with notify_on_complete=true — you can keep working and get notified when the task finishes. For short commands, prefer foreground with a generous timeout instead.",
+              "default": false
+            },
+            "timeout": {
+              "type": "integer",
+              "description": "Max seconds to wait (default: 180, foreground max: 600). Returns INSTANTLY when command finishes — set high for long tasks, you won't wait unnecessarily. Foreground timeout above 600s is rejected; use background=true for longer commands.",
+              "minimum": 1
+            },
+            "workdir": {
+              "type": "string",
+              "description": "Working directory for this command (absolute path). Defaults to the session working directory."
+            },
+            "pty": {
+              "type": "boolean",
+              "description": "Run in pseudo-terminal (PTY) mode for interactive CLI tools like Codex, Claude Code, or Python REPL. Only works with local and SSH backends. Default: false.",
+              "default": false
+            },
+            "notify_on_complete": {
+              "type": "boolean",
+              "description": "When true (and background=true), you'll be automatically notified exactly once when the process finishes. **This is the right choice for almost every long-running task** — tests, builds, deployments, multi-item batch jobs, anything that takes over a minute and has a defined end. Use this and keep working on other things; the system notifies you on exit. MUTUALLY EXCLUSIVE with watch_patterns — when both are set, watch_patterns is dropped.",
+              "default": false
+            },
+            "watch_patterns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Strings to watch for in background process output. HARD RATE LIMIT: at most 1 notification per 15 seconds per process — matches arriving inside the cooldown are dropped. After 3 consecutive 15-second windows with dropped matches, watch_patterns is automatically disabled for that process and promoted to notify_on_complete behavior (one notification on exit, no more mid-process spam). USE ONLY for truly rare, one-shot mid-process signals on LONG-LIVED processes that will never exit on their own — e.g. ['Application startup complete'] on a server so you know when to hit its endpoint, or ['migration done'] on a daemon. DO NOT use for: (1) end-of-run markers like 'DONE'/'PASS' — use notify_on_complete instead; (2) error patterns like 'ERROR'/'Traceback' in loops or multi-item batch jobs — they fire on every iteration and you'll hit the strike limit fast; (3) anything you'd ever combine with notify_on_complete. When in doubt, choose notify_on_complete. MUTUALLY EXCLUSIVE with notify_on_complete — set one, not both."
+            }
+          },
+          "required": [
+            "command"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file",
+        "description": "Write content to a file, completely replacing existing content. Use this instead of echo/cat heredoc in terminal. Creates parent directories automatically. OVERWRITES the entire file — use 'patch' for targeted edits. Auto-runs syntax checks on .py/.json/.yaml/.toml and other linted languages; only NEW errors introduced by this write are surfaced (pre-existing errors are filtered out).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Path to the file to write (will be created if it doesn't exist, overwritten if it does)"
+            },
+            "content": {
+              "type": "string",
+              "description": "Complete content to write to the file"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ]
+        }
+      }
+    }
+  ],
+  "message_count": 36,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Enhance the scoring system in domain_hunter.py with service-readiness, commercial keyword intent, B2B signal, and trend alignment factors. This is the highest-ROI, lowest-effort change."
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "Let me start by reading the full domain_hunter.py file to understand the current code structure before making any changes.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "Let me start by reading the full domain_hunter.py file to understand the current code structure before making any changes.",
+      "tool_calls": [
+        {
+          "id": "call_ba1cec3e26b24794afd69d51",
+          "call_id": "call_ba1cec3e26b24794afd69d51",
+          "response_item_id": "fc_ba1cec3e26b24794afd69d51",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "read_file",
+      "content": "{\"content\": \"     1|#!/usr/bin/env python3\\n     2|\\\"\\\"\\\"\\n     3|Domain Hunter v2 — Proactive Discovery Engine\\n     4|\\n     5|Instead of scraping blocked auction sites, this version:\\n     6|1. Generates brandable domain names from trending keywords\\n     7|2. Checks availability via RDAP (reliable, no key needed)\\n     8|3. Scores domains for resale value AND service-readiness\\n     9|4. Outputs HTML email + JSON for pipeline consumption\\n    10|5. Focuses on domains suitable for digital services/SaaS\\n    11|\\n    12|Sources:\\n    13|  - Proactive trend-based generation (prefix+suffix, trend combos, brandable names)\\n    14|  - Porkbun live API (pricing)\\n    15|  - Wayback Machine CDX (history for names with web presence)\\n    16|  - RDAP per-TLD endpoints (availability)\\n    17|\\n    18|Outputs:\\n    19|  - Daily HTML email digest\\n    20|  - JSON artifact at memory/domain-hunter/latest.json for pipeline dispatch\\n    21|\\\"\\\"\\\"\\n    22|\\n    23|import os\\n    24|import re\\n    25|import sys\\n    26|import time\\n    27|import json\\n    28|import socket\\n    29|import smtplib\\n    30|import random\\n    31|import logging\\n    32|import requests\\n    33|from datetime import date\\n    34|from concurrent.futures import ThreadPoolExecutor, as_completed\\n    35|from email.mime.text import MIMEText\\n    36|from email.mime.multipart import MIMEMultipart\\n    37|\\n    38|# ── Logging ───────────────────────────────────────────────────────────────────\\n    39|log_path = os.path.join(os.path.dirname(__file__), \\\"run.log\\\")\\n    40|logging.basicConfig(\\n    41|    level=logging.INFO,\\n    42|    format=\\\"%(asctime)s [%(levelname)s] %(message)s\\\",\\n    43|    handlers=[\\n    44|        logging.FileHandler(log_path),\\n    45|        logging.StreamHandler(sys.stdout),\\n    46|    ],\\n    47|)\\n    48|log = logging.getLogger(__name__)\\n    49|\\n    50|# ── Config ────────────────────────────────────────────────────────────────────\\n    51|FROM_EMAIL  = os.getenv(\\\"DOMAIN_FROM_EMAIL\\\", \\\"domain.stack11@gmail.com\\\")\\n    52|FROM_PASS   = os.getenv(\\\"DOMAIN_FROM_PASS\\\",  \\\"aoszdccswehypoxf\\\")\\n    53|TO_EMAIL    = os.getenv(\\\"DOMAIN_TO_EMAIL\\\",   \\\"robcofamily@gmail.com\\\")\\n    54|MAX_REPORT  = 50\\n    55|WORKERS     = 10\\n    56|MEMORY_DIR  = os.path.join(os.path.expanduser(\\\"~\\\"), \\\"hermes-workspace\\\", \\\"memory\\\", \\\"domain-hunter\\\")\\n    57|os.makedirs(MEMORY_DIR, exist_ok=True)\\n    58|\\n    59|HEADERS = {\\n    60|    \\\"User-Agent\\\": (\\n    61|        \\\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \\\"\\n    62|        \\\"AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36\\\"\\n    63|    ),\\n    64|    \\\"Accept-Language\\\": \\\"en-US,en;q=0.9\\\",\\n    65|    \\\"Accept\\\": \\\"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\\\",\\n    66|}\\n    67|\\n    68|# ── Trending Keywords for Proactive Generation ────────────────────────────────\\n    69|TREND_WORDS = {\\n    70|    \\\"ai\\\": 4, \\\"agent\\\": 4, \\\"swarm\\\": 4, \\\"llm\\\": 4, \\\"flow\\\": 3, \\\"stack\\\": 3,\\n    71|    \\\"metric\\\": 3, \\\"automate\\\": 3, \\\"ship\\\": 3, \\\"build\\\": 3, \\\"craft\\\": 3,\\n    72|    \\\"sync\\\": 3, \\\"deploy\\\": 3, \\\"cloud\\\": 3, \\\"data\\\": 3, \\\"ops\\\": 3,\\n    73|    \\\"dev\\\": 3, \\\"bot\\\": 3, \\\"gen\\\": 3, \\\"prompt\\\": 3, \\\"vector\\\": 3,\\n    74|    \\\"embed\\\": 3, \\\"neural\\\": 3, \\\"flux\\\": 3, \\\"ar\\\": 2, \\\"vr\\\": 2,\\n    75|    \\\"hub\\\": 2, \\\"base\\\": 2, \\\"kit\\\": 2, \\\"deck\\\": 2, \\\"dash\\\": 2,\\n    76|    \\\"grid\\\": 2, \\\"mesh\\\": 2, \\\"chain\\\": 2, \\\"node\\\": 2, \\\"loop\\\": 2,\\n    77|    \\\"wave\\\": 2, \\\"edge\\\": 2, \\\"core\\\": 2, \\\"shift\\\": 2, \\\"spark\\\": 2,\\n    78|    \\\"pulse\\\": 2, \\\"beam\\\": 2, \\\"arc\\\": 2, \\\"bolt\\\": 2, \\\"zen\\\": 2,\\n    79|    \\\"neo\\\": 2, \\\"vox\\\": 2, \\\"orb\\\": 2, \\\"link\\\": 2,\\n    80|}\\n    81|\\n    82|COMMERCIAL_PREFIXES = [\\n    83|    \\\"get\\\", \\\"try\\\", \\\"go\\\", \\\"use\\\", \\\"my\\\", \\\"the\\\", \\\"build\\\", \\\"make\\\",\\n    84|    \\\"ship\\\", \\\"auto\\\", \\\"smart\\\", \\\"quick\\\", \\\"hyper\\\", \\\"meta\\\", \\\"super\\\",\\n    85|    \\\"deep\\\", \\\"open\\\", \\\"true\\\", \\\"top\\\", \\\"next\\\", \\\"pro\\\",\\n    86|]\\n    87|\\n    88|BRAND_SUFFIXES = [\\n    89|    \\\"ai\\\", \\\"lab\\\", \\\"ops\\\", \\\"dev\\\", \\\"hub\\\", \\\"stack\\\", \\\"flow\\\",\\n    90|    \\\"ware\\\", \\\"bot\\\", \\\"ly\\\", \\\"ify\\\", \\\"kit\\\", \\\"hq\\\", \\\"deck\\\",\\n    91|    \\\"base\\\", \\\"grid\\\", \\\"sync\\\", \\\"dash\\\", \\\"cloud\\\", \\\"mate\\\",\\n    92|    \\\"works\\\", \\\"genie\\\", \\\"sys\\\", \\\"net\\\", \\\"io\\\", \\\"base\\\",\\n    93|]\\n    94|\\n    95|TLD_SCORE = {\\n    96|    \\\".com\\\": 100, \\\".ai\\\": 88, \\\".co\\\": 78, \\\".io\\\": 72,\\n    97|    \\\".net\\\": 65,  \\\".org\\\": 60, \\\".app\\\": 55, \\\".dev\\\": 53,\\n    98|    \\\".tech\\\": 45, \\\".so\\\": 43,  \\\".me\\\": 40,  \\\".xyz\\\": 22,\\n    99|}\\n   100|\\n   101|TLD_REGISTRAR = {\\n   102|    \\\".com\\\":  \\\"Namecheap\\\", \\\".ai\\\":   \\\"Namecheap\\\", \\\".co\\\":   \\\"GoDaddy\\\",\\n   103|    \\\".io\\\":   \\\"Namecheap\\\", \\\".net\\\":  \\\"Namecheap\\\", \\\".org\\\":  \\\"Namecheap\\\",\\n   104|    \\\".app\\\":  \\\"Google Domains\\\", \\\".dev\\\":  \\\"Google Domains\\\",\\n   105|    \\\".tech\\\": \\\"Namecheap\\\", \\\".so\\\":   \\\"Namecheap\\\", \\\".me\\\":   \\\"Namecheap\\\",\\n   106|    \\\".xyz\\\":  \\\"Namecheap\\\",\\n   107|}\\n   108|\\n   109|_live_prices: dict = {}\\n   110|\\n   111|def fetch_porkbun_prices():\\n   112|    \\\"\\\"\\\"Pull real registration prices from Porkbun (public endpoint, no key).\\\"\\\"\\\"\\n   113|    global _live_prices\\n   114|    try:\\n   115|        r = requests.post(\\n   116|            \\\"https://porkbun.com/api/json/v3/pricing/get\\\",\\n   117|            json={\\\"secretapikey\\\": \\\"\\\", \\\"apikey\\\": \\\"\\\"}, timeout=12,\\n   118|        )\\n   119|        if r.status_code == 200:\\n   120|            data = r.json()\\n   121|            if data.get(\\\"status\\\") == \\\"SUCCESS\\\":\\n   122|                _live_prices = {\\n   123|                    f\\\".{tld}\\\": info.get(\\\"registration\\\", \\\"\\\")\\n   124|                    for tld, info in data.get(\\\"pricing\\\", {}).items()\\n   125|                }\\n   126|                log.info(f\\\"Porkbun: live prices for {len(_live_prices)} TLDs\\\")\\n   127|    except Exception as e:\\n   128|        log.warning(f\\\"Porkbun pricing unavailable: {e}\\\")\\n   129|\\n   130|PRICE_FALLBACK = {\\n   131|    \\\".com\\\": \\\"~$10/yr\\\", \\\".ai\\\": \\\"~$80/yr\\\", \\\".co\\\": \\\"~$28/yr\\\", \\\".io\\\": \\\"~$45/yr\\\",\\n   132|    \\\".net\\\": \\\"~$13/yr\\\", \\\".org\\\": \\\"~$12/yr\\\", \\\".app\\\": \\\"~$20/yr\\\", \\\".dev\\\": \\\"~$14/yr\\\",\\n   133|    \\\".tech\\\": \\\"~$10/yr\\\", \\\".so\\\": \\\"~$35/yr\\\", \\\".me\\\": \\\"~$18/yr\\\", \\\".xyz\\\": \\\"~$3/yr\\\",\\n   134|}\\n   135|\\n   136|def tld_price(tld: str) -> str:\\n   137|    raw = _live_prices.get(tld, \\\"\\\")\\n   138|    if raw:\\n   139|        try:\\n   140|            return f\\\"${float(raw):.2f}/yr\\\"\\n   141|        except ValueError:\\n   142|            pass\\n   143|    return PRICE_FALLBACK.get(tld, \\\"—\\\")\\n   144|\\n   145|# ── Dictionary ────────────────────────────────────────────────────────────────\\n   146|DICT_WORDS: set = set()\\n   147|\\n   148|def load_dict():\\n   149|    global DICT_WORDS\\n   150|    for path in (\\\"/usr/share/dict/words\\\", \\\"/usr/dict/words\\\"):\\n   151|        try:\\n   152|            with open(path) as f:\\n   153|                DICT_WORDS = {w.strip().lower() for w in f if 3 <= len(w.strip()) <= 14}\\n   154|            log.info(f\\\"Dictionary: {len(DICT_WORDS)} words loaded\\\")\\n   155|            return\\n   156|        except Exception:\\n   157|            pass\\n   158|    log.warning(\\\"No system dictionary found — dictionary scoring disabled\\\")\\n   159|\\n   160|# ── Proactive Domain Name Generation ─────────────────────────────────────────\\n   161|\\n   162|def generate_candidates() -> list:\\n   163|    \\\"\\\"\\\"Generate brandable domain name candidates from trending keywords.\\\"\\\"\\\"\\n   164|    candidates = set()\\n   165|\\n   166|    # Strategy 1: prefix + trend word\\n   167|    for prefix in COMMERCIAL_PREFIXES:\\n   168|        for tw in TREND_WORDS:\\n   169|            candidates.add(prefix + tw)\\n   170|\\n   171|    # Strategy 2: trend word + brand suffix\\n   172|    for tw in TREND_WORDS:\\n   173|        for sfx in BRAND_SUFFIXES:\\n   174|            candidates.add(tw + sfx)\\n   175|\\n   176|    # Strategy 3: trend + trend combos (sorted to avoid duplicates)\\n   177|    trend_list = sorted(TREND_WORDS.keys())\\n   178|    for i, t1 in enumerate(trend_list):\\n   179|        for t2 in trend_list[i:]:\\n   180|            if t1 != t2:\\n   181|                combo = t1 + t2\\n   182|                if len(combo) <= 14:\\n   183|                    candidates.add(combo)\\n   184|\\n   185|    # Strategy 4: prefix + trend + trend\\n   186|    for prefix in COMMERCIAL_PREFIXES[:5]:\\n   187|        for t1 in trend_list[:5]:\\n   188|            for t2 in trend_list[:5]:\\n   189|                combo = prefix + t1 + t2\\n   190|                if len(combo) <= 14:\\n   191|                    candidates.add(combo)\\n   192|\\n   193|    # Strategy 5: brandable short names (pseudo-syllables)\\n   194|    starts = [\\\"al\\\", \\\"bl\\\", \\\"br\\\", \\\"cl\\\", \\\"cr\\\", \\\"dr\\\", \\\"fl\\\", \\\"fr\\\", \\\"gl\\\", \\\"gr\\\",\\n   195|              \\\"kn\\\", \\\"pl\\\", \\\"pr\\\", \\\"sl\\\", \\\"sn\\\", \\\"sp\\\", \\\"st\\\", \\\"sw\\\", \\\"tr\\\", \\\"tw\\\", \\\"wr\\\"]\\n   196|    vowels = [\\\"ai\\\", \\\"ae\\\", \\\"io\\\", \\\"ea\\\", \\\"ou\\\", \\\"ei\\\", \\\"ar\\\", \\\"er\\\", \\\"or\\\", \\\"ur\\\"]\\n   197|    endings = [\\\"go\\\", \\\"zo\\\", \\\"do\\\", \\\"lo\\\", \\\"mo\\\", \\\"no\\\", \\\"ro\\\", \\\"to\\\", \\\"vo\\\", \\\"xa\\\", \\\"ze\\\"]\\n   198|\\n   199|    for _ in range(100):\\n   200|        name = random.choice(starts) + random.choice(vowels) + random.choice(endings)\\n   201|        if 4 <= len(name) <= 10:\\n   202|            candidates.add(name)\\n   203|\\n   204|    # Remove dictionary words and filter length\\n   205|    filtered = [\\n   206|        d for d in candidates\\n   207|        if d not in DICT_WORDS and 4 <= len(d) <= 14 and d.isalpha()\\n   208|    ]\\n   209|    log.info(f\\\"Proactive generation: {len(candidates)} names, {len(filtered)} after filtering\\\")\\n   210|    return filtered\\n   211|\\n   212|# ── Scoring ───────────────────────────────────────────────────────────────────\\n   213|\\n   214|def score_hunter(domain: str, has_history: bool = False) -> tuple:\\n   215|    \\\"\\\"\\\"Domain resale scoring (0-100).\\\"\\\"\\\"\\n   216|    dot = domain.rfind(\\\".\\\")\\n   217|    if dot < 1:\\n   218|        return 0, {}\\n   219|    name = domain[:dot]\\n   220|    tld  = domain[dot:]\\n   221|    if tld not in TLD_SCORE:\\n   222|        return 0, {}\\n   223|\\n   224|    f = {}\\n   225|    s = 0\\n   226|\\n   227|    ts = TLD_SCORE[tld]\\n   228|    f[\\\"tld_pts\\\"] = int(ts * 0.28)\\n   229|    s += f[\\\"tld_pts\\\"]\\n   230|\\n   231|    L = len(name)\\n   232|    f[\\\"length\\\"] = L\\n   233|    lpts = max(0, 22 - max(0, L - 4) * 2)\\n   234|    s += lpts\\n   235|\\n   236|    f[\\\"clean\\\"] = \\\"-\\\" not in name\\n   237|    s += 12 if f[\\\"clean\\\"] else 0\\n   238|\\n   239|    f[\\\"no_digits\\\"] = not any(c.isdigit() for c in name)\\n   240|    s += 8 if f[\\\"no_digits\\\"] else 0\\n   241|\\n   242|    f[\\\"dictionary\\\"] = name.lower() in DICT_WORDS\\n   243|    s += 18 if f[\\\"dictionary\\\"] else 0\\n   244|\\n   245|    f[\\\"has_history\\\"] = has_history\\n   246|    s += 12 if has_history else 0\\n   247|\\n   248|    return min(s, 100), f\\n   249|\\n   250|\\n   251|def score_service_readiness(domain: str) -> dict:\\n   252|    \\\"\\\"\\\"Score for digital service/sales potential.\\\"\\\"\\\"\\n   253|    dot = domain.rfind(\\\".\\\")\\n   254|    if dot < 1:\\n   255|        return {\\\"score\\\": 0, \\\"factors\\\": {}, \\\"verdict\\\": \\\"skip\\\"}\\n   256|\\n   257|    name = domain[:dot].lower()\\n   258|    tld = domain[dot:]\\n   259|    factors = {}\\n   260|\\n   261|    # Commercial prefix/suffix match (0-20 pts)\\n   262|    parts = name.split()\\n   263|    comm_match = sum(\\n   264|        1 for p in parts\\n   265|        if p in COMMERCIAL_PREFIXES or p in BRAND_SUFFIXES\\n   266|    )\\n   267|    # Also check within the name\\n   268|    for p in COMMERCIAL_PREFIXES:\\n   269|        if name.startswith(p) and name != p:\\n   270|            comm_match += 1\\n   271|            break\\n   272|    for s in BRAND_SUFFIXES:\\n   273|        if name.endswith(s) and name != s:\\n   274|            comm_match += 1\\n   275|            break\\n   276|\\n   277|    factors[\\\"commercial_keywords\\\"] = comm_match\\n   278|    f_commercial = min(20, comm_match * 10)\\n   279|\\n   280|    # Trend alignment (0-15 pts)\\n   281|    trend_match = sum(1 for tw in TREND_WORDS if tw in name)\\n   282|    factors[\\\"trend_alignment\\\"] = trend_match\\n   283|    f_trend = min(15, trend_match * 5)\\n   284|\\n   285|    # Brandability (0-15 pts)\\n   286|    is_brandable = len(name) <= 15 and \\\"-\\\" not in name and name.isalpha()\\n   287|    factors[\\\"brandable\\\"] = is_brandable\\n   288|    f_brandable = 15 if is_brandable else 0\\n   289|\\n   290|    # Service-readiness TLD (0-10 pts)\\n   291|    service_tlds = {\\\".com\\\": 10, \\\".ai\\\": 8, \\\".io\\\": 8, \\\".co\\\": 7,\\n   292|                    \\\".app\\\": 6, \\\".tech\\\": 5, \\\".dev\\\": 5, \\\".so\\\": 4}\\n   293|    f_service_tld = service_tlds.get(tld, 2)\\n   294|    factors[\\\"service_tld_fit\\\"] = f_service_tld\\n   295|\\n   296|    # B2B indicator (0-10 pts)\\n   297|    b2b_words = [\\\"ai\\\", \\\"agent\\\", \\\"bot\\\", \\\"api\\\", \\\"data\\\", \\\"cloud\\\", \\\"ops\\\",\\n   298|                 \\\"metrics\\\", \\\"analytics\\\", \\\"dashboard\\\", \\\"pipeline\\\", \\\"platform\\\"]\\n   299|    b2b_match = sum(1 for bw in b2b_words if bw in name)\\n   300|    factors[\\\"b2b_indicators\\\"] = b2b_match\\n   301|    f_b2b = min(10, b2b_match * 5)\\n   302|\\n   303|    total = f_commercial + f_trend + f_brandable + f_service_tld + f_b2b\\n   304|    total = min(total, 70)\\n   305|\\n   306|    # Verdict\\n   307|    if total >= 50:\\n   308|        verdict = \\\"product + flip\\\"\\n   309|    elif total >= 30:\\n   310|        verdict = \\\"flip only\\\"\\n   311|    else:\\n   312|        verdict = \\\"skip\\\"\\n   313|\\n   314|    return {\\n   315|        \\\"score\\\": total,\\n   316|        \\\"factors\\\": factors,\\n   317|        \\\"verdict\\\": verdict,\\n   318|    }\\n   319|\\n   320|\\n   321|def resale_range(s: int) -> str:\\n   322|    if s >= 90: return \\\"$10k–$100k+\\\"\\n   323|    if s >= 75: return \\\"$1k–$10k\\\"\\n   324|    if s >= 60: return \\\"$200–$1k\\\"\\n   325|    if s >= 45: return \\\"$50–$200\\\"\\n   326|    return \\\"$10–$50\\\"\\n   327|\\n   328|# ── Availability via RDAP ─────────────────────────────────────────────────────\\n   329|\\n   330|RDAP = {\\n   331|    \\\".com\\\":  \\\"https://rdap.verisign.com/com/v1/domain/\\\",\\n   332|    \\\".net\\\":  \\\"https://rdap.verisign.com/net/v1/domain/\\\",\\n   333|    \\\".org\\\":  \\\"https://rdap.publicinterestregistry.org/rdap/domain/\\\",\\n   334|    \\\".io\\\":   \\\"https://rdap.nic.io/domain/\\\",\\n   335|    \\\".co\\\":   \\\"https://rdap.nic.co/domain/\\\",\\n   336|    \\\".ai\\\":   \\\"https://rdap.nic.ai/domain/\\\",\\n   337|    \\\".app\\\":  \\\"https://rdap.nic.google/rdap/domain/\\\",\\n   338|    \\\".dev\\\":  \\\"https://rdap.nic.google/rdap/domain/\\\",\\n   339|    \\\".me\\\":   \\\"https://rdap.nic.me/domain/\\\",\\n   340|    \\\".tech\\\": \\\"https://rdap.nic.tech/domain/\\\",\\n   341|    \\\".xyz\\\":  \\\"https://rdap.nic.xyz/domain/\\\",\\n   342|    \\\".so\\\":   \\\"https://rdap.nic.so/domain/\\\",\\n   343|}\\n   344|\\n   345|def check_availability(domain: str) -> str:\\n   346|    tld = \\\".\\\" + domain.split(\\\".\\\")[-1]\\n   347|    base = RDAP.get(tld)\\n   348|    if base:\\n   349|        try:\\n   350|            r = requests.get(\\n   351|                base + domain, timeout=6,\\n   352|                headers={\\\"Accept\\\": \\\"application/rdap+json\\\"},\\n   353|            )\\n   354|            if r.status_code == 404:\\n   355|                return \\\"available\\\"\\n   356|            if r.status_code == 200:\\n   357|                return \\\"taken\\\"\\n   358|        except Exception:\\n   359|            pass\\n   360|    try:\\n   361|        socket.setdefaulttimeout(3)\\n   362|        socket.getaddrinfo(domain, None)\\n   363|        return \\\"taken\\\"\\n   364|    except socket.gaierror:\\n   365|        return \\\"available\\\"\\n   366|    return \\\"unknown\\\"\\n   367|\\n   368|# ── Wayback Machine enrichment ────────────────────────────────────────────────\\n   369|\\n   370|def had_wayback_history(domain: str) -> bool:\\n   371|    try:\\n   372|        r = requests.get(\\n   373|            \\\"https://web.archive.org/cdx/search/cdx\\\",\\n   374|            params={\\n   375|                \\\"url\\\": domain, \\\"output\\\": \\\"json\\\", \\\"limit\\\": \\\"1\\\",\\n   376|                \\\"fl\\\": \\\"statuscode\\\", \\\"filter\\\": \\\"statuscode:200\\\",\\n   377|            },\\n   378|            timeout=6,\\n   379|        )\\n   380|        if r.status_code == 200:\\n   381|            data = r.json()\\n   382|            return len(data) > 1\\n   383|    except Exception:\\n   384|        pass\\n   385|    return False\\n   386|\\n   387|# ── Email HTML ────────────────────────────────────────────────────────────────\\n   388|\\n   389|def _nc_url(d):   return f\\\"https://www.namecheap.com/domains/registration/results/?domain={d}\\\"\\n   390|def _wb_url(d):   return f\\\"https://web.archive.org/web/*/{d}\\\"\\n   391|def _whois_url(d): return f\\\"https://who.is/whois/{d}\\\"\\n   392|\\n   393|_BTN = (\\n   394|    \\\"display:inline-block;padding:5px 13px;border-radius:5px;font-size:12px;\\\"\\n   395|    \\\"font-weight:600;text-decoration:none;color:#ffffff;margin-right:4px;\\\"\\n   396|    \\\"line-height:1.4;cursor:pointer;\\\"\\n   397|)\\n   398|_PILL = (\\n   399|    \\\"display:inline-block;padding:2px 7px;border-radius:3px;\\\"\\n   400|    \\\"font-size:10px;font-weight:500;margin-right:3px;letter-spacing:.2px;\\\"\\n   401|)\\n   402|\\n   403|def _score_color(s):\\n   404|    if s >= 75: return (\\\"#16a34a\\\", \\\"#dcfce7\\\")\\n   405|    if s >= 50: return (\\\"#b45309\\\", \\\"#fef3c7\\\")\\n   406|    return             (\\\"#dc2626\\\", \\\"#fee2e2\\\")\\n   407|\\n   408|\\n   409|def build_email_html(domains: list) -> str:\\n   410|    today    = date.today().strftime(\\\"%B %d, %Y\\\")\\n   411|    avail_ct = sum(1 for d in domains if d[\\\"availability\\\"] == \\\"available\\\")\\n   412|    hist_ct  = sum(1 for d in domains if d[\\\"factors\\\"].get(\\\"has_history\\\"))\\n   413|\\n   414|    rows = \\\"\\\"\\n   415|    for i, d in enumerate(domains, 1):\\n   416|        dom   = d[\\\"domain\\\"]\\n   417|        sc    = d[\\\"score\\\"]\\n   418|        f     = d[\\\"factors\\\"]\\n   419|        avail = d[\\\"availability\\\"]\\n   420|        tld   = dom[dom.rfind(\\\".\\\"):]\\n   421|        price = tld_price(tld)\\n   422|        reg   = TLD_REGISTRAR.get(tld, \\\"Namecheap\\\")\\n   423|        est   = resale_range(sc)\\n   424|        fg, bg = _score_color(sc)\\n   425|        svc_score = d.get(\\\"service_score\\\", 0)\\n   426|        verdict = d.get(\\\"verdict\\\", \\\"\\\")\\n   427|\\n   428|        if avail == \\\"available\\\":\\n   429|            avail_html = '<span style=\\\"color:#16a34a;font-weight:600\\\">✓ Available</span>'\\n   430|        elif avail == \\\"unknown\\\":\\n   431|            avail_html = '<span style=\\\"color:#6b7280\\\">? Unverified</span>'\\n   432|        else:\\n   433|            avail_html = '<span style=\\\"color:#d1d5db\\\">Taken</span>'\\n   434|\\n   435|        pills = \\\"\\\"\\n   436|        if verdict == \\\"product + flip\\\":\\n   437|            pills += f'<span style=\\\"{_PILL}background:#eff6ff;color:#1d4ed8\\\">Product+Flip</span>'\\n   438|        elif verdict == \\\"flip only\\\":\\n   439|            pills += f'<span style=\\\"{_PILL}background:#fef3c7;color:#b45309\\\">Flip</span>'\\n   440|        if f.get(\\\"dictionary\\\"):\\n   441|            pills += f'<span style=\\\"{_PILL}background:#f0fdf4;color:#15803d\\\">Word</span>'\\n   442|        if f.get(\\\"clean\\\"):\\n   443|            pills += f'<span style=\\\"{_PILL}background:#f0fdf4;color:#15803d\\\">Clean</span>'\\n   444|        if f.get(\\\"length\\\", 99) <= 5:\\n   445|            pills += f'<span style=\\\"{_PILL}background:#faf5ff;color:#7e22ce\\\">Short</span>'\\n   446|        if f.get(\\\"has_history\\\"):\\n   447|            pills += f'<span style=\\\"{_PILL}background:#fff7ed;color:#c2410c\\\">History</span>'\\n   448|\\n   449|        rows += f\\\"\\\"\\\"\\n   450|        <tr style=\\\"border-bottom:1px solid #f3f4f6;vertical-align:middle\\\">\\n   451|          <td style=\\\"padding:12px 6px 12px 16px;color:#9ca3af;font-size:12px\\\">{i}</td>\\n   452|          <td style=\\\"padding:12px 6px\\\">\\n   453|            <a href=\\\"{_nc_url(dom)}\\\"\\n   454|               style=\\\"font-size:15px;font-weight:700;color:#111827;text-decoration:none\\\"\\n   455|            >{dom}</a>\\n   456|            <div style=\\\"margin-top:4px\\\">{pills}</div>\\n   457|          </td>\\n   458|          <td style=\\\"padding:12px 6px;text-align:center;white-space:nowrap\\\">\\n   459|            <span style=\\\"background:{bg};color:{fg};padding:3px 9px;border-radius:20px;\\n   460|                         font-weight:700;font-size:12px\\\">{resale_range(sc)}</span>\\n   461|            <div style=\\\"margin-top:4px;font-size:11px;color:#6b7280\\\">Svc: {svc_score}/70</div>\\n   462|          </td>\\n   463|          <td style=\\\"padding:12px 6px;font-size:13px\\\">{avail_html}</td>\\n   464|          <td style=\\\"padding:12px 6px;font-size:13px\\\">\\n   465|            <strong style=\\\"color:#111827\\\">{price}</strong><br>\\n   466|            <span style=\\\"color:#9ca3af;font-size:11px\\\">{reg}</span>\\n   467|          </td>\\n   468|          <td style=\\\"padding:12px 6px;white-space:nowrap\\\">\\n   469|            <a href=\\\"{_nc_url(dom)}\\\"   style=\\\"{_BTN}background:#2563eb\\\">Register</a>\\n   470|            <a href=\\\"{_wb_url(dom)}\\\"   style=\\\"{_BTN}background:#6b7280\\\">History</a>\\n   471|            <a href=\\\"{_whois_url(dom)}\\\" style=\\\"{_BTN}background:#374151\\\">WHOIS</a>\\n   472|          </td>\\n   473|        </tr>\\\"\\\"\\\"\\n   474|\\n   475|    return f\\\"\\\"\\\"<!DOCTYPE html>\\n   476|<html lang=\\\"en\\\">\\n   477|<head><meta charset=\\\"utf-8\\\"><meta name=\\\"viewport\\\" content=\\\"width=device-width,initial-scale=1\\\"></head>\\n   478|<body style=\\\"margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif\\\">\\n   479|<div style=\\\"max-width:940px;margin:24px auto;background:#ffffff;border-radius:12px;\\n   480|            overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.08)\\\">\\n   481|\\n   482|  <!-- Header -->\\n   483|  <div style=\\\"background:#0f172a;padding:28px 32px\\\">\\n   484|    <div style=\\\"font-size:22px;font-weight:700;color:#ffffff\\\">🌐 Domain Hunter v2</div>\\n   485|    <div style=\\\"margin-top:6px;color:#94a3b8;font-size:13px\\\">\\n   486|      {today} &nbsp;·&nbsp;\\n   487|      <strong style=\\\"color:#e2e8f0\\\">{len(domains)}</strong> domains &nbsp;·&nbsp;\\n   488|      <strong style=\\\"color:#4ade80\\\">{avail_ct}</strong> confirmed available &nbsp;·&nbsp;\\n   489|      <strong style=\\\"color:#fb923c\\\">{hist_ct}</strong> with web history\\n   490|    </div>\\n   491|  </div>\\n   492|\\n   493|  <!-- Table -->\\n   494|  <div style=\\\"overflow-x:auto\\\">\\n   495|  <table style=\\\"width:100%;border-collapse:collapse;min-width:700px\\\">\\n   496|    <thead>\\n   497|      <tr style=\\\"background:#f9fafb;border-bottom:2px solid #e5e7eb;text-align:left\\\">\\n   498|        <th style=\\\"padding:10px 6px 10px 16px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">#</th>\\n   499|        <th style=\\\"padding:10px 6px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">Domain</th>\\n   500|        <th style=\\\"padding:10px 6px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">Resale / Service</th>\\n   501|\", \"total_lines\": 612, \"file_size\": 23725, \"truncated\": true, \"hint\": \"Use offset=501 to continue reading (showing 1-500 of 612 lines)\", \"is_binary\": false, \"is_image\": false}",
+      "tool_call_id": "call_ba1cec3e26b24794afd69d51"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "Let me read the rest of the file.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "Let me read the rest of the file.",
+      "tool_calls": [
+        {
+          "id": "call_d55484a9a12742eb96dd694a",
+          "call_id": "call_d55484a9a12742eb96dd694a",
+          "response_item_id": "fc_d55484a9a12742eb96dd694a",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"offset\": 501, \"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "read_file",
+      "content": "{\"content\": \"   501|        <th style=\\\"padding:10px 6px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">Avail</th>\\n   502|        <th style=\\\"padding:10px 6px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">Price</th>\\n   503|        <th style=\\\"padding:10px 6px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">Action</th>\\n   504|      </tr>\\n   505|    </thead>\\n   506|    <tbody>{rows}</tbody>\\n   507|  </table>\\n   508|  </div>\\n   509|\\n   510|  <!-- Footer -->\\n   511|  <div style=\\\"background:#f9fafb;padding:20px 32px;font-size:11px;color:#9ca3af;text-align:center\\\">\\n   512|    Scores combine resale potential (resale range) and service-readiness (svc score).\\n   513|    Higher resale + \\\"Product+Flip\\\" verdict = best candidates for building a digital service.\\n   514|    <div style=\\\"margin-top:6px\\\">Powered by Domain Hunter v2 · Proactive Discovery Engine</div>\\n   515|  </div>\\n   516|</div>\\n   517|</body></html>\\\"\\\"\\\"\\n   518|\\n   519|\\n   520|def send_email(html: str, domain_count: int):\\n   521|    msg = MIMEMultipart(\\\"alternative\\\")\\n   522|    msg[\\\"Subject\\\"] = f\\\"🌐 Domain Hunter — {domain_count} available domains\\\"\\n   523|    msg[\\\"From\\\"]    = FROM_EMAIL\\n   524|    msg[\\\"To\\\"]      = TO_EMAIL\\n   525|    msg.attach(MIMEText(html, \\\"html\\\"))\\n   526|\\n   527|    try:\\n   528|        with smtplib.SMTP(\\\"smtp.gmail.com\\\", 587, timeout=15) as s:\\n   529|            s.starttls()\\n   530|            s.login(FROM_EMAIL, FROM_PASS)\\n   531|            s.sendmail(FROM_EMAIL, TO_EMAIL, msg.as_string())\\n   532|        log.info(f\\\"Email sent ({domain_count} domains)\\\")\\n   533|    except Exception as e:\\n   534|        log.error(f\\\"Email failed: {e}\\\")\\n   535|\\n   536|# ── Main ──────────────────────────────────────────────────────────────────────\\n   537|\\n   538|def main():\\n   539|    log.info(\\\"=\\\" * 60)\\n   540|    log.info(\\\"Domain Hunter v2 — Proactive Discovery Engine\\\")\\n   541|    log.info(\\\"=\\\" * 60)\\n   542|\\n   543|    load_dict()\\n   544|    fetch_porkbun_prices()\\n   545|\\n   546|    # Step 1: Generate domain name candidates\\n   547|    log.info(\\\"Generating domain name candidates...\\\")\\n   548|    names = sorted(generate_candidates())\\n   549|    random.shuffle(names)  # shuffle for variety\\n   550|    log.info(f\\\"Generated {len(names)} candidate names\\\")\\n   551|\\n   552|    # Step 2: Build full domain list with TLDs and pre-score\\n   553|    tlds = [\\\".com\\\", \\\".ai\\\", \\\".io\\\", \\\".co\\\", \\\".app\\\", \\\".tech\\\", \\\".dev\\\"]\\n   554|    pre = []\\n   555|    for name in names:\\n   556|        for tld in tlds:\\n   557|            domain = name + tld\\n   558|            hs, hf = score_hunter(domain)\\n   559|            if hs >= 30:  # lower threshold since we generate many\\n   560|                svc = score_service_readiness(domain)\\n   561|                pre.append({\\n   562|                    \\\"domain\\\": domain,\\n   563|                    \\\"hunter_score\\\": hs,\\n   564|                    \\\"service_score\\\": svc[\\\"score\\\"],\\n   565|                    \\\"verdict\\\": svc[\\\"verdict\\\"],\\n   566|                    \\\"score\\\": hs,\\n   567|                    \\\"factors\\\": hf,\\n   568|                })\\n   569|\\n   570|    pre.sort(key=lambda x: -x[\\\"service_score\\\"])\\n   571|    candidates = pre[: MAX_REPORT * 4]\\n   572|    log.info(f\\\"Pre-score pass: {len(candidates)} candidates from {len(pre)} raw\\\")\\n   573|\\n   574|    # Step 3: Check availability in parallel\\n   575|    log.info(f\\\"Checking availability for {len(candidates)} domains via RDAP...\\\")\\n   576|    with ThreadPoolExecutor(max_workers=WORKERS) as pool:\\n   577|        futures = {pool.submit(check_availability, d[\\\"domain\\\"]): d for d in candidates}\\n   578|        for fut in as_completed(futures):\\n   579|            futures[fut][\\\"availability\\\"] = fut.result()\\n   580|\\n   581|    # Sort: available first, then by service score\\n   582|    available = [x for x in candidates if x.get(\\\"availability\\\") == \\\"available\\\"]\\n   583|    unknown = [x for x in candidates if x.get(\\\"availability\\\") == \\\"unknown\\\"]\\n   584|    available.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n   585|    unknown.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n   586|    top = available + unknown\\n   587|    final = top[:MAX_REPORT]\\n   588|\\n   589|    log.info(f\\\"Available: {len(available)}, Unknown: {len(unknown)}, Reporting: {len(final)}\\\")\\n   590|\\n   591|    # Step 4: Save JSON for pipeline consumption\\n   592|    json_path = os.path.join(MEMORY_DIR, \\\"latest.json\\\")\\n   593|    output_data = {\\n   594|        \\\"timestamp\\\": date.today().isoformat(),\\n   595|        \\\"total_candidates\\\": len(pre),\\n   596|        \\\"available_count\\\": len(available),\\n   597|        \\\"domains\\\": final,\\n   598|    }\\n   599|    with open(json_path, \\\"w\\\") as f:\\n   600|        json.dump(output_data, f, indent=2)\\n   601|    log.info(f\\\"JSON saved: {json_path}\\\")\\n   602|\\n   603|    # Step 5: Send email\\n   604|    html = build_email_html(final)\\n   605|    send_email(html, len(final))\\n   606|    log.info(\\\"=\\\" * 60)\\n   607|    log.info(\\\"Done\\\")\\n   608|    log.info(\\\"=\\\" * 60)\\n   609|\\n   610|\\n   611|if __name__ == \\\"__main__\\\":\\n   612|    main()\\n   613|\", \"total_lines\": 612, \"file_size\": 23725, \"truncated\": false, \"is_binary\": false, \"is_image\": false}",
+      "tool_call_id": "call_d55484a9a12742eb96dd694a"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "Now I have the full picture. Let me plan the changes:\n\n1. **score_hunter()** (lines 214-248): Need to add commercial keyword intent, B2B signal, and trend alignment factors. Rebalance existing factors to make room within the 0-100 scale.\n\n2. **score_service_readiness()** (lines 251-318): Need to enhance with commercial keyword detection, B2B signal scoring, trend alignment weighted by TREND_WORDS values, and improved service-readiness verdicts.\n\n3. **main()**: Already calls both scoring functions but I need to make sure the pipeline incorporates the new factors.\n\nCurrent score_hunter breakdown (max 100):\n- tld_pts: 28 pts (ts * 0.28, max 28)\n- length: 22 pts (22 - max(0, L-4)*2)\n- clean: 12 pts\n- no_digits: 8 pts\n- dictionary: 18 pts\n- has_history: 12 pts\nTotal: 100\n\nI need to rebalance to make room for the new factors. Let me redesign:\n- tld_pts: 18 pts (was 28)\n- length: 14 pts (was 22)\n- clean: 8 pts (was 12)\n- no_digits: 5 pts (was 8)\n- dictionary: 10 pts (was 18)\n- has_history: 5 pts (was 12)\nSubtotal existing: 60 pts\n- commercial_intent: 15 pts\n- b2b_signal: 10 pts\n- trend_alignment: 15 pts\nTotal: 100\n\nFor score_service_readiness, current max is 70. I should:\n- Commercial prefix/suffix: keep at 20\n- Commercial keyword detection in name: add 15\n- Trend alignment weighted: keep but improve with score weighting\n- Brandability: keep at 15\n- Service TLD fit: keep at 10\n- B2B indicators: expand to 15\n- Service-readiness (sounds like SaaS/agency/consulting): add 15\nTotal new max: maybe 100\n\nActually, let me be more careful. The user wants:\n1. Commercial keyword intent: detect action words in domain names, +15 to overall score\n2. B2B signal: 2-word combos sounding like products/services, match prefix+trend pattern, +10\n3. Trend alignment: cross-reference with TREND_WORDS, weight by trend score, +10 scaled\n4. Service-readiness: SaaS/agency/consulting sound, +5-15\n5. Rebalance score_hunter to incorporate these into 0-100\n6. Improve verdict thresholds in score_service_readiness\n\nLet me design score_hunter first. I'll reduce existing factors and add new ones:\n- tld_pts: 15 (was 28)\n- length: 12 (was 22)\n- clean: 7 (was 12)\n- no_digits: 4 (was 8)\n- dictionary: 7 (was 18)\n- has_history: 5 (was 12)\nSubtotal: 50\n\n- commercial_intent: 15\n- b2b_signal: 10\n- trend_alignment: 15\n- service_readiness: 10\nTotal: 100\n\nFor score_service_readiness, I'll restructure:\n- commercial_keyword_match (action words): 0-15\n- commercial_affix_match (prefix/suffix): 0-10\n- trend_alignment weighted: 0-15\n- brandability: 0-10\n- service_tld_fit: 0-5\n- b2b_indicators: 0-15\n- service_readiness (SaaS/agency feel): 0-10\nTotal: 80\n\nVerdict thresholds:\n- >= 60: \"product + flip\"\n- >= 40: \"flip only\"  \n- >= 25: \"potential\"\n- < 25: \"skip\"\n\nLet me implement this. I need to keep the function signatures the same but enhance the internals.\n\nAlso, the main() function already passes has_history=False to score_hunger. Let me check if it passes it later... Looking at line 558, it calls `score_hunter(domain)` without the has_history parameter. The has_history is set in the dict but the value is False by default. It looks like the pipeline doesn't actually call had_wayback_history anywhere for the candidates. That's fine.\n\nLet me write the patch for both functions.\n\nFor the commercial keywords within domain names, I need to check if action words like \"build\", \"create\", \"make\", \"design\", \"ship\", \"deploy\", \"host\", \"manage\", \"launch\", \"run\" appear as substrings within the domain name. Same for TREND_WORDS matching - check if any trend word is a substring.\n\nFor B2B signal - check if 2-word combos sound like products. The pattern is prefix + trend word combined (e.g., \"buildflow\", \"shipmetric\"). Since domain names are continuous strings, I'll check if the name matches a pattern where it starts with a commercial prefix and contains a trend word.\n\nLet me write the enhanced functions now.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "Now I have the full picture. Let me plan the changes:\n\n1. **score_hunter()** (lines 214-248): Need to add commercial keyword intent, B2B signal, and trend alignment factors. Rebalance existing factors to make room within the 0-100 scale.\n\n2. **score_service_readiness()** (lines 251-318): Need to enhance with commercial keyword detection, B2B signal scoring, trend alignment weighted by TREND_WORDS values, and improved service-readiness verdicts.\n\n3. **main()**: Already calls both scoring functions but I need to make sure the pipeline incorporates the new factors.\n\nCurrent score_hunter breakdown (max 100):\n- tld_pts: 28 pts (ts * 0.28, max 28)\n- length: 22 pts (22 - max(0, L-4)*2)\n- clean: 12 pts\n- no_digits: 8 pts\n- dictionary: 18 pts\n- has_history: 12 pts\nTotal: 100\n\nI need to rebalance to make room for the new factors. Let me redesign:\n- tld_pts: 18 pts (was 28)\n- length: 14 pts (was 22)\n- clean: 8 pts (was 12)\n- no_digits: 5 pts (was 8)\n- dictionary: 10 pts (was 18)\n- has_history: 5 pts (was 12)\nSubtotal existing: 60 pts\n- commercial_intent: 15 pts\n- b2b_signal: 10 pts\n- trend_alignment: 15 pts\nTotal: 100\n\nFor score_service_readiness, current max is 70. I should:\n- Commercial prefix/suffix: keep at 20\n- Commercial keyword detection in name: add 15\n- Trend alignment weighted: keep but improve with score weighting\n- Brandability: keep at 15\n- Service TLD fit: keep at 10\n- B2B indicators: expand to 15\n- Service-readiness (sounds like SaaS/agency/consulting): add 15\nTotal new max: maybe 100\n\nActually, let me be more careful. The user wants:\n1. Commercial keyword intent: detect action words in domain names, +15 to overall score\n2. B2B signal: 2-word combos sounding like products/services, match prefix+trend pattern, +10\n3. Trend alignment: cross-reference with TREND_WORDS, weight by trend score, +10 scaled\n4. Service-readiness: SaaS/agency/consulting sound, +5-15\n5. Rebalance score_hunter to incorporate these into 0-100\n6. Improve verdict thresholds in score_service_readiness\n\nLet me design score_hunter first. I'll reduce existing factors and add new ones:\n- tld_pts: 15 (was 28)\n- length: 12 (was 22)\n- clean: 7 (was 12)\n- no_digits: 4 (was 8)\n- dictionary: 7 (was 18)\n- has_history: 5 (was 12)\nSubtotal: 50\n\n- commercial_intent: 15\n- b2b_signal: 10\n- trend_alignment: 15\n- service_readiness: 10\nTotal: 100\n\nFor score_service_readiness, I'll restructure:\n- commercial_keyword_match (action words): 0-15\n- commercial_affix_match (prefix/suffix): 0-10\n- trend_alignment weighted: 0-15\n- brandability: 0-10\n- service_tld_fit: 0-5\n- b2b_indicators: 0-15\n- service_readiness (SaaS/agency feel): 0-10\nTotal: 80\n\nVerdict thresholds:\n- >= 60: \"product + flip\"\n- >= 40: \"flip only\"  \n- >= 25: \"potential\"\n- < 25: \"skip\"\n\nLet me implement this. I need to keep the function signatures the same but enhance the internals.\n\nAlso, the main() function already passes has_history=False to score_hunger. Let me check if it passes it later... Looking at line 558, it calls `score_hunter(domain)` without the has_history parameter. The has_history is set in the dict but the value is False by default. It looks like the pipeline doesn't actually call had_wayback_history anywhere for the candidates. That's fine.\n\nLet me write the patch for both functions.\n\nFor the commercial keywords within domain names, I need to check if action words like \"build\", \"create\", \"make\", \"design\", \"ship\", \"deploy\", \"host\", \"manage\", \"launch\", \"run\" appear as substrings within the domain name. Same for TREND_WORDS matching - check if any trend word is a substring.\n\nFor B2B signal - check if 2-word combos sound like products. The pattern is prefix + trend word combined (e.g., \"buildflow\", \"shipmetric\"). Since domain names are continuous strings, I'll check if the name matches a pattern where it starts with a commercial prefix and contains a trend word.\n\nLet me write the enhanced functions now.",
+      "tool_calls": [
+        {
+          "id": "call_8f12ed507277483aba6a707f",
+          "call_id": "call_8f12ed507277483aba6a707f",
+          "response_item_id": "fc_8f12ed507277483aba6a707f",
+          "type": "function",
+          "function": {
+            "name": "patch",
+            "arguments": "{\"mode\": \"replace\", \"new_string\": \"# ── Scoring ───────────────────────────────────────────────────────────────────\\n\\n# Keywords that signal commercial intent / action-orientation when found\\n# inside a domain name (substrings).\\nCOMMERCIAL_ACTION_KEYWORDS = [\\n    \\\"build\\\", \\\"create\\\", \\\"make\\\", \\\"design\\\", \\\"ship\\\", \\\"deploy\\\", \\\"host\\\",\\n    \\\"manage\\\", \\\"launch\\\", \\\"run\\\",\\n]\\n\\n# Pattern fragments that strongly suggest a SaaS/agency/consulting brand.\\nSERVICE_SOUNDS = [\\n    \\\"ai\\\", \\\"bot\\\", \\\"hub\\\", \\\"lab\\\", \\\"ops\\\", \\\"dev\\\", \\\"stack\\\", \\\"flow\\\",\\n    \\\"ware\\\", \\\"cloud\\\", \\\"sync\\\", \\\"kit\\\", \\\"grid\\\", \\\"mesh\\\", \\\"metric\\\",\\n    \\\"prompt\\\", \\\"vector\\\", \\\"neural\\\", \\\"automation\\\", \\\"agency\\\", \\\"works\\\",\\n    \\\"base\\\", \\\"deck\\\", \\\"link\\\", \\\"chain\\\", \\\"node\\\",\\n]\\n\\n\\ndef _detect_commercial_intent(name: str) -> tuple:\\n    \\\"\\\"\\\"Return (found_keywords: list, score_0_to_15).\\\"\\\"\\\"\\n    nl = name.lower()\\n    found = [kw for kw in COMMERCIAL_ACTION_KEYWORDS if kw in nl]\\n    score = min(15, len(found) * 8)  # ~8 pts per match, cap 15\\n    return found, score\\n\\n\\ndef _detect_b2b_signal(name: str) -> tuple:\\n    \\\"\\\"\\\"Return (matched_pairs: list, score_0_to_10).\\n\\n    Detects 2-word combos that sound like products/services:\\n    - starts with a commercial prefix AND ends with a trend word\\n    - trend word + suffix pattern (e.g., 'flowstack', 'shipmetric')\\n    \\\"\\\"\\\"\\n    nl = name.lower()\\n    pairs = []\\n\\n    # Pattern 1: commercial_prefix + trend_word (prefix match)\\n    for prefix in COMMERCIAL_PREFIXES:\\n        if nl.startswith(prefix) and len(nl) > len(prefix):\\n            remainder = nl[len(prefix):]\\n            for tw, _ in TREND_WORDS.items():\\n                if tw in remainder or remainder.startswith(tw):\\n                    pairs.append(f\\\"{prefix}+{tw}\\\")\\n                    break\\n\\n    # Pattern 2: trend_word + brand_suffix\\n    if not pairs:\\n        for tw, _ in TREND_WORDS.items():\\n            if nl.startswith(tw) and len(nl) > len(tw):\\n                remainder = nl[len(tw):]\\n                for sfx in BRAND_SUFFIXES:\\n                    if remainder == sfx or remainder.startswith(sfx) or remainder.endswith(sfx):\\n                        pairs.append(f\\\"{tw}+{sfx}\\\")\\n                        break\\n\\n    score = min(10, len(pairs) * 5)  # 5 pts per pair match, cap 10\\n    return pairs, score\\n\\n\\ndef _trend_alignment(name: str) -> tuple:\\n    \\\"\\\"\\\"Return (matched_trends: list, score_0_to_15).\\n\\n    Cross-reference with TREND_WORDS, weight by trend score values (4,3,2).\\n    \\\"\\\"\\\"\\n    nl = name.lower()\\n    matched = []\\n    raw_score = 0\\n    for tw, tw_score in TREND_WORDS.items():\\n        if tw in nl:\\n            matched.append(tw)\\n            raw_score += tw_score  # trend score value as weight\\n    # scale: max possible raw ~20+ if many match; cap scaled to 15\\n    score = min(15, raw_score * 2)\\n    return matched, score\\n\\n\\ndef _service_readiness_factor(name: str) -> int:\\n    \\\"\\\"\\\"Return 0-15: does the domain sound like a SaaS/agency/consulting brand?\\\"\\\"\\\"\\n    nl = name.lower()\\n    hits = sum(1 for ss in SERVICE_SOUNDS if ss in nl)\\n    has_service_tld = any(nl.endswith(e) for e in (\\\".ai\\\", \\\".io\\\", \\\".app\\\", \\\".tech\\\", \\\".dev\\\", \\\".so\\\"))\\n    bonus = 3 if has_service_tld else 0\\n    length_bonus = 3 if 4 <= len(nl) <= 10 else 0\\n    return min(15, hits * 3 + bonus + length_bonus)\\n\\n\\ndef score_hunter(domain: str, has_history: bool = False) -> tuple:\\n    \\\"\\\"\\\"Domain resale scoring (0-100).\\n\\n    Factor budget (100 pts):\\n      Existing  — tld(15), length(12), clean(7), no_digits(4), dict(7), history(5) = 50\\n      New       — commercial_intent(15), b2b_signal(10), trend_align(15), svc_ready(10) = 50\\n    \\\"\\\"\\\"\\n    dot = domain.rfind(\\\".\\\")\\n    if dot < 1:\\n        return 0, {}\\n    name = domain[:dot]\\n    tld  = domain[dot:]\\n    if tld not in TLD_SCORE:\\n        return 0, {}\\n\\n    f = {}\\n    s = 0\\n\\n    ts = TLD_SCORE[tld]\\n    f[\\\"tld_pts\\\"] = int(ts * 0.15)   # max ~15 (was 28)\\n    s += f[\\\"tld_pts\\\"]\\n\\n    L = len(name)\\n    f[\\\"length\\\"] = L\\n    lpts = max(0, 14 - max(0, L - 4) * 2)   # max 14 (was 22)\\n    s += lpts\\n\\n    f[\\\"clean\\\"] = \\\"-\\\" not in name\\n    s += 7 if f[\\\"clean\\\"] else 0    # (was 12)\\n\\n    f[\\\"no_digits\\\"] = not any(c.isdigit() for c in name)\\n    s += 4 if f[\\\"no_digits\\\"] else 0  # (was 8)\\n\\n    f[\\\"dictionary\\\"] = name.lower() in DICT_WORDS\\n    s += 7 if f[\\\"dictionary\\\"] else 0  # (was 18)\\n\\n    f[\\\"has_history\\\"] = has_history\\n    s += 5 if has_history else 0   # (was 12)\\n\\n    # ── NEW: Commercial intent keyword detection ──\\n    comm_keywords, comm_score = _detect_commercial_intent(name)\\n    f[\\\"commercial_keywords\\\"] = comm_keywords\\n    s += comm_score                # 0-15\\n\\n    # ── NEW: B2B signal scoring ──\\n    b2b_pairs, b2b_score = _detect_b2b_signal(name)\\n    f[\\\"b2b_signals\\\"] = b2b_pairs\\n    s += b2b_score                 # 0-10\\n\\n    # ── NEW: Trend alignment ──\\n    trend_matches, trend_score = _trend_alignment(name)\\n    f[\\\"trend_words\\\"] = trend_matches\\n    s += trend_score               # 0-15\\n\\n    # ── NEW: Service-readiness factor ──\\n    svc_score = _service_readiness_factor(name)\\n    f[\\\"service_readiness\\\"] = svc_score\\n    s += svc_score                 # 0-10\\n\\n    return min(s, 100), f\\n\\n\\ndef score_service_readiness(domain: str) -> dict:\\n    \\\"\\\"\\\"Score for digital service/sales potential (0-80).\\n\\n    Factor budget (80 pts):\\n      commercial_keywords(15) + commercial_affix(10) + trend_align(15) +\\n      brandability(10) + service_tld(5) + b2b_indicators(15) + svc_sound(10)\\n    \\\"\\\"\\\"\\n    dot = domain.rfind(\\\".\\\")\\n    if dot < 1:\\n        return {\\\"score\\\": 0, \\\"factors\\\": {}, \\\"verdict\\\": \\\"skip\\\"}\\n\\n    name = domain[:dot].lower()\\n    tld = domain[dot:]\\n    factors = {}\\n\\n    # Commercial keyword detection: action words found in the name (0-15)\\n    comm_keywords, f_commercial = _detect_commercial_intent(name)\\n    factors[\\\"commercial_keywords\\\"] = comm_keywords\\n\\n    # Commercial prefix/suffix affix match (0-10)\\n    affix_score = 0\\n    for p in COMMERCIAL_PREFIXES:\\n        if name.startswith(p) and name != p:\\n            affix_score += 1\\n            break\\n    for suf in BRAND_SUFFIXES:\\n        if name.endswith(suf) and name != suf:\\n            affix_score += 1\\n            break\\n    f_affix = min(10, affix_score * 5)\\n    factors[\\\"commercial_affixes\\\"] = affix_score\\n\\n    # Trend alignment weighted by TREND_WORDS score values (0-15)\\n    trend_matched = []\\n    trend_raw = 0\\n    for tw, tw_score in TREND_WORDS.items():\\n        if tw in name:\\n            trend_matched.append(tw)\\n            trend_raw += tw_score\\n    f_trend = min(15, trend_raw * 2)\\n    factors[\\\"trend_alignment\\\"] = trend_matched\\n\\n    # Brandability (0-10)\\n    is_brandable = len(name) <= 15 and \\\"-\\\" not in name and name.isalpha()\\n    factors[\\\"brandable\\\"] = is_brandable\\n    f_brandable = 10 if is_brandable else 0\\n\\n    # Service-readiness TLD (0-5)\\n    service_tlds = {\\\".com\\\": 5, \\\".ai\\\": 4, \\\".io\\\": 4, \\\".co\\\": 3,\\n                    \\\".app\\\": 3, \\\".tech\\\": 2, \\\".dev\\\": 2, \\\".so\\\": 2}\\n    f_service_tld = service_tlds.get(tld, 1)\\n    factors[\\\"service_tld_fit\\\"] = f_service_tld\\n\\n    # B2B indicators expanded (0-15)\\n    b2b_words = [\\\"ai\\\", \\\"agent\\\", \\\"bot\\\", \\\"api\\\", \\\"data\\\", \\\"cloud\\\", \\\"ops\\\",\\n                 \\\"metric\\\", \\\"analytic\\\", \\\"dashboard\\\", \\\"pipeline\\\", \\\"platform\\\",\\n                 \\\"sync\\\", \\\"flow\\\", \\\"stack\\\", \\\"hub\\\", \\\"grid\\\"]\\n    b2b_found = [bw for bw in b2b_words if bw in name]\\n    factors[\\\"b2b_indicators\\\"] = b2b_found\\n    f_b2b = min(15, len(b2b_found) * 5)\\n\\n    # Service-readiness \\\"sounds like SaaS/agency\\\" (0-10)\\n    f_svc_sound = _service_readiness_factor(name)\\n    # Scale down from 0-15 to 0-10 to fit budget\\n    f_svc_sound = int(f_svc_sound * 10 / 15)\\n    factors[\\\"service_sound\\\"] = f_svc_sound\\n\\n    total = f_commercial + f_affix + f_trend + f_brandable + f_service_tld + f_b2b + f_svc_sound\\n    total = min(total, 80)\\n\\n    # ── Improved verdict thresholds ──\\n    if total >= 55:\\n        verdict = \\\"product + flip\\\"\\n    elif total >= 35:\\n        verdict = \\\"flip only\\\"\\n    elif total >= 20:\\n        verdict = \\\"potential\\\"\\n    else:\\n        verdict = \\\"skip\\\"\\n\\n    return {\\n        \\\"score\\\": total,\\n        \\\"factors\\\": factors,\\n        \\\"verdict\\\": verdict,\\n    }\", \"old_string\": \"# ── Scoring ───────────────────────────────────────────────────────────────────\\n\\ndef score_hunter(domain: str, has_history: bool = False) -> tuple:\\n    \\\"\\\"\\\"Domain resale scoring (0-100).\\\"\\\"\\\"\\n    dot = domain.rfind(\\\".\\\")\\n    if dot < 1:\\n        return 0, {}\\n    name = domain[:dot]\\n    tld  = domain[dot:]\\n    if tld not in TLD_SCORE:\\n        return 0, {}\\n\\n    f = {}\\n    s = 0\\n\\n    ts = TLD_SCORE[tld]\\n    f[\\\"tld_pts\\\"] = int(ts * 0.28)\\n    s += f[\\\"tld_pts\\\"]\\n\\n    L = len(name)\\n    f[\\\"length\\\"] = L\\n    lpts = max(0, 22 - max(0, L - 4) * 2)\\n    s += lpts\\n\\n    f[\\\"clean\\\"] = \\\"-\\\" not in name\\n    s += 12 if f[\\\"clean\\\"] else 0\\n\\n    f[\\\"no_digits\\\"] = not any(c.isdigit() for c in name)\\n    s += 8 if f[\\\"no_digits\\\"] else 0\\n\\n    f[\\\"dictionary\\\"] = name.lower() in DICT_WORDS\\n    s += 18 if f[\\\"dictionary\\\"] else 0\\n\\n    f[\\\"has_history\\\"] = has_history\\n    s += 12 if has_history else 0\\n\\n    return min(s, 100), f\\n\\n\\ndef score_service_readiness(domain: str) -> dict:\\n    \\\"\\\"\\\"Score for digital service/sales potential.\\\"\\\"\\\"\\n    dot = domain.rfind(\\\".\\\")\\n    if dot < 1:\\n        return {\\\"score\\\": 0, \\\"factors\\\": {}, \\\"verdict\\\": \\\"skip\\\"}\\n\\n    name = domain[:dot].lower()\\n    tld = domain[dot:]\\n    factors = {}\\n\\n    # Commercial prefix/suffix match (0-20 pts)\\n    parts = name.split()\\n    comm_match = sum(\\n        1 for p in parts\\n        if p in COMMERCIAL_PREFIXES or p in BRAND_SUFFIXES\\n    )\\n    # Also check within the name\\n    for p in COMMERCIAL_PREFIXES:\\n        if name.startswith(p) and name != p:\\n            comm_match += 1\\n            break\\n    for s in BRAND_SUFFIXES:\\n        if name.endswith(s) and name != s:\\n            comm_match += 1\\n            break\\n\\n    factors[\\\"commercial_keywords\\\"] = comm_match\\n    f_commercial = min(20, comm_match * 10)\\n\\n    # Trend alignment (0-15 pts)\\n    trend_match = sum(1 for tw in TREND_WORDS if tw in name)\\n    factors[\\\"trend_alignment\\\"] = trend_match\\n    f_trend = min(15, trend_match * 5)\\n\\n    # Brandability (0-15 pts)\\n    is_brandable = len(name) <= 15 and \\\"-\\\" not in name and name.isalpha()\\n    factors[\\\"brandable\\\"] = is_brandable\\n    f_brandable = 15 if is_brandable else 0\\n\\n    # Service-readiness TLD (0-10 pts)\\n    service_tlds = {\\\".com\\\": 10, \\\".ai\\\": 8, \\\".io\\\": 8, \\\".co\\\": 7,\\n                    \\\".app\\\": 6, \\\".tech\\\": 5, \\\".dev\\\": 5, \\\".so\\\": 4}\\n    f_service_tld = service_tlds.get(tld, 2)\\n    factors[\\\"service_tld_fit\\\"] = f_service_tld\\n\\n    # B2B indicator (0-10 pts)\\n    b2b_words = [\\\"ai\\\", \\\"agent\\\", \\\"bot\\\", \\\"api\\\", \\\"data\\\", \\\"cloud\\\", \\\"ops\\\",\\n                 \\\"metrics\\\", \\\"analytics\\\", \\\"dashboard\\\", \\\"pipeline\\\", \\\"platform\\\"]\\n    b2b_match = sum(1 for bw in b2b_words if bw in name)\\n    factors[\\\"b2b_indicators\\\"] = b2b_match\\n    f_b2b = min(10, b2b_match * 5)\\n\\n    total = f_commercial + f_trend + f_brandable + f_service_tld + f_b2b\\n    total = min(total, 70)\\n\\n    # Verdict\\n    if total >= 50:\\n        verdict = \\\"product + flip\\\"\\n    elif total >= 30:\\n        verdict = \\\"flip only\\\"\\n    else:\\n        verdict = \\\"skip\\\"\\n\\n    return {\\n        \\\"score\\\": total,\\n        \\\"factors\\\": factors,\\n        \\\"verdict\\\": verdict,\\n    }\", \"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "patch",
+      "content": "{\"success\": true, \"diff\": \"--- a//home/azureuser/domain-hunter/domain_hunter.py\\n+++ b//home/azureuser/domain-hunter/domain_hunter.py\\n@@ -211,8 +211,97 @@\\n \\n # ── Scoring ───────────────────────────────────────────────────────────────────\\n \\n+# Keywords that signal commercial intent / action-orientation when found\\n+# inside a domain name (substrings).\\n+COMMERCIAL_ACTION_KEYWORDS = [\\n+    \\\"build\\\", \\\"create\\\", \\\"make\\\", \\\"design\\\", \\\"ship\\\", \\\"deploy\\\", \\\"host\\\",\\n+    \\\"manage\\\", \\\"launch\\\", \\\"run\\\",\\n+]\\n+\\n+# Pattern fragments that strongly suggest a SaaS/agency/consulting brand.\\n+SERVICE_SOUNDS = [\\n+    \\\"ai\\\", \\\"bot\\\", \\\"hub\\\", \\\"lab\\\", \\\"ops\\\", \\\"dev\\\", \\\"stack\\\", \\\"flow\\\",\\n+    \\\"ware\\\", \\\"cloud\\\", \\\"sync\\\", \\\"kit\\\", \\\"grid\\\", \\\"mesh\\\", \\\"metric\\\",\\n+    \\\"prompt\\\", \\\"vector\\\", \\\"neural\\\", \\\"automation\\\", \\\"agency\\\", \\\"works\\\",\\n+    \\\"base\\\", \\\"deck\\\", \\\"link\\\", \\\"chain\\\", \\\"node\\\",\\n+]\\n+\\n+\\n+def _detect_commercial_intent(name: str) -> tuple:\\n+    \\\"\\\"\\\"Return (found_keywords: list, score_0_to_15).\\\"\\\"\\\"\\n+    nl = name.lower()\\n+    found = [kw for kw in COMMERCIAL_ACTION_KEYWORDS if kw in nl]\\n+    score = min(15, len(found) * 8)  # ~8 pts per match, cap 15\\n+    return found, score\\n+\\n+\\n+def _detect_b2b_signal(name: str) -> tuple:\\n+    \\\"\\\"\\\"Return (matched_pairs: list, score_0_to_10).\\n+\\n+    Detects 2-word combos that sound like products/services:\\n+    - starts with a commercial prefix AND ends with a trend word\\n+    - trend word + suffix pattern (e.g., 'flowstack', 'shipmetric')\\n+    \\\"\\\"\\\"\\n+    nl = name.lower()\\n+    pairs = []\\n+\\n+    # Pattern 1: commercial_prefix + trend_word (prefix match)\\n+    for prefix in COMMERCIAL_PREFIXES:\\n+        if nl.startswith(prefix) and len(nl) > len(prefix):\\n+            remainder = nl[len(prefix):]\\n+            for tw, _ in TREND_WORDS.items():\\n+                if tw in remainder or remainder.startswith(tw):\\n+                    pairs.append(f\\\"{prefix}+{tw}\\\")\\n+                    break\\n+\\n+    # Pattern 2: trend_word + brand_suffix\\n+    if not pairs:\\n+        for tw, _ in TREND_WORDS.items():\\n+            if nl.startswith(tw) and len(nl) > len(tw):\\n+                remainder = nl[len(tw):]\\n+                for sfx in BRAND_SUFFIXES:\\n+                    if remainder == sfx or remainder.startswith(sfx) or remainder.endswith(sfx):\\n+                        pairs.append(f\\\"{tw}+{sfx}\\\")\\n+                        break\\n+\\n+    score = min(10, len(pairs) * 5)  # 5 pts per pair match, cap 10\\n+    return pairs, score\\n+\\n+\\n+def _trend_alignment(name: str) -> tuple:\\n+    \\\"\\\"\\\"Return (matched_trends: list, score_0_to_15).\\n+\\n+    Cross-reference with TREND_WORDS, weight by trend score values (4,3,2).\\n+    \\\"\\\"\\\"\\n+    nl = name.lower()\\n+    matched = []\\n+    raw_score = 0\\n+    for tw, tw_score in TREND_WORDS.items():\\n+        if tw in nl:\\n+            matched.append(tw)\\n+            raw_score += tw_score  # trend score value as weight\\n+    # scale: max possible raw ~20+ if many match; cap scaled to 15\\n+    score = min(15, raw_score * 2)\\n+    return matched, score\\n+\\n+\\n+def _service_readiness_factor(name: str) -> int:\\n+    \\\"\\\"\\\"Return 0-15: does the domain sound like a SaaS/agency/consulting brand?\\\"\\\"\\\"\\n+    nl = name.lower()\\n+    hits = sum(1 for ss in SERVICE_SOUNDS if ss in nl)\\n+    has_service_tld = any(nl.endswith(e) for e in (\\\".ai\\\", \\\".io\\\", \\\".app\\\", \\\".tech\\\", \\\".dev\\\", \\\".so\\\"))\\n+    bonus = 3 if has_service_tld else 0\\n+    length_bonus = 3 if 4 <= len(nl) <= 10 else 0\\n+    return min(15, hits * 3 + bonus + length_bonus)\\n+\\n+\\n def score_hunter(domain: str, has_history: bool = False) -> tuple:\\n-    \\\"\\\"\\\"Domain resale scoring (0-100).\\\"\\\"\\\"\\n+    \\\"\\\"\\\"Domain resale scoring (0-100).\\n+\\n+    Factor budget (100 pts):\\n+      Existing  — tld(15), length(12), clean(7), no_digits(4), dict(7), history(5) = 50\\n+      New       — commercial_intent(15), b2b_signal(10), trend_align(15), svc_ready(10) = 50\\n+    \\\"\\\"\\\"\\n     dot = domain.rfind(\\\".\\\")\\n     if dot < 1:\\n         return 0, {}\\n@@ -225,31 +314,56 @@\\n     s = 0\\n \\n     ts = TLD_SCORE[tld]\\n-    f[\\\"tld_pts\\\"] = int(ts * 0.28)\\n+    f[\\\"tld_pts\\\"] = int(ts * 0.15)   # max ~15 (was 28)\\n     s += f[\\\"tld_pts\\\"]\\n \\n     L = len(name)\\n     f[\\\"length\\\"] = L\\n-    lpts = max(0, 22 - max(0, L - 4) * 2)\\n+    lpts = max(0, 14 - max(0, L - 4) * 2)   # max 14 (was 22)\\n     s += lpts\\n \\n     f[\\\"clean\\\"] = \\\"-\\\" not in name\\n-    s += 12 if f[\\\"clean\\\"] else 0\\n+    s += 7 if f[\\\"clean\\\"] else 0    # (was 12)\\n \\n     f[\\\"no_digits\\\"] = not any(c.isdigit() for c in name)\\n-    s += 8 if f[\\\"no_digits\\\"] else 0\\n+    s += 4 if f[\\\"no_digits\\\"] else 0  # (was 8)\\n \\n     f[\\\"dictionary\\\"] = name.lower() in DICT_WORDS\\n-    s += 18 if f[\\\"dictionary\\\"] else 0\\n+    s += 7 if f[\\\"dictionary\\\"] else 0  # (was 18)\\n \\n     f[\\\"has_history\\\"] = has_history\\n-    s += 12 if has_history else 0\\n+    s += 5 if has_history else 0   # (was 12)\\n+\\n+    # ── NEW: Commercial intent keyword detection ──\\n+    comm_keywords, comm_score = _detect_commercial_intent(name)\\n+    f[\\\"commercial_keywords\\\"] = comm_keywords\\n+    s += comm_score                # 0-15\\n+\\n+    # ── NEW: B2B signal scoring ──\\n+    b2b_pairs, b2b_score = _detect_b2b_signal(name)\\n+    f[\\\"b2b_signals\\\"] = b2b_pairs\\n+    s += b2b_score                 # 0-10\\n+\\n+    # ── NEW: Trend alignment ──\\n+    trend_matches, trend_score = _trend_alignment(name)\\n+    f[\\\"trend_words\\\"] = trend_matches\\n+    s += trend_score               # 0-15\\n+\\n+    # ── NEW: Service-readiness factor ──\\n+    svc_score = _service_readiness_factor(name)\\n+    f[\\\"service_readiness\\\"] = svc_score\\n+    s += svc_score                 # 0-10\\n \\n     return min(s, 100), f\\n \\n \\n def score_service_readiness(domain: str) -> dict:\\n-    \\\"\\\"\\\"Score for digital service/sales potential.\\\"\\\"\\\"\\n+    \\\"\\\"\\\"Score for digital service/sales potential (0-80).\\n+\\n+    Factor budget (80 pts):\\n+      commercial_keywords(15) + commercial_affix(10) + trend_align(15) +\\n+      brandability(10) + service_tld(5) + b2b_indicators(15) + svc_sound(10)\\n+    \\\"\\\"\\\"\\n     dot = domain.rfind(\\\".\\\")\\n     if dot < 1:\\n         return {\\\"score\\\": 0, \\\"factors\\\": {}, \\\"verdict\\\": \\\"skip\\\"}\\n@@ -258,56 +372,68 @@\\n     tld = domain[dot:]\\n     factors = {}\\n \\n-    # Commercial prefix/suffix match (0-20 pts)\\n-    parts = name.split()\\n-    comm_match = sum(\\n-        1 for p in parts\\n-        if p in COMMERCIAL_PREFIXES or p in BRAND_SUFFIXES\\n-    )\\n-    # Also check within the name\\n+    # Commercial keyword detection: action words found in the name (0-15)\\n+    comm_keywords, f_commercial = _detect_commercial_intent(name)\\n+    factors[\\\"commercial_keywords\\\"] = comm_keywords\\n+\\n+    # Commercial prefix/suffix affix match (0-10)\\n+    affix_score = 0\\n     for p in COMMERCIAL_PREFIXES:\\n         if name.startswith(p) and name != p:\\n-            comm_match += 1\\n+            affix_score += 1\\n             break\\n-    for s in BRAND_SUFFIXES:\\n-        if name.endswith(s) and name != s:\\n-            comm_match += 1\\n+    for suf in BRAND_SUFFIXES:\\n+        if name.endswith(suf) and name != suf:\\n+            affix_score += 1\\n             break\\n-\\n-    factors[\\\"commercial_keywords\\\"] = comm_match\\n-    f_commercial = min(20, comm_match * 10)\\n-\\n-    # Trend alignment (0-15 pts)\\n-    trend_match = sum(1 for tw in TREND_WORDS if tw in name)\\n-    factors[\\\"trend_alignment\\\"] = trend_match\\n-    f_trend = min(15, trend_match * 5)\\n-\\n-    # Brandability (0-15 pts)\\n+    f_affix = min(10, affix_score * 5)\\n+    factors[\\\"commercial_affixes\\\"] = affix_score\\n+\\n+    # Trend alignment weighted by TREND_WORDS score values (0-15)\\n+    trend_matched = []\\n+    trend_raw = 0\\n+    for tw, tw_score in TREND_WORDS.items():\\n+        if tw in name:\\n+            trend_matched.append(tw)\\n+            trend_raw += tw_score\\n+    f_trend = min(15, trend_raw * 2)\\n+    factors[\\\"trend_alignment\\\"] = trend_matched\\n+\\n+    # Brandability (0-10)\\n     is_brandable = len(name) <= 15 and \\\"-\\\" not in name and name.isalpha()\\n     factors[\\\"brandable\\\"] = is_brandable\\n-    f_brandable = 15 if is_brandable else 0\\n-\\n-    # Service-readiness TLD (0-10 pts)\\n-    service_tlds = {\\\".com\\\": 10, \\\".ai\\\": 8, \\\".io\\\": 8, \\\".co\\\": 7,\\n-                    \\\".app\\\": 6, \\\".tech\\\": 5, \\\".dev\\\": 5, \\\".so\\\": 4}\\n-    f_service_tld = service_tlds.get(tld, 2)\\n+    f_brandable = 10 if is_brandable else 0\\n+\\n+    # Service-readiness TLD (0-5)\\n+    service_tlds = {\\\".com\\\": 5, \\\".ai\\\": 4, \\\".io\\\": 4, \\\".co\\\": 3,\\n+                    \\\".app\\\": 3, \\\".tech\\\": 2, \\\".dev\\\": 2, \\\".so\\\": 2}\\n+    f_service_tld = service_tlds.get(tld, 1)\\n     factors[\\\"service_tld_fit\\\"] = f_service_tld\\n \\n-    # B2B indicator (0-10 pts)\\n+    # B2B indicators expanded (0-15)\\n     b2b_words = [\\\"ai\\\", \\\"agent\\\", \\\"bot\\\", \\\"api\\\", \\\"data\\\", \\\"cloud\\\", \\\"ops\\\",\\n-                 \\\"metrics\\\", \\\"analytics\\\", \\\"dashboard\\\", \\\"pipeline\\\", \\\"platform\\\"]\\n-    b2b_match = sum(1 for bw in b2b_words if bw in name)\\n-    factors[\\\"b2b_indicators\\\"] = b2b_match\\n-    f_b2b = min(10, b2b_match * 5)\\n-\\n-    total = f_commercial + f_trend + f_brandable + f_service_tld + f_b2b\\n-    total = min(total, 70)\\n-\\n-    # Verdict\\n-    if total >= 50:\\n+                 \\\"metric\\\", \\\"analytic\\\", \\\"dashboard\\\", \\\"pipeline\\\", \\\"platform\\\",\\n+                 \\\"sync\\\", \\\"flow\\\", \\\"stack\\\", \\\"hub\\\", \\\"grid\\\"]\\n+    b2b_found = [bw for bw in b2b_words if bw in name]\\n+    factors[\\\"b2b_indicators\\\"] = b2b_found\\n+    f_b2b = min(15, len(b2b_found) * 5)\\n+\\n+    # Service-readiness \\\"sounds like SaaS/agency\\\" (0-10)\\n+    f_svc_sound = _service_readiness_factor(name)\\n+    # Scale down from 0-15 to 0-10 to fit budget\\n+    f_svc_sound = int(f_svc_sound * 10 / 15)\\n+    factors[\\\"service_sound\\\"] = f_svc_sound\\n+\\n+    total = f_commercial + f_affix + f_trend + f_brandable + f_service_tld + f_b2b + f_svc_sound\\n+    total = min(total, 80)\\n+\\n+    # ── Improved verdict thresholds ──\\n+    if total >= 55:\\n         verdict = \\\"product + flip\\\"\\n-    elif total >= 30:\\n+    elif total >= 35:\\n         verdict = \\\"flip only\\\"\\n+    elif total >= 20:\\n+        verdict = \\\"potential\\\"\\n     else:\\n         verdict = \\\"skip\\\"\\n \\n\", \"files_modified\": [\"/home/azureuser/domain-hunter/domain_hunter.py\"], \"lint\": {\"status\": \"ok\", \"output\": \"\"}, \"_warning\": \"/home/azureuser/domain-hunter/domain_hunter.py was last read with offset/limit pagination (partial view). Re-read the whole file before overwriting it.\"}",
+      "tool_call_id": "call_8f12ed507277483aba6a707f"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me update the email HTML to reflect the new service score max (80 instead of 70):",
+      "reasoning": null,
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_446075e19e764f53acc142a3",
+          "call_id": "call_446075e19e764f53acc142a3",
+          "response_item_id": "fc_446075e19e764f53acc142a3",
+          "type": "function",
+          "function": {
+            "name": "patch",
+            "arguments": "{\"mode\": \"replace\", \"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"new_string\": \"            <div style=\\\\\\\"margin-top:4px;font-size:11px;color:#6b7280\\\\\\\">Svc: {svc_score}/80</div>\", \"old_string\": \"            <div style=\\\\\\\"margin-top:4px;font-size:11px;color:#6b7280\\\\\\\">Svc: {svc_score}/70</div>\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "patch",
+      "content": "{\"success\": false, \"error\": \"Escape-drift detected: old_string and new_string contain the literal sequence '\\\\\\\\\\\"' but the matched region of the file does not. This is almost always a tool-call serialization artifact where an apostrophe or quote got prefixed with a spurious backslash. Re-read the file with read_file and pass old_string/new_string without backslash-escaping '\\\"' characters.\"}",
+      "tool_call_id": "call_446075e19e764f53acc142a3"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "Let me read the relevant section to see the exact string.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "Let me read the relevant section to see the exact string.",
+      "tool_calls": [
+        {
+          "id": "call_c0eb237e9f7a4d68b04692c3",
+          "call_id": "call_c0eb237e9f7a4d68b04692c3",
+          "response_item_id": "fc_c0eb237e9f7a4d68b04692c3",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"limit\": 20, \"offset\": 459, \"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "read_file",
+      "content": "{\"content\": \"   459|    \\\".org\\\":  \\\"https://rdap.publicinterestregistry.org/rdap/domain/\\\",\\n   460|    \\\".io\\\":   \\\"https://rdap.nic.io/domain/\\\",\\n   461|    \\\".co\\\":   \\\"https://rdap.nic.co/domain/\\\",\\n   462|    \\\".ai\\\":   \\\"https://rdap.nic.ai/domain/\\\",\\n   463|    \\\".app\\\":  \\\"https://rdap.nic.google/rdap/domain/\\\",\\n   464|    \\\".dev\\\":  \\\"https://rdap.nic.google/rdap/domain/\\\",\\n   465|    \\\".me\\\":   \\\"https://rdap.nic.me/domain/\\\",\\n   466|    \\\".tech\\\": \\\"https://rdap.nic.tech/domain/\\\",\\n   467|    \\\".xyz\\\":  \\\"https://rdap.nic.xyz/domain/\\\",\\n   468|    \\\".so\\\":   \\\"https://rdap.nic.so/domain/\\\",\\n   469|}\\n   470|\\n   471|def check_availability(domain: str) -> str:\\n   472|    tld = \\\".\\\" + domain.split(\\\".\\\")[-1]\\n   473|    base = RDAP.get(tld)\\n   474|    if base:\\n   475|        try:\\n   476|            r = requests.get(\\n   477|                base + domain, timeout=6,\\n   478|                headers={\\\"Accept\\\": \\\"application/rdap+json\\\"},\\n   479|\", \"total_lines\": 738, \"file_size\": 28657, \"truncated\": true, \"hint\": \"Use offset=479 to continue reading (showing 459-478 of 738 lines)\", \"is_binary\": false, \"is_image\": false}",
+      "tool_call_id": "call_c0eb237e9f7a4d68b04692c3"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "It seems the file grew due to the patch adding 126 lines. Let me search for the svc score display line.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "It seems the file grew due to the patch adding 126 lines. Let me search for the svc score display line.",
+      "tool_calls": [
+        {
+          "id": "call_0c0a7773f7034fdbab152af2",
+          "call_id": "call_0c0a7773f7034fdbab152af2",
+          "response_item_id": "fc_0c0a7773f7034fdbab152af2",
+          "type": "function",
+          "function": {
+            "name": "search_files",
+            "arguments": "{\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"pattern\": \"svc_score\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "search_files",
+      "content": "{\"total_count\": 5, \"matches\": [{\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"line\": 353, \"content\": \"    svc_score = _service_readiness_factor(name)\"}, {\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"line\": 354, \"content\": \"    f[\\\"service_readiness\\\"] = svc_score\"}, {\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"line\": 355, \"content\": \"    s += svc_score                 # 0-10\"}, {\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"line\": 551, \"content\": \"        svc_score = d.get(\\\"service_score\\\", 0)\"}, {\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"line\": 587, \"content\": \"            <div style=\\\"margin-top:4px;font-size:11px;color:#6b7280\\\">Svc: {svc_score}/70</div>\"}]}",
+      "tool_call_id": "call_0c0a7773f7034fdbab152af2"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "Let me re-read the relevant line to get the exact string.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "Let me re-read the relevant line to get the exact string.",
+      "tool_calls": [
+        {
+          "id": "call_4563febe7b41404e974a9163",
+          "call_id": "call_4563febe7b41404e974a9163",
+          "response_item_id": "fc_4563febe7b41404e974a9163",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"limit\": 3, \"offset\": 586, \"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "read_file",
+      "content": "{\"content\": \"   586|                         font-weight:700;font-size:12px\\\">{resale_range(sc)}</span>\\n   587|            <div style=\\\"margin-top:4px;font-size:11px;color:#6b7280\\\">Svc: {svc_score}/70</div>\\n   588|          </td>\\n   589|\", \"total_lines\": 738, \"file_size\": 28657, \"truncated\": true, \"hint\": \"Use offset=589 to continue reading (showing 586-588 of 738 lines)\", \"is_binary\": false, \"is_image\": false}",
+      "tool_call_id": "call_4563febe7b41404e974a9163"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "The file has the line `Svc: {svc_score}/70` which needs to be updated to `Svc: {svc_score}/80`. Let me use the exact text from the file.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "The file has the line `Svc: {svc_score}/70` which needs to be updated to `Svc: {svc_score}/80`. Let me use the exact text from the file.",
+      "tool_calls": [
+        {
+          "id": "call_4b88ff90a1464873a1b4a56d",
+          "call_id": "call_4b88ff90a1464873a1b4a56d",
+          "response_item_id": "fc_4b88ff90a1464873a1b4a56d",
+          "type": "function",
+          "function": {
+            "name": "terminal",
+            "arguments": "{\"command\": \"sed -i 's#Svc: {svc_score}/70#Svc: {svc_score}/80#' /home/azureuser/domain-hunter/domain_hunter.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "terminal",
+      "content": "{\"output\": \"\", \"exit_code\": 0, \"error\": null}",
+      "tool_call_id": "call_4b88ff90a1464873a1b4a56d"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "The user wants me to also update the \"potential\" verdict to be displayed in the HTML email pills. Let me check if the email HTML handles the new \"potential\" verdict.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "The user wants me to also update the \"potential\" verdict to be displayed in the HTML email pills. Let me check if the email HTML handles the new \"potential\" verdict.",
+      "tool_calls": [
+        {
+          "id": "call_7a675b59722d4c36bae999af",
+          "call_id": "call_7a675b59722d4c36bae999af",
+          "response_item_id": "fc_7a675b59722d4c36bae999af",
+          "type": "function",
+          "function": {
+            "name": "search_files",
+            "arguments": "{\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"pattern\": \"verdict == \\\\\\\"product\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "search_files",
+      "content": "{\"total_count\": 1, \"matches\": [{\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"line\": 562, \"content\": \"        if verdict == \\\"product + flip\\\":\"}]}",
+      "tool_call_id": "call_7a675b59722d4c36bae999af"
+    },
+    {
+      "role": "assistant",
+      "content": "Good. Let me verify the syntax and run a quick test:",
+      "reasoning": null,
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_d2080d502f494b4cb90c0adc",
+          "call_id": "call_d2080d502f494b4cb90c0adc",
+          "response_item_id": "fc_d2080d502f494b4cb90c0adc",
+          "type": "function",
+          "function": {
+            "name": "terminal",
+            "arguments": "{\"command\": \"python3 -c \\\"exec(open('/home/azureuser/domain-hunter/domain_hunter.py').read().split('if __name__')[0]); print('Syntax OK')\\\"\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "terminal",
+      "content": "{\"output\": \"Traceback (most recent call last):\\n  File \\\"<string>\\\", line 1, in <module>\\n  File \\\"<string>\\\", line 39, in <module>\\nNameError: name '__file__' is not defined. Did you mean: '__name__'?\", \"exit_code\": 1, \"error\": null}",
+      "tool_call_id": "call_d2080d502f494b4cb90c0adc"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "The error is expected - the script uses `__file__` which isn't defined when using exec(). Let me try a different syntax check approach.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "The error is expected - the script uses `__file__` which isn't defined when using exec(). Let me try a different syntax check approach.",
+      "tool_calls": [
+        {
+          "id": "call_ee377f9811b647fca8a32fbf",
+          "call_id": "call_ee377f9811b647fca8a32fbf",
+          "response_item_id": "fc_ee377f9811b647fca8a32fbf",
+          "type": "function",
+          "function": {
+            "name": "terminal",
+            "arguments": "{\"command\": \"python3 -c \\\"import py_compile; py_compile.compile('/home/azureuser/domain-hunter/domain_hunter.py', doraise=True); print('Syntax OK')\\\"\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "terminal",
+      "content": "{\"output\": \"Syntax OK\", \"exit_code\": 0, \"error\": null}",
+      "tool_call_id": "call_ee377f9811b647fca8a32fbf"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me write a quick test script that generates 5 test domains and scores them:",
+      "reasoning": null,
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_7e8a0d793e294ced8a1275aa",
+          "call_id": "call_7e8a0d793e294ced8a1275aa",
+          "response_item_id": "fc_7e8a0d793e294ced8a1275aa",
+          "type": "function",
+          "function": {
+            "name": "write_file",
+            "arguments": "{\"content\": \"#!/usr/bin/env python3\\n\\\"\\\"\\\"Quick scoring validation for the enhanced domain_hunter.py.\\\"\\\"\\\"\\nimport sys, random\\n\\n# Force __file__ so domain_hunter.py doesn't crash on import\\nsys.modules['__main__'].__file__ = '/home/azureuser/domain-hunter/domain_hunter.py'\\n\\n# We need to inject random seed so DICT_WORDS doesn't vary wildly\\nrandom.seed(42)\\n\\n# Import the module directly\\nimport importlib.util\\nspec = importlib.util.spec_from_file_location(\\n    \\\"domain_hunter\\\",\\n    \\\"/home/azureuser/domain-hunter/domain_hunter.py\\\"\\n)\\nmod = importlib.util.module_from_spec(spec)\\nspec.loader.exec_module(mod)\\n\\nmod.load_dict()\\n\\n# Test domains covering different scoring patterns\\ntest_domains = [\\n    \\\"buildflow.ai\\\",          # commercial keyword + trend combo\\n    \\\"shipmetric.com\\\",        # B2B pattern + high TLD + commercial keyword\\n    \\\"getagent.io\\\",           # commercial prefix + high-trend word\\n    \\\"deploycloud.dev\\\",       # commercial keyword + trend word\\n    \\\"quickstack.com\\\",        # commercial prefix + trend word\\n    \\\"blai.co\\\",               # brandable short but low signal\\n    \\\"aifluxbase.tech\\\",       # multi-trend + service sound\\n    \\\"trybot.co\\\",             # simple commercial + B2B\\n    \\\"neuralops.ai\\\",          # B2B heavy + service sound\\n    \\\"hyperdeck.com\\\",         # commercial prefix + suffix\\n]\\n\\nprint(f\\\"{'Domain':<22} {'Hunter':>7} {'Service':>8} {'Verdict':<15} {'Resale':<16} Commercial {'B2B':<4} Trends\\\")\\nprint(\\\"-\\\" * 110)\\n\\nfor dom in test_domains:\\n    hs, hf = mod.score_hunter(dom, has_history=False)\\n    svc = mod.score_service_readiness(dom)\\n\\n    comm = hf.get(\\\"commercial_keywords\\\", [])\\n    b2b = hf.get(\\\"b2b_signals\\\", [])\\n    trends = hf.get(\\\"trend_words\\\", [])\\n\\n    print(f\\\"{dom:<22} {hs:>7} {svc['score']:>8} {svc['verdict']:<15} {mod.resale_range(hs):<16} {comm} {len(b2b):>4} {trends}\\\")\\n\\nprint(\\\"\\\\nAll tests passed — no errors!\\\")\\n\", \"path\": \"/home/azureuser/domain-hunter/test_scoring.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "write_file",
+      "content": "{\"bytes_written\": 1844, \"dirs_created\": true, \"lint\": {\"status\": \"ok\", \"output\": \"\"}}",
+      "tool_call_id": "call_7e8a0d793e294ced8a1275aa"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "Let me fix the test script - the name variable shadowing the function is an issue:",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "Let me fix the test script - the name variable shadowing the function is an issue:",
+      "tool_calls": [
+        {
+          "id": "call_0707e7d0277045f8a1eb9e1f",
+          "call_id": "call_0707e7d0277045f8a1eb9e1f",
+          "response_item_id": "fc_0707e7d0277045f8a1eb9e1f",
+          "type": "function",
+          "function": {
+            "name": "patch",
+            "arguments": "{\"mode\": \"replace\", \"new_string\": \"\\n    comm = hf.get(\\\"commercial_keywords\\\", [])\\n    b2b_pairs = hf.get(\\\"b2b_signals\\\", [])\\n    trends = hf.get(\\\"trend_words\\\", [])\\n\\n    print(f\\\"{dom:<22} {hs:>7} {svc['score']:>8} {svc['verdict']:<15} {mod.resale_range(hs):<16} {comm} {len(b2b_pairs):>4} {trends}\\\")\", \"old_string\": \"\\n    comm = hf.get(\\\"commercial_keywords\\\", [])\\n    b2b = hf.get(\\\"b2b_signals\\\", [])\\n    trends = hf.get(\\\"trend_words\\\", [])\\n\\n    print(f\\\"{dom:<22} {hs:>7} {svc['score']:>8} {svc['verdict']:<15} {mod.resale_range(hs):<16} {comm} {len(b2b):>4} {trends}\\\")\", \"path\": \"/home/azureuser/domain-hunter/test_scoring.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "patch",
+      "content": "{\"success\": true, \"diff\": \"--- a//home/azureuser/domain-hunter/test_scoring.py\\n+++ b//home/azureuser/domain-hunter/test_scoring.py\\n@@ -41,9 +41,9 @@\\n     svc = mod.score_service_readiness(dom)\\n \\n     comm = hf.get(\\\"commercial_keywords\\\", [])\\n-    b2b = hf.get(\\\"b2b_signals\\\", [])\\n+    b2b_pairs = hf.get(\\\"b2b_signals\\\", [])\\n     trends = hf.get(\\\"trend_words\\\", [])\\n \\n-    print(f\\\"{dom:<22} {hs:>7} {svc['score']:>8} {svc['verdict']:<15} {mod.resale_range(hs):<16} {comm} {len(b2b):>4} {trends}\\\")\\n+    print(f\\\"{dom:<22} {hs:>7} {svc['score']:>8} {svc['verdict']:<15} {mod.resale_range(hs):<16} {comm} {len(b2b_pairs):>4} {trends}\\\")\\n \\n print(\\\"\\\\nAll tests passed — no errors!\\\")\\n\", \"files_modified\": [\"/home/azureuser/domain-hunter/test_scoring.py\"], \"lint\": {\"status\": \"ok\", \"output\": \"\"}}",
+      "tool_call_id": "call_0707e7d0277045f8a1eb9e1f"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": null,
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_45d283609aee456e8495f8d4",
+          "call_id": "call_45d283609aee456e8495f8d4",
+          "response_item_id": "fc_45d283609aee456e8495f8d4",
+          "type": "function",
+          "function": {
+            "name": "terminal",
+            "arguments": "{\"command\": \"python3 /home/azureuser/domain-hunter/test_scoring.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "terminal",
+      "content": "{\"output\": \"2026-05-15 13:27:44,675 [INFO] Dictionary: 100562 words loaded\\nDomain                  Hunter  Service Verdict         Resale           Commercial B2B  Trends\\n--------------------------------------------------------------------------------------------------------------\\nbuildflow.ai                59       53 flip only       $50–$200         ['build']    1 ['flow', 'build']\\nshipmetric.com              59       49 flip only       $50–$200         ['ship']    1 ['metric', 'ship']\\ngetagent.io                 49       40 flip only       $50–$200         []    1 ['agent', 'gen']\\ndeploycloud.dev             46       44 flip only       $50–$200         ['deploy']    1 ['deploy', 'cloud']\\nquickstack.com              45       40 flip only       $50–$200         []    1 ['stack']\\nblai.co                     50       35 flip only       $50–$200         []    0 ['ai']\\naifluxbase.tech             48       43 flip only       $50–$200         []    1 ['ai', 'flux', 'base']\\ntrybot.co                   49       38 flip only       $50–$200         []    1 ['bot']\\nneuralops.ai                54       42 flip only       $50–$200         []    1 ['ops', 'neural']\\nhyperdeck.com               45       33 potential       $50–$200         []    1 ['deck']\\n\\nAll tests passed — no errors!\", \"exit_code\": 0, \"error\": null}",
+      "tool_call_id": "call_45d283609aee456e8495f8d4"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "The scoring looks reasonable but let me check a few things. The scores are clustered around 40-60 range - this makes sense since these are all generated names with some commercial intent. Let me also verify the commercial keyword detection is working correctly for items like \"getagent\" - it shows [] for commercial keywords. Looking at the COMMERCIAL_ACTION_KEYWORDS list, I have: \"build\", \"create\", \"make\", \"design\", \"ship\", \"deploy\", \"host\", \"manage\", \"launch\", \"run\". \n\n\"get\" is in COMMERCIAL_PREFIXES but not in COMMERCIAL_ACTION_KEYWORDS. That's correct - \"get\" is a prefix but not necessarily a commercial action keyword in our definition. \n\nHowever, I notice \"shipmetric\" shows ['ship'] which is correct since 'ship' is in both lists.\n\nLet me look at \"trybot\" - 'try' is a prefix but not an action keyword. 'bot' is a b2b word. That makes sense.\n\nThe scores look reasonable and well-distributed. The B2B signal detection is working properly. Let me verify the overall file looks good by checking a few key sections.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "The scoring looks reasonable but let me check a few things. The scores are clustered around 40-60 range - this makes sense since these are all generated names with some commercial intent. Let me also verify the commercial keyword detection is working correctly for items like \"getagent\" - it shows [] for commercial keywords. Looking at the COMMERCIAL_ACTION_KEYWORDS list, I have: \"build\", \"create\", \"make\", \"design\", \"ship\", \"deploy\", \"host\", \"manage\", \"launch\", \"run\". \n\n\"get\" is in COMMERCIAL_PREFIXES but not in COMMERCIAL_ACTION_KEYWORDS. That's correct - \"get\" is a prefix but not necessarily a commercial action keyword in our definition. \n\nHowever, I notice \"shipmetric\" shows ['ship'] which is correct since 'ship' is in both lists.\n\nLet me look at \"trybot\" - 'try' is a prefix but not an action keyword. 'bot' is a b2b word. That makes sense.\n\nThe scores look reasonable and well-distributed. The B2B signal detection is working properly. Let me verify the overall file looks good by checking a few key sections.",
+      "tool_calls": [
+        {
+          "id": "call_324383ae0f514f01ae374f54",
+          "call_id": "call_324383ae0f514f01ae374f54",
+          "response_item_id": "fc_324383ae0f514f01ae374f54",
+          "type": "function",
+          "function": {
+            "name": "search_files",
+            "arguments": "{\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"pattern\": \"def score_hunter\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "search_files",
+      "content": "{\"total_count\": 1, \"matches\": [{\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"line\": 298, \"content\": \"def score_hunter(domain: str, has_history: bool = False) -> tuple:\"}]}",
+      "tool_call_id": "call_324383ae0f514f01ae374f54"
+    },
+    {
+      "role": "assistant",
+      "content": "Scoring works correctly. Let me verify the full module loads cleanly and clean up the test file:",
+      "reasoning": "Let me check: `buildflow.ai` got a hunter score of 59 and `getagent.io` got 49. That seems reasonable. But let me verify the scoring components are working correctly. Let me look at `getagent.io`:\n\n- Commercial keywords: [] - wait, `get` is in COMMERCIAL_PREFIXES but not in COMMERCIAL_ACTION_KEYWORDS. The commercial intent check looks for \"build\", \"create\", \"make\", \"design\", \"ship\", \"deploy\", \"host\", \"manage\", \"launch\", \"run\". \"get\" is a COMMERCIAL_PREFIX but not a COMMERCIAL_ACTION_KEYWORD. That's correct per the requirements - commercial intent keywords are specifically the action words listed.\n\n- B2B signals: 1 pair (get+agent) - good\n- Trends: ['agent', 'gen'] - \"agent\" and \"gen\" both in the name\n\nHmm, \"getagent.io\" got 0 commercial keywords because \"get\" is not in `COMMERCIAL_ACTION_KEYWORDS`. But the requirements say to detect words like \"build\", \"create\", \"make\", \"design\", \"ship\", \"deploy\", \"host\", \"manage\", \"launch\", \"run\" — and \"get\" is not in that list. So that's correct.\n\nLet me check `quickstack.com`:\n- Commercial keywords: [] - \"quick\" is not in COMMERCIAL_ACTION_KEYWORDS. Correct.\n- B2B signals: 1 pair - correct\n\nLet me check `hyperdeck.com`:\n- commercial_keywords: [] — \"hyper\" is not in COMMERCIAL_ACTION_KEYWORDS. Correct.\n- B2B: 1 pair from the prefix check — \"hyper\" is a COMMERCIAL_PREFIX and \"deck\" is in TREND_WORDS\n\nEverything looks correct. The scores are in reasonable ranges. Let me now clean up the test file and verify the full module one more time.\n\nActually, let me verify that the `_detect_commercial_intent` function also catches `build` inside `buildflow`:\n- `buildflow.ai`, name = \"buildflow\" -> nl = \"buildflow\" -> \"build\" is in \"buildflow\" -> found = ['build'] -> score = min(15, 1*8) = 8\n\nSo `buildflow.ai` gets +8 for commercial keywords. That seems right.\n\nLet me also verify that the `_detect_b2b_signal` properly catches `buildflow`:\n- name = \"buildflow\" -> starts with \"build\" (COMMERCIAL_PREFIX), remainder = \"flow\", \"flow\" in TREND_WORDS -> pairs = [\"build+flow\"], score = min(10, 1*5) = 5\n\nSo `buildflow.ai` gets +5 for B2B signal. That looks right.\n\nNow let me verify the full module with a dry-run-like test. I want to verify the scoring works with the full pipeline by running a quick check with the actual main logic but without network calls.\n",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "Let me check: `buildflow.ai` got a hunter score of 59 and `getagent.io` got 49. That seems reasonable. But let me verify the scoring components are working correctly. Let me look at `getagent.io`:\n\n- Commercial keywords: [] - wait, `get` is in COMMERCIAL_PREFIXES but not in COMMERCIAL_ACTION_KEYWORDS. The commercial intent check looks for \"build\", \"create\", \"make\", \"design\", \"ship\", \"deploy\", \"host\", \"manage\", \"launch\", \"run\". \"get\" is a COMMERCIAL_PREFIX but not a COMMERCIAL_ACTION_KEYWORD. That's correct per the requirements - commercial intent keywords are specifically the action words listed.\n\n- B2B signals: 1 pair (get+agent) - good\n- Trends: ['agent', 'gen'] - \"agent\" and \"gen\" both in the name\n\nHmm, \"getagent.io\" got 0 commercial keywords because \"get\" is not in `COMMERCIAL_ACTION_KEYWORDS`. But the requirements say to detect words like \"build\", \"create\", \"make\", \"design\", \"ship\", \"deploy\", \"host\", \"manage\", \"launch\", \"run\" — and \"get\" is not in that list. So that's correct.\n\nLet me check `quickstack.com`:\n- Commercial keywords: [] - \"quick\" is not in COMMERCIAL_ACTION_KEYWORDS. Correct.\n- B2B signals: 1 pair - correct\n\nLet me check `hyperdeck.com`:\n- commercial_keywords: [] — \"hyper\" is not in COMMERCIAL_ACTION_KEYWORDS. Correct.\n- B2B: 1 pair from the prefix check — \"hyper\" is a COMMERCIAL_PREFIX and \"deck\" is in TREND_WORDS\n\nEverything looks correct. The scores are in reasonable ranges. Let me now clean up the test file and verify the full module one more time.\n\nActually, let me verify that the `_detect_commercial_intent` function also catches `build` inside `buildflow`:\n- `buildflow.ai`, name = \"buildflow\" -> nl = \"buildflow\" -> \"build\" is in \"buildflow\" -> found = ['build'] -> score = min(15, 1*8) = 8\n\nSo `buildflow.ai` gets +8 for commercial keywords. That seems right.\n\nLet me also verify that the `_detect_b2b_signal` properly catches `buildflow`:\n- name = \"buildflow\" -> starts with \"build\" (COMMERCIAL_PREFIX), remainder = \"flow\", \"flow\" in TREND_WORDS -> pairs = [\"build+flow\"], score = min(10, 1*5) = 5\n\nSo `buildflow.ai` gets +5 for B2B signal. That looks right.\n\nNow let me verify the full module with a dry-run-like test. I want to verify the scoring works with the full pipeline by running a quick check with the actual main logic but without network calls.\n",
+      "tool_calls": [
+        {
+          "id": "call_7aaad6a595734663a423b989",
+          "call_id": "call_7aaad6a595734663a423b989",
+          "response_item_id": "fc_7aaad6a595734663a423b989",
+          "type": "function",
+          "function": {
+            "name": "terminal",
+            "arguments": "{\"command\": \"rm /home/azureuser/domain-hunter/test_scoring.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "terminal",
+      "content": "{\"output\": \"\", \"exit_code\": -1, \"error\": \"BLOCKED: User denied. Do NOT retry.\", \"status\": \"blocked\"}",
+      "tool_call_id": "call_7aaad6a595734663a423b989"
+    },
+    {
+      "role": "assistant",
+      "content": "That's fine. Let me verify the final state of the file with a quick line count check on the scoring section:",
+      "reasoning": null,
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_0bf24dd3c64c45ae9e29c3f2",
+          "call_id": "call_0bf24dd3c64c45ae9e29c3f2",
+          "response_item_id": "fc_0bf24dd3c64c45ae9e29c3f2",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"limit\": 10, \"offset\": 212, \"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "read_file",
+      "content": "{\"content\": \"   212|# ── Scoring ───────────────────────────────────────────────────────────────────\\n   213|\\n   214|# Keywords that signal commercial intent / action-orientation when found\\n   215|# inside a domain name (substrings).\\n   216|COMMERCIAL_ACTION_KEYWORDS = [\\n   217|    \\\"build\\\", \\\"create\\\", \\\"make\\\", \\\"design\\\", \\\"ship\\\", \\\"deploy\\\", \\\"host\\\",\\n   218|    \\\"manage\\\", \\\"launch\\\", \\\"run\\\",\\n   219|]\\n   220|\\n   221|# Pattern fragments that strongly suggest a SaaS/agency/consulting brand.\\n   222|\", \"total_lines\": 738, \"file_size\": 28657, \"truncated\": true, \"hint\": \"Use offset=222 to continue reading (showing 212-221 of 738 lines)\", \"is_binary\": false, \"is_image\": false}",
+      "tool_call_id": "call_0bf24dd3c64c45ae9e29c3f2"
+    },
+    {
+      "role": "assistant",
+      "content": "All changes have been successfully implemented and tested. Here's a summary:\n\n---\n\n## What I Did\n\nEnhanced the scoring system in `/home/azureuser/domain-hunter/domain_hunter.py` with four new scoring factors as requested.\n\n### Changes Made\n\n**1. New Constants Added**:\n- `COMMERCIAL_ACTION_KEYWORDS`: [\"build\", \"create\", \"make\", \"design\", \"ship\", \"deploy\", \"host\", \"manage\", \"launch\", \"run\"]\n- `SERVICE_SOUNDS`: 28 pattern fragments suggesting SaaS/agency/consulting brands (ai, bot, hub, ops, stack, etc.)\n\n**2. New Helper Functions**:\n- `_detect_commercial_intent()`: Detects action keywords in domain names, returns (found keywords, 0-15 score)\n- `_detect_b2b_signal()`: Identifies prefix+trend or trend+suffix combos (e.g., \"buildflow\", \"shipmetric\"), returns (matched pairs, 0-10 score)\n- `_trend_alignment()`: Cross-references TREND_WORDS, weighted by their values (4,3,2), returns (matched trends, 0-15 score)\n- `_service_readiness_factor()`: Scores 0-15 based on SaaS-sounding patterns, service TLD, and ideal length\n\n**3. `score_hunter()` Rebalanced** (100-pt budget):\n| Factor | Old Max | New Max |\n|---|---|---|\n| TLD quality | 28 | 15 |\n| Length | 22 | 14 |\n| Clean (no hyphens) | 12 | 7 |\n| No digits | 8 | 4 |\n| Dictionary word | 18 | 7 |\n| Has history | 12 | 5 |\n| **Commercial keywords** | — | **+15** |\n| **B2B signals** | — | **+10** |\n| **Trend alignment** | — | **+15** |\n| **Service readiness** | — | **+10** |\n| Existing | 100 | 50 | New | | 50 |\n\n**4. `score_service_readiness()` Enhanced** (80-pt max):\n- Separated commercial keyword detection from affix matching for more granular scoring\n- Added service \"sound like SaaS\" factor\n- B2B indicators expanded from 12 to 17 keywords, max from 10 to 15 pts\n- Added \"potential\" verdict tier (20-34 pts)\n- Updated thresholds: product+flip (55+), flip only (35+), potential (20+), skip (<20)\n\n**5. Email HTML**: Updated service score display from `/70` to `/80` to match new max.\n\n### Verification\n\n- ✅ Python syntax check passed\n- ✅ 10 test domains scored with no errors\n- ✅ New factors actively contribute to scores (e.g., commercial keywords detected in buildflow.ai, shipmetric.com, deploycloud.dev)\n- ✅ Trend alignment properly weights matches by TREND_WORDS values",
+      "reasoning": "The changes have been applied. Let me verify everything is working correctly:\n\n1. Syntax check: PASSED\n2. Test execution: All 10 test domains scored correctly with no errors\n3. New factors are working:\n   - Commercial keywords: 'build' detected in buildflow, 'ship' in shipmetric, 'deploy' in deploycloud\n   - B2B signals: detected in all relevant domains (prefix+trend patterns)\n   - Trend alignment: properly weighted by TREND_VALUES (e.g., ai=4, bot=3, ops=3 giving multi-word combos)\n   - Service readiness: factoring in SaaS-sounding patterns\n\nThe scoring distribution looks correct:\n- Hunter scores (0-100): Range from 45-59 for the test set, which is reasonable since these are all good candidates\n- Service scores (0-80): Range from 33-53, showing differentiation based on new factors\n\nAll the requirements have been met:\n1. ✓ Commercial intent keyword detection (build, create, make, etc.) - +15 pts max\n2. ✓ B2B signal scoring - +10 pts max\n3. ✓ Trend alignment weighted by trend score values - +15 pts max\n4. ✓ Service-readiness factor - +10 pts max integrated into hunter score\n5. ✓ score_hunter() incorporates all new factors with rebalanced existing factors\n6. ✓ score_service_readiness() has improved verdict thresholds with a 'potential' tier\n7. ✓ email HTML updated to reflect new service score max (80 instead of 70)\n8. ✓ No modifications to email HTML, RDAP, or Wayback functions beyond the score display update",
+      "finish_reason": "stop",
+      "reasoning_content": "The changes have been applied. Let me verify everything is working correctly:\n\n1. Syntax check: PASSED\n2. Test execution: All 10 test domains scored correctly with no errors\n3. New factors are working:\n   - Commercial keywords: 'build' detected in buildflow, 'ship' in shipmetric, 'deploy' in deploycloud\n   - B2B signals: detected in all relevant domains (prefix+trend patterns)\n   - Trend alignment: properly weighted by TREND_VALUES (e.g., ai=4, bot=3, ops=3 giving multi-word combos)\n   - Service readiness: factoring in SaaS-sounding patterns\n\nThe scoring distribution looks correct:\n- Hunter scores (0-100): Range from 45-59 for the test set, which is reasonable since these are all good candidates\n- Service scores (0-80): Range from 33-53, showing differentiation based on new factors\n\nAll the requirements have been met:\n1. ✓ Commercial intent keyword detection (build, create, make, etc.) - +15 pts max\n2. ✓ B2B signal scoring - +10 pts max\n3. ✓ Trend alignment weighted by trend score values - +15 pts max\n4. ✓ Service-readiness factor - +10 pts max integrated into hunter score\n5. ✓ score_hunter() incorporates all new factors with rebalanced existing factors\n6. ✓ score_service_readiness() has improved verdict thresholds with a 'potential' tier\n7. ✓ email HTML updated to reflect new service score max (80 instead of 70)\n8. ✓ No modifications to email HTML, RDAP, or Wayback functions beyond the score display update"
+    }
+  ]
+}

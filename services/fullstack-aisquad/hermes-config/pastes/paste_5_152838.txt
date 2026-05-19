@@ -1,0 +1,7 @@
+Agent: Partnership Scout
+Wrapper: partner:scout
+What It Does: Finds and warm-outreach-drafts to IBCLCs, postpartum doulas,
+  small mom-influencers (5K-50K followers), and complementary creators.
+  Manages an affiliate roster with attribution links, payout tracking,
+  and quarterly check-ins.
+In Revenue Swarm.

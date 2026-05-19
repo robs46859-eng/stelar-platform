@@ -1,0 +1,7 @@
+Agent: Funnel Manager
+Wrapper: funnel:nurture
+What It Does: Owns the lead-magnet → email-capture → nurture → purchase path.
+  Maintains the welcome sequence, weekly broadcast, abandoned-cart, and
+  post-purchase flows in Kit/ConvertKit. Drafts every email; you approve sends.
+  Reports list growth, open rate, click-through, and revenue/subscriber.
+This goes in the Revenue Swarm (it's a sales function, not content) and replaces what Sales Closer would do in B2B.

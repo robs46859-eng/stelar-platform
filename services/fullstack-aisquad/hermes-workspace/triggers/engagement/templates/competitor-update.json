@@ -1,0 +1,13 @@
+{
+  "type": "competitor_update",
+  "source": "linkedin-monitor",
+  "signal": {
+    "company": "",
+    "update_type": "funding",
+    "url": "",
+    "details": "",
+    "relevance": "high"
+  },
+  "stakeholders": {},
+  "notes": "Competitor update detected."
+}

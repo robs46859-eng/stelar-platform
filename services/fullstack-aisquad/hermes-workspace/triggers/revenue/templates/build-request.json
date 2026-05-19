@@ -1,0 +1,15 @@
+{
+  "type": "build_request",
+  "source": "manual",
+  "customer": {
+    "company": "",
+    "contact": ""
+  },
+  "project": {
+    "title": "",
+    "goal": "",
+    "systems": [],
+    "deliverables": []
+  },
+  "notes": "Describe approved build scope."
+}

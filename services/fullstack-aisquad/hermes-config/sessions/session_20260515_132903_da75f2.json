@@ -1,0 +1,527 @@
+{
+  "session_id": "20260515_132903_da75f2",
+  "model": "qwen/qwen3.6-plus",
+  "base_url": "https://openrouter.ai/api/v1",
+  "platform": "cli",
+  "session_start": "2026-05-15T13:29:03.492704",
+  "last_updated": "2026-05-15T13:31:17.836616",
+  "system_prompt": "You are Hermes Agent, an intelligent AI assistant created by Nous Research. You are helpful, knowledgeable, and direct. You assist users with a wide range of tasks including answering questions, writing and editing code, analyzing information, creative work, and executing actions via your tools. You communicate clearly, admit uncertainty when appropriate, and prioritize being genuinely useful over being verbose unless otherwise directed below. Be targeted and efficient in your exploration and investigations.\n\nIf the user asks about configuring, setting up, or using Hermes Agent itself, load the `hermes-agent` skill with skill_view(name='hermes-agent') before answering. Docs: https://hermes-agent.nousresearch.com/docs\n\nHost: Linux (6.17.0-1013-azure)\nUser home directory: /home/azureuser\nCurrent working directory: /home/azureuser\n\nYou are a CLI AI Agent. Try not to use markdown but simple text renderable inside a terminal. File delivery: there is no attachment channel — the user reads your response directly in their terminal. Do NOT emit MEDIA:/path tags (those are only intercepted on messaging platforms like Telegram, Discord, Slack, etc.; on the CLI they render as literal text). When referring to a file you created or changed, just state its absolute path in plain text; the user can open it from there.\n\nConversation started: Friday, May 15, 2026 01:29 PM\nModel: qwen/qwen3.6-plus\nProvider: openrouter",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "patch",
+        "description": "Targeted find-and-replace edits in files. Use this instead of sed/awk in terminal. Uses fuzzy matching (9 strategies) so minor whitespace/indentation differences won't break it. Returns a unified diff. Auto-runs syntax checks after editing.\n\nREPLACE MODE (mode='replace', default): find a unique string and replace it. REQUIRED PARAMETERS: mode, path, old_string, new_string.\nPATCH MODE (mode='patch'): apply V4A multi-file patches for bulk changes. REQUIRED PARAMETERS: mode, patch.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "replace",
+                "patch"
+              ],
+              "description": "Edit mode. 'replace' (default): requires path + old_string + new_string. 'patch': requires patch content only.",
+              "default": "replace"
+            },
+            "path": {
+              "type": "string",
+              "description": "REQUIRED when mode='replace'. File path to edit."
+            },
+            "old_string": {
+              "type": "string",
+              "description": "REQUIRED when mode='replace'. Exact text to find and replace. Must be unique in the file unless replace_all=true. Include surrounding context lines to ensure uniqueness."
+            },
+            "new_string": {
+              "type": "string",
+              "description": "REQUIRED when mode='replace'. Replacement text. Pass empty string '' to delete the matched text."
+            },
+            "replace_all": {
+              "type": "boolean",
+              "description": "Replace all occurrences instead of requiring a unique match (default: false)",
+              "default": false
+            },
+            "patch": {
+              "type": "string",
+              "description": "REQUIRED when mode='patch'. V4A format patch content. Format:\n*** Begin Patch\n*** Update File: path/to/file\n@@ context hint @@\n context line\n-removed line\n+added line\n*** End Patch"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "process",
+        "description": "Manage background processes started with terminal(background=true). Actions: 'list' (show all), 'poll' (check status + new output), 'log' (full output with pagination), 'wait' (block until done or timeout), 'kill' (terminate), 'write' (send raw stdin data without newline), 'submit' (send data + Enter, for answering prompts), 'close' (close stdin/send EOF).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "list",
+                "poll",
+                "log",
+                "wait",
+                "kill",
+                "write",
+                "submit",
+                "close"
+              ],
+              "description": "Action to perform on background processes"
+            },
+            "session_id": {
+              "type": "string",
+              "description": "Process session ID (from terminal background output). Required for all actions except 'list'."
+            },
+            "data": {
+              "type": "string",
+              "description": "Text to send to process stdin (for 'write' and 'submit' actions)"
+            },
+            "timeout": {
+              "type": "integer",
+              "description": "Max seconds to block for 'wait' action. Returns partial output on timeout.",
+              "minimum": 1
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Line offset for 'log' action (default: last 200 lines)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max lines to return for 'log' action",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "action"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file",
+        "description": "Read a text file with line numbers and pagination. Use this instead of cat/head/tail in terminal. Output format: 'LINE_NUM|CONTENT'. Suggests similar filenames if not found. Use offset and limit for large files. Reads exceeding ~100K characters are rejected; use offset and limit to read specific sections of large files. NOTE: Cannot read images or binary files — use vision_analyze for images.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Path to the file to read (absolute, relative, or ~/path)"
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Line number to start reading from (1-indexed, default: 1)",
+              "default": 1,
+              "minimum": 1
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of lines to read (default: 500, max: 2000)",
+              "default": 500,
+              "maximum": 2000
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_files",
+        "description": "Search file contents or find files by name. Use this instead of grep/rg/find/ls in terminal. Ripgrep-backed, faster than shell equivalents.\n\nContent search (target='content'): Regex search inside files. Output modes: full matches with line numbers, file paths only, or match counts.\n\nFile search (target='files'): Find files by glob pattern (e.g., '*.py', '*config*'). Also use this instead of ls — results sorted by modification time.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "description": "Regex pattern for content search, or glob pattern (e.g., '*.py') for file search"
+            },
+            "target": {
+              "type": "string",
+              "enum": [
+                "content",
+                "files"
+              ],
+              "description": "'content' searches inside file contents, 'files' searches for files by name",
+              "default": "content"
+            },
+            "path": {
+              "type": "string",
+              "description": "Directory or file to search in (default: current working directory)",
+              "default": "."
+            },
+            "file_glob": {
+              "type": "string",
+              "description": "Filter files by pattern in grep mode (e.g., '*.py' to only search Python files)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of results to return (default: 50)",
+              "default": 50
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Skip first N results for pagination (default: 0)",
+              "default": 0
+            },
+            "output_mode": {
+              "type": "string",
+              "enum": [
+                "content",
+                "files_only",
+                "count"
+              ],
+              "description": "Output format for grep mode: 'content' shows matching lines with line numbers, 'files_only' lists file paths, 'count' shows match counts per file",
+              "default": "content"
+            },
+            "context": {
+              "type": "integer",
+              "description": "Number of context lines before and after each match (grep mode only)",
+              "default": 0
+            }
+          },
+          "required": [
+            "pattern"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "terminal",
+        "description": "Execute shell commands on a Linux environment. Filesystem usually persists between calls.\n\nDo NOT use cat/head/tail to read files — use read_file instead.\nDo NOT use grep/rg/find to search — use search_files instead.\nDo NOT use ls to list directories — use search_files(target='files') instead.\nDo NOT use sed/awk to edit files — use patch instead.\nDo NOT use echo/cat heredoc to create files — use write_file instead.\nReserve terminal for: builds, installs, git, processes, scripts, network, package managers, and anything that needs a shell.\n\nForeground (default): Commands return INSTANTLY when done, even if the timeout is high. Set timeout=300 for long builds/scripts — you'll still get the result in seconds if it's fast. Prefer foreground for short commands.\nBackground: Set background=true to get a session_id. Two patterns:\n  (1) Long-lived processes that never exit (servers, watchers).\n  (2) Long-running tasks with notify_on_complete=true — you can keep working on other things and the system auto-notifies you when the task finishes. Great for test suites, builds, deployments, or anything that takes more than a minute.\nFor servers/watchers, do NOT use shell-level background wrappers (nohup/disown/setsid/trailing '&') in foreground mode. Use background=true so Hermes can track lifecycle and output.\nAfter starting a server, verify readiness with a health check or log signal, then run tests in a separate terminal() call. Avoid blind sleep loops.\nUse process(action=\"poll\") for progress checks, process(action=\"wait\") to block until done.\nWorking directory: Use 'workdir' for per-command cwd.\nPTY mode: Set pty=true for interactive CLI tools (Codex, Claude Code, Python REPL).\n\nDo NOT use vim/nano/interactive tools without pty=true — they hang without a pseudo-terminal. Pipe git output to cat if it might page.\n",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "description": "The command to execute on the VM"
+            },
+            "background": {
+              "type": "boolean",
+              "description": "Run the command in the background. Two patterns: (1) Long-lived processes that never exit (servers, watchers). (2) Long-running tasks paired with notify_on_complete=true — you can keep working and get notified when the task finishes. For short commands, prefer foreground with a generous timeout instead.",
+              "default": false
+            },
+            "timeout": {
+              "type": "integer",
+              "description": "Max seconds to wait (default: 180, foreground max: 600). Returns INSTANTLY when command finishes — set high for long tasks, you won't wait unnecessarily. Foreground timeout above 600s is rejected; use background=true for longer commands.",
+              "minimum": 1
+            },
+            "workdir": {
+              "type": "string",
+              "description": "Working directory for this command (absolute path). Defaults to the session working directory."
+            },
+            "pty": {
+              "type": "boolean",
+              "description": "Run in pseudo-terminal (PTY) mode for interactive CLI tools like Codex, Claude Code, or Python REPL. Only works with local and SSH backends. Default: false.",
+              "default": false
+            },
+            "notify_on_complete": {
+              "type": "boolean",
+              "description": "When true (and background=true), you'll be automatically notified exactly once when the process finishes. **This is the right choice for almost every long-running task** — tests, builds, deployments, multi-item batch jobs, anything that takes over a minute and has a defined end. Use this and keep working on other things; the system notifies you on exit. MUTUALLY EXCLUSIVE with watch_patterns — when both are set, watch_patterns is dropped.",
+              "default": false
+            },
+            "watch_patterns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Strings to watch for in background process output. HARD RATE LIMIT: at most 1 notification per 15 seconds per process — matches arriving inside the cooldown are dropped. After 3 consecutive 15-second windows with dropped matches, watch_patterns is automatically disabled for that process and promoted to notify_on_complete behavior (one notification on exit, no more mid-process spam). USE ONLY for truly rare, one-shot mid-process signals on LONG-LIVED processes that will never exit on their own — e.g. ['Application startup complete'] on a server so you know when to hit its endpoint, or ['migration done'] on a daemon. DO NOT use for: (1) end-of-run markers like 'DONE'/'PASS' — use notify_on_complete instead; (2) error patterns like 'ERROR'/'Traceback' in loops or multi-item batch jobs — they fire on every iteration and you'll hit the strike limit fast; (3) anything you'd ever combine with notify_on_complete. When in doubt, choose notify_on_complete. MUTUALLY EXCLUSIVE with notify_on_complete — set one, not both."
+            }
+          },
+          "required": [
+            "command"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "web_extract",
+        "description": "Extract content from web page URLs. Returns page content in markdown format. Also works with PDF URLs (arxiv papers, documents, etc.) — pass the PDF link directly and it converts to markdown text. Pages under 5000 chars return full markdown; larger pages are LLM-summarized and capped at ~5000 chars per page. Pages over 2M chars are refused. If a URL fails or times out, use the browser tool to access it instead.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "urls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of URLs to extract content from (max 5 URLs per call)",
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "urls"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "web_search",
+        "description": "Search the web for information. Returns up to 5 results by default with titles, URLs, and descriptions. The query is passed through to the configured backend, so operators such as site:domain, filetype:pdf, intitle:word, -term, and \"exact phrase\" may work when the backend supports them.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The search query to look up on the web. You may include backend-supported operators such as site:example.com, filetype:pdf, intitle:word, -term, or \"exact phrase\"."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of results to return. Defaults to 5.",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 5
+            }
+          },
+          "required": [
+            "query"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file",
+        "description": "Write content to a file, completely replacing existing content. Use this instead of echo/cat heredoc in terminal. Creates parent directories automatically. OVERWRITES the entire file — use 'patch' for targeted edits. Auto-runs syntax checks on .py/.json/.yaml/.toml and other linted languages; only NEW errors introduced by this write are surfaced (pre-existing errors are filtered out).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Path to the file to write (will be created if it doesn't exist, overwritten if it does)"
+            },
+            "content": {
+              "type": "string",
+              "description": "Complete content to write to the file"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ]
+        }
+      }
+    }
+  ],
+  "message_count": 17,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Add JSON output mode, duplicate tracking, and portfolio tracker to domain_hunter.py. Verify all TLDs in RDAP mapping and add missing ones. Add --json, --output FILE, --fresh CLI flags."
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "Let me start by reading the full file to understand its structure before making any changes.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "Let me start by reading the full file to understand its structure before making any changes.",
+      "tool_calls": [
+        {
+          "id": "call_76c6dc57f381470f8171ba32",
+          "call_id": "call_76c6dc57f381470f8171ba32",
+          "response_item_id": "fc_76c6dc57f381470f8171ba32",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "read_file",
+      "content": "{\"content\": \"     1|#!/usr/bin/env python3\\n     2|\\\"\\\"\\\"\\n     3|Domain Hunter v2 — Proactive Discovery Engine\\n     4|\\n     5|Instead of scraping blocked auction sites, this version:\\n     6|1. Generates brandable domain names from trending keywords\\n     7|2. Checks availability via RDAP (reliable, no key needed)\\n     8|3. Scores domains for resale value AND service-readiness\\n     9|4. Outputs HTML email + JSON for pipeline consumption\\n    10|5. Focuses on domains suitable for digital services/SaaS\\n    11|\\n    12|Sources:\\n    13|  - Proactive trend-based generation (prefix+suffix, trend combos, brandable names)\\n    14|  - Porkbun live API (pricing)\\n    15|  - Wayback Machine CDX (history for names with web presence)\\n    16|  - RDAP per-TLD endpoints (availability)\\n    17|\\n    18|Outputs:\\n    19|  - Daily HTML email digest\\n    20|  - JSON artifact at memory/domain-hunter/latest.json for pipeline dispatch\\n    21|\\\"\\\"\\\"\\n    22|\\n    23|import os\\n    24|import re\\n    25|import sys\\n    26|import time\\n    27|import json\\n    28|import socket\\n    29|import smtplib\\n    30|import random\\n    31|import logging\\n    32|import requests\\n    33|from datetime import date\\n    34|from concurrent.futures import ThreadPoolExecutor, as_completed\\n    35|from email.mime.text import MIMEText\\n    36|from email.mime.multipart import MIMEMultipart\\n    37|\\n    38|# ── Logging ───────────────────────────────────────────────────────────────────\\n    39|log_path = os.path.join(os.path.dirname(__file__), \\\"run.log\\\")\\n    40|logging.basicConfig(\\n    41|    level=logging.INFO,\\n    42|    format=\\\"%(asctime)s [%(levelname)s] %(message)s\\\",\\n    43|    handlers=[\\n    44|        logging.FileHandler(log_path),\\n    45|        logging.StreamHandler(sys.stdout),\\n    46|    ],\\n    47|)\\n    48|log = logging.getLogger(__name__)\\n    49|\\n    50|# ── Config ────────────────────────────────────────────────────────────────────\\n    51|FROM_EMAIL  = os.getenv(\\\"DOMAIN_FROM_EMAIL\\\", \\\"domain.stack11@gmail.com\\\")\\n    52|FROM_PASS   = os.getenv(\\\"DOMAIN_FROM_PASS\\\",  \\\"aoszdccswehypoxf\\\")\\n    53|TO_EMAIL    = os.getenv(\\\"DOMAIN_TO_EMAIL\\\",   \\\"robcofamily@gmail.com\\\")\\n    54|MAX_REPORT  = 50\\n    55|WORKERS     = 10\\n    56|MEMORY_DIR  = os.path.join(os.path.expanduser(\\\"~\\\"), \\\"hermes-workspace\\\", \\\"memory\\\", \\\"domain-hunter\\\")\\n    57|os.makedirs(MEMORY_DIR, exist_ok=True)\\n    58|\\n    59|HEADERS = {\\n    60|    \\\"User-Agent\\\": (\\n    61|        \\\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \\\"\\n    62|        \\\"AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36\\\"\\n    63|    ),\\n    64|    \\\"Accept-Language\\\": \\\"en-US,en;q=0.9\\\",\\n    65|    \\\"Accept\\\": \\\"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\\\",\\n    66|}\\n    67|\\n    68|# ── Trending Keywords for Proactive Generation ────────────────────────────────\\n    69|TREND_WORDS = {\\n    70|    \\\"ai\\\": 4, \\\"agent\\\": 4, \\\"swarm\\\": 4, \\\"llm\\\": 4, \\\"flow\\\": 3, \\\"stack\\\": 3,\\n    71|    \\\"metric\\\": 3, \\\"automate\\\": 3, \\\"ship\\\": 3, \\\"build\\\": 3, \\\"craft\\\": 3,\\n    72|    \\\"sync\\\": 3, \\\"deploy\\\": 3, \\\"cloud\\\": 3, \\\"data\\\": 3, \\\"ops\\\": 3,\\n    73|    \\\"dev\\\": 3, \\\"bot\\\": 3, \\\"gen\\\": 3, \\\"prompt\\\": 3, \\\"vector\\\": 3,\\n    74|    \\\"embed\\\": 3, \\\"neural\\\": 3, \\\"flux\\\": 3, \\\"ar\\\": 2, \\\"vr\\\": 2,\\n    75|    \\\"hub\\\": 2, \\\"base\\\": 2, \\\"kit\\\": 2, \\\"deck\\\": 2, \\\"dash\\\": 2,\\n    76|    \\\"grid\\\": 2, \\\"mesh\\\": 2, \\\"chain\\\": 2, \\\"node\\\": 2, \\\"loop\\\": 2,\\n    77|    \\\"wave\\\": 2, \\\"edge\\\": 2, \\\"core\\\": 2, \\\"shift\\\": 2, \\\"spark\\\": 2,\\n    78|    \\\"pulse\\\": 2, \\\"beam\\\": 2, \\\"arc\\\": 2, \\\"bolt\\\": 2, \\\"zen\\\": 2,\\n    79|    \\\"neo\\\": 2, \\\"vox\\\": 2, \\\"orb\\\": 2, \\\"link\\\": 2,\\n    80|}\\n    81|\\n    82|COMMERCIAL_PREFIXES = [\\n    83|    \\\"get\\\", \\\"try\\\", \\\"go\\\", \\\"use\\\", \\\"my\\\", \\\"the\\\", \\\"build\\\", \\\"make\\\",\\n    84|    \\\"ship\\\", \\\"auto\\\", \\\"smart\\\", \\\"quick\\\", \\\"hyper\\\", \\\"meta\\\", \\\"super\\\",\\n    85|    \\\"deep\\\", \\\"open\\\", \\\"true\\\", \\\"top\\\", \\\"next\\\", \\\"pro\\\",\\n    86|]\\n    87|\\n    88|BRAND_SUFFIXES = [\\n    89|    \\\"ai\\\", \\\"lab\\\", \\\"ops\\\", \\\"dev\\\", \\\"hub\\\", \\\"stack\\\", \\\"flow\\\",\\n    90|    \\\"ware\\\", \\\"bot\\\", \\\"ly\\\", \\\"ify\\\", \\\"kit\\\", \\\"hq\\\", \\\"deck\\\",\\n    91|    \\\"base\\\", \\\"grid\\\", \\\"sync\\\", \\\"dash\\\", \\\"cloud\\\", \\\"mate\\\",\\n    92|    \\\"works\\\", \\\"genie\\\", \\\"sys\\\", \\\"net\\\", \\\"io\\\", \\\"base\\\",\\n    93|]\\n    94|\\n    95|TLD_SCORE = {\\n    96|    \\\".com\\\": 100, \\\".ai\\\": 88, \\\".co\\\": 78, \\\".io\\\": 72,\\n    97|    \\\".net\\\": 65,  \\\".org\\\": 60, \\\".app\\\": 55, \\\".dev\\\": 53,\\n    98|    \\\".tech\\\": 45, \\\".so\\\": 43,  \\\".me\\\": 40,  \\\".xyz\\\": 22,\\n    99|}\\n   100|\\n   101|TLD_REGISTRAR = {\\n   102|    \\\".com\\\":  \\\"Namecheap\\\", \\\".ai\\\":   \\\"Namecheap\\\", \\\".co\\\":   \\\"GoDaddy\\\",\\n   103|    \\\".io\\\":   \\\"Namecheap\\\", \\\".net\\\":  \\\"Namecheap\\\", \\\".org\\\":  \\\"Namecheap\\\",\\n   104|    \\\".app\\\":  \\\"Google Domains\\\", \\\".dev\\\":  \\\"Google Domains\\\",\\n   105|    \\\".tech\\\": \\\"Namecheap\\\", \\\".so\\\":   \\\"Namecheap\\\", \\\".me\\\":   \\\"Namecheap\\\",\\n   106|    \\\".xyz\\\":  \\\"Namecheap\\\",\\n   107|}\\n   108|\\n   109|_live_prices: dict = {}\\n   110|\\n   111|def fetch_porkbun_prices():\\n   112|    \\\"\\\"\\\"Pull real registration prices from Porkbun (public endpoint, no key).\\\"\\\"\\\"\\n   113|    global _live_prices\\n   114|    try:\\n   115|        r = requests.post(\\n   116|            \\\"https://porkbun.com/api/json/v3/pricing/get\\\",\\n   117|            json={\\\"secretapikey\\\": \\\"\\\", \\\"apikey\\\": \\\"\\\"}, timeout=12,\\n   118|        )\\n   119|        if r.status_code == 200:\\n   120|            data = r.json()\\n   121|            if data.get(\\\"status\\\") == \\\"SUCCESS\\\":\\n   122|                _live_prices = {\\n   123|                    f\\\".{tld}\\\": info.get(\\\"registration\\\", \\\"\\\")\\n   124|                    for tld, info in data.get(\\\"pricing\\\", {}).items()\\n   125|                }\\n   126|                log.info(f\\\"Porkbun: live prices for {len(_live_prices)} TLDs\\\")\\n   127|    except Exception as e:\\n   128|        log.warning(f\\\"Porkbun pricing unavailable: {e}\\\")\\n   129|\\n   130|PRICE_FALLBACK = {\\n   131|    \\\".com\\\": \\\"~$10/yr\\\", \\\".ai\\\": \\\"~$80/yr\\\", \\\".co\\\": \\\"~$28/yr\\\", \\\".io\\\": \\\"~$45/yr\\\",\\n   132|    \\\".net\\\": \\\"~$13/yr\\\", \\\".org\\\": \\\"~$12/yr\\\", \\\".app\\\": \\\"~$20/yr\\\", \\\".dev\\\": \\\"~$14/yr\\\",\\n   133|    \\\".tech\\\": \\\"~$10/yr\\\", \\\".so\\\": \\\"~$35/yr\\\", \\\".me\\\": \\\"~$18/yr\\\", \\\".xyz\\\": \\\"~$3/yr\\\",\\n   134|}\\n   135|\\n   136|def tld_price(tld: str) -> str:\\n   137|    raw = _live_prices.get(tld, \\\"\\\")\\n   138|    if raw:\\n   139|        try:\\n   140|            return f\\\"${float(raw):.2f}/yr\\\"\\n   141|        except ValueError:\\n   142|            pass\\n   143|    return PRICE_FALLBACK.get(tld, \\\"—\\\")\\n   144|\\n   145|# ── Dictionary ────────────────────────────────────────────────────────────────\\n   146|DICT_WORDS: set = set()\\n   147|\\n   148|def load_dict():\\n   149|    global DICT_WORDS\\n   150|    for path in (\\\"/usr/share/dict/words\\\", \\\"/usr/dict/words\\\"):\\n   151|        try:\\n   152|            with open(path) as f:\\n   153|                DICT_WORDS = {w.strip().lower() for w in f if 3 <= len(w.strip()) <= 14}\\n   154|            log.info(f\\\"Dictionary: {len(DICT_WORDS)} words loaded\\\")\\n   155|            return\\n   156|        except Exception:\\n   157|            pass\\n   158|    log.warning(\\\"No system dictionary found — dictionary scoring disabled\\\")\\n   159|\\n   160|# ── Proactive Domain Name Generation ─────────────────────────────────────────\\n   161|\\n   162|def generate_candidates() -> list:\\n   163|    \\\"\\\"\\\"Generate brandable domain name candidates from trending keywords.\\\"\\\"\\\"\\n   164|    candidates = set()\\n   165|\\n   166|    # Strategy 1: prefix + trend word\\n   167|    for prefix in COMMERCIAL_PREFIXES:\\n   168|        for tw in TREND_WORDS:\\n   169|            candidates.add(prefix + tw)\\n   170|\\n   171|    # Strategy 2: trend word + brand suffix\\n   172|    for tw in TREND_WORDS:\\n   173|        for sfx in BRAND_SUFFIXES:\\n   174|            candidates.add(tw + sfx)\\n   175|\\n   176|    # Strategy 3: trend + trend combos (sorted to avoid duplicates)\\n   177|    trend_list = sorted(TREND_WORDS.keys())\\n   178|    for i, t1 in enumerate(trend_list):\\n   179|        for t2 in trend_list[i:]:\\n   180|            if t1 != t2:\\n   181|                combo = t1 + t2\\n   182|                if len(combo) <= 14:\\n   183|                    candidates.add(combo)\\n   184|\\n   185|    # Strategy 4: prefix + trend + trend\\n   186|    for prefix in COMMERCIAL_PREFIXES[:5]:\\n   187|        for t1 in trend_list[:5]:\\n   188|            for t2 in trend_list[:5]:\\n   189|                combo = prefix + t1 + t2\\n   190|                if len(combo) <= 14:\\n   191|                    candidates.add(combo)\\n   192|\\n   193|    # Strategy 5: brandable short names (pseudo-syllables)\\n   194|    starts = [\\\"al\\\", \\\"bl\\\", \\\"br\\\", \\\"cl\\\", \\\"cr\\\", \\\"dr\\\", \\\"fl\\\", \\\"fr\\\", \\\"gl\\\", \\\"gr\\\",\\n   195|              \\\"kn\\\", \\\"pl\\\", \\\"pr\\\", \\\"sl\\\", \\\"sn\\\", \\\"sp\\\", \\\"st\\\", \\\"sw\\\", \\\"tr\\\", \\\"tw\\\", \\\"wr\\\"]\\n   196|    vowels = [\\\"ai\\\", \\\"ae\\\", \\\"io\\\", \\\"ea\\\", \\\"ou\\\", \\\"ei\\\", \\\"ar\\\", \\\"er\\\", \\\"or\\\", \\\"ur\\\"]\\n   197|    endings = [\\\"go\\\", \\\"zo\\\", \\\"do\\\", \\\"lo\\\", \\\"mo\\\", \\\"no\\\", \\\"ro\\\", \\\"to\\\", \\\"vo\\\", \\\"xa\\\", \\\"ze\\\"]\\n   198|\\n   199|    for _ in range(100):\\n   200|        name = random.choice(starts) + random.choice(vowels) + random.choice(endings)\\n   201|        if 4 <= len(name) <= 10:\\n   202|            candidates.add(name)\\n   203|\\n   204|    # Remove dictionary words and filter length\\n   205|    filtered = [\\n   206|        d for d in candidates\\n   207|        if d not in DICT_WORDS and 4 <= len(d) <= 14 and d.isalpha()\\n   208|    ]\\n   209|    log.info(f\\\"Proactive generation: {len(candidates)} names, {len(filtered)} after filtering\\\")\\n   210|    return filtered\\n   211|\\n   212|# ── Scoring ───────────────────────────────────────────────────────────────────\\n   213|\\n   214|# Keywords that signal commercial intent / action-orientation when found\\n   215|# inside a domain name (substrings).\\n   216|COMMERCIAL_ACTION_KEYWORDS = [\\n   217|    \\\"build\\\", \\\"create\\\", \\\"make\\\", \\\"design\\\", \\\"ship\\\", \\\"deploy\\\", \\\"host\\\",\\n   218|    \\\"manage\\\", \\\"launch\\\", \\\"run\\\",\\n   219|]\\n   220|\\n   221|# Pattern fragments that strongly suggest a SaaS/agency/consulting brand.\\n   222|SERVICE_SOUNDS = [\\n   223|    \\\"ai\\\", \\\"bot\\\", \\\"hub\\\", \\\"lab\\\", \\\"ops\\\", \\\"dev\\\", \\\"stack\\\", \\\"flow\\\",\\n   224|    \\\"ware\\\", \\\"cloud\\\", \\\"sync\\\", \\\"kit\\\", \\\"grid\\\", \\\"mesh\\\", \\\"metric\\\",\\n   225|    \\\"prompt\\\", \\\"vector\\\", \\\"neural\\\", \\\"automation\\\", \\\"agency\\\", \\\"works\\\",\\n   226|    \\\"base\\\", \\\"deck\\\", \\\"link\\\", \\\"chain\\\", \\\"node\\\",\\n   227|]\\n   228|\\n   229|\\n   230|def _detect_commercial_intent(name: str) -> tuple:\\n   231|    \\\"\\\"\\\"Return (found_keywords: list, score_0_to_15).\\\"\\\"\\\"\\n   232|    nl = name.lower()\\n   233|    found = [kw for kw in COMMERCIAL_ACTION_KEYWORDS if kw in nl]\\n   234|    score = min(15, len(found) * 8)  # ~8 pts per match, cap 15\\n   235|    return found, score\\n   236|\\n   237|\\n   238|def _detect_b2b_signal(name: str) -> tuple:\\n   239|    \\\"\\\"\\\"Return (matched_pairs: list, score_0_to_10).\\n   240|\\n   241|    Detects 2-word combos that sound like products/services:\\n   242|    - starts with a commercial prefix AND ends with a trend word\\n   243|    - trend word + suffix pattern (e.g., 'flowstack', 'shipmetric')\\n   244|    \\\"\\\"\\\"\\n   245|    nl = name.lower()\\n   246|    pairs = []\\n   247|\\n   248|    # Pattern 1: commercial_prefix + trend_word (prefix match)\\n   249|    for prefix in COMMERCIAL_PREFIXES:\\n   250|        if nl.startswith(prefix) and len(nl) > len(prefix):\\n   251|            remainder = nl[len(prefix):]\\n   252|            for tw, _ in TREND_WORDS.items():\\n   253|                if tw in remainder or remainder.startswith(tw):\\n   254|                    pairs.append(f\\\"{prefix}+{tw}\\\")\\n   255|                    break\\n   256|\\n   257|    # Pattern 2: trend_word + brand_suffix\\n   258|    if not pairs:\\n   259|        for tw, _ in TREND_WORDS.items():\\n   260|            if nl.startswith(tw) and len(nl) > len(tw):\\n   261|                remainder = nl[len(tw):]\\n   262|                for sfx in BRAND_SUFFIXES:\\n   263|                    if remainder == sfx or remainder.startswith(sfx) or remainder.endswith(sfx):\\n   264|                        pairs.append(f\\\"{tw}+{sfx}\\\")\\n   265|                        break\\n   266|\\n   267|    score = min(10, len(pairs) * 5)  # 5 pts per pair match, cap 10\\n   268|    return pairs, score\\n   269|\\n   270|\\n   271|def _trend_alignment(name: str) -> tuple:\\n   272|    \\\"\\\"\\\"Return (matched_trends: list, score_0_to_15).\\n   273|\\n   274|    Cross-reference with TREND_WORDS, weight by trend score values (4,3,2).\\n   275|    \\\"\\\"\\\"\\n   276|    nl = name.lower()\\n   277|    matched = []\\n   278|    raw_score = 0\\n   279|    for tw, tw_score in TREND_WORDS.items():\\n   280|        if tw in nl:\\n   281|            matched.append(tw)\\n   282|            raw_score += tw_score  # trend score value as weight\\n   283|    # scale: max possible raw ~20+ if many match; cap scaled to 15\\n   284|    score = min(15, raw_score * 2)\\n   285|    return matched, score\\n   286|\\n   287|\\n   288|def _service_readiness_factor(name: str) -> int:\\n   289|    \\\"\\\"\\\"Return 0-15: does the domain sound like a SaaS/agency/consulting brand?\\\"\\\"\\\"\\n   290|    nl = name.lower()\\n   291|    hits = sum(1 for ss in SERVICE_SOUNDS if ss in nl)\\n   292|    has_service_tld = any(nl.endswith(e) for e in (\\\".ai\\\", \\\".io\\\", \\\".app\\\", \\\".tech\\\", \\\".dev\\\", \\\".so\\\"))\\n   293|    bonus = 3 if has_service_tld else 0\\n   294|    length_bonus = 3 if 4 <= len(nl) <= 10 else 0\\n   295|    return min(15, hits * 3 + bonus + length_bonus)\\n   296|\\n   297|\\n   298|def score_hunter(domain: str, has_history: bool = False) -> tuple:\\n   299|    \\\"\\\"\\\"Domain resale scoring (0-100).\\n   300|\\n   301|    Factor budget (100 pts):\\n   302|      Existing  — tld(15), length(12), clean(7), no_digits(4), dict(7), history(5) = 50\\n   303|      New       — commercial_intent(15), b2b_signal(10), trend_align(15), svc_ready(10) = 50\\n   304|    \\\"\\\"\\\"\\n   305|    dot = domain.rfind(\\\".\\\")\\n   306|    if dot < 1:\\n   307|        return 0, {}\\n   308|    name = domain[:dot]\\n   309|    tld  = domain[dot:]\\n   310|    if tld not in TLD_SCORE:\\n   311|        return 0, {}\\n   312|\\n   313|    f = {}\\n   314|    s = 0\\n   315|\\n   316|    ts = TLD_SCORE[tld]\\n   317|    f[\\\"tld_pts\\\"] = int(ts * 0.15)   # max ~15 (was 28)\\n   318|    s += f[\\\"tld_pts\\\"]\\n   319|\\n   320|    L = len(name)\\n   321|    f[\\\"length\\\"] = L\\n   322|    lpts = max(0, 14 - max(0, L - 4) * 2)   # max 14 (was 22)\\n   323|    s += lpts\\n   324|\\n   325|    f[\\\"clean\\\"] = \\\"-\\\" not in name\\n   326|    s += 7 if f[\\\"clean\\\"] else 0    # (was 12)\\n   327|\\n   328|    f[\\\"no_digits\\\"] = not any(c.isdigit() for c in name)\\n   329|    s += 4 if f[\\\"no_digits\\\"] else 0  # (was 8)\\n   330|\\n   331|    f[\\\"dictionary\\\"] = name.lower() in DICT_WORDS\\n   332|    s += 7 if f[\\\"dictionary\\\"] else 0  # (was 18)\\n   333|\\n   334|    f[\\\"has_history\\\"] = has_history\\n   335|    s += 5 if has_history else 0   # (was 12)\\n   336|\\n   337|    # ── NEW: Commercial intent keyword detection ──\\n   338|    comm_keywords, comm_score = _detect_commercial_intent(name)\\n   339|    f[\\\"commercial_keywords\\\"] = comm_keywords\\n   340|    s += comm_score                # 0-15\\n   341|\\n   342|    # ── NEW: B2B signal scoring ──\\n   343|    b2b_pairs, b2b_score = _detect_b2b_signal(name)\\n   344|    f[\\\"b2b_signals\\\"] = b2b_pairs\\n   345|    s += b2b_score                 # 0-10\\n   346|\\n   347|    # ── NEW: Trend alignment ──\\n   348|    trend_matches, trend_score = _trend_alignment(name)\\n   349|    f[\\\"trend_words\\\"] = trend_matches\\n   350|    s += trend_score               # 0-15\\n   351|\\n   352|    # ── NEW: Service-readiness factor ──\\n   353|    svc_score = _service_readiness_factor(name)\\n   354|    f[\\\"service_readiness\\\"] = svc_score\\n   355|    s += svc_score                 # 0-10\\n   356|\\n   357|    return min(s, 100), f\\n   358|\\n   359|\\n   360|def score_service_readiness(domain: str) -> dict:\\n   361|    \\\"\\\"\\\"Score for digital service/sales potential (0-80).\\n   362|\\n   363|    Factor budget (80 pts):\\n   364|      commercial_keywords(15) + commercial_affix(10) + trend_align(15) +\\n   365|      brandability(10) + service_tld(5) + b2b_indicators(15) + svc_sound(10)\\n   366|    \\\"\\\"\\\"\\n   367|    dot = domain.rfind(\\\".\\\")\\n   368|    if dot < 1:\\n   369|        return {\\\"score\\\": 0, \\\"factors\\\": {}, \\\"verdict\\\": \\\"skip\\\"}\\n   370|\\n   371|    name = domain[:dot].lower()\\n   372|    tld = domain[dot:]\\n   373|    factors = {}\\n   374|\\n   375|    # Commercial keyword detection: action words found in the name (0-15)\\n   376|    comm_keywords, f_commercial = _detect_commercial_intent(name)\\n   377|    factors[\\\"commercial_keywords\\\"] = comm_keywords\\n   378|\\n   379|    # Commercial prefix/suffix affix match (0-10)\\n   380|    affix_score = 0\\n   381|    for p in COMMERCIAL_PREFIXES:\\n   382|        if name.startswith(p) and name != p:\\n   383|            affix_score += 1\\n   384|            break\\n   385|    for suf in BRAND_SUFFIXES:\\n   386|        if name.endswith(suf) and name != suf:\\n   387|            affix_score += 1\\n   388|            break\\n   389|    f_affix = min(10, affix_score * 5)\\n   390|    factors[\\\"commercial_affixes\\\"] = affix_score\\n   391|\\n   392|    # Trend alignment weighted by TREND_WORDS score values (0-15)\\n   393|    trend_matched = []\\n   394|    trend_raw = 0\\n   395|    for tw, tw_score in TREND_WORDS.items():\\n   396|        if tw in name:\\n   397|            trend_matched.append(tw)\\n   398|            trend_raw += tw_score\\n   399|    f_trend = min(15, trend_raw * 2)\\n   400|    factors[\\\"trend_alignment\\\"] = trend_matched\\n   401|\\n   402|    # Brandability (0-10)\\n   403|    is_brandable = len(name) <= 15 and \\\"-\\\" not in name and name.isalpha()\\n   404|    factors[\\\"brandable\\\"] = is_brandable\\n   405|    f_brandable = 10 if is_brandable else 0\\n   406|\\n   407|    # Service-readiness TLD (0-5)\\n   408|    service_tlds = {\\\".com\\\": 5, \\\".ai\\\": 4, \\\".io\\\": 4, \\\".co\\\": 3,\\n   409|                    \\\".app\\\": 3, \\\".tech\\\": 2, \\\".dev\\\": 2, \\\".so\\\": 2}\\n   410|    f_service_tld = service_tlds.get(tld, 1)\\n   411|    factors[\\\"service_tld_fit\\\"] = f_service_tld\\n   412|\\n   413|    # B2B indicators expanded (0-15)\\n   414|    b2b_words = [\\\"ai\\\", \\\"agent\\\", \\\"bot\\\", \\\"api\\\", \\\"data\\\", \\\"cloud\\\", \\\"ops\\\",\\n   415|                 \\\"metric\\\", \\\"analytic\\\", \\\"dashboard\\\", \\\"pipeline\\\", \\\"platform\\\",\\n   416|                 \\\"sync\\\", \\\"flow\\\", \\\"stack\\\", \\\"hub\\\", \\\"grid\\\"]\\n   417|    b2b_found = [bw for bw in b2b_words if bw in name]\\n   418|    factors[\\\"b2b_indicators\\\"] = b2b_found\\n   419|    f_b2b = min(15, len(b2b_found) * 5)\\n   420|\\n   421|    # Service-readiness \\\"sounds like SaaS/agency\\\" (0-10)\\n   422|    f_svc_sound = _service_readiness_factor(name)\\n   423|    # Scale down from 0-15 to 0-10 to fit budget\\n   424|    f_svc_sound = int(f_svc_sound * 10 / 15)\\n   425|    factors[\\\"service_sound\\\"] = f_svc_sound\\n   426|\\n   427|    total = f_commercial + f_affix + f_trend + f_brandable + f_service_tld + f_b2b + f_svc_sound\\n   428|    total = min(total, 80)\\n   429|\\n   430|    # ── Improved verdict thresholds ──\\n   431|    if total >= 55:\\n   432|        verdict = \\\"product + flip\\\"\\n   433|    elif total >= 35:\\n   434|        verdict = \\\"flip only\\\"\\n   435|    elif total >= 20:\\n   436|        verdict = \\\"potential\\\"\\n   437|    else:\\n   438|        verdict = \\\"skip\\\"\\n   439|\\n   440|    return {\\n   441|        \\\"score\\\": total,\\n   442|        \\\"factors\\\": factors,\\n   443|        \\\"verdict\\\": verdict,\\n   444|    }\\n   445|\\n   446|\\n   447|def resale_range(s: int) -> str:\\n   448|    if s >= 90: return \\\"$10k–$100k+\\\"\\n   449|    if s >= 75: return \\\"$1k–$10k\\\"\\n   450|    if s >= 60: return \\\"$200–$1k\\\"\\n   451|    if s >= 45: return \\\"$50–$200\\\"\\n   452|    return \\\"$10–$50\\\"\\n   453|\\n   454|# ── Availability via RDAP ─────────────────────────────────────────────────────\\n   455|\\n   456|RDAP = {\\n   457|    \\\".com\\\":  \\\"https://rdap.verisign.com/com/v1/domain/\\\",\\n   458|    \\\".net\\\":  \\\"https://rdap.verisign.com/net/v1/domain/\\\",\\n   459|    \\\".org\\\":  \\\"https://rdap.publicinterestregistry.org/rdap/domain/\\\",\\n   460|    \\\".io\\\":   \\\"https://rdap.nic.io/domain/\\\",\\n   461|    \\\".co\\\":   \\\"https://rdap.nic.co/domain/\\\",\\n   462|    \\\".ai\\\":   \\\"https://rdap.nic.ai/domain/\\\",\\n   463|    \\\".app\\\":  \\\"https://rdap.nic.google/rdap/domain/\\\",\\n   464|    \\\".dev\\\":  \\\"https://rdap.nic.google/rdap/domain/\\\",\\n   465|    \\\".me\\\":   \\\"https://rdap.nic.me/domain/\\\",\\n   466|    \\\".tech\\\": \\\"https://rdap.nic.tech/domain/\\\",\\n   467|    \\\".xyz\\\":  \\\"https://rdap.nic.xyz/domain/\\\",\\n   468|    \\\".so\\\":   \\\"https://rdap.nic.so/domain/\\\",\\n   469|}\\n   470|\\n   471|def check_availability(domain: str) -> str:\\n   472|    tld = \\\".\\\" + domain.split(\\\".\\\")[-1]\\n   473|    base = RDAP.get(tld)\\n   474|    if base:\\n   475|        try:\\n   476|            r = requests.get(\\n   477|                base + domain, timeout=6,\\n   478|                headers={\\\"Accept\\\": \\\"application/rdap+json\\\"},\\n   479|            )\\n   480|            if r.status_code == 404:\\n   481|                return \\\"available\\\"\\n   482|            if r.status_code == 200:\\n   483|                return \\\"taken\\\"\\n   484|        except Exception:\\n   485|            pass\\n   486|    try:\\n   487|        socket.setdefaulttimeout(3)\\n   488|        socket.getaddrinfo(domain, None)\\n   489|        return \\\"taken\\\"\\n   490|    except socket.gaierror:\\n   491|        return \\\"available\\\"\\n   492|    return \\\"unknown\\\"\\n   493|\\n   494|# ── Wayback Machine enrichment ────────────────────────────────────────────────\\n   495|\\n   496|def had_wayback_history(domain: str) -> bool:\\n   497|    try:\\n   498|        r = requests.get(\\n   499|            \\\"https://web.archive.org/cdx/search/cdx\\\",\\n   500|            params={\\n   501|\", \"total_lines\": 738, \"file_size\": 28657, \"truncated\": true, \"hint\": \"Use offset=501 to continue reading (showing 1-500 of 738 lines)\", \"is_binary\": false, \"is_image\": false}",
+      "tool_call_id": "call_76c6dc57f381470f8171ba32"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "I need to see the rest of the file. Let me read from line 501 onward.\n",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "I need to see the rest of the file. Let me read from line 501 onward.\n",
+      "tool_calls": [
+        {
+          "id": "call_b35ad356db954ff397145cd3",
+          "call_id": "call_b35ad356db954ff397145cd3",
+          "response_item_id": "fc_b35ad356db954ff397145cd3",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"offset\": 501}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "read_file",
+      "content": "{\"content\": \"   501|                \\\"url\\\": domain, \\\"output\\\": \\\"json\\\", \\\"limit\\\": \\\"1\\\",\\n   502|                \\\"fl\\\": \\\"statuscode\\\", \\\"filter\\\": \\\"statuscode:200\\\",\\n   503|            },\\n   504|            timeout=6,\\n   505|        )\\n   506|        if r.status_code == 200:\\n   507|            data = r.json()\\n   508|            return len(data) > 1\\n   509|    except Exception:\\n   510|        pass\\n   511|    return False\\n   512|\\n   513|# ── Email HTML ────────────────────────────────────────────────────────────────\\n   514|\\n   515|def _nc_url(d):   return f\\\"https://www.namecheap.com/domains/registration/results/?domain={d}\\\"\\n   516|def _wb_url(d):   return f\\\"https://web.archive.org/web/*/{d}\\\"\\n   517|def _whois_url(d): return f\\\"https://who.is/whois/{d}\\\"\\n   518|\\n   519|_BTN = (\\n   520|    \\\"display:inline-block;padding:5px 13px;border-radius:5px;font-size:12px;\\\"\\n   521|    \\\"font-weight:600;text-decoration:none;color:#ffffff;margin-right:4px;\\\"\\n   522|    \\\"line-height:1.4;cursor:pointer;\\\"\\n   523|)\\n   524|_PILL = (\\n   525|    \\\"display:inline-block;padding:2px 7px;border-radius:3px;\\\"\\n   526|    \\\"font-size:10px;font-weight:500;margin-right:3px;letter-spacing:.2px;\\\"\\n   527|)\\n   528|\\n   529|def _score_color(s):\\n   530|    if s >= 75: return (\\\"#16a34a\\\", \\\"#dcfce7\\\")\\n   531|    if s >= 50: return (\\\"#b45309\\\", \\\"#fef3c7\\\")\\n   532|    return             (\\\"#dc2626\\\", \\\"#fee2e2\\\")\\n   533|\\n   534|\\n   535|def build_email_html(domains: list) -> str:\\n   536|    today    = date.today().strftime(\\\"%B %d, %Y\\\")\\n   537|    avail_ct = sum(1 for d in domains if d[\\\"availability\\\"] == \\\"available\\\")\\n   538|    hist_ct  = sum(1 for d in domains if d[\\\"factors\\\"].get(\\\"has_history\\\"))\\n   539|\\n   540|    rows = \\\"\\\"\\n   541|    for i, d in enumerate(domains, 1):\\n   542|        dom   = d[\\\"domain\\\"]\\n   543|        sc    = d[\\\"score\\\"]\\n   544|        f     = d[\\\"factors\\\"]\\n   545|        avail = d[\\\"availability\\\"]\\n   546|        tld   = dom[dom.rfind(\\\".\\\"):]\\n   547|        price = tld_price(tld)\\n   548|        reg   = TLD_REGISTRAR.get(tld, \\\"Namecheap\\\")\\n   549|        est   = resale_range(sc)\\n   550|        fg, bg = _score_color(sc)\\n   551|        svc_score = d.get(\\\"service_score\\\", 0)\\n   552|        verdict = d.get(\\\"verdict\\\", \\\"\\\")\\n   553|\\n   554|        if avail == \\\"available\\\":\\n   555|            avail_html = '<span style=\\\"color:#16a34a;font-weight:600\\\">✓ Available</span>'\\n   556|        elif avail == \\\"unknown\\\":\\n   557|            avail_html = '<span style=\\\"color:#6b7280\\\">? Unverified</span>'\\n   558|        else:\\n   559|            avail_html = '<span style=\\\"color:#d1d5db\\\">Taken</span>'\\n   560|\\n   561|        pills = \\\"\\\"\\n   562|        if verdict == \\\"product + flip\\\":\\n   563|            pills += f'<span style=\\\"{_PILL}background:#eff6ff;color:#1d4ed8\\\">Product+Flip</span>'\\n   564|        elif verdict == \\\"flip only\\\":\\n   565|            pills += f'<span style=\\\"{_PILL}background:#fef3c7;color:#b45309\\\">Flip</span>'\\n   566|        if f.get(\\\"dictionary\\\"):\\n   567|            pills += f'<span style=\\\"{_PILL}background:#f0fdf4;color:#15803d\\\">Word</span>'\\n   568|        if f.get(\\\"clean\\\"):\\n   569|            pills += f'<span style=\\\"{_PILL}background:#f0fdf4;color:#15803d\\\">Clean</span>'\\n   570|        if f.get(\\\"length\\\", 99) <= 5:\\n   571|            pills += f'<span style=\\\"{_PILL}background:#faf5ff;color:#7e22ce\\\">Short</span>'\\n   572|        if f.get(\\\"has_history\\\"):\\n   573|            pills += f'<span style=\\\"{_PILL}background:#fff7ed;color:#c2410c\\\">History</span>'\\n   574|\\n   575|        rows += f\\\"\\\"\\\"\\n   576|        <tr style=\\\"border-bottom:1px solid #f3f4f6;vertical-align:middle\\\">\\n   577|          <td style=\\\"padding:12px 6px 12px 16px;color:#9ca3af;font-size:12px\\\">{i}</td>\\n   578|          <td style=\\\"padding:12px 6px\\\">\\n   579|            <a href=\\\"{_nc_url(dom)}\\\"\\n   580|               style=\\\"font-size:15px;font-weight:700;color:#111827;text-decoration:none\\\"\\n   581|            >{dom}</a>\\n   582|            <div style=\\\"margin-top:4px\\\">{pills}</div>\\n   583|          </td>\\n   584|          <td style=\\\"padding:12px 6px;text-align:center;white-space:nowrap\\\">\\n   585|            <span style=\\\"background:{bg};color:{fg};padding:3px 9px;border-radius:20px;\\n   586|                         font-weight:700;font-size:12px\\\">{resale_range(sc)}</span>\\n   587|            <div style=\\\"margin-top:4px;font-size:11px;color:#6b7280\\\">Svc: {svc_score}/80</div>\\n   588|          </td>\\n   589|          <td style=\\\"padding:12px 6px;font-size:13px\\\">{avail_html}</td>\\n   590|          <td style=\\\"padding:12px 6px;font-size:13px\\\">\\n   591|            <strong style=\\\"color:#111827\\\">{price}</strong><br>\\n   592|            <span style=\\\"color:#9ca3af;font-size:11px\\\">{reg}</span>\\n   593|          </td>\\n   594|          <td style=\\\"padding:12px 6px;white-space:nowrap\\\">\\n   595|            <a href=\\\"{_nc_url(dom)}\\\"   style=\\\"{_BTN}background:#2563eb\\\">Register</a>\\n   596|            <a href=\\\"{_wb_url(dom)}\\\"   style=\\\"{_BTN}background:#6b7280\\\">History</a>\\n   597|            <a href=\\\"{_whois_url(dom)}\\\" style=\\\"{_BTN}background:#374151\\\">WHOIS</a>\\n   598|          </td>\\n   599|        </tr>\\\"\\\"\\\"\\n   600|\\n   601|    return f\\\"\\\"\\\"<!DOCTYPE html>\\n   602|<html lang=\\\"en\\\">\\n   603|<head><meta charset=\\\"utf-8\\\"><meta name=\\\"viewport\\\" content=\\\"width=device-width,initial-scale=1\\\"></head>\\n   604|<body style=\\\"margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif\\\">\\n   605|<div style=\\\"max-width:940px;margin:24px auto;background:#ffffff;border-radius:12px;\\n   606|            overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.08)\\\">\\n   607|\\n   608|  <!-- Header -->\\n   609|  <div style=\\\"background:#0f172a;padding:28px 32px\\\">\\n   610|    <div style=\\\"font-size:22px;font-weight:700;color:#ffffff\\\">🌐 Domain Hunter v2</div>\\n   611|    <div style=\\\"margin-top:6px;color:#94a3b8;font-size:13px\\\">\\n   612|      {today} &nbsp;·&nbsp;\\n   613|      <strong style=\\\"color:#e2e8f0\\\">{len(domains)}</strong> domains &nbsp;·&nbsp;\\n   614|      <strong style=\\\"color:#4ade80\\\">{avail_ct}</strong> confirmed available &nbsp;·&nbsp;\\n   615|      <strong style=\\\"color:#fb923c\\\">{hist_ct}</strong> with web history\\n   616|    </div>\\n   617|  </div>\\n   618|\\n   619|  <!-- Table -->\\n   620|  <div style=\\\"overflow-x:auto\\\">\\n   621|  <table style=\\\"width:100%;border-collapse:collapse;min-width:700px\\\">\\n   622|    <thead>\\n   623|      <tr style=\\\"background:#f9fafb;border-bottom:2px solid #e5e7eb;text-align:left\\\">\\n   624|        <th style=\\\"padding:10px 6px 10px 16px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">#</th>\\n   625|        <th style=\\\"padding:10px 6px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">Domain</th>\\n   626|        <th style=\\\"padding:10px 6px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">Resale / Service</th>\\n   627|        <th style=\\\"padding:10px 6px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">Avail</th>\\n   628|        <th style=\\\"padding:10px 6px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">Price</th>\\n   629|        <th style=\\\"padding:10px 6px;font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase\\\">Action</th>\\n   630|      </tr>\\n   631|    </thead>\\n   632|    <tbody>{rows}</tbody>\\n   633|  </table>\\n   634|  </div>\\n   635|\\n   636|  <!-- Footer -->\\n   637|  <div style=\\\"background:#f9fafb;padding:20px 32px;font-size:11px;color:#9ca3af;text-align:center\\\">\\n   638|    Scores combine resale potential (resale range) and service-readiness (svc score).\\n   639|    Higher resale + \\\"Product+Flip\\\" verdict = best candidates for building a digital service.\\n   640|    <div style=\\\"margin-top:6px\\\">Powered by Domain Hunter v2 · Proactive Discovery Engine</div>\\n   641|  </div>\\n   642|</div>\\n   643|</body></html>\\\"\\\"\\\"\\n   644|\\n   645|\\n   646|def send_email(html: str, domain_count: int):\\n   647|    msg = MIMEMultipart(\\\"alternative\\\")\\n   648|    msg[\\\"Subject\\\"] = f\\\"🌐 Domain Hunter — {domain_count} available domains\\\"\\n   649|    msg[\\\"From\\\"]    = FROM_EMAIL\\n   650|    msg[\\\"To\\\"]      = TO_EMAIL\\n   651|    msg.attach(MIMEText(html, \\\"html\\\"))\\n   652|\\n   653|    try:\\n   654|        with smtplib.SMTP(\\\"smtp.gmail.com\\\", 587, timeout=15) as s:\\n   655|            s.starttls()\\n   656|            s.login(FROM_EMAIL, FROM_PASS)\\n   657|            s.sendmail(FROM_EMAIL, TO_EMAIL, msg.as_string())\\n   658|        log.info(f\\\"Email sent ({domain_count} domains)\\\")\\n   659|    except Exception as e:\\n   660|        log.error(f\\\"Email failed: {e}\\\")\\n   661|\\n   662|# ── Main ──────────────────────────────────────────────────────────────────────\\n   663|\\n   664|def main():\\n   665|    log.info(\\\"=\\\" * 60)\\n   666|    log.info(\\\"Domain Hunter v2 — Proactive Discovery Engine\\\")\\n   667|    log.info(\\\"=\\\" * 60)\\n   668|\\n   669|    load_dict()\\n   670|    fetch_porkbun_prices()\\n   671|\\n   672|    # Step 1: Generate domain name candidates\\n   673|    log.info(\\\"Generating domain name candidates...\\\")\\n   674|    names = sorted(generate_candidates())\\n   675|    random.shuffle(names)  # shuffle for variety\\n   676|    log.info(f\\\"Generated {len(names)} candidate names\\\")\\n   677|\\n   678|    # Step 2: Build full domain list with TLDs and pre-score\\n   679|    tlds = [\\\".com\\\", \\\".ai\\\", \\\".io\\\", \\\".co\\\", \\\".app\\\", \\\".tech\\\", \\\".dev\\\"]\\n   680|    pre = []\\n   681|    for name in names:\\n   682|        for tld in tlds:\\n   683|            domain = name + tld\\n   684|            hs, hf = score_hunter(domain)\\n   685|            if hs >= 30:  # lower threshold since we generate many\\n   686|                svc = score_service_readiness(domain)\\n   687|                pre.append({\\n   688|                    \\\"domain\\\": domain,\\n   689|                    \\\"hunter_score\\\": hs,\\n   690|                    \\\"service_score\\\": svc[\\\"score\\\"],\\n   691|                    \\\"verdict\\\": svc[\\\"verdict\\\"],\\n   692|                    \\\"score\\\": hs,\\n   693|                    \\\"factors\\\": hf,\\n   694|                })\\n   695|\\n   696|    pre.sort(key=lambda x: -x[\\\"service_score\\\"])\\n   697|    candidates = pre[: MAX_REPORT * 4]\\n   698|    log.info(f\\\"Pre-score pass: {len(candidates)} candidates from {len(pre)} raw\\\")\\n   699|\\n   700|    # Step 3: Check availability in parallel\\n   701|    log.info(f\\\"Checking availability for {len(candidates)} domains via RDAP...\\\")\\n   702|    with ThreadPoolExecutor(max_workers=WORKERS) as pool:\\n   703|        futures = {pool.submit(check_availability, d[\\\"domain\\\"]): d for d in candidates}\\n   704|        for fut in as_completed(futures):\\n   705|            futures[fut][\\\"availability\\\"] = fut.result()\\n   706|\\n   707|    # Sort: available first, then by service score\\n   708|    available = [x for x in candidates if x.get(\\\"availability\\\") == \\\"available\\\"]\\n   709|    unknown = [x for x in candidates if x.get(\\\"availability\\\") == \\\"unknown\\\"]\\n   710|    available.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n   711|    unknown.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n   712|    top = available + unknown\\n   713|    final = top[:MAX_REPORT]\\n   714|\\n   715|    log.info(f\\\"Available: {len(available)}, Unknown: {len(unknown)}, Reporting: {len(final)}\\\")\\n   716|\\n   717|    # Step 4: Save JSON for pipeline consumption\\n   718|    json_path = os.path.join(MEMORY_DIR, \\\"latest.json\\\")\\n   719|    output_data = {\\n   720|        \\\"timestamp\\\": date.today().isoformat(),\\n   721|        \\\"total_candidates\\\": len(pre),\\n   722|        \\\"available_count\\\": len(available),\\n   723|        \\\"domains\\\": final,\\n   724|    }\\n   725|    with open(json_path, \\\"w\\\") as f:\\n   726|        json.dump(output_data, f, indent=2)\\n   727|    log.info(f\\\"JSON saved: {json_path}\\\")\\n   728|\\n   729|    # Step 5: Send email\\n   730|    html = build_email_html(final)\\n   731|    send_email(html, len(final))\\n   732|    log.info(\\\"=\\\" * 60)\\n   733|    log.info(\\\"Done\\\")\\n   734|    log.info(\\\"=\\\" * 60)\\n   735|\\n   736|\\n   737|if __name__ == \\\"__main__\\\":\\n   738|    main()\\n   739|\", \"total_lines\": 738, \"file_size\": 28657, \"truncated\": false, \"is_binary\": false, \"is_image\": false}",
+      "tool_call_id": "call_b35ad356db954ff397145cd3"
+    },
+    {
+      "role": "assistant",
+      "content": "I have the full file now. Let me analyze the key areas:\n\n1. **RDAP mapping**: Already complete - all 12 TLDs in `TLD_SCORE` (`.com`, `.ai`, `.co`, `.io`, `.net`, `.org`, `.app`, `.dev`, `.tech`, `.so`, `.me`, `.xyz`) have matching RDAP endpoints and registrar entries.\n\n2. **No argparse**: The file has no CLI argument handling at all.\n\n3. **main() function** already saves JSON unconditionally, but without `--json` flag control.\n\nLet me now implement all the required changes in one comprehensive patch. I'll add argparse, duplicate tracking, JSON mode control, and verify the TLD coverage.",
+      "reasoning": "Now I have the full file. Let me analyze what needs to be done:\n\n1. **JSON Output Mode**: Add `--json` and `--output FILE` to argparse. The file already saves JSON but without `--json` flag control. Need to refactor to use argparse.\n2. **Duplicate Tracking**: Create `evaluated.tsv` tracking, load at startup, skip/flag duplicates.\n3. **GoDaddy Auctions + Dynadot Integration**: The task says the pragmatic approach is to add more TLDs and verify RDAP mapping. Let me check the mapping:\n\nTLD_SCORE has: `.com`, `.ai`, `.co`, `.io`, `.net`, `.org`, `.app`, `.dev`, `.tech`, `.so`, `.me`, `.xyz`\nRDAP has: `.com`, `.net`, `.org`, `.io`, `.co`, `.ai`, `.app`, `.dev`, `.me`, `.tech`, `.xyz`, `.so`\n\nThese match! Good. But `main()` only uses `.com`, `.ai`, `.io`, `.co`, `.app`, `.tech`, `.dev` as candidate TLDs. Let me check if TLD_REGISTRAR matches too - yes it has all TLDs from TLD_SCORE.\n\nSo the RDAP mapping is already complete for all TLDs in TLD_SCORE. But the main function only uses a subset of TLDs. I should update the `main()` function to use more TLDs (all of TLD_SCORE).\n\nNow let me plan the changes:\n\n1. Add `argparse` block to handle `--json`, `--output`, `--fresh`, `--max-domains` flags\n2. Create duplicate tracking with `evaluated.tsv`\n3. Update JSON output format to match the expected schema\n4. Add `--json` flag to skip email\n5. Verify TLDs in RDAP mapping (all match)\n6. Expand TLD coverage in main to include more TLDs\n\nLet me implement these changes.\n\nActually, looking at the main function, it already saves JSON always at `latest.json` (line 723-726). The task is to:\n- Add `--json` flag that makes JSON the primary output (skip email)\n- Add `--output FILE` to specify where to save JSON\n- Add `--fresh` flag to ignore duplicates\n\nLet me write the changes now.\n",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "Now I have the full file. Let me analyze what needs to be done:\n\n1. **JSON Output Mode**: Add `--json` and `--output FILE` to argparse. The file already saves JSON but without `--json` flag control. Need to refactor to use argparse.\n2. **Duplicate Tracking**: Create `evaluated.tsv` tracking, load at startup, skip/flag duplicates.\n3. **GoDaddy Auctions + Dynadot Integration**: The task says the pragmatic approach is to add more TLDs and verify RDAP mapping. Let me check the mapping:\n\nTLD_SCORE has: `.com`, `.ai`, `.co`, `.io`, `.net`, `.org`, `.app`, `.dev`, `.tech`, `.so`, `.me`, `.xyz`\nRDAP has: `.com`, `.net`, `.org`, `.io`, `.co`, `.ai`, `.app`, `.dev`, `.me`, `.tech`, `.xyz`, `.so`\n\nThese match! Good. But `main()` only uses `.com`, `.ai`, `.io`, `.co`, `.app`, `.tech`, `.dev` as candidate TLDs. Let me check if TLD_REGISTRAR matches too - yes it has all TLDs from TLD_SCORE.\n\nSo the RDAP mapping is already complete for all TLDs in TLD_SCORE. But the main function only uses a subset of TLDs. I should update the `main()` function to use more TLDs (all of TLD_SCORE).\n\nNow let me plan the changes:\n\n1. Add `argparse` block to handle `--json`, `--output`, `--fresh`, `--max-domains` flags\n2. Create duplicate tracking with `evaluated.tsv`\n3. Update JSON output format to match the expected schema\n4. Add `--json` flag to skip email\n5. Verify TLDs in RDAP mapping (all match)\n6. Expand TLD coverage in main to include more TLDs\n\nLet me implement these changes.\n\nActually, looking at the main function, it already saves JSON always at `latest.json` (line 723-726). The task is to:\n- Add `--json` flag that makes JSON the primary output (skip email)\n- Add `--output FILE` to specify where to save JSON\n- Add `--fresh` flag to ignore duplicates\n\nLet me write the changes now.\n",
+      "tool_calls": [
+        {
+          "id": "call_b552482621e6473dba8e1745",
+          "call_id": "call_b552482621e6473dba8e1745",
+          "response_item_id": "fc_b552482621e6473dba8e1745",
+          "type": "function",
+          "function": {
+            "name": "process",
+            "arguments": "{\"action\": \"list\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "process",
+      "content": "{\"processes\": []}",
+      "tool_call_id": "call_b552482621e6473dba8e1745"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "There is an active process running that could be affected by edits. Check if it's working on domain_hunter.py.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "There is an active process running that could be affected by edits. Check if it's working on domain_hunter.py.",
+      "tool_calls": [
+        {
+          "id": "call_627f563e9f0644c391955886",
+          "call_id": "call_627f563e9f0644c391955886",
+          "response_item_id": "fc_627f563e9f0644c391955886",
+          "type": "function",
+          "function": {
+            "name": "patch",
+            "arguments": "{\"mode\": \"replace\", \"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\", \"new_string\": \"import os\\nimport re\\nimport sys\\nimport time\\nimport json\\nimport socket\\nimport smtplib\\nimport random\\nimport logging\\nimport argparse\\nimport requests\\nfrom datetime import date\\nfrom concurrent.futures import ThreadPoolExecutor, as_completed\\nfrom email.mime.text import MIMEText\\nfrom email.mime.multipart import MIMEMultipart\", \"old_string\": \"import os\\nimport re\\nimport sys\\nimport time\\nimport json\\nimport socket\\nimport smtplib\\nimport random\\nimport logging\\nimport requests\\nfrom datetime import date\\nfrom concurrent.futures import ThreadPoolExecutor, as_completed\\nfrom email.mime.text import MIMEText\\nfrom email.mime.multipart import MIMEMultipart\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "patch",
+      "content": "{\"success\": true, \"diff\": \"--- a//home/azureuser/domain-hunter/domain_hunter.py\\n+++ b//home/azureuser/domain-hunter/domain_hunter.py\\n@@ -29,6 +29,7 @@\\n import smtplib\\n import random\\n import logging\\n+import argparse\\n import requests\\n from datetime import date\\n from concurrent.futures import ThreadPoolExecutor, as_completed\\n\", \"files_modified\": [\"/home/azureuser/domain-hunter/domain_hunter.py\"], \"lint\": {\"status\": \"ok\", \"output\": \"\"}, \"_warning\": \"/home/azureuser/domain-hunter/domain_hunter.py was last read with offset/limit pagination (partial view). Re-read the whole file before overwriting it.\"}",
+      "tool_call_id": "call_627f563e9f0644c391955886"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": null,
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_d44269dc8d17402ea68d7249",
+          "call_id": "call_d44269dc8d17402ea68d7249",
+          "response_item_id": "fc_d44269dc8d17402ea68d7249",
+          "type": "function",
+          "function": {
+            "name": "patch",
+            "arguments": "{\"mode\": \"replace\", \"new_string\": \"MEMORY_DIR  = os.path.join(os.path.expanduser(\\\"~\\\"), \\\"hermes-workspace\\\", \\\"memory\\\", \\\"domain-hunter\\\")\\nos.makedirs(MEMORY_DIR, exist_ok=True)\\nDUPES_PATH  = os.path.join(MEMORY_DIR, \\\"evaluated.tsv\\\")\\n\\nHEADERS\", \"old_string\": \"MEMORY_DIR  = os.path.join(os.path.expanduser(\\\"~\\\"), \\\"hermes-workspace\\\", \\\"memory\\\", \\\"domain-hunter\\\")\\nos.makedirs(MEMORY_DIR, exist_ok=True)\\n\\nHEADERS\", \"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "patch",
+      "content": "{\"success\": true, \"diff\": \"--- a//home/azureuser/domain-hunter/domain_hunter.py\\n+++ b//home/azureuser/domain-hunter/domain_hunter.py\\n@@ -56,6 +56,7 @@\\n WORKERS     = 10\\n MEMORY_DIR  = os.path.join(os.path.expanduser(\\\"~\\\"), \\\"hermes-workspace\\\", \\\"memory\\\", \\\"domain-hunter\\\")\\n os.makedirs(MEMORY_DIR, exist_ok=True)\\n+DUPES_PATH  = os.path.join(MEMORY_DIR, \\\"evaluated.tsv\\\")\\n \\n HEADERS = {\\n     \\\"User-Agent\\\": (\\n\", \"files_modified\": [\"/home/azureuser/domain-hunter/domain_hunter.py\"], \"lint\": {\"status\": \"ok\", \"output\": \"\"}}",
+      "tool_call_id": "call_d44269dc8d17402ea68d7249"
+    },
+    {
+      "role": "assistant",
+      "content": "Now add the duplicate tracking functions and the portfolio tracker section right before the `send_email` function. Also need to add the `main()` argparse logic and `build_json` output. Let me add the duplicate tracking functions before the email HTML section:",
+      "reasoning": null,
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_3b5b4f850cfe4364b1465bb2",
+          "call_id": "call_3b5b4f850cfe4364b1465bb2",
+          "response_item_id": "fc_3b5b4f850cfe4364b1465bb2",
+          "type": "function",
+          "function": {
+            "name": "patch",
+            "arguments": "{\"new_string\": \"def _whois_url(d): return f\\\"https://who.is/whois/{d}\\\"\\n\\n# ── Duplicate Tracking ────────────────────────────────────────────────────────\\n# Persistent TSV: domain \\\\t date \\\\t availability \\\\t score \\\\t verdict \\\\t action_taken\\n\\ndef load_duplicates() -> dict:\\n    \\\"\\\"\\\"Return {domain: {date, availability, score, verdict, action_taken}}.\\\"\\\"\\\"\\n    dupes = {}\\n    if not os.path.isfile(DUPES_PATH):\\n        return dupes\\n    try:\\n        with open(DUPES_PATH, \\\"r\\\") as f:\\n            header = f.readline()  # skip header\\n            for line in f:\\n                parts = line.strip().split(\\\"\\\\t\\\")\\n                if len(parts) >= 6:\\n                    domain = parts[0]\\n                    dupes[domain] = {\\n                        \\\"date\\\": parts[1],\\n                        \\\"availability\\\": parts[2],\\n                        \\\"score\\\": parts[3],\\n                        \\\"verdict\\\": parts[4],\\n                        \\\"action_taken\\\": parts[5],\\n                    }\\n        log.info(f\\\"Duplicate tracking: loaded {len(dupes)} previously evaluated domains\\\")\\n    except Exception as e:\\n        log.warning(f\\\"Could not load duplicates: {e}\\\")\\n    return dupes\\n\\n\\ndef save_duplicates(dupes: dict):\\n    \\\"\\\"\\\"Write the duplicates dict to the TSV file.\\\"\\\"\\\"\\n    try:\\n        with open(DUPES_PATH, \\\"w\\\") as f:\\n            f.write(\\\"domain\\\\tdate\\\\tavailability\\\\tscore\\\\tverdict\\\\taction_taken\\\\n\\\")\\n            for domain, info in sorted(dupes.items()):\\n                f.write(\\n                    f\\\"{domain}\\\\t{info['date']}\\\\t{info['availability']}\\\\t\\\"\\n                    f\\\"{info['score']}\\\\t{info['verdict']}\\\\t{info['action_taken']}\\\\n\\\"\\n                )\\n        log.info(f\\\"Duplicate tracking: saved {len(dupes)} entries to {DUPES_PATH}\\\")\\n    except Exception as e:\\n        log.warning(f\\\"Could not save duplicates: {e}\\\")\\n\\n\\ndef mark_evaluated(dupes: dict, domain: str, availability: str, score: int,\\n                   verdict: str, action_taken: str, today: str = None):\\n    \\\"\\\"\\\"Record a domain as evaluated in the duplicates dict.\\\"\\\"\\\"\\n    if today is None:\\n        today = date.today().isoformat()\\n    dupes[domain] = {\\n        \\\"date\\\": today,\\n        \\\"availability\\\": availability,\\n        \\\"score\\\": str(score),\\n        \\\"verdict\\\": verdict,\\n        \\\"action_taken\\\": action_taken,\\n    }\\n\\n\\n# ── JSON Output Builder ───────────────────────────────────────────────────────\\n\\ndef build_json_output(final: list, total_candidates: int, today: str = None) -> dict:\\n    \\\"\\\"\\\"Build the JSON output matching the domain_acquisition trigger schema.\\\"\\\"\\\"\\n    if today is None:\\n        today = date.today().isoformat()\\n    results = []\\n    for d in final:\\n        dom = d[\\\"domain\\\"]\\n        tld = dom[dom.rfind(\\\".\\\"):]\\n        results.append({\\n            \\\"domain\\\": dom,\\n            \\\"availability\\\": d.get(\\\"availability\\\", \\\"unknown\\\"),\\n            \\\"score\\\": d.get(\\\"score\\\", 0),\\n            \\\"service_score\\\": d.get(\\\"service_score\\\", 0),\\n            \\\"verdict\\\": d.get(\\\"verdict\\\", \\\"\\\"),\\n            \\\"factors\\\": d.get(\\\"factors\\\", {}),\\n            \\\"price\\\": tld_price(tld),\\n            \\\"registrar\\\": TLD_REGISTRAR.get(tld, \\\"Namecheap\\\"),\\n            \\\"wayback_history\\\": d.get(\\\"factors\\\", {}).get(\\\"has_history\\\", False),\\n        })\\n    return {\\n        \\\"date\\\": today,\\n        \\\"total_domains\\\": total_candidates,\\n        \\\"available\\\": sum(1 for d in final if d.get(\\\"availability\\\") == \\\"available\\\"),\\n        \\\"results\\\": results,\\n    }\\n\\n\\ndef write_json(data: dict, output_path: str):\\n    \\\"\\\"\\\"Write JSON output to a file.\\\"\\\"\\\"\\n    os.makedirs(os.path.dirname(output_path), exist_ok=True)\\n    with open(output_path, \\\"w\\\") as f:\\n        json.dump(data, f, indent=2)\\n    log.info(f\\\"JSON output written: {output_path}\\\")\\n    # Always write to latest.json in memory dir as well (for pipeline compatibility)\\n    latest = os.path.join(MEMORY_DIR, \\\"latest.json\\\")\\n    if os.path.abspath(output_path) != os.path.abspath(latest):\\n        with open(latest, \\\"w\\\") as f:\\n            json.dump(data, f, indent=2)\\n        log.info(f\\\"JSON output also mirrored to: {latest}\\\")\\n\\n\\n# ── Portfolio Tracker ─────────────────────────────────────────────────────────\\n\\ndef load_portfolio() -> list:\\n    \\\"\\\"\\\"Load portfolio.tsv with acquired/registered domains.\\\"\\\"\\\"\\n    path = os.path.join(MEMORY_DIR, \\\"portfolio.tsv\\\")\\n    portfolio = []\\n    if os.path.isfile(path):\\n        try:\\n            with open(path, \\\"r\\\") as f:\\n                header = f.readline()\\n                for line in f:\\n                    parts = line.strip().split(\\\"\\\\t\\\")\\n                    if len(parts) >= 4:\\n                        portfolio.append({\\n                            \\\"domain\\\": parts[0],\\n                            \\\"date_acquired\\\": parts[1],\\n                            \\\"registrar\\\": parts[2],\\n                            \\\"notes\\\": parts[3] if len(parts) > 3 else \\\"\\\",\\n                        })\\n            log.info(f\\\"Portfolio tracker: loaded {len(portfolio)} domains\\\")\\n        except Exception as e:\\n            log.warning(f\\\"Could not load portfolio: {e}\\\")\\n    return portfolio\\n\\n\\ndef add_to_portfolio(domain: str, date_acquired: str = None, registrar: str = \\\"\\\", notes: str = \\\"\\\"):\\n    \\\"\\\"\\\"Add a domain to the portfolio tracker.\\\"\\\"\\\"\\n    if date_acquired is None:\\n        date_acquired = date.today().isoformat()\\n    path = os.path.join(MEMORY_DIR, \\\"portfolio.tsv\\\")\\n    write_header = not os.path.isfile(path)\\n    with open(path, \\\"a\\\") as f:\\n        if write_header:\\n            f.write(\\\"domain\\\\tdate_acquired\\\\tregistrar\\\\tnotes\\\\n\\\")\\n        f.write(f\\\"{domain}\\\\t{date_acquired}\\\\t{registrar}\\\\t{notes}\\\\n\\\")\\n    log.info(f\\\"Portfolio tracker: added {domain}\\\")\\n    return path\\n\\n\\ndef save_portfolio_tsv(portfolio: list, path: str = None):\\n    \\\"\\\"\\\"Save the entire portfolio list.\\\"\\\"\\\"\\n    if path is None:\\n        path = os.path.join(MEMORY_DIR, \\\"portfolio.tsv\\\")\\n    with open(path, \\\"w\\\") as f:\\n        f.write(\\\"domain\\\\tdate_acquired\\\\tregistrar\\\\tnotes\\\\n\\\")\\n        for entry in portfolio:\\n            f.write(\\n                f\\\"{entry['domain']}\\\\t{entry.get('date_acquired', '')}\\\\t\\\"\\n                f\\\"{entry.get('registrar', '')}\\\\t{entry.get('notes', '')}\\\\n\\\"\\n            )\\n    log.info(f\\\"Portfolio tracker: saved {len(portfolio)} entries\\\")\\n\\n\\n_BT\", \"old_string\": \"def _whois_url(d): return f\\\"https://who.is/whois/{d}\\\"\\n\\n_BT\", \"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "patch",
+      "content": "{\"success\": true, \"diff\": \"--- a//home/azureuser/domain-hunter/domain_hunter.py\\n+++ b//home/azureuser/domain-hunter/domain_hunter.py\\n@@ -517,6 +517,159 @@\\n def _nc_url(d):   return f\\\"https://www.namecheap.com/domains/registration/results/?domain={d}\\\"\\n def _wb_url(d):   return f\\\"https://web.archive.org/web/*/{d}\\\"\\n def _whois_url(d): return f\\\"https://who.is/whois/{d}\\\"\\n+\\n+# ── Duplicate Tracking ────────────────────────────────────────────────────────\\n+# Persistent TSV: domain \\\\t date \\\\t availability \\\\t score \\\\t verdict \\\\t action_taken\\n+\\n+def load_duplicates() -> dict:\\n+    \\\"\\\"\\\"Return {domain: {date, availability, score, verdict, action_taken}}.\\\"\\\"\\\"\\n+    dupes = {}\\n+    if not os.path.isfile(DUPES_PATH):\\n+        return dupes\\n+    try:\\n+        with open(DUPES_PATH, \\\"r\\\") as f:\\n+            header = f.readline()  # skip header\\n+            for line in f:\\n+                parts = line.strip().split(\\\"\\\\t\\\")\\n+                if len(parts) >= 6:\\n+                    domain = parts[0]\\n+                    dupes[domain] = {\\n+                        \\\"date\\\": parts[1],\\n+                        \\\"availability\\\": parts[2],\\n+                        \\\"score\\\": parts[3],\\n+                        \\\"verdict\\\": parts[4],\\n+                        \\\"action_taken\\\": parts[5],\\n+                    }\\n+        log.info(f\\\"Duplicate tracking: loaded {len(dupes)} previously evaluated domains\\\")\\n+    except Exception as e:\\n+        log.warning(f\\\"Could not load duplicates: {e}\\\")\\n+    return dupes\\n+\\n+\\n+def save_duplicates(dupes: dict):\\n+    \\\"\\\"\\\"Write the duplicates dict to the TSV file.\\\"\\\"\\\"\\n+    try:\\n+        with open(DUPES_PATH, \\\"w\\\") as f:\\n+            f.write(\\\"domain\\\\tdate\\\\tavailability\\\\tscore\\\\tverdict\\\\taction_taken\\\\n\\\")\\n+            for domain, info in sorted(dupes.items()):\\n+                f.write(\\n+                    f\\\"{domain}\\\\t{info['date']}\\\\t{info['availability']}\\\\t\\\"\\n+                    f\\\"{info['score']}\\\\t{info['verdict']}\\\\t{info['action_taken']}\\\\n\\\"\\n+                )\\n+        log.info(f\\\"Duplicate tracking: saved {len(dupes)} entries to {DUPES_PATH}\\\")\\n+    except Exception as e:\\n+        log.warning(f\\\"Could not save duplicates: {e}\\\")\\n+\\n+\\n+def mark_evaluated(dupes: dict, domain: str, availability: str, score: int,\\n+                   verdict: str, action_taken: str, today: str = None):\\n+    \\\"\\\"\\\"Record a domain as evaluated in the duplicates dict.\\\"\\\"\\\"\\n+    if today is None:\\n+        today = date.today().isoformat()\\n+    dupes[domain] = {\\n+        \\\"date\\\": today,\\n+        \\\"availability\\\": availability,\\n+        \\\"score\\\": str(score),\\n+        \\\"verdict\\\": verdict,\\n+        \\\"action_taken\\\": action_taken,\\n+    }\\n+\\n+\\n+# ── JSON Output Builder ───────────────────────────────────────────────────────\\n+\\n+def build_json_output(final: list, total_candidates: int, today: str = None) -> dict:\\n+    \\\"\\\"\\\"Build the JSON output matching the domain_acquisition trigger schema.\\\"\\\"\\\"\\n+    if today is None:\\n+        today = date.today().isoformat()\\n+    results = []\\n+    for d in final:\\n+        dom = d[\\\"domain\\\"]\\n+        tld = dom[dom.rfind(\\\".\\\"):]\\n+        results.append({\\n+            \\\"domain\\\": dom,\\n+            \\\"availability\\\": d.get(\\\"availability\\\", \\\"unknown\\\"),\\n+            \\\"score\\\": d.get(\\\"score\\\", 0),\\n+            \\\"service_score\\\": d.get(\\\"service_score\\\", 0),\\n+            \\\"verdict\\\": d.get(\\\"verdict\\\", \\\"\\\"),\\n+            \\\"factors\\\": d.get(\\\"factors\\\", {}),\\n+            \\\"price\\\": tld_price(tld),\\n+            \\\"registrar\\\": TLD_REGISTRAR.get(tld, \\\"Namecheap\\\"),\\n+            \\\"wayback_history\\\": d.get(\\\"factors\\\", {}).get(\\\"has_history\\\", False),\\n+        })\\n+    return {\\n+        \\\"date\\\": today,\\n+        \\\"total_domains\\\": total_candidates,\\n+        \\\"available\\\": sum(1 for d in final if d.get(\\\"availability\\\") == \\\"available\\\"),\\n+        \\\"results\\\": results,\\n+    }\\n+\\n+\\n+def write_json(data: dict, output_path: str):\\n+    \\\"\\\"\\\"Write JSON output to a file.\\\"\\\"\\\"\\n+    os.makedirs(os.path.dirname(output_path), exist_ok=True)\\n+    with open(output_path, \\\"w\\\") as f:\\n+        json.dump(data, f, indent=2)\\n+    log.info(f\\\"JSON output written: {output_path}\\\")\\n+    # Always write to latest.json in memory dir as well (for pipeline compatibility)\\n+    latest = os.path.join(MEMORY_DIR, \\\"latest.json\\\")\\n+    if os.path.abspath(output_path) != os.path.abspath(latest):\\n+        with open(latest, \\\"w\\\") as f:\\n+            json.dump(data, f, indent=2)\\n+        log.info(f\\\"JSON output also mirrored to: {latest}\\\")\\n+\\n+\\n+# ── Portfolio Tracker ─────────────────────────────────────────────────────────\\n+\\n+def load_portfolio() -> list:\\n+    \\\"\\\"\\\"Load portfolio.tsv with acquired/registered domains.\\\"\\\"\\\"\\n+    path = os.path.join(MEMORY_DIR, \\\"portfolio.tsv\\\")\\n+    portfolio = []\\n+    if os.path.isfile(path):\\n+        try:\\n+            with open(path, \\\"r\\\") as f:\\n+                header = f.readline()\\n+                for line in f:\\n+                    parts = line.strip().split(\\\"\\\\t\\\")\\n+                    if len(parts) >= 4:\\n+                        portfolio.append({\\n+                            \\\"domain\\\": parts[0],\\n+                            \\\"date_acquired\\\": parts[1],\\n+                            \\\"registrar\\\": parts[2],\\n+                            \\\"notes\\\": parts[3] if len(parts) > 3 else \\\"\\\",\\n+                        })\\n+            log.info(f\\\"Portfolio tracker: loaded {len(portfolio)} domains\\\")\\n+        except Exception as e:\\n+            log.warning(f\\\"Could not load portfolio: {e}\\\")\\n+    return portfolio\\n+\\n+\\n+def add_to_portfolio(domain: str, date_acquired: str = None, registrar: str = \\\"\\\", notes: str = \\\"\\\"):\\n+    \\\"\\\"\\\"Add a domain to the portfolio tracker.\\\"\\\"\\\"\\n+    if date_acquired is None:\\n+        date_acquired = date.today().isoformat()\\n+    path = os.path.join(MEMORY_DIR, \\\"portfolio.tsv\\\")\\n+    write_header = not os.path.isfile(path)\\n+    with open(path, \\\"a\\\") as f:\\n+        if write_header:\\n+            f.write(\\\"domain\\\\tdate_acquired\\\\tregistrar\\\\tnotes\\\\n\\\")\\n+        f.write(f\\\"{domain}\\\\t{date_acquired}\\\\t{registrar}\\\\t{notes}\\\\n\\\")\\n+    log.info(f\\\"Portfolio tracker: added {domain}\\\")\\n+    return path\\n+\\n+\\n+def save_portfolio_tsv(portfolio: list, path: str = None):\\n+    \\\"\\\"\\\"Save the entire portfolio list.\\\"\\\"\\\"\\n+    if path is None:\\n+        path = os.path.join(MEMORY_DIR, \\\"portfolio.tsv\\\")\\n+    with open(path, \\\"w\\\") as f:\\n+        f.write(\\\"domain\\\\tdate_acquired\\\\tregistrar\\\\tnotes\\\\n\\\")\\n+        for entry in portfolio:\\n+            f.write(\\n+                f\\\"{entry['domain']}\\\\t{entry.get('date_acquired', '')}\\\\t\\\"\\n+                f\\\"{entry.get('registrar', '')}\\\\t{entry.get('notes', '')}\\\\n\\\"\\n+            )\\n+    log.info(f\\\"Portfolio tracker: saved {len(portfolio)} entries\\\")\\n+\\n \\n _BTN = (\\n     \\\"display:inline-block;padding:5px 13px;border-radius:5px;font-size:12px;\\\"\\n\", \"files_modified\": [\"/home/azureuser/domain-hunter/domain_hunter.py\"], \"lint\": {\"status\": \"ok\", \"output\": \"\"}}",
+      "tool_call_id": "call_3b5b4f850cfe4364b1465bb2"
+    },
+    {
+      "role": "assistant",
+      "content": "Now let me replace the entire `main()` function and `__main__` block with the enhanced version:",
+      "reasoning": "Good, the functions are added. Now let me rewrite the `main()` function to include argparse and duplicate tracking integration. Let me replace the entire main function and the `if __name__` block.",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "Good, the functions are added. Now let me rewrite the `main()` function to include argparse and duplicate tracking integration. Let me replace the entire main function and the `if __name__` block.",
+      "tool_calls": [
+        {
+          "id": "call_ef74daa31a2a4a44a435bdf1",
+          "call_id": "call_ef74daa31a2a4a44a435bdf1",
+          "response_item_id": "fc_ef74daa31a2a4a44a435bdf1",
+          "type": "function",
+          "function": {
+            "name": "patch",
+            "arguments": "{\"mode\": \"replace\", \"new_string\": \"# ── Main / CLI ───────────────────────────────────────────────────────────────\\n\\ndef parse_args(argv=None):\\n    p = argparse.ArgumentParser(\\n        description=\\\"Domain Hunter v2 — Proactive Domain Discovery Engine\\\",\\n        formatter_class=argparse.RawDescriptionHelpFormatter,\\n        epilog=\\\"Examples:\\\\n\\\"\\n               \\\"  python domain_hunter.py                   # default HTML email mode\\\\n\\\"\\n               \\\"  python domain_hunter.py --json             # JSON-only, no email\\\\n\\\"\\n               \\\"  python domain_hunter.py --json --fresh     # JSON, ignore duplicates\\\\n\\\"\\n               \\\"  python domain_hunter.py --output out.json  # write JSON to file\\\\n\\\",\\n    )\\n    p.add_argument(\\\"--json\\\", action=\\\"store_true\\\",\\n                   help=\\\"Output results as JSON (skip email sending)\\\")\\n    p.add_argument(\\\"--output\\\", metavar=\\\"FILE\\\", default=None,\\n                   help=\\\"Write JSON output to FILE \\\"\\n                        \\\"(default: ~/hermes-workspace/memory/domain-hunter/latest.json)\\\")\\n    p.add_argument(\\\"--fresh\\\", action=\\\"store_true\\\",\\n                   help=\\\"Ignore previously evaluated domains (disable duplicate skip)\\\")\\n    p.add_argument(\\\"--max-domains\\\", type=int, default=None,\\n                   help=\\\"Override MAX_REPORT (default: 50)\\\")\\n    p.add_argument(\\\"--no-email\\\", action=\\\"store_true\\\",\\n                   help=\\\"Skip sending email (implied by --json)\\\")\\n    return p.parse_args(argv)\\n\\n\\ndef main(argv=None):\\n    args = parse_args(argv)\\n    today = date.today().isoformat()\\n\\n    # Apply CLI overrides\\n    max_report = args.max_domains if args.max_domains is not None else MAX_REPORT\\n    json_mode  = args.json\\n    json_file  = args.output\\n    if json_file is None and json_mode:\\n        json_file = os.path.join(MEMORY_DIR, \\\"latest.json\\\")\\n    skip_email   = args.no_email or json_mode\\n\\n    # ── Duplicate tracking ──\\n    dupes = {} if args.fresh else load_duplicates()\\n\\n    log.info(\\\"=\\\" * 60)\\n    log.info(\\\"Domain Hunter v2 — Proactive Discovery Engine\\\")\\n    if json_mode:\\n        log.info(\\\"Mode: JSON output\\\")\\n        if args.fresh:\\n            log.info(\\\"--fresh: processing all domains regardless of history\\\")\\n    log.info(\\\"=\\\" * 60)\\n\\n    load_dict()\\n    fetch_porkbun_prices()\\n\\n    # Step 1: Generate domain name candidates\\n    log.info(\\\"Generating domain name candidates...\\\")\\n    names = sorted(generate_candidates())\\n    random.shuffle(names)  # shuffle for variety\\n    log.info(f\\\"Generated {len(names)} candidate names\\\")\\n\\n    # Step 2: Build full domain list with TLDs and pre-score\\n    tlds = [\\\".com\\\", \\\".ai\\\", \\\".io\\\", \\\".co\\\", \\\".app\\\", \\\".tech\\\", \\\".dev\\\"]\\n    pre = []\\n    skip_dupes = 0\\n    for name in names:\\n        for tld in tlds:\\n            domain = name + tld\\n\\n            # Duplicate check\\n            if domain in dupes and not args.fresh:\\n                skip_dupes += 1\\n                info = dupes[domain]\\n                # Reuse previous evaluation\\n                pre.append({\\n                    \\\"domain\\\": domain,\\n                    \\\"hunter_score\\\": int(info.get(\\\"score\\\", 0)),\\n                    \\\"service_score\\\": 0,\\n                    \\\"verdict\\\": info.get(\\\"verdict\\\", \\\"\\\"),\\n                    \\\"score\\\": int(info.get(\\\"score\\\", 0)),\\n                    \\\"factors\\\": {},\\n                    \\\"_previously_seen\\\": True,\\n                })\\n                continue\\n\\n            hs, hf = score_hunter(domain)\\n            if hs >= 30:  # lower threshold since we generate many\\n                svc = score_service_readiness(domain)\\n                entry = {\\n                    \\\"domain\\\": domain,\\n                    \\\"hunter_score\\\": hs,\\n                    \\\"service_score\\\": svc[\\\"score\\\"],\\n                    \\\"verdict\\\": svc[\\\"verdict\\\"],\\n                    \\\"score\\\": hs,\\n                    \\\"factors\\\": hf,\\n                    \\\"_previously_seen\\\": False,\\n                }\\n                # Record as evaluated in duplicates\\n                mark_evaluated(dupes, domain, \\\"unknown\\\", hs, svc[\\\"verdict\\\"],\\n                               \\\"evaluated\\\", today)\\n                pre.append(entry)\\n\\n    if skip_dupes:\\n        log.info(f\\\"Skipped {skip_dupes} previously evaluated domains (--fresh to override)\\\")\\n\\n    pre.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n    candidates = pre[: max_report * 4]\\n    log.info(f\\\"Pre-score pass: {len(candidates)} candidates from {len(pre)} raw\\\")\\n\\n    # Step 3: Check availability in parallel\\n    log.info(f\\\"Checking availability for {len(candidates)} domains via RDAP...\\\")\\n    with ThreadPoolExecutor(max_workers=WORKERS) as pool:\\n        futures = {pool.submit(check_availability, d[\\\"domain\\\"]): d for d in candidates}\\n        for fut in as_completed(futures):\\n            futures[fut][\\\"availability\\\"] = fut.result()\\n\\n    # Sort: available first, then by service score\\n    available = [x for x in candidates if x.get(\\\"availability\\\") == \\\"available\\\"]\\n    unknown = [x for x in candidates if x.get(\\\"availability\\\") == \\\"unknown\\\"]\\n    available.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n    unknown.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n    top = available + unknown\\n    final = top[:max_report]\\n\\n    log.info(f\\\"Available: {len(available)}, Unknown: {len(unknown)}, Reporting: {len(final)}\\\")\\n\\n    # ── Update availability in duplicates ──\\n    for d in final:\\n        if not d.get(\\\"_previously_seen\\\", False):\\n            mark_evaluated(dupes, d[\\\"domain\\\"], d.get(\\\"availability\\\", \\\"unknown\\\"),\\n                           d.get(\\\"score\\\", 0), d.get(\\\"verdict\\\", \\\"\\\"), \\\"in_report\\\", today)\\n    save_duplicates(dupes)\\n\\n    # Step 4: JSON output\\n    json_data = build_json_output(final, len(pre), today)\\n\\n    if json_mode:\\n        write_json(json_data, json_file)\\n        print(json.dumps(json_data, indent=2))\\n    else:\\n        # Always save JSON for pipeline consumption\\n        default_json = os.path.join(MEMORY_DIR, \\\"latest.json\\\")\\n        with open(default_json, \\\"w\\\") as f:\\n            json.dump(json_data, f, indent=2)\\n        log.info(f\\\"JSON saved: {default_json}\\\")\\n\\n        # Step 5: Send email (only if not JSON mode)\\n        if not skip_email:\\n            html = build_email_html(final)\\n            send_email(html, len(final))\\n    log.info(\\\"=\\\" * 60)\\n    log.info(\\\"Done\\\")\\n    log.info(\\\"=\\\" * 60)\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\", \"old_string\": \"# ── Main ──────────────────────────────────────────────────────────────────────\\n\\ndef main():\\n    log.info(\\\"=\\\" * 60)\\n    log.info(\\\"Domain Hunter v2 — Proactive Discovery Engine\\\")\\n    log.info(\\\"=\\\" * 60)\\n\\n    load_dict()\\n    fetch_porkbun_prices()\\n\\n    # Step 1: Generate domain name candidates\\n    log.info(\\\"Generating domain name candidates...\\\")\\n    names = sorted(generate_candidates())\\n    random.shuffle(names)  # shuffle for variety\\n    log.info(f\\\"Generated {len(names)} candidate names\\\")\\n\\n    # Step 2: Build full domain list with TLDs and pre-score\\n    tlds = [\\\".com\\\", \\\".ai\\\", \\\".io\\\", \\\".co\\\", \\\".app\\\", \\\".tech\\\", \\\".dev\\\"]\\n    pre = []\\n    for name in names:\\n        for tld in tlds:\\n            domain = name + tld\\n            hs, hf = score_hunter(domain)\\n            if hs >= 30:  # lower threshold since we generate many\\n                svc = score_service_readiness(domain)\\n                pre.append({\\n                    \\\"domain\\\": domain,\\n                    \\\"hunter_score\\\": hs,\\n                    \\\"service_score\\\": svc[\\\"score\\\"],\\n                    \\\"verdict\\\": svc[\\\"verdict\\\"],\\n                    \\\"score\\\": hs,\\n                    \\\"factors\\\": hf,\\n                })\\n\\n    pre.sort(key=lambda x: -x[\\\"service_score\\\"])\\n    candidates = pre[: MAX_REPORT * 4]\\n    log.info(f\\\"Pre-score pass: {len(candidates)} candidates from {len(pre)} raw\\\")\\n\\n    # Step 3: Check availability in parallel\\n    log.info(f\\\"Checking availability for {len(candidates)} domains via RDAP...\\\")\\n    with ThreadPoolExecutor(max_workers=WORKERS) as pool:\\n        futures = {pool.submit(check_availability, d[\\\"domain\\\"]): d for d in candidates}\\n        for fut in as_completed(futures):\\n            futures[fut][\\\"availability\\\"] = fut.result()\\n\\n    # Sort: available first, then by service score\\n    available = [x for x in candidates if x.get(\\\"availability\\\") == \\\"available\\\"]\\n    unknown = [x for x in candidates if x.get(\\\"availability\\\") == \\\"unknown\\\"]\\n    available.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n    unknown.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n    top = available + unknown\\n    final = top[:MAX_REPORT]\\n\\n    log.info(f\\\"Available: {len(available)}, Unknown: {len(unknown)}, Reporting: {len(final)}\\\")\\n\\n    # Step 4: Save JSON for pipeline consumption\\n    json_path = os.path.join(MEMORY_DIR, \\\"latest.json\\\")\\n    output_data = {\\n        \\\"timestamp\\\": date.today().isoformat(),\\n        \\\"total_candidates\\\": len(pre),\\n        \\\"available_count\\\": len(available),\\n        \\\"domains\\\": final,\\n    }\\n    with open(json_path, \\\"w\\\") as f:\\n        json.dump(output_data, f, indent=2)\\n    log.info(f\\\"JSON saved: {json_path}\\\")\\n\\n    # Step 5: Send email\\n    html = build_email_html(final)\\n    send_email(html, len(final))\\n    log.info(\\\"=\\\" * 60)\\n    log.info(\\\"Done\\\")\\n    log.info(\\\"=\\\" * 60)\\n\\n\\nif __name__ == \\\"__main__\\\":\\n    main()\", \"path\": \"/home/azureuser/domain-hunter/domain_hunter.py\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "patch",
+      "content": "{\"success\": true, \"diff\": \"--- a//home/azureuser/domain-hunter/domain_hunter.py\\n+++ b//home/azureuser/domain-hunter/domain_hunter.py\\n@@ -814,11 +814,53 @@\\n     except Exception as e:\\n         log.error(f\\\"Email failed: {e}\\\")\\n \\n-# ── Main ──────────────────────────────────────────────────────────────────────\\n-\\n-def main():\\n+# ── Main / CLI ───────────────────────────────────────────────────────────────\\n+\\n+def parse_args(argv=None):\\n+    p = argparse.ArgumentParser(\\n+        description=\\\"Domain Hunter v2 — Proactive Domain Discovery Engine\\\",\\n+        formatter_class=argparse.RawDescriptionHelpFormatter,\\n+        epilog=\\\"Examples:\\\\n\\\"\\n+               \\\"  python domain_hunter.py                   # default HTML email mode\\\\n\\\"\\n+               \\\"  python domain_hunter.py --json             # JSON-only, no email\\\\n\\\"\\n+               \\\"  python domain_hunter.py --json --fresh     # JSON, ignore duplicates\\\\n\\\"\\n+               \\\"  python domain_hunter.py --output out.json  # write JSON to file\\\\n\\\",\\n+    )\\n+    p.add_argument(\\\"--json\\\", action=\\\"store_true\\\",\\n+                   help=\\\"Output results as JSON (skip email sending)\\\")\\n+    p.add_argument(\\\"--output\\\", metavar=\\\"FILE\\\", default=None,\\n+                   help=\\\"Write JSON output to FILE \\\"\\n+                        \\\"(default: ~/hermes-workspace/memory/domain-hunter/latest.json)\\\")\\n+    p.add_argument(\\\"--fresh\\\", action=\\\"store_true\\\",\\n+                   help=\\\"Ignore previously evaluated domains (disable duplicate skip)\\\")\\n+    p.add_argument(\\\"--max-domains\\\", type=int, default=None,\\n+                   help=\\\"Override MAX_REPORT (default: 50)\\\")\\n+    p.add_argument(\\\"--no-email\\\", action=\\\"store_true\\\",\\n+                   help=\\\"Skip sending email (implied by --json)\\\")\\n+    return p.parse_args(argv)\\n+\\n+\\n+def main(argv=None):\\n+    args = parse_args(argv)\\n+    today = date.today().isoformat()\\n+\\n+    # Apply CLI overrides\\n+    max_report = args.max_domains if args.max_domains is not None else MAX_REPORT\\n+    json_mode  = args.json\\n+    json_file  = args.output\\n+    if json_file is None and json_mode:\\n+        json_file = os.path.join(MEMORY_DIR, \\\"latest.json\\\")\\n+    skip_email   = args.no_email or json_mode\\n+\\n+    # ── Duplicate tracking ──\\n+    dupes = {} if args.fresh else load_duplicates()\\n+\\n     log.info(\\\"=\\\" * 60)\\n     log.info(\\\"Domain Hunter v2 — Proactive Discovery Engine\\\")\\n+    if json_mode:\\n+        log.info(\\\"Mode: JSON output\\\")\\n+        if args.fresh:\\n+            log.info(\\\"--fresh: processing all domains regardless of history\\\")\\n     log.info(\\\"=\\\" * 60)\\n \\n     load_dict()\\n@@ -833,23 +875,49 @@\\n     # Step 2: Build full domain list with TLDs and pre-score\\n     tlds = [\\\".com\\\", \\\".ai\\\", \\\".io\\\", \\\".co\\\", \\\".app\\\", \\\".tech\\\", \\\".dev\\\"]\\n     pre = []\\n+    skip_dupes = 0\\n     for name in names:\\n         for tld in tlds:\\n             domain = name + tld\\n+\\n+            # Duplicate check\\n+            if domain in dupes and not args.fresh:\\n+                skip_dupes += 1\\n+                info = dupes[domain]\\n+                # Reuse previous evaluation\\n+                pre.append({\\n+                    \\\"domain\\\": domain,\\n+                    \\\"hunter_score\\\": int(info.get(\\\"score\\\", 0)),\\n+                    \\\"service_score\\\": 0,\\n+                    \\\"verdict\\\": info.get(\\\"verdict\\\", \\\"\\\"),\\n+                    \\\"score\\\": int(info.get(\\\"score\\\", 0)),\\n+                    \\\"factors\\\": {},\\n+                    \\\"_previously_seen\\\": True,\\n+                })\\n+                continue\\n+\\n             hs, hf = score_hunter(domain)\\n             if hs >= 30:  # lower threshold since we generate many\\n                 svc = score_service_readiness(domain)\\n-                pre.append({\\n+                entry = {\\n                     \\\"domain\\\": domain,\\n                     \\\"hunter_score\\\": hs,\\n                     \\\"service_score\\\": svc[\\\"score\\\"],\\n                     \\\"verdict\\\": svc[\\\"verdict\\\"],\\n                     \\\"score\\\": hs,\\n                     \\\"factors\\\": hf,\\n-                })\\n-\\n-    pre.sort(key=lambda x: -x[\\\"service_score\\\"])\\n-    candidates = pre[: MAX_REPORT * 4]\\n+                    \\\"_previously_seen\\\": False,\\n+                }\\n+                # Record as evaluated in duplicates\\n+                mark_evaluated(dupes, domain, \\\"unknown\\\", hs, svc[\\\"verdict\\\"],\\n+                               \\\"evaluated\\\", today)\\n+                pre.append(entry)\\n+\\n+    if skip_dupes:\\n+        log.info(f\\\"Skipped {skip_dupes} previously evaluated domains (--fresh to override)\\\")\\n+\\n+    pre.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n+    candidates = pre[: max_report * 4]\\n     log.info(f\\\"Pre-score pass: {len(candidates)} candidates from {len(pre)} raw\\\")\\n \\n     # Step 3: Check availability in parallel\\n@@ -865,25 +933,34 @@\\n     available.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n     unknown.sort(key=lambda x: -x.get(\\\"service_score\\\", 0))\\n     top = available + unknown\\n-    final = top[:MAX_REPORT]\\n+    final = top[:max_report]\\n \\n     log.info(f\\\"Available: {len(available)}, Unknown: {len(unknown)}, Reporting: {len(final)}\\\")\\n \\n-    # Step 4: Save JSON for pipeline consumption\\n-    json_path = os.path.join(MEMORY_DIR, \\\"latest.json\\\")\\n-    output_data = {\\n-        \\\"timestamp\\\": date.today().isoformat(),\\n-        \\\"total_candidates\\\": len(pre),\\n-        \\\"available_count\\\": len(available),\\n-        \\\"domains\\\": final,\\n-    }\\n-    with open(json_path, \\\"w\\\") as f:\\n-        json.dump(output_data, f, indent=2)\\n-    log.info(f\\\"JSON saved: {json_path}\\\")\\n-\\n-    # Step 5: Send email\\n-    html = build_email_html(final)\\n-    send_email(html, len(final))\\n+    # ── Update availability in duplicates ──\\n+    for d in final:\\n+        if not d.get(\\\"_previously_seen\\\", False):\\n+            mark_evaluated(dupes, d[\\\"domain\\\"], d.get(\\\"availability\\\", \\\"unknown\\\"),\\n+                           d.get(\\\"score\\\", 0), d.get(\\\"verdict\\\", \\\"\\\"), \\\"in_report\\\", today)\\n+    save_duplicates(dupes)\\n+\\n+    # Step 4: JSON output\\n+    json_data = build_json_output(final, len(pre), today)\\n+\\n+    if json_mode:\\n+        write_json(json_data, json_file)\\n+        print(json.dumps(json_data, indent=2))\\n+    else:\\n+        # Always save JSON for pipeline consumption\\n+        default_json = os.path.join(MEMORY_DIR, \\\"latest.json\\\")\\n+        with open(default_json, \\\"w\\\") as f:\\n+            json.dump(json_data, f, indent=2)\\n+        log.info(f\\\"JSON saved: {default_json}\\\")\\n+\\n+        # Step 5: Send email (only if not JSON mode)\\n+        if not skip_email:\\n+            html = build_email_html(final)\\n+            send_email(html, len(final))\\n     log.info(\\\"=\\\" * 60)\\n     log.info(\\\"Done\\\")\\n     log.info(\\\"=\\\" * 60)\\n\", \"files_modified\": [\"/home/azureuser/domain-hunter/domain_hunter.py\"], \"lint\": {\"status\": \"ok\", \"output\": \"\"}}",
+      "tool_call_id": "call_ef74daa31a2a4a44a435bdf1"
+    },
+    {
+      "role": "assistant",
+      "content": "Now verify syntax and test:",
+      "reasoning": null,
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_8cf808e04b5b4aa3987a1aa2",
+          "call_id": "call_8cf808e04b5b4aa3987a1aa2",
+          "response_item_id": "fc_8cf808e04b5b4aa3987a1aa2",
+          "type": "function",
+          "function": {
+            "name": "terminal",
+            "arguments": "{\"command\": \"cd /home/azureuser/domain-hunter && python3 -c \\\"exec(open('domain_hunter.py').read())\\\" 2>&1 | head -20\", \"timeout\": 15}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "terminal",
+      "content": "{\"output\": \"Traceback (most recent call last):\\n  File \\\"<string>\\\", line 1, in <module>\\n  File \\\"<string>\\\", line 40, in <module>\\nNameError: name '__file__' is not defined. Did you mean: '__name__'?\", \"exit_code\": 0, \"error\": null}",
+      "tool_call_id": "call_8cf808e04b5b4aa3987a1aa2"
+    }
+  ]
+}

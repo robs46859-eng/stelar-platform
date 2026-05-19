@@ -1,0 +1,15 @@
+{
+  "type": "beta_launch",
+  "source": "manual",
+  "feature": {
+    "feature_name": "",
+    "beta_type": "closed | open | dogfood",
+    "target_users": [],
+    "duration": "",
+    "success_criteria": [],
+    "known_issues": []
+  },
+  "product": {},
+  "stakeholders": {},
+  "notes": ""
+}

@@ -1,0 +1,8 @@
+2026-05-15 18:28:23,250 INFO hermes_cli.plugins: Plugin 'openai' registered image_gen provider: openai
+2026-05-15 18:28:23,251 INFO hermes_cli.plugins: Plugin 'openai-codex' registered image_gen provider: openai-codex
+2026-05-15 18:28:23,252 INFO hermes_cli.plugins: Plugin 'xai' registered image_gen provider: xai
+2026-05-15 18:28:23,456 INFO hermes_cli.plugins: Plugin discovery complete: 12 found, 8 enabled
+2026-05-15 18:28:36,548 INFO hermes_cli.plugins: Plugin 'openai' registered image_gen provider: openai
+2026-05-15 18:28:36,548 INFO hermes_cli.plugins: Plugin 'openai-codex' registered image_gen provider: openai-codex
+2026-05-15 18:28:36,549 INFO hermes_cli.plugins: Plugin 'xai' registered image_gen provider: xai
+2026-05-15 18:28:36,742 INFO hermes_cli.plugins: Plugin discovery complete: 12 found, 8 enabled

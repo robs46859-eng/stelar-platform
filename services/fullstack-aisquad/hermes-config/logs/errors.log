@@ -1,0 +1,713 @@
+2026-05-13 05:02:52,359 WARNING run_agent: Stream drop mid tool-call on attempt 2/3 — retrying. subagent_id=- depth=0 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=103350 chunks=190 elapsed=65.57s ttfb=2.03s upstream=[cf-ray=9faf1b6fadb93928-IAD server=cloudflare]
+2026-05-13 05:06:59,853 WARNING [20260513_045130_30d241] run_agent: Stream stale for 180s (threshold 180s) — no chunks received. model=inclusionai/ring-2.6-1t:free context=~43,823 tokens. Killing connection.
+2026-05-13 05:07:00,214 WARNING run_agent: Stream drop mid tool-call on attempt 2/3 — retrying. subagent_id=- depth=0 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=24911 chunks=46 elapsed=190.96s ttfb=8.98s upstream=[cf-ray=9faf1e6d199cf26e-IAD server=cloudflare]
+2026-05-13 05:08:51,505 WARNING [20260513_050820_3b931f] run_agent: Tool skill_view returned error (0.01s): {"success": false, "error": "File 'references' not found in skill 'hermes-agent'.", "available_files": {}, "hint": "Use one of the available file paths listed above"}
+2026-05-13 05:08:52,506 WARNING [20260513_050820_3b931f] run_agent: Tool skill_manage returned error (0.00s): {"success": false, "error": "Unknown action 'list'. Use: create, edit, patch, delete, write_file, remove_file"}
+2026-05-13 05:09:14,625 WARNING [20260513_050820_3b931f] run_agent: Tool skill_manage returned error (0.00s): {"success": false, "error": "File must be under one of: assets, references, scripts, templates. Got: 'autonomous-ai-agents/hermes-agent/SKILL.md'"}
+2026-05-13 05:09:20,962 WARNING [20260513_050820_3b931f] run_agent: Tool skill_manage returned error (0.00s): {"success": false, "error": "File must be under one of: assets, references, scripts, templates. Got: 'SKILL.md'"}
+
+[Tool loop warning: same_tool_failure_warning; count=3; skill_manage has failed 3 tim
+2026-05-13 05:09:31,482 WARNING [20260513_050820_3b931f] run_agent: Tool skill_manage returned error (0.00s): {"success": false, "error": "SKILL.md must start with YAML frontmatter (---). See existing skills for format."}
+
+[Tool loop warning: same_tool_failure_warning; count=4; skill_manage has failed 4 times
+2026-05-13 05:10:12,200 WARNING [20260513_050820_3b931f] run_agent: Tool skill_manage returned error (0.00s): {"error": "file_content is required for 'write_file'.", "success": false}
+
+[Tool loop warning: same_tool_failure_warning; count=5; skill_manage has failed 5 times this turn. This looks like a loop; ch
+2026-05-13 05:10:27,551 WARNING [20260513_050820_3b931f] run_agent: Tool skill_manage returned error (0.00s): {"error": "file_path is required for 'write_file'. Example: 'references/api-guide.md'", "success": false}
+
+[Tool loop warning: same_tool_failure_warning; count=6; skill_manage has failed 6 times this 
+2026-05-13 09:55:16,762 WARNING [20260513_083137_9de00e] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=Thread-13 (run):124841828038336 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 09:55:16,762 WARNING [20260513_083137_9de00e] run_agent: Retrying API call in 2.096234219126812s (attempt 1/3) thread=Thread-13 (run):124841828038336 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 09:55:19,170 WARNING [20260513_083137_9de00e] run_agent: API call failed (attempt 2/3) error_type=RateLimitError thread=Thread-13 (run):124841828038336 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 09:55:19,171 WARNING [20260513_083137_9de00e] run_agent: Retrying API call in 4.338139525449654s (attempt 2/3) thread=Thread-13 (run):124841828038336 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 09:55:27,970 WARNING [20260513_083137_9de00e] run_agent: Tool read_file returned error (0.63s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /Users/rob/Desktop/SPECIFICATIONS.md"}
+2026-05-13 10:19:35,838 WARNING run_agent: Unrepairable tool_call arguments for write_file — replaced with empty object (was: {"content": "\"\"\"FSC Database Models using SQLAlchemy 2.0 style.\"\"\"\n\nfrom)
+2026-05-13 10:20:41,557 WARNING [20260513_083137_9de00e] run_agent: Tool terminal returned error (0.32s): {"output": "fatal: destination path 'fscompanion' already exists and is not an empty directory.", "exit_code": 128, "error": null}
+2026-05-13 10:22:18,335 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:22:18,949 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:22:19,157 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:22:19,158 WARNING run_agent: No auxiliary LLM provider for compression — summaries will be unavailable.
+2026-05-13 10:22:43,818 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:22:44,055 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:22:44,063 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:22:44,341 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:22:44,341 WARNING [20260513_102216_1d97e5] root: No auxiliary model available for session summarization
+2026-05-13 10:22:52,440 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:22:52,668 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:22:52,676 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:22:52,883 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:22:52,883 WARNING agent.title_generator: Title generation failed: No LLM provider configured for task=title_generation provider=auto. Run: hermes setup
+2026-05-13 10:24:54,821 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:24:55,032 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:24:55,041 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:24:55,277 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:24:55,278 WARNING [20260513_102216_1d97e5] root: No auxiliary model available for session summarization
+2026-05-13 10:25:16,371 WARNING [20260513_102216_1d97e5] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=Thread-11 (run):131834513376960 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 10:25:16,372 WARNING [20260513_102216_1d97e5] run_agent: Retrying API call in 2.4461848466373404s (attempt 1/3) thread=Thread-11 (run):131834513376960 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 10:25:34,393 WARNING [20260513_102216_1d97e5] run_agent: Tool read_file returned error (0.42s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /home/azureuser/fscompanion/src/models/__init__.py"}
+2026-05-13 10:25:37,746 WARNING [20260513_102216_1d97e5] run_agent: Tool terminal returned error (0.26s): {"output": "/home/azureuser/fscompanion/.git/HEAD\n/home/azureuser/fscompanion/.git/config\n/home/azureuser/fscompanion/.git/description\n/home/azureuser/fscompanion/.git/hooks/applypatch-msg.sample\n
+2026-05-13 10:29:13,048 WARNING [20260513_102216_1d97e5] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=Thread-51 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 10:29:13,049 WARNING [20260513_102216_1d97e5] run_agent: Retrying API call in 2.2805586487516747s (attempt 1/3) thread=Thread-51 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 10:29:16,408 WARNING [20260513_102216_1d97e5] run_agent: API call failed (attempt 2/3) error_type=RateLimitError thread=Thread-51 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 10:29:16,409 WARNING [20260513_102216_1d97e5] run_agent: Retrying API call in 4.238525302137104s (attempt 2/3) thread=Thread-51 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 10:31:23,081 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=- depth=0 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=21.54s ttfb=- upstream=[cf-ray=9fb0fdbafc5205b0-IAD server=cloudflare]
+2026-05-13 10:41:15,927 WARNING [20260513_102216_1d97e5] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=Thread-132 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 10:41:15,928 WARNING [20260513_102216_1d97e5] run_agent: Retrying API call in 2.668865724567083s (attempt 1/3) thread=Thread-132 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 10:47:57,557 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:47:57,797 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:47:57,798 WARNING run_agent: No auxiliary LLM provider for compression — summaries will be unavailable.
+2026-05-13 10:47:57,869 WARNING [20260513_104757_964a9d] agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:47:58,076 WARNING [20260513_104757_964a9d] agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:47:58,085 WARNING [20260513_104757_964a9d] agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:47:58,293 WARNING [20260513_104757_964a9d] agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:47:58,294 WARNING [20260513_104757_964a9d] root: Context compression: no provider available for summary. Middle turns will be dropped without summary for 600 seconds.
+2026-05-13 10:48:40,250 WARNING [20260513_104757_964a9d] run_agent: Tool skill_manage returned error (0.00s): {"success": false, "error": "SKILL.md must start with YAML frontmatter (---). See existing skills for format."}
+2026-05-13 10:49:17,770 WARNING [20260513_104757_964a9d] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=bg-review:131834339907264 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 10:49:17,770 WARNING [20260513_104757_964a9d] run_agent: Retrying API call in 2.5533478403118135s (attempt 1/3) thread=bg-review:131834339907264 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 10:52:23,768 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:52:23,974 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:52:23,983 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 10:52:24,188 WARNING [20260513_102216_1d97e5] agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 10:52:24,188 WARNING [20260513_102216_1d97e5] root: Context compression: no provider available for summary. Middle turns will be dropped without summary for 600 seconds.
+2026-05-13 10:52:34,271 WARNING [20260513_102216_1d97e5] run_agent: Tool memory returned error (0.00s): {"error": "Unknown action 'search'. Use: add, replace, remove", "success": false}
+2026-05-13 10:53:22,032 WARNING [20260513_102216_1d97e5] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=Thread-512 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 10:53:22,033 WARNING [20260513_102216_1d97e5] run_agent: Retrying API call in 2.482537583579842s (attempt 1/3) thread=Thread-512 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 10:54:13,499 WARNING [20260513_102216_1d97e5] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=Thread-512 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 10:54:13,500 WARNING [20260513_102216_1d97e5] run_agent: Retrying API call in 2.915250937192633s (attempt 1/3) thread=Thread-512 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 10:54:16,794 WARNING [20260513_102216_1d97e5] run_agent: API call failed (attempt 2/3) error_type=RateLimitError thread=Thread-512 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 10:54:16,795 WARNING [20260513_102216_1d97e5] run_agent: Retrying API call in 5.464959122552486s (attempt 2/3) thread=Thread-512 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 10:54:22,698 WARNING [20260513_102216_1d97e5] run_agent: API call failed (attempt 3/3) error_type=RateLimitError thread=Thread-512 (run):131834356692672 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 10:54:22,698 ERROR [20260513_102216_1d97e5] root: API call failed after 3 retries. HTTP 429: Provider returned error | provider=openrouter model=inclusionai/ring-2.6-1t:free msgs=35 tokens=~16,229
+2026-05-13 10:58:51,803 WARNING agent.lsp.servers: bash-language-server: shellcheck not found on PATH — diagnostics will be empty until shellcheck is installed (apt: shellcheck, brew: shellcheck, scoop: shellcheck).
+2026-05-13 17:48:49,558 WARNING [20260513_174234_5e295d] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=Thread-4 (run_agent):124924811269824 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 17:48:49,560 WARNING [20260513_174234_5e295d] run_agent: Retrying API call in 2.629377693900855s (attempt 1/3) thread=Thread-4 (run_agent):124924811269824 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 17:48:52,617 WARNING [20260513_174234_5e295d] run_agent: API call failed (attempt 2/3) error_type=RateLimitError thread=Thread-4 (run_agent):124924811269824 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 17:48:52,617 WARNING [20260513_174234_5e295d] run_agent: Retrying API call in 4.004157289973614s (attempt 2/3) thread=Thread-4 (run_agent):124924811269824 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 17:49:28,424 WARNING [20260513_174234_5e295d] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=Thread-4 (run_agent):124924811269824 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 17:49:28,424 WARNING [20260513_174234_5e295d] run_agent: Retrying API call in 2.7645004340369237s (attempt 1/3) thread=Thread-4 (run_agent):124924811269824 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 17:49:31,536 WARNING [20260513_174234_5e295d] run_agent: API call failed (attempt 2/3) error_type=RateLimitError thread=Thread-4 (run_agent):124924811269824 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free summary=HTTP 429: Provider returned error
+2026-05-13 17:49:31,537 WARNING [20260513_174234_5e295d] run_agent: Retrying API call in 5.746226797399814s (attempt 2/3) thread=Thread-4 (run_agent):124924811269824 provider=openrouter base_url=https://openrouter.ai/api/v1 model=inclusionai/ring-2.6-1t:free error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'inclusionai/ring-2.6-1t:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Novita', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-13 17:50:31,171 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 17:50:31,396 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 17:50:31,405 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-13 17:50:31,645 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-13 17:50:31,645 WARNING agent.title_generator: Title generation failed: No LLM provider configured for task=title_generation provider=auto. Run: hermes setup
+2026-05-15 02:45:20,356 WARNING gateway.run: No user allowlists configured. All unauthorized users will be denied. Set GATEWAY_ALLOW_ALL_USERS=true in ~/.hermes/.env to allow open access, or configure platform allowlists (e.g., TELEGRAM_ALLOWED_USERS=your_id).
+2026-05-15 02:45:20,512 WARNING gateway.platforms.api_server: [Api_Server] ⚠️  No API key configured (API_SERVER_KEY / platforms.api_server.key). All requests will be accepted without authentication. Set an API key for production deployments to prevent unauthorized access to sessions, responses, and cron jobs.
+2026-05-15 11:46:50,090 WARNING [20260515_113407_8d54fb] run_agent: Tool search_files returned error (0.65s): {"total_count": 0, "error": "Path not found: /home/azureuser/hermes-workspace/revenue-swarm"}
+2026-05-15 12:05:56,183 WARNING [20260515_113407_8d54fb] run_agent: Tool terminal returned error (60.06s): {"output": "", "exit_code": -1, "error": "BLOCKED: User denied. Do NOT retry.", "status": "blocked"}
+2026-05-15 12:31:31,435 WARNING [20260515_113407_8d54fb] run_agent: Tool patch returned error (0.00s): {"error": "path required"}
+2026-05-15 12:33:50,879 WARNING [20260515_113407_8d54fb] run_agent: Tool execute_code returned error (1.42s): {"status": "error", "output": "Created trigger-map.yaml\n\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_tu5y7vq6/script.py\", line 162, in <module>\n    \"migration
+2026-05-15 12:46:09,417 WARNING [20260515_113407_8d54fb] run_agent: Tool search_files returned error (0.84s): {"total_count": 0, "error": "Path not found: /home/azureuser/hermes-workspace/domain-hunter"}
+2026-05-15 12:47:32,694 WARNING cli: Agent thread still alive after interrupt (thread 130420794443456). Daemon thread will be cleaned up on exit.
+2026-05-15 12:59:51,422 WARNING [20260515_113407_8d54fb] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=Thread-1070 (run_agent):130420794443456 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 429: Provider returned error
+2026-05-15 12:59:51,422 WARNING [20260515_113407_8d54fb] run_agent: Retrying API call in 2.701779666862594s (attempt 1/3) thread=Thread-1070 (run_agent):130420794443456 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'qwen/qwen3.6-plus is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Alibaba', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-15 13:02:53,405 WARNING [20260515_113407_8d54fb] run_agent: Tool execute_code returned error (3.21s): {"status": "error", "output": "\n--- stderr ---\n  File \"/tmp/hermes_sandbox_0mii7k59/script.py\", line 3\n    result = terminal('cd /home/azureuser/domain-hunter && source venv/bin/activate && pytho
+2026-05-15 13:10:18,404 WARNING [20260515_113407_8d54fb] run_agent: Tool terminal returned error (60.07s): {"output": "", "exit_code": -1, "error": "BLOCKED: User denied. Do NOT retry.", "status": "blocked"}
+2026-05-15 13:11:52,115 WARNING [20260515_113407_8d54fb] run_agent: Tool terminal returned error (60.10s): {"output": "", "exit_code": -1, "error": "BLOCKED: User denied. Do NOT retry.", "status": "blocked"}
+2026-05-15 13:13:03,534 WARNING [20260515_113407_8d54fb] run_agent: Tool execute_code returned error (3.21s): {"status": "error", "output": "\n--- stderr ---\n  File \"/tmp/hermes_sandbox_oq0plw_1/script.py\", line 8\n    ', '.join(w.get('skills', [])), ', '.join(w.get('mcpServers', []))) or 'none'))\n       
+2026-05-15 13:14:41,849 WARNING [20260515_131331_ccd0a0] run_agent: Tool skill_manage returned error (0.00s): {"error": "old_string is required for 'patch'. Provide the text to find.", "success": false}
+2026-05-15 13:21:35,275 WARNING [20260515_131917_9f15b5] run_agent: Tool terminal returned error (17.76s): {"output": "Traceback (most recent call last):\n  File \"<string>\", line 8, in <module>\nAttributeError: 'str' object has no attribute 'get'\nTotal workers: 2", "exit_code": 1, "error": null, "approv
+2026-05-15 13:21:39,440 WARNING run_agent: Unrepairable tool_call arguments for terminal — replaced with empty object (was: {"command": "python3 -c \"\nimport yaml\nwith open('/home/azureuser/hermes-works)
+2026-05-15 13:21:50,179 WARNING [20260515_131917_9f15b5] run_agent: Tool terminal returned error (0.46s): {"output": "Traceback (most recent call last):\n  File \"<string>\", line 7, in <module>\nAttributeError: 'str' object has no attribute 'get'\nTotal workers: 2", "exit_code": 1, "error": null}
+2026-05-15 13:26:49,154 WARNING [20260515_132504_f9d6eb] run_agent: Tool patch returned error (0.28s): {"success": false, "error": "Escape-drift detected: old_string and new_string contain the literal sequence '\\\\\"' but the matched region of the file does not. This is almost always a tool-call seria
+2026-05-15 13:27:13,546 WARNING [20260515_132504_f9d6eb] run_agent: Tool terminal returned error (0.46s): {"output": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"<string>\", line 39, in <module>\nNameError: name '__file__' is not defined. Did you mean: '__name__'
+2026-05-15 13:28:06,392 WARNING [20260515_132504_f9d6eb] tools.delegate_tool: Subagent auto-denied dangerous command: rm /home/azureuser/domain-hunter/test_scoring.py (delete in root path). Set delegation.subagent_auto_approve: true to allow.
+2026-05-15 13:28:06,393 WARNING [20260515_132504_f9d6eb] run_agent: Tool terminal returned error (0.05s): {"output": "", "exit_code": -1, "error": "BLOCKED: User denied. Do NOT retry.", "status": "blocked"}
+2026-05-15 13:31:02,590 WARNING [20260515_132903_da75f2] run_agent: API call failed (attempt 1/3) error_type=RateLimitError thread=ThreadPoolExecutor-2_0:133301801043648 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 429: Provider returned error
+2026-05-15 13:31:02,591 WARNING [20260515_132903_da75f2] run_agent: Retrying API call in 2.8353876168282985s (attempt 1/3) thread=ThreadPoolExecutor-2_0:133301801043648 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'qwen/qwen3.6-plus is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Alibaba', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-15 13:31:10,139 WARNING [20260515_132903_da75f2] run_agent: API call failed (attempt 2/3) error_type=RateLimitError thread=ThreadPoolExecutor-2_0:133301801043648 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 429: Provider returned error
+2026-05-15 13:31:10,139 WARNING [20260515_132903_da75f2] run_agent: Retrying API call in 5.822411020691947s (attempt 2/3) thread=ThreadPoolExecutor-2_0:133301801043648 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus error=Error code: 429 - {'error': {'message': 'Provider returned error', 'code': 429, 'metadata': {'raw': 'qwen/qwen3.6-plus is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations', 'provider_name': 'Alibaba', 'is_byok': False}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-15 13:31:17,826 WARNING [20260515_132903_da75f2] run_agent: API call failed (attempt 3/3) error_type=RateLimitError thread=ThreadPoolExecutor-2_0:133301801043648 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 429: Provider returned error
+2026-05-15 13:31:17,827 ERROR [20260515_132903_da75f2] root: [subagent-0] API call failed after 3 retries. HTTP 429: Provider returned error | provider=openrouter model=qwen/qwen3.6-plus msgs=18 tokens=~21,212
+2026-05-15 13:32:08,911 WARNING [20260515_131917_9f15b5] agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 13:32:09,147 WARNING [20260515_131917_9f15b5] agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-15 13:32:09,149 WARNING [20260515_131917_9f15b5] run_agent: No auxiliary LLM provider for compression — summaries will be unavailable.
+2026-05-15 13:33:10,784 WARNING [20260515_133208_3b9f47] run_agent: Tool read_file returned error (0.42s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /home/azureuser/hermes-workspace/memory/domain-hunter", "similar_
+2026-05-15 13:34:37,273 WARNING [20260515_133208_3b9f47] run_agent: Tool patch returned error (0.21s): {"success": false, "error": "old_string and new_string are identical"}
+2026-05-15 13:35:18,032 WARNING run_agent: Unrepairable tool_call arguments for write_file — replaced with empty object (was: {"content": "#!/usr/bin/env bash\n# ── Domain Hunter Pipeline Cron Runner ──────)
+2026-05-15 13:35:43,033 WARNING [20260515_131917_9f15b5] run_agent: Tool process returned error (0.00s): {"error": "session_id is required for poll"}
+2026-05-15 13:36:07,894 WARNING [20260515_131917_9f15b5] run_agent: Tool patch returned error (0.21s): {"success": false, "error": "old_string and new_string are identical"}
+2026-05-15 14:05:45,450 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (3.21s): {"status": "error", "output": "\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_13oqwisn/script.py\", line 1, in <module>\n    from hermes_tools import write_file, re
+2026-05-15 14:06:02,992 WARNING [20260515_131917_9f15b5] agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 14:06:03,234 WARNING [20260515_131917_9f15b5] agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-15 14:06:03,236 WARNING [20260515_131917_9f15b5] run_agent: No auxiliary LLM provider for compression — summaries will be unavailable.
+2026-05-15 14:09:18,255 WARNING [20260515_140602_4d4fc9] run_agent: Tool terminal returned error (0.26s): {"output": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nModuleNotFoundError: No module named 'pydantic'", "exit_code": 1, "error": null}
+2026-05-15 14:15:48,344 WARNING [20260515_131917_9f15b5] run_agent: Tool terminal returned error (0.27s): {"output": "Marketplace Monitor — Scanning 20 keywords\nMax price: $500\nKnown seen domains: 23574\n============================================================\nTraceback (most recent call last):\n  
+2026-05-15 15:03:10,762 WARNING [20260515_131917_9f15b5] run_agent: Tool terminal returned error (0.00s): {"output": "", "exit_code": -1, "error": "Foreground command uses '&' backgrounding. Use terminal(background=true) for long-lived processes, then run health checks and tests in follow-up terminal call
+2026-05-15 15:06:42,966 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (3.21s): {"status": "error", "output": "\n--- stderr ---\n  File \"/tmp/hermes_sandbox_n63va2v7/script.py\", line 95\n    \"match\n    ^\nSyntaxError: unterminated string literal (detected at line 95)\n", "too
+2026-05-15 15:07:53,087 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (3.21s): {"status": "error", "output": "\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_33jnb05f/script.py\", line 1, in <module>\n    from hermes_tools import write_file, pa
+2026-05-15 15:09:16,819 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (3.21s): {"status": "error", "output": "\n--- stderr ---\n  File \"/tmp/hermes_sandbox_fqwx1sf5/script.py\", line 83\n    print(\"\\n=== CREDENTIALS GUID\n          ^\nSyntaxError: unterminated string literal 
+2026-05-15 15:11:34,340 WARNING [20260515_151016_55d3fe] run_agent: Tool skill_manage returned error (0.03s): {"success": false, "error": "Could not find a match for old_string in the file\n\nDid you mean one of these sections?\n 209| 11. If extending an existing swarm's triggers, the dispatch script's `build
+2026-05-15 15:31:05,504 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (3.21s): {"status": "error", "output": "\n--- stderr ---\n  File \"/tmp/hermes_sandbox_fcp00dod/script.py\", line 334\n    \"\"\")\n       ^\nSyntaxError: f-string: empty expression not allowed\n", "tool_calls
+2026-05-15 15:32:44,988 WARNING [20260515_131917_9f15b5] run_agent: Tool patch returned error (0.21s): {"success": false, "error": "Failed to read file: /home/azureuser/hermes-workspace/triggers/engagement/trigger-map.yaml"}
+2026-05-15 15:32:48,599 WARNING [20260515_131917_9f15b5] run_agent: Tool terminal returned error (0.26s): {"output": "cat: /home/azureuser/hermes-workspace/triggers/engagement/trigger-map.yaml: No such file or directory", "exit_code": 1, "error": null}
+2026-05-15 15:49:40,208 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (0.81s): {"status": "error", "output": "swarm.yaml updated: 9 revenue workers + linkedin-monitor marked as 'sleeping'\n\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_pgxzr3t
+2026-05-15 15:49:58,905 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (1.21s): {"status": "error", "output": "[OK] IG credentials saved securely at .credentials-ig.json\n  [!] Permissions set to 600 (owner-read/write only)\n\n--- stderr ---\nTraceback (most recent call last):\n 
+2026-05-15 15:50:05,743 WARNING run_agent: Unrepairable tool_call arguments for execute_code — replaced with empty object (was: {"code": "from hermes_tools import write_file, terminal\n\nplan_content = \"\"\")
+2026-05-15 15:58:25,550 WARNING [20260515_155743_646d0c] run_agent: Tool web_extract returned error (0.14s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 16:13:48,999 WARNING tools.approval: Dangerous-command approval requested on a thread with no approval callback while prompt_toolkit is active; denying to avoid stdin deadlock. command='curl -s "https://www.googleapis.com/youtube/v3/search?part=snippet&q=postpartum&maxResults=1&key=*** description='Security scan — [HIGH] GCP API Key detected: A credential matching a known provider pattern was found in the input. Credentials should not appear in commands or pasted text.'
+2026-05-15 16:13:55,812 WARNING tools.approval: Dangerous-command approval requested on a thread with no approval callback while prompt_toolkit is active; denying to avoid stdin deadlock. command='curl -s --max-time 10 "https://www.googleapis.com/youtube/v3/search?part=snippet&q=postpartum&maxResults=1&key=*** 2>&1' description='Security scan — [HIGH] GCP API Key detected: A credential matching a known provider pattern was found in the input. Credentials should not appear in commands or pasted text.'
+2026-05-15 16:14:14,955 WARNING tools.approval: Dangerous-command approval requested on a thread with no approval callback while prompt_toolkit is active; denying to avoid stdin deadlock. command="echo 'export YT_API_KEY=*** >> ~/.bashrc" description='Security scan — [HIGH] Dotfile overwrite detected: Command redirects output to a dotfile in the home directory, which could overwrite shell configuration; [HIGH] GCP API Key detected: A credential matching a known provider pattern was found in the input. Credentials should not appear in commands or pasted text.; overwrite system file via redirection'
+2026-05-15 16:14:41,196 WARNING [20260515_161428_64cd36] tools.delegate_tool: Subagent auto-denied dangerous command: KEY="AIzaSy...LrC0"
+
+# Search 1: first time mom
+curl -s "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=%22first%20time%20mom%20pregnant&maxResults=5&order=relevance&key=*** | python3 -m json.tool 2>/dev/null | head -200 (Security scan — [MEDIUM] Schemeless URL in sink context: URL without explicit scheme passed to a command that downloads/executes content; [HIGH] Pipe to interpreter: curl | python3: Command pipes output from 'curl' directly to interpreter 'python3'. Downloaded content will be executed without inspection.
+  Safer: tirith run https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=%22first%20time%20mom%20pregnant&maxResults=5&order=relevance&key=***  — or: vet https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=%22first%20time%20mom%20pregnant&maxResults=5&order=relevance&key=***  (https://getvet.sh); [HIGH] GCP API Key detected: A credential matching a known provider pattern was found in the input. Credentials should not appear in commands or pasted text.). Set delegation.subagent_auto_approve: true to allow.
+2026-05-15 16:14:41,197 WARNING [20260515_161428_64cd36] run_agent: Tool terminal returned error (0.09s): {"output": "", "exit_code": -1, "error": "BLOCKED: User denied. Do NOT retry.", "status": "blocked"}
+2026-05-15 16:17:35,037 WARNING [20260515_161634_29c83d] run_agent: Tool skill_manage returned error (0.00s): {"error": "file_path is required for 'write_file'. Example: 'references/api-guide.md'", "success": false}
+2026-05-15 16:17:57,458 WARNING [20260515_131917_9f15b5] run_agent: Tool browser_navigate returned error (2.52s): {"success": false, "error": "Auto-launch failed: Chrome exited early (exit code: unknown) without writing DevToolsActivePort\n(also tried parsing stderr) Chrome exited before providing DevTools URL\nC
+2026-05-15 16:18:00,500 WARNING [20260515_161634_29c83d] run_agent: Tool skill_manage returned error (0.01s): {"success": false, "error": "Skill 'engagement-signal-monitoring' not found. Create it first with action='create'."}
+2026-05-15 16:18:10,278 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (3.21s): {"status": "error", "output": "\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_h8v4wqc3/script.py\", line 1, in <module>\n    from hermes_tools import skill_manage\n
+2026-05-15 16:18:36,670 WARNING [20260515_161634_29c83d] run_agent: Tool skill_manage returned error (0.00s): {"success": false, "error": "Unknown action ''. Use: create, edit, patch, delete, write_file, remove_file"}
+
+[Tool loop warning: same_tool_failure_warning; count=3; skill_manage has failed 3 times thi
+2026-05-15 16:18:54,633 WARNING [20260515_161634_29c83d] run_agent: API call failed (attempt 1/3) error_type=APIStatusError thread=bg-review:133301826221760 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 402: This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 16233. To increase, visit https://openrouter.ai/settings/credits and add more credits
+2026-05-15 16:18:54,633 WARNING [20260515_161634_29c83d] run_agent: Retrying API call in 2.548651944439829s (attempt 1/3) thread=bg-review:133301826221760 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus error=Error code: 402 - {'error': {'message': 'This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 16233. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-15 16:18:57,446 WARNING [20260515_161634_29c83d] run_agent: API call failed (attempt 2/3) error_type=APIStatusError thread=bg-review:133301826221760 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 402: This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 16233. To increase, visit https://openrouter.ai/settings/credits and add more credits
+2026-05-15 16:18:57,447 WARNING [20260515_161634_29c83d] run_agent: Retrying API call in 4.489465586887215s (attempt 2/3) thread=bg-review:133301826221760 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus error=Error code: 402 - {'error': {'message': 'This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 16233. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-15 16:19:01,950 ERROR tools.terminal_tool: terminal_tool exception:
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/tools/terminal_tool.py", line 1719, in terminal_tool
+    if not background and timeout and timeout > FOREGROUND_MAX_TIMEOUT:
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '>' not supported between instances of 'str' and 'int'
+
+2026-05-15 16:19:02,284 WARNING [20260515_161634_29c83d] run_agent: API call failed (attempt 3/3) error_type=APIStatusError thread=bg-review:133301826221760 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 402: This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 16233. To increase, visit https://openrouter.ai/settings/credits and add more credits
+2026-05-15 16:19:02,285 ERROR [20260515_161634_29c83d] root: API call failed after 3 retries. HTTP 402: This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 16233. To increase, visit https://openrouter.ai/settings/credits and add more credits | provider=openrouter model=qwen/qwen3.6-plus msgs=258 tokens=~176,100
+2026-05-15 16:19:02,699 WARNING [20260515_131917_9f15b5] run_agent: API call failed (attempt 1/3) error_type=APIStatusError thread=Thread-1138 (run_agent):133301188671168 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 402: This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 10053. To increase, visit https://openrouter.ai/settings/credits and add more credits
+2026-05-15 16:19:02,700 WARNING [20260515_131917_9f15b5] run_agent: Retrying API call in 2.0155286660060723s (attempt 1/3) thread=Thread-1138 (run_agent):133301188671168 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus error=Error code: 402 - {'error': {'message': 'This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 10053. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-15 16:19:05,221 WARNING [20260515_131917_9f15b5] run_agent: API call failed (attempt 2/3) error_type=APIStatusError thread=Thread-1138 (run_agent):133301188671168 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 402: This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 10053. To increase, visit https://openrouter.ai/settings/credits and add more credits
+2026-05-15 16:19:05,222 WARNING [20260515_131917_9f15b5] run_agent: Retrying API call in 5.37315396395756s (attempt 2/3) thread=Thread-1138 (run_agent):133301188671168 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus error=Error code: 402 - {'error': {'message': 'This request requires more credits, or fewer max_tokens. You requested up to 65536 tokens, but can only afford 10053. To increase, visit https://openrouter.ai/settings/credits and add more credits', 'code': 402, 'metadata': {'provider_name': None}}, 'user_id': 'user_3DX2ujsPSrWpOKBf4KvO4HtB9A2'}
+2026-05-15 16:19:11,108 WARNING [20260515_131917_9f15b5] run_agent: API call failed (attempt 3/3) error_type=APIStatusError thread=Thread-1138 (run_agent):133301188671168 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 402: Insufficient credits. Add more using https://openrouter.ai/settings/credits
+2026-05-15 16:19:11,109 ERROR [20260515_131917_9f15b5] root: API call failed after 3 retries. HTTP 402: Insufficient credits. Add more using https://openrouter.ai/settings/credits | provider=openrouter model=qwen/qwen3.6-plus msgs=260 tokens=~172,168
+2026-05-15 16:19:11,700 WARNING [20260515_131917_9f15b5] run_agent: API call failed (attempt 1/3) error_type=APIStatusError thread=Thread-1167 (run_agent):133301188671168 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 402: Insufficient credits. Add more using https://openrouter.ai/settings/credits
+2026-05-15 16:19:11,701 WARNING [20260515_131917_9f15b5] run_agent: Retrying API call in 2.6211162310812712s (attempt 1/3) thread=Thread-1167 (run_agent):133301188671168 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus error=Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}
+2026-05-15 16:19:14,713 WARNING [20260515_131917_9f15b5] run_agent: API call failed (attempt 2/3) error_type=APIStatusError thread=Thread-1167 (run_agent):133301188671168 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 402: Insufficient credits. Add more using https://openrouter.ai/settings/credits
+2026-05-15 16:19:14,714 WARNING [20260515_131917_9f15b5] run_agent: Retrying API call in 4.698149934294872s (attempt 2/3) thread=Thread-1167 (run_agent):133301188671168 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus error=Error code: 402 - {'error': {'message': 'Insufficient credits. Add more using https://openrouter.ai/settings/credits', 'code': 402}}
+2026-05-15 16:19:19,887 WARNING [20260515_131917_9f15b5] run_agent: API call failed (attempt 3/3) error_type=APIStatusError thread=Thread-1167 (run_agent):133301188671168 provider=openrouter base_url=https://openrouter.ai/api/v1 model=qwen/qwen3.6-plus summary=HTTP 402: Insufficient credits. Add more using https://openrouter.ai/settings/credits
+2026-05-15 16:19:19,888 ERROR [20260515_131917_9f15b5] root: API call failed after 3 retries. HTTP 402: Insufficient credits. Add more using https://openrouter.ai/settings/credits | provider=openrouter model=qwen/qwen3.6-plus msgs=261 tokens=~172,296
+2026-05-15 16:24:36,224 WARNING [20260515_131917_9f15b5] run_agent: Tool browser_navigate returned error (1.77s): {"success": false, "error": "Auto-launch failed: Chrome exited early (exit code: unknown) without writing DevToolsActivePort\n(also tried parsing stderr) Chrome exited before providing DevTools URL\nC
+2026-05-15 16:25:20,457 WARNING [20260515_131917_9f15b5] run_agent: Tool browser_navigate returned error (1.86s): {"success": false, "error": "Auto-launch failed: Chrome exited early (exit code: unknown) without writing DevToolsActivePort\n(also tried parsing stderr) Chrome exited before providing DevTools URL\nC
+2026-05-15 16:25:46,048 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:25:46,342 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-15 16:25:46,344 WARNING run_agent: No auxiliary LLM provider for compression — summaries will be unavailable.
+2026-05-15 16:27:12,397 WARNING [20260515_162545_8ff1f5] run_agent: Tool skill_manage returned error (0.01s): {"success": false, "error": "Skill '' not found."}
+2026-05-15 16:27:48,820 WARNING [20260515_162545_8ff1f5] run_agent: Tool skill_manage returned error (0.01s): {"success": false, "error": "Skill '' not found. Create it first with action='create'."}
+2026-05-15 16:29:40,478 WARNING [20260515_131917_9f15b5] run_agent: Tool execute_code returned error (0.00s): {"error": "No code provided."}
+2026-05-15 16:39:38,384 WARNING [20260515_163732_e4dada] run_agent: Tool browser_navigate returned error (1.82s): {"success": false, "error": "Auto-launch failed: Chrome exited early (exit code: unknown) without writing DevToolsActivePort\n(also tried parsing stderr) Chrome exited before providing DevTools URL\nC
+2026-05-15 16:39:44,460 WARNING [20260515_163732_e4dada] run_agent: Tool terminal returned error (0.27s): {"output": "", "exit_code": 1, "error": null}
+2026-05-15 16:40:03,880 WARNING [20260515_163732_e4dada] run_agent: Tool terminal returned error (0.00s): {"output": "", "exit_code": -1, "error": "Foreground command uses '&' backgrounding. Use terminal(background=true) for long-lived processes, then run health checks and tests in follow-up terminal call
+2026-05-15 16:40:37,595 WARNING [20260515_163732_e4dada] run_agent: Tool terminal returned error (0.30s): {"output": "sleep: invalid option -- 's'\nTry 'sleep --help' for more information.\n[908356:908356:0515/164037.486554:ERROR:ui/ozone/platform/x11/ozone_platform_x11.cc:256] Missing X server or $DISPLA
+2026-05-15 16:40:42,485 WARNING [20260515_163732_e4dada] run_agent: Tool terminal returned error (0.00s): {"output": "", "exit_code": -1, "error": "Foreground command uses '&' backgrounding. Use terminal(background=true) for long-lived processes, then run health checks and tests in follow-up terminal call
+2026-05-15 16:41:33,179 WARNING [20260515_163732_e4dada] run_agent: Tool browser_navigate returned error (1.82s): {"success": false, "error": "Auto-launch failed: Chrome exited early (exit code: unknown) without writing DevToolsActivePort\n(also tried parsing stderr) Chrome exited before providing DevTools URL\nC
+2026-05-15 16:42:06,348 WARNING [20260515_163732_e4dada] run_agent: Tool execute_code returned error (3.21s): {"status": "error", "output": "\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_1ifh1wcd/script.py\", line 2, in <module>\n    from playwright.sync_api import sync_pl
+2026-05-15 16:42:12,533 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:42:12,831 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-15 16:42:12,840 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:42:13,106 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-15 16:42:13,109 WARNING agent.title_generator: Title generation failed: No LLM provider configured for task=title_generation provider=auto. Run: hermes setup
+2026-05-15 16:43:01,331 WARNING [20260515_163732_e4dada] run_agent: Tool terminal returned error (37.20s): {"output": "Traceback (most recent call last):\n  File \"<string>\", line 25, in <module>\n  File \"/home/azureuser/.local/lib/python3.12/site-packages/playwright/sync_api/_generated.py\", line 16548,
+2026-05-15 16:44:47,722 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:44:47,994 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-15 16:44:48,003 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:44:48,238 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-15 16:44:48,239 WARNING agent.title_generator: Title generation failed: No LLM provider configured for task=title_generation provider=auto. Run: hermes setup
+2026-05-15 16:45:58,773 WARNING [20260515_163732_e4dada] run_agent: Tool terminal returned error (47.25s): {"output": "Traceback (most recent call last):\n  File \"<string>\", line 34, in <module>\n  File \"/home/azureuser/.local/lib/python3.12/site-packages/playwright/sync_api/_generated.py\", line 16548,
+2026-05-15 16:48:14,223 WARNING [20260515_163732_e4dada] run_agent: Tool terminal returned error (0.36s): {"output": "[Command interrupted]", "exit_code": 130, "error": null}
+2026-05-15 16:49:34,372 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:49:34,396 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:49:34,406 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:49:34,526 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:49:34,536 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:49:59,713 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:50:00,038 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-15 16:50:00,039 WARNING run_agent: No auxiliary LLM provider for compression — summaries will be unavailable.
+2026-05-15 16:50:14,558 WARNING [20260515_164934_6b4aee] run_agent: Tool terminal returned error (0.27s): {"output": "/usr/bin/bash: line 3: /new: No such file or directory", "exit_code": 127, "error": null}
+2026-05-15 16:53:07,005 WARNING [20260515_164934_6b4aee] run_agent: Tool terminal returned error (60.21s): {"output": "[Command timed out after 60s]", "exit_code": 124, "error": null}
+2026-05-15 16:54:02,610 WARNING [20260515_164934_6b4aee] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": 1, "error": null}
+2026-05-15 16:54:40,086 WARNING [20260515_164934_6b4aee] run_agent: Tool browser_navigate returned error (1.81s): {"success": false, "error": "Auto-launch failed: Chrome exited early (exit code: unknown) without writing DevToolsActivePort\n(also tried parsing stderr) Chrome exited before providing DevTools URL\nC
+2026-05-15 16:56:10,398 WARNING [20260515_164934_6b4aee] run_agent: Tool web_extract returned error (0.02s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 16:57:30,010 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:57:30,282 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-15 16:57:30,291 WARNING agent.auxiliary_client: resolve_provider_client: openrouter requested but OpenRouter credential pool has no usable entries (credentials may be exhausted)
+2026-05-15 16:57:30,546 WARNING agent.auxiliary_client: Auxiliary auto-detect: no provider available (tried: openrouter, nous, local/custom, api-key). Compression, summarization, and memory flush will not work. Set OPENROUTER_API_KEY or configure a local model in config.yaml.
+2026-05-15 16:57:30,547 WARNING agent.title_generator: Title generation failed: No LLM provider configured for task=title_generation provider=auto. Run: hermes setup
+2026-05-15 17:21:43,683 WARNING [20260515_172006_9b1e26] run_agent: Tool browser_navigate returned error (1.82s): {"success": false, "error": "Auto-launch failed: Chrome exited early (exit code: unknown) without writing DevToolsActivePort\n(also tried parsing stderr) Chrome exited before providing DevTools URL\nC
+2026-05-15 17:22:05,561 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.28s): {"output": "/usr/bin/bash: line 3: /new: No such file or directory", "exit_code": 127, "error": null}
+2026-05-15 17:23:57,637 WARNING [20260515_172006_9b1e26] run_agent: Tool browser_navigate returned error (1.77s): {"success": false, "error": "Auto-launch failed: Chrome exited early (exit code: unknown) without writing DevToolsActivePort\n(also tried parsing stderr) Chrome exited before providing DevTools URL\nC
+2026-05-15 17:24:10,802 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.27s): {"output": "", "exit_code": -15, "error": null}
+2026-05-15 17:24:50,247 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.27s): {"output": "", "exit_code": 1, "error": null}
+2026-05-15 17:25:57,783 WARNING [20260515_172006_9b1e26] run_agent: Tool read_file returned error (0.42s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /home/azureuser/.hermes/profiles/instagram-monitor/", "similar_fi
+2026-05-15 17:27:19,178 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": 1, "error": null}
+2026-05-15 17:28:10,582 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.26s): {"output": "Reading package lists...\nE: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)\nE: Unable to lock directory /var/lib/apt/lists/\nW: Problem unlinking the file
+2026-05-15 17:29:14,844 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (60.32s): {"output": "Hit:1 http://azure.archive.ubuntu.com/ubuntu noble InRelease\nGet:2 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]\nHit:3 http://azure.archive.ubuntu.com/ubuntu no
+2026-05-15 17:29:19,266 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.38s): {"output": "", "exit_code": 1, "error": null}
+
+[Tool loop warning: same_tool_failure_warning; count=4; terminal has failed 4 times this turn. This looks like a loop; change approach before retrying.]
+2026-05-15 17:31:47,476 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (60.06s): {"output": "", "exit_code": -1, "error": "BLOCKED: User denied. Do NOT retry.", "status": "blocked"}
+2026-05-15 17:33:09,067 WARNING [20260515_172006_9b1e26] tools.browser_tool: browser 'open' timed out after 60s (task=20260515_172006_9b1e26, socket_dir=/tmp/agent-browser-h_3ab612bb1c)
+2026-05-15 17:33:09,068 WARNING [20260515_172006_9b1e26] run_agent: Tool browser_navigate returned error (60.01s): {"success": false, "error": "Command timed out after 60 seconds"}
+
+[Tool loop warning: same_tool_failure_warning; count=3; browser_navigate has failed 3 times this turn. This looks like a loop; change
+2026-05-15 17:34:22,547 WARNING tools.browser_tool: browser 'close' timed out after 10s (task=20260515_172006_9b1e26, socket_dir=/tmp/agent-browser-h_3ab612bb1c)
+2026-05-15 17:35:46,467 WARNING [20260515_172006_9b1e26] run_agent: Tool browser_navigate returned error (1.67s): {"success": false, "error": "Auto-launch failed: Chrome exited early (exit code: 64) without writing DevToolsActivePort\n(also tried parsing stderr) Chrome exited before providing DevTools URL\nChrome
+2026-05-15 17:36:59,600 WARNING [20260515_172006_9b1e26] run_agent: Tool browser_navigate returned error (1.57s): {"success": false, "error": "Auto-launch failed: Chrome exited early (exit code: 64) without writing DevToolsActivePort\n(also tried parsing stderr) Chrome exited before providing DevTools URL\nChrome
+2026-05-15 17:38:09,901 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.00s): {"output": "", "exit_code": -1, "error": "Foreground command uses '&' backgrounding. Use terminal(background=true) for long-lived processes, then run health checks and tests in follow-up terminal call
+2026-05-15 17:38:20,598 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=- depth=0 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=ReadTimeout error=The read operation timed out chain=ReadTimeout(The read operation timed out) <- ReadTimeout(The read operation timed out) <- TimeoutError(The read operation timed out) http_status=200 bytes=0 chunks=0 elapsed=152.11s ttfb=- upstream=[cf-ray=9fc3e6b85e31dda5-IAD server=cloudflare]
+2026-05-15 17:40:39,236 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": -15, "error": null}
+2026-05-15 17:41:36,128 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": -15, "error": null}
+
+[Tool loop warning: repeated_exact_failure_warning; count=2; terminal has failed 2 times with identical arguments. This looks like a loop; inspect the 
+2026-05-15 17:44:33,362 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.27s): {"output": "", "exit_code": -15, "error": null}
+
+[Tool loop warning: repeated_exact_failure_warning; count=3; terminal has failed 3 times with identical arguments. This looks like a loop; inspect the 
+2026-05-15 17:44:43,715 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": -15, "error": null}
+2026-05-15 18:19:03,484 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (1.26s): {"output": "No session found matching 'Instagram login continuation'.\nUse 'hermes sessions list' to see available sessions.", "exit_code": 1, "error": null}
+2026-05-15 18:20:58,603 WARNING [20260515_172006_9b1e26] run_agent: Tool read_file returned error (0.42s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /home/azureuser/.hermes/profiles/youtube-monitor/", "similar_file
+2026-05-15 18:24:04,972 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.86s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
+2026-05-15 18:24:16,828 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.86s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
+2026-05-15 18:26:46,110 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (60.16s): {"output": "[Command timed out after 60s]", "exit_code": 124, "error": null}
+2026-05-15 18:28:23,695 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.87s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
+2026-05-15 18:32:10,051 WARNING [20260515_172006_9b1e26] run_agent: Tool terminal returned error (0.87s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
+2026-05-15 18:33:15,878 WARNING [20260515_172006_9b1e26] run_agent: Tool delegate_task returned error (0.00s): {"error": "Too many tasks: 12 provided, but max_concurrent_children is 3. Either reduce the task count, split into multiple delegate_task calls, or increase delegation.max_concurrent_children in confi
+2026-05-15 18:33:38,613 WARNING [20260515_183334_11a4aa] tools.web_tools: /home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
+2026-05-15 18:33:38,613 WARNING [20260515_183334_11a4aa] tools.web_tools: /home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:33:38,614 WARNING [20260515_183334_11a4aa] run_agent: Tool web_extract returned error (0.05s): {
+  "results": [
+    {
+      "url": "/home/azureuser/hermes-workspace/missions/research-brief.md",
+      "title": "",
+      "content": "",
+      "error": "Blocked: URL targets a private or internal ne
+2026-05-15 18:33:45,894 WARNING [20260515_183334_11a4aa] tools.web_tools: file:///home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
+2026-05-15 18:33:45,895 WARNING [20260515_183334_11a4aa] tools.web_tools: file:///home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:33:45,895 WARNING [20260515_183334_11a4aa] run_agent: Tool web_extract returned error (0.05s): {
+  "results": [
+    {
+      "url": "file:///home/azureuser/hermes-workspace/missions/research-brief.md",
+      "title": "",
+      "content": "",
+      "error": "Blocked: URL targets a private or inte
+2026-05-15 18:34:17,442 WARNING [20260515_183334_11a4aa] run_agent: Tool web_extract returned error (0.03s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+
+[Tool loop warning: sa
+2026-05-15 18:34:27,219 WARNING [20260515_183334_11a4aa] run_agent: Tool web_extract returned error (0.02s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+
+[Tool loop warning: sa
+2026-05-15 18:34:40,442 WARNING [20260515_183335_dac2ee] run_agent: Tool web_extract returned error (0.51s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:34:41,785 WARNING [20260515_183336_fe5a7c] run_agent: Tool web_extract returned error (0.00s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:34:44,838 WARNING [20260515_183336_fe5a7c] run_agent: Tool web_extract returned error (0.06s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:38:04,978 WARNING [20260515_183802_180c48] tools.web_tools: /home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
+2026-05-15 18:38:04,979 WARNING [20260515_183802_180c48] run_agent: Tool web_extract returned error (0.05s): {
+  "results": [
+    {
+      "url": "/home/azureuser/hermes-workspace/missions/research-brief.md",
+      "title": "",
+      "content": "",
+      "error": "Blocked: URL targets a private or internal ne
+2026-05-15 18:38:06,284 WARNING [20260515_183801_6b0715] tools.web_tools: file:///home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
+2026-05-15 18:38:06,285 WARNING [20260515_183801_6b0715] tools.web_tools: file:///home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:38:06,285 WARNING [20260515_183801_6b0715] run_agent: Tool web_extract returned error (0.05s): {
+  "results": [
+    {
+      "url": "file:///home/azureuser/hermes-workspace/missions/research-brief.md",
+      "title": "",
+      "content": "",
+      "error": "Blocked: URL targets a private or inte
+2026-05-15 18:38:09,815 WARNING [20260515_183801_4419b4] run_agent: Tool web_extract returned error (0.19s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:39:06,266 WARNING [20260515_183802_180c48] run_agent: Tool web_extract returned error (0.00s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:39:08,932 WARNING [20260515_183801_6b0715] run_agent: Tool web_extract returned error (0.53s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:39:20,299 WARNING [20260515_183801_6b0715] run_agent: Tool web_extract returned error (0.26s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+
+[Tool loop warning: sa
+2026-05-15 18:39:24,444 WARNING [20260515_183801_4419b4] run_agent: Tool web_extract returned error (0.02s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:43:08,302 WARNING [20260515_172006_9b1e26] run_agent: Tool delegate_task returned error (0.00s): {"error": "Too many tasks: 6 provided, but max_concurrent_children is 3. Either reduce the task count, split into multiple delegate_task calls, or increase delegation.max_concurrent_children in config
+2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] tools.web_tools: /home/azureuser/hermes-workspace/missions/research-brief.md (no content to process)
+2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] tools.web_tools: /home/azureuser/hermes-workspace/memory/icp-prepared-paige.md (no content to process)
+2026-05-15 18:43:51,794 WARNING [20260515_184348_abda0f] run_agent: Tool web_extract returned error (0.05s): {
+  "results": [
+    {
+      "url": "/home/azureuser/hermes-workspace/missions/research-brief.md",
+      "title": "",
+      "content": "",
+      "error": "Blocked: URL targets a private or internal ne
+2026-05-15 18:44:01,622 WARNING [20260515_184348_abda0f] run_agent: Tool web_extract returned error (0.03s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:44:29,423 WARNING [20260515_184348_abda0f] run_agent: Tool web_extract returned error (0.09s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+
+[Tool loop warning: re
+2026-05-15 18:45:48,908 WARNING [20260515_184348_845ab5] run_agent: Tool web_extract returned error (0.45s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:48:28,383 WARNING [20260515_184759_6feaba] run_agent: Tool web_extract returned error (0.28s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:49:25,272 WARNING [20260515_184759_34ec0d] run_agent: Tool web_extract returned error (0.48s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:49:36,691 WARNING [20260515_184759_daa28c] run_agent: Tool web_extract returned error (0.01s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:49:39,588 WARNING [20260515_184759_daa28c] run_agent: Tool web_extract returned error (0.03s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-15 18:50:14,090 WARNING [20260515_184759_daa28c] run_agent: Tool web_extract returned error (0.01s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+
+[Tool loop warning: sa
+2026-05-15 19:14:18,834 WARNING [20260515_191038_1e5d84] run_agent: Stream stale for 180s (threshold 180s) — no chunks received. model=nvidia/nemotron-3-super-120b-a12b:free context=~5,444 tokens. Killing connection.
+2026-05-15 19:14:18,987 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=sa-0-1f3992d8 depth=1 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=180.23s ttfb=- upstream=[cf-ray=9fc4729e6c7a8eaa-IAD server=cloudflare]
+2026-05-15 19:16:32,576 WARNING [20260515_191038_1e5d84] tools.tts_tool: TTS text too long for provider edge (7385 chars), truncating to 5000
+2026-05-15 19:17:00,976 WARNING [20260515_191038_1e5d84] run_agent: Tool read_file returned error (0.00s): {"error": "Cannot read binary file '/home/azureuser/hermes-workspace/missions/drafts/week01_audio.mp3' (.mp3). Use vision_analyze for images, or terminal to inspect binary files."}
+2026-05-15 19:22:39,946 WARNING [20260515_192145_258775] tools.tts_tool: TTS text too long for provider edge (9332 chars), truncating to 5000
+2026-05-15 19:23:30,594 WARNING [20260515_192146_a5a6d1] tools.tts_tool: TTS text too long for provider edge (8210 chars), truncating to 5000
+2026-05-15 19:24:49,388 WARNING [20260515_192146_cff275] run_agent: Stream stale for 180s (threshold 180s) — no chunks received. model=nvidia/nemotron-3-super-120b-a12b:free context=~5,056 tokens. Killing connection.
+2026-05-15 19:24:49,730 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=sa-2-4d98adb4 depth=1 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=180.43s ttfb=- upstream=[cf-ray=9fc482033f03ffc6-IAD server=cloudflare]
+2026-05-15 19:25:44,403 WARNING [20260515_192146_cff275] tools.tts_tool: TTS text too long for provider edge (7916 chars), truncating to 5000
+2026-05-15 19:30:49,899 WARNING [20260515_192943_347c9e] tools.tts_tool: TTS text too long for provider edge (8396 chars), truncating to 5000
+2026-05-15 19:31:02,913 WARNING [20260515_192942_b83430] tools.tts_tool: TTS text too long for provider edge (8808 chars), truncating to 5000
+2026-05-15 19:31:49,162 WARNING [20260515_192942_f8dac1] tools.tts_tool: TTS text too long for provider edge (8833 chars), truncating to 5000
+2026-05-15 19:34:21,635 WARNING [20260515_193248_095ea7] run_agent: API call failed (attempt 1/3) error_type=APIError thread=ThreadPoolExecutor-45_0:128769025111744 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free summary=Provider returned error
+2026-05-15 19:34:21,636 WARNING [20260515_193248_095ea7] run_agent: Retrying API call in 2.5460676248275087s (attempt 1/3) thread=ThreadPoolExecutor-45_0:128769025111744 provider=openrouter base_url=https://openrouter.ai/api/v1 model=nvidia/nemotron-3-super-120b-a12b:free error=Provider returned error
+2026-05-15 19:35:24,099 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=sa-1-c9378e0e depth=1 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=40.81s ttfb=- upstream=[cf-ray=9fc494e8bbbdf36e-IAD server=cloudflare]
+2026-05-15 19:42:48,811 WARNING [20260515_190245_1e03c6] run_agent: Tool delegate_task returned error (25.92s): {"results": [{"task_index": 0, "status": "interrupted", "summary": null, "error": "Parent agent interrupted — child did not finish in time", "api_calls": 0, "duration_seconds": 0}, {"task_index": 1, "
+2026-05-15 19:42:48,898 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=sa-0-3b31d06c depth=1 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=11.82s ttfb=- upstream=[cf-ray=9fc4a079d8d6c5b1-IAD server=cloudflare]
+2026-05-15 19:42:48,949 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=sa-2-50d39f49 depth=1 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=18.11s ttfb=- upstream=[cf-ray=9fc4a052dc5b2578-IAD server=cloudflare]
+2026-05-15 19:42:49,080 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=sa-1-08c93056 depth=1 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=18.11s ttfb=- upstream=[cf-ray=9fc4a053bc5ca3be-IAD server=cloudflare]
+2026-05-15 19:45:23,147 WARNING [20260515_194402_d67757] tools.tts_tool: TTS text too long for provider edge (9528 chars), truncating to 5000
+2026-05-15 19:45:26,976 WARNING [20260515_194402_6fddbd] tools.tts_tool: TTS text too long for provider edge (13138 chars), truncating to 5000
+2026-05-15 19:48:57,041 WARNING [20260515_194401_1555cc] run_agent: Stream stale for 180s (threshold 180s) — no chunks received. model=nvidia/nemotron-3-super-120b-a12b:free context=~10,503 tokens. Killing connection.
+2026-05-15 19:48:57,200 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=sa-0-aa9f952c depth=1 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=180.24s ttfb=- upstream=[cf-ray=9fc4a55b2f55399d-IAD server=cloudflare]
+2026-05-15 19:49:13,321 WARNING run_agent: Stream drop on attempt 3/3 — retrying. subagent_id=sa-0-aa9f952c depth=1 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=16.10s ttfb=- upstream=[cf-ray=9fc4a9c1de3105eb-IAD server=cloudflare]
+2026-05-15 19:52:01,797 WARNING [20260515_195015_1ac40f] tools.tts_tool: TTS text too long for provider edge (9935 chars), truncating to 5000
+2026-05-15 19:53:09,175 WARNING [20260515_195014_cb291b] tools.tts_tool: TTS text too long for provider edge (12607 chars), truncating to 5000
+2026-05-15 19:54:22,066 WARNING [20260515_195015_9e4bee] tools.tts_tool: TTS text too long for provider edge (9460 chars), truncating to 5000
+2026-05-15 20:06:44,365 WARNING [20260515_195649_eeb3e4] run_agent: Tool skill_manage returned error (0.00s): {"success": false, "error": "Patch would break SKILL.md structure: YAML frontmatter parse error: mapping values are not allowed here\n  in \"<unicode string>\", line 3, column 35:\n    description: Us
+2026-05-15 21:17:41,963 WARNING [20260515_211616_7563ce] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": 1, "error": null}
+2026-05-15 21:19:09,389 WARNING [20260515_211616_7563ce] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": 1, "error": null}
+2026-05-15 21:19:38,247 WARNING [20260515_211616_7563ce] run_agent: Tool terminal returned error (0.27s): {"output": "Reading package lists...\nE: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)\nE: Unable to lock directory /var/lib/apt/lists/\nW: Problem unlinking the file
+2026-05-15 21:22:53,652 WARNING [20260515_211615_a1002b] run_agent: Tool read_file returned error (0.44s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /home/azureuser/hermes-workspace/missions/drafts", "similar_files
+2026-05-15 21:26:16,675 WARNING tools.delegate_tool: Subagent 0 timed out after 600.0s
+2026-05-15 21:26:16,680 WARNING [20260515_190245_1e03c6] run_agent: Tool delegate_task returned error (601.40s): {"results": [{"task_index": 0, "status": "timeout", "summary": null, "error": "Subagent timed out after 600.0s with 28 API call(s) completed — likely stuck on a slow API call or unresponsive network r
+2026-05-15 21:27:33,071 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=sa-0-50257888 depth=1 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=263.84s ttfb=- upstream=[cf-ray=9fc533beea10ccb9-IAD server=cloudflare]
+2026-05-15 21:27:35,798 WARNING [20260515_190245_1e03c6] run_agent: Tool execute_code returned error (3.28s): {"status": "error", "output": "\n--- stderr ---\n  File \"/tmp/hermes_sandbox_15ozlrft/script.py\", line 12\n    content_parts.append(f'# Week {os.path.basename(f).replace(\\\"week\\\",\\\"\\\").repla
+2026-05-16 14:24:48,895 WARNING [20260516_140917_6adc65] run_agent: Tool execute_code returned error (0.61s): {"status": "error", "output": "Found 0 matches\n\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_egffww6g/script.py\", line 6, in <module>\n    for match in result['m
+2026-05-16 14:25:06,033 WARNING [20260516_140917_6adc65] run_agent: Tool read_file returned error (0.42s): {"content": "", "total_lines": 0, "file_size": 0, "truncated": false, "is_binary": false, "is_image": false, "error": "File not found: /home/azureuser/fscompanion/src/gemma", "similar_files": ["/home/
+2026-05-16 14:28:30,861 WARNING [20260516_140917_6adc65] run_agent: Tool skill_manage returned error (0.00s): {"success": false, "error": "SKILL.md frontmatter is not closed. Ensure you have a closing '---' line."}
+2026-05-16 14:34:05,881 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (60.06s): {"output": "", "exit_code": -1, "error": "BLOCKED: User denied. Do NOT retry.", "status": "blocked"}
+2026-05-16 14:36:55,641 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (60.07s): {"output": "", "exit_code": -1, "error": "BLOCKED: User denied. Do NOT retry.", "status": "blocked"}
+2026-05-16 14:37:39,506 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": 1, "error": null, "exit_code_meaning": "No matches found (not an error)"}
+2026-05-16 14:40:11,311 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.86s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
+2026-05-16 14:40:31,316 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.46s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
+2026-05-16 14:40:45,275 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.46s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
+2026-05-16 14:41:03,510 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.46s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
+2026-05-16 14:41:42,418 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.46s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
+2026-05-16 14:42:10,546 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.46s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
+2026-05-16 14:44:11,503 WARNING [20260516_140917_6adc65] run_agent: Tool execute_code returned error (0.61s): {"status": "error", "output": "Found 0 potential usage matches\n\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_cr0whg90/script.py\", line 6, in <module>\n    for ma
+2026-05-16 14:44:17,040 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": 1, "error": null, "exit_code_meaning": "No matches found (not an error)"}
+2026-05-16 14:44:53,152 WARNING [20260516_140917_6adc65] run_agent: Tool execute_code returned error (0.41s): {"status": "error", "output": "Found 0 matches for Gemma imports/usage\n\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_09qsi40w/script.py\", line 6, in <module>\n  
+2026-05-16 14:45:42,991 WARNING [20260516_140917_6adc65] run_agent: Tool execute_code returned error (0.61s): {"status": "error", "output": "Found 0 matches for gemma imports in services\n\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_9j0hkuty/script.py\", line 6, in <modul
+2026-05-16 14:45:49,386 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.27s): {"output": "", "exit_code": 1, "error": null}
+2026-05-16 14:46:56,546 WARNING [20260516_140917_6adc65] run_agent: Tool execute_code returned error (0.61s): {"status": "error", "output": "Found 0 matches for src imports in services\n\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_b89flvmj/script.py\", line 6, in <module>
+2026-05-16 14:47:06,303 WARNING [20260516_140917_6adc65] run_agent: Tool execute_code returned error (0.61s): {"status": "error", "output": "Found 0 matches for main/app files\n\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_s217042a/script.py\", line 6, in <module>\n    for
+2026-05-16 14:47:15,333 WARNING [20260516_140917_6adc65] run_agent: Tool execute_code returned error (1.01s): {"status": "error", "output": "Found 0 Python files\n\n--- stderr ---\nTraceback (most recent call last):\n  File \"/tmp/hermes_sandbox_gqcezq6e/script.py\", line 5, in <module>\n    for match in resu
+2026-05-16 14:52:58,562 WARNING [20260516_144918_bd011c] run_agent: Tool skill_manage returned error (0.00s): {"success": false, "error": "old_string and new_string are identical", "file_preview": "---\nname: llm-integration-core\ndescription: Use for integrating local LLMs (like Gemma 4 26M) into existing AI
+2026-05-16 15:41:20,295 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.47s): {"output": "usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]\n              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]\n              [--worktree] [--accep
+2026-05-16 15:44:32,307 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.26s): {"output": "sed: can't read .hermes/profiles/llm-integrator/config.yaml: No such file or directory", "exit_code": 2, "error": null}
+2026-05-16 15:45:29,625 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (0.26s): {"output": "/usr/bin/bash: line 3: ollama: command not found", "exit_code": 127, "error": null}
+2026-05-16 15:51:06,613 WARNING [20260516_140917_6adc65] run_agent: Tool terminal returned error (57.96s): {"output": "pulling manifest ⠋ pulling manifest ⠙ pulling manifest ⠹ pulling manifest ⠸ pulling manifest ⠼ pulling manifest ⠴ pulling manifest \npulling d7e4b00a7d7a:   0% ▕                  ▏  33 MB/
+2026-05-16 15:51:08,591 WARNING hermes_state: kanban.db (kanban.db): WAL journal_mode unsupported on this filesystem (disk I/O error) — falling back to journal_mode=DELETE (slower rollback-journal mode; reduces concurrency but works on NFS/SMB/FUSE). See https://www.sqlite.org/wal.html for details. This warning fires once per process per database.
+2026-05-16 15:51:50,111 WARNING run_agent: Stream drop on attempt 2/3 — retrying. subagent_id=- depth=0 provider=openrouter base_url=https://openrouter.ai/api/v1 error_type=RemoteProtocolError error=peer closed connection without sending complete message body (incomplete chunked read) chain=RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) <- RemoteProtocolError(peer closed connection without sending complete message body (incomplete chunked read)) http_status=200 bytes=0 chunks=0 elapsed=11.49s ttfb=- upstream=[cf-ray=9fcb8b82fce6f3c4-IAD server=cloudflare]
+2026-05-16 15:52:35,020 WARNING cli: Agent thread still alive after interrupt (thread 131106907461312). Daemon thread will be cleaned up on exit.
+2026-05-16 15:59:56,160 WARNING cli: Agent thread still alive after interrupt (thread 131106907461312). Daemon thread will be cleaned up on exit.
+2026-05-16 16:48:32,052 WARNING run_agent: Unrepairable tool_call arguments for write_file — replaced with empty object (was: {"content": "# Family Companion — Unified Integration Strategy\n\n## Gemma 4 27B)
+2026-05-16 16:52:26,459 WARNING [20260516_163016_481975] run_agent: Tool terminal returned error (0.26s): {"output": "=== Android ===\n---", "exit_code": 2, "error": null}
+2026-05-16 16:53:24,144 WARNING [20260516_163016_481975] run_agent: Tool terminal returned error (0.26s): {"output": "ls: cannot access '/home/azureuser/family-companion/android/': No such file or directory", "exit_code": 2, "error": null}
+2026-05-16 16:55:12,933 WARNING run_agent: Streaming failed after partial delivery, not retrying: peer closed connection without sending complete message body (incomplete chunked read)
+2026-05-16 16:58:18,957 WARNING run_agent: Streaming failed after partial delivery, not retrying: [SSL] record layer failure (_ssl.c:2590)
+2026-05-16 16:58:18,958 WARNING [20260516_163016_481975] run_agent: Partial stream delivered before error; returning stub response with 97 chars of recovered content to prevent duplicate messages: [SSL] record layer failure (_ssl.c:2590)
+2026-05-16 16:59:51,386 WARNING [20260516_163016_481975] run_agent: Tool delegate_task returned error (0.00s): {"error": "tasks must be a JSON array of task objects; received a string that could not be parsed as JSON (Extra data)."}
+2026-05-16 17:05:43,458 WARNING [20260516_170017_b5a9e0] run_agent: Tool patch returned error (1.80s): {"success": false, "error": "Post-write verification failed: could not re-read /home/azureuser/family-companion/backend/src/api/routes/android.py"}
+2026-05-16 17:09:41,877 WARNING [20260516_163016_481975] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": 1, "error": null, "exit_code_meaning": "No matches found (not an error)"}
+2026-05-16 17:10:22,150 WARNING [20260516_163016_481975] run_agent: Tool patch returned error (0.22s): {"success": false, "error": "Found 6 matches for old_string. Provide more context to make it unique, or use replace_all=True."}
+2026-05-16 17:10:34,051 WARNING [20260516_163016_481975] run_agent: Tool patch returned error (0.23s): {"success": false, "error": "Escape-drift detected: old_string and new_string contain the literal sequence '\\\\\"' but the matched region of the file does not. This is almost always a tool-call seria
+2026-05-16 17:14:17,093 WARNING [20260516_171143_6f5786] run_agent: Tool skill_manage returned error (0.00s): {"success": false, "error": "Patch would break SKILL.md structure: SKILL.md frontmatter is not closed. Ensure you have a closing '---' line."}
+2026-05-16 17:16:22,805 WARNING [20260516_171143_6f5786] run_agent: Tool memory returned error (0.00s): {"error": "old_text is required for 'replace' action.", "success": false}
+2026-05-16 17:16:33,337 WARNING [20260516_171143_6f5786] run_agent: Tool memory returned error (0.00s): {"error": "content is required for 'replace' action.", "success": false}
+2026-05-16 17:17:46,064 WARNING hermes.lint.lsp: lsp[kotlin-language-server] server unavailable: kotlin-language-server not found (install via `hermes lsp install <id>` or set lsp.servers.<id>.command)
+2026-05-16 17:23:35,217 WARNING run_agent: Unrepairable tool_call arguments for terminal — replaced with empty object (was: {"command": "find /home/azureuser/family-companion/android/core-data/src/main/ja)
+2026-05-16 18:14:24,928 WARNING run_agent: Unrepairable tool_call arguments for terminal — replaced with empty object (was: {"command": "az disk show --ids /subscriptions/$(az account show --query id -o t)
+2026-05-16 18:14:53,675 WARNING [20260516_181241_9d1b35] run_agent: Tool terminal returned error (0.27s): {"output": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/sdb1        16G   32K   15G   1% /mnt", "exit_code": 1, "error": null, "exit_code_meaning": "No matches found (not an error)"}
+2026-05-16 18:15:12,425 WARNING [20260516_181241_9d1b35] tools.approval: Hardline block: format filesystem (mkfs) (command: sudo mkfs.ext4 -L gemma4 /dev/sdc1)
+2026-05-16 18:15:12,425 WARNING [20260516_181241_9d1b35] run_agent: Tool terminal returned error (0.00s): {"output": "", "exit_code": -1, "error": "BLOCKED (hardline): format filesystem (mkfs). This command is on the unconditional blocklist and cannot be executed via the agent — not even with --yolo, /yol
+2026-05-16 18:19:42,608 WARNING [20260516_181241_9d1b35] run_agent: Tool web_extract returned error (0.02s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-16 18:20:06,442 WARNING run_agent: Streaming failed after partial delivery, not retrying: peer closed connection without sending complete message body (incomplete chunked read)
+2026-05-16 18:20:58,877 WARNING [20260516_182024_dd1f3e] run_agent: Tool skill_view returned error (0.06s): {"success": false, "error": "Skill 'Gemma LLM Integration Layer' not found.", "available_skills": ["dogfood", "domain-hunter-pipeline", "engagement-signal-monitoring", "yuanbao", "claude-code", "codex
+2026-05-16 18:21:26,536 WARNING [20260516_181241_9d1b35] run_agent: Tool terminal returned error (0.29s): {"output": "Cannot edit units if not on a tty.", "exit_code": 1, "error": null}
+2026-05-16 18:24:22,782 WARNING [20260516_181241_9d1b35] run_agent: Tool web_extract returned error (0.01s): {"success": false, "error": "Brave Search (free tier) is a search-only backend and cannot extract URL content. Set web.extract_backend to firecrawl, tavily, exa, or parallel."}
+2026-05-16 18:26:37,575 WARNING [20260516_181241_9d1b35] run_agent: Tool terminal returned error (0.26s): {"output": "", "exit_code": 2, "error": null}
+2026-05-16 18:26:48,838 WARNING [20260516_181241_9d1b35] run_agent: Tool terminal returned error (2.06s): {"output": "⠙ ⠙ ⠸ ⠸ ⠼ ⠴ ⠦ ⠇ ⠇ ⠋ ⠋ ⠹ ⠹ Error: 500 Internal Server Error: model requires more system memory (18.3 GiB) than is available (5.3 GiB)", "exit_code": 1, "error": null}
+2026-05-16 18:27:07,729 WARNING [20260516_182626_2b6b9a] run_agent: Tool skill_view returned error (0.12s): {"success": false, "error": "Skill 'Gemma LLM Integration Layer' not found.", "available_skills": ["dogfood", "domain-hunter-pipeline", "engagement-signal-monitoring", "yuanbao", "claude-code", "codex
+2026-05-16 18:28:01,236 WARNING [20260516_182626_2b6b9a] run_agent: Tool skill_manage returned error (0.00s): {"error": "file_content is required for 'write_file'.", "success": false}
+2026-05-16 18:28:26,038 WARNING [20260516_182626_2b6b9a] run_agent: Tool skill_manage returned error (0.00s): {"error": "file_content is required for 'write_file'.", "success": false}
+
+[Tool loop warning: repeated_exact_failure_warning; count=2; skill_manage has failed 2 times with identical arguments. This l
+2026-05-16 18:33:02,469 ERROR asyncio: Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<Application.run_async() done, defined at /home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py:620> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 641, in run_until_complete
+    self.run_forever()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 608, in run_forever
+    self._run_once()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 1898, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/cli.py", line 13089, in _signal_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 746, in _run_async
+    result = await f
+             ^^^^^^^
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/cli.py", line 13176, in run
+    app.run()
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 1002, in run
+    return asyncio.run(coro)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py", line 189, in run
+    with Runner(debug=debug) as runner:
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py", line 63, in __exit__
+    self.close()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py", line 71, in close
+    _cancel_all_tasks(loop)
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py", line 201, in _cancel_all_tasks
+    loop.run_until_complete(tasks.gather(*to_cancel, return_exceptions=True))
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 641, in run_until_complete
+    self.run_forever()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 608, in run_forever
+    self._run_once()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 1936, in _run_once
+    handle._run()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 886, in run_async
+    return await _run_async(f)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 751, in _run_async
+    self._redraw(render_as_done=True)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 543, in _redraw
+    self.context.copy().run(run_in_context)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 524, in run_in_context
+    self.renderer.render(self, self.layout, is_done=render_as_done)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/renderer.py", line 639, in render
+    height = layout.container.preferred_height(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/layout/containers.py", line 318, in preferred_height
+    dimensions = [
+                 ^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/layout/containers.py", line 319, in <listcomp>
+    c.preferred_height(width, max_available_height) for c in self._all_children
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/layout/containers.py", line 1607, in preferred_height
+    dimension=to_dimension(self.height),
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/layout/dimension.py", line 193, in to_dimension
+    return to_dimension(value())
+                        ^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/cli.py", line 12125, in _input_height
+    prompt_width = max(2, get_cwidth(self._get_tui_prompt_text()))
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/cli.py", line 10937, in _get_tui_prompt_text
+    return "".join(text for _, text in self._get_tui_prompt_fragments())
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/cli.py", line 10897, in _get_tui_prompt_fragments
+    symbol, state_suffix = self._get_tui_prompt_symbols()
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/cli.py", line 10865, in _get_tui_prompt_symbols
+    profile = get_active_profile_name()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/hermes_cli/profiles.py", line 955, in get_active_profile_name
+    hermes_home = get_hermes_home()
+                  ^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/hermes_constants.py", line 42, in get_hermes_home
+    active_path = (Path.home() / ".hermes" / "active_profile")
+                   ^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 914, in home
+    return cls("~").expanduser()
+           ^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 871, in __new__
+    self = cls._from_parts(args)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 509, in _from_parts
+    drv, root, parts = self._parse_args(args)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py", line 496, in _parse_args
+    parts.append(str(a))
+                 ^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/cli.py", line 13089, in _signal_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+2026-05-16 19:43:13,196 WARNING [20260516_194311_d14405] __main__: API call failed (attempt 1/3) error_type=BadRequestError thread=MainThread:132829650571392 provider= base_url=http://localhost:11434/v1/ model= summary=HTTP 400: model is required
+2026-05-16 19:43:13,212 ERROR [20260516_194311_d14405] root: Non-retryable client error: Error code: 400 - {'error': {'message': 'model is required', 'type': 'invalid_request_error', 'param': None, 'code': None}}
+2026-05-16 23:16:37,777 WARNING [20260516_231258_e03830] run_agent: API call failed (attempt 1/3) error_type=NotFoundError thread=Thread-4 (run_agent):128556169864896 provider=azure-foundry base_url=https://arkhamsecurity-resource.services.ai.azure.com/api/projects/arkhamsecurity/openai/v1/responses model=gpt-5.5/azure-guy summary=HTTP 404: Error code: 404
+2026-05-16 23:16:37,778 WARNING [20260516_231258_e03830] run_agent: Retrying API call in 2.7539536859689004s (attempt 1/3) thread=Thread-4 (run_agent):128556169864896 provider=azure-foundry base_url=https://arkhamsecurity-resource.services.ai.azure.com/api/projects/arkhamsecurity/openai/v1/responses model=gpt-5.5/azure-guy error=Error code: 404
+2026-05-16 23:16:40,632 WARNING [20260516_231258_e03830] run_agent: API call failed (attempt 2/3) error_type=NotFoundError thread=Thread-4 (run_agent):128556169864896 provider=azure-foundry base_url=https://arkhamsecurity-resource.services.ai.azure.com/api/projects/arkhamsecurity/openai/v1/responses model=gpt-5.5/azure-guy summary=HTTP 404: Error code: 404
+2026-05-16 23:16:40,633 WARNING [20260516_231258_e03830] run_agent: Retrying API call in 4.389649091902004s (attempt 2/3) thread=Thread-4 (run_agent):128556169864896 provider=azure-foundry base_url=https://arkhamsecurity-resource.services.ai.azure.com/api/projects/arkhamsecurity/openai/v1/responses model=gpt-5.5/azure-guy error=Error code: 404
+2026-05-16 23:16:45,095 WARNING [20260516_231258_e03830] run_agent: API call failed (attempt 3/3) error_type=NotFoundError thread=Thread-4 (run_agent):128556169864896 provider=azure-foundry base_url=https://arkhamsecurity-resource.services.ai.azure.com/api/projects/arkhamsecurity/openai/v1/responses model=gpt-5.5/azure-guy summary=HTTP 404: Error code: 404
+2026-05-16 23:16:45,096 ERROR [20260516_231258_e03830] root: API call failed after 3 retries. HTTP 404: Error code: 404 | provider=azure-foundry model=gpt-5.5/azure-guy msgs=2 tokens=~6,806
+2026-05-16 23:46:50,465 ERROR asyncio: unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-1' coro=<Application.run_async() done, defined at /home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py:620> exception=OSError(5, 'Input/output error')>
+Traceback (most recent call last):
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 641, in run_until_complete
+    self.run_forever()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 608, in run_forever
+    self._run_once()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 1936, in _run_once
+    handle._run()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 714, in read_from_input_in_context
+    context.copy().run(read_from_input)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 694, in read_from_input
+    self.key_processor.process_keys()
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/key_binding/key_processor.py", line 262, in process_keys
+    while not_empty():
+          ^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/key_binding/key_processor.py", line 244, in not_empty
+    if app.is_done:
+       ^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 1406, in is_done
+    return self.future.done()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/cli.py", line 13089, in _signal_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 746, in _run_async
+    result = await f
+             ^^^^^^^
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 751, in _run_async
+    self._redraw(render_as_done=True)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 543, in _redraw
+    self.context.copy().run(run_in_context)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 524, in run_in_context
+    self.renderer.render(self, self.layout, is_done=render_as_done)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/renderer.py", line 629, in render
+    screen = Screen()
+             ^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/layout/screen.py", line 166, in __init__
+    self.data_buffer: defaultdict[int, defaultdict[int, Char]] = defaultdict(
+                                                                 ^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/cli.py", line 13089, in _signal_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 886, in run_async
+    return await _run_async(f)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 756, in _run_async
+    self.renderer.reset()
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/renderer.py", line 429, in reset
+    self.output.flush()
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/output/vt100.py", line 706, in flush
+    flush_stdout(self.stdout, data)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/output/flush_stdout.py", line 37, in flush_stdout
+    stdout.flush()
+OSError: [Errno 5] Input/output error
+2026-05-17 00:17:09,061 WARNING [20260517_001703_ff8d38] run_agent: API call failed (attempt 1/3) error_type=GeminiAPIError thread=Thread-4 (run_agent):126393729930944 provider=gemini base_url=https://generativelanguage.googleapis.com/v1beta model=gemini-3.1-pro-preview summary=HTTP 429: Gemini HTTP 429 (RESOURCE_EXHAUSTED): You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier
+2026-05-17 00:17:09,063 WARNING [20260517_001703_ff8d38] run_agent: Retrying API call in 2.5982163781873355s (attempt 1/3) thread=Thread-4 (run_agent):126393729930944 provider=gemini base_url=https://generativelanguage.googleapis.com/v1beta model=gemini-3.1-pro-preview error=Gemini HTTP 429 (RESOURCE_EXHAUSTED): You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+Please retry in 50.958789113s.
+
+Your Google API key is on the free tier (<= 250 requests/day for gemini-2.5-flash). Hermes typically makes 3-10 API calls per user turn, so the free tier is exhausted in a handful of messages and cannot sustain an agent session. Enable billing on your Google Cloud project and regenerate the key in a billing-enabled project: https://aistudio.google.com/apikey
+2026-05-17 00:17:11,836 WARNING [20260517_001703_ff8d38] run_agent: API call failed (attempt 2/3) error_type=GeminiAPIError thread=Thread-4 (run_agent):126393729930944 provider=gemini base_url=https://generativelanguage.googleapis.com/v1beta model=gemini-3.1-pro-preview summary=HTTP 429: Gemini HTTP 429 (RESOURCE_EXHAUSTED): You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_
+2026-05-17 00:17:11,837 WARNING [20260517_001703_ff8d38] run_agent: Retrying API call in 4.510342559513341s (attempt 2/3) thread=Thread-4 (run_agent):126393729930944 provider=gemini base_url=https://generativelanguage.googleapis.com/v1beta model=gemini-3.1-pro-preview error=Gemini HTTP 429 (RESOURCE_EXHAUSTED): You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-3.1-pro
+Please retry in 48.195552804s.
+
+Your Google API key is on the free tier (<= 250 requests/day for gemini-2.5-flash). Hermes typically makes 3-10 API calls per user turn, so the free tier is exhausted in a handful of messages and cannot sustain an agent session. Enable billing on your Google Cloud project and regenerate the key in a billing-enabled project: https://aistudio.google.com/apikey
+2026-05-17 00:17:16,711 WARNING [20260517_001703_ff8d38] run_agent: API call failed (attempt 3/3) error_type=GeminiAPIError thread=Thread-4 (run_agent):126393729930944 provider=gemini base_url=https://generativelanguage.googleapis.com/v1beta model=gemini-3.1-pro-preview summary=HTTP 429: Gemini HTTP 429 (RESOURCE_EXHAUSTED): You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_
+2026-05-17 00:17:16,712 ERROR [20260517_001703_ff8d38] root: API call failed after 3 retries. HTTP 429: Gemini HTTP 429 (RESOURCE_EXHAUSTED): You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-3.1-pro
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_ | provider=gemini model=gemini-3.1-pro-preview msgs=2 tokens=~6,380
+2026-05-17 01:35:19,966 ERROR asyncio: unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-1' coro=<Application.run_async() done, defined at /home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py:620> exception=OSError(5, 'Input/output error')>
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 746, in _run_async
+    result = await f
+             ^^^^^^^
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 751, in _run_async
+    self._redraw(render_as_done=True)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 543, in _redraw
+    self.context.copy().run(run_in_context)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 524, in run_in_context
+    self.renderer.render(self, self.layout, is_done=render_as_done)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/renderer.py", line 628, in render
+    size = output.get_size()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/output/vt100.py", line 501, in get_size
+    return self._get_size()
+           ^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/output/vt100.py", line 490, in get_size
+    return Size(rows=rows or 24, columns=columns or 80)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <lambda>
+  File "/home/azureuser/.hermes/hermes-agent/cli.py", line 13089, in _signal_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 886, in run_async
+    return await _run_async(f)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 756, in _run_async
+    self.renderer.reset()
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/renderer.py", line 429, in reset
+    self.output.flush()
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/output/vt100.py", line 706, in flush
+    flush_stdout(self.stdout, data)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/output/flush_stdout.py", line 37, in flush_stdout
+    stdout.flush()
+OSError: [Errno 5] Input/output error

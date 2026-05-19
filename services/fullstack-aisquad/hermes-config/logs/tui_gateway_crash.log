@@ -1,0 +1,63 @@
+
+=== SIGTERM received · 2026-05-13 05:23:51 ===
+main-thread stack at signal delivery:
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/azureuser/.hermes/hermes-agent/tui_gateway/entry.py", line 251, in <module>
+    main()
+  File "/home/azureuser/.hermes/hermes-agent/tui_gateway/entry.py", line 227, in main
+    for raw in sys.stdin:
+
+--- thread MainThread (id=124068938049344) ---
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/azureuser/.hermes/hermes-agent/tui_gateway/entry.py", line 251, in <module>
+    main()
+  File "/home/azureuser/.hermes/hermes-agent/tui_gateway/entry.py", line 227, in main
+    for raw in sys.stdin:
+  File "/home/azureuser/.hermes/hermes-agent/tui_gateway/entry.py", line 106, in _log_signal
+    f.write("".join(traceback.format_stack(sys._current_frames().get(tid))))
+
+--- thread Thread-4 (_drain_stdout) (id=124068911158976) ---
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 1002, in _bootstrap
+    self._bootstrap_inner()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/azureuser/.hermes/hermes-agent/tui_gateway/server.py", line 216, in _drain_stdout
+    for line in self.proc.stdout or []:
+
+--- thread Thread-5 (_drain_stderr) (id=124068774803136) ---
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 1002, in _bootstrap
+    self._bootstrap_inner()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/azureuser/.hermes/hermes-agent/tui_gateway/server.py", line 224, in _drain_stderr
+    for line in self.proc.stderr or []:
+
+--- thread asyncio_0 (id=124068733421248) ---
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 1002, in _bootstrap
+    self._bootstrap_inner()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/concurrent/futures/thread.py", line 81, in _worker
+    work_item = work_queue.get(block=True)
+
+--- thread Thread-10 (_cleanup_thread_worker) (id=124068886714048) ---
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 1002, in _bootstrap
+    self._bootstrap_inner()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/azureuser/.hermes/hermes-agent/tools/terminal_tool.py", line 1329, in _cleanup_thread_worker
+    time.sleep(1)
+
+=== gateway exit · 2026-05-13 10:21:12 · reason=stdin EOF (TUI closed the command pipe) ===
+
+=== gateway exit · 2026-05-13 10:58:48 · reason=stdin EOF (TUI closed the command pipe) ===

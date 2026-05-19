@@ -1,0 +1,11 @@
+{
+  "workerId": "sales-closer",
+  "profile": "sales-closer",
+  "name": "Sales Closer",
+  "role": "Sales / Discovery / Proposal Agent",
+  "state": "idle",
+  "mission": "Move qualified prospects from discovery to proposal to close with truthful, approval-ready drafts and clear next steps.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T10:55:17Z",
+  "checkpoint": null
+}

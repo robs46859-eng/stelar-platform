@@ -1,0 +1,11 @@
+2026-05-15 17:25:23,509 INFO hermes_cli.plugins: Plugin 'openai' registered image_gen provider: openai
+2026-05-15 17:25:23,510 INFO hermes_cli.plugins: Plugin 'openai-codex' registered image_gen provider: openai-codex
+2026-05-15 17:25:23,510 INFO hermes_cli.plugins: Plugin 'xai' registered image_gen provider: xai
+2026-05-15 17:25:23,707 INFO hermes_cli.plugins: Plugin discovery complete: 12 found, 8 enabled
+2026-05-15 17:25:24,813 INFO run_agent: No .env file found. Using system environment variables.
+2026-05-15 17:25:25,622 INFO agent.auxiliary_client: Vision auto-detect: using main provider openrouter (inclusionai/ring-2.6-1t:free)
+2026-05-15 17:25:25,645 INFO agent.auxiliary_client: Vision auto-detect: using main provider openrouter (inclusionai/ring-2.6-1t:free)
+2026-05-15 17:25:25,658 INFO agent.auxiliary_client: Vision auto-detect: using main provider openrouter (inclusionai/ring-2.6-1t:free)
+2026-05-15 17:25:25,777 INFO agent.auxiliary_client: Vision auto-detect: using main provider openrouter (inclusionai/ring-2.6-1t:free)
+2026-05-15 17:25:25,789 INFO agent.auxiliary_client: Vision auto-detect: using main provider openrouter (inclusionai/ring-2.6-1t:free)
+2026-05-15 17:25:25,816 INFO tools.tirith_security: tirith not found — downloading latest release for x86_64-unknown-linux-gnu...

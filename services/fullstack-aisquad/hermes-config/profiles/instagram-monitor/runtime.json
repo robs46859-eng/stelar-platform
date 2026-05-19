@@ -1,0 +1,11 @@
+{
+  "workerId": "instagram-monitor",
+  "profile": "instagram-monitor",
+  "name": "Instagram Monitor",
+  "role": "Instagram Reels & Carousel Signal Monitor",
+  "state": "idle",
+  "mission": "Detect Prepared Paige buying signals across Instagram Reels, carousels, and comments - her PRIMARY platform.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T15:04:26.283908Z",
+  "checkpoint": null
+}

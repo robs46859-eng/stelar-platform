@@ -1,0 +1,11 @@
+{
+  "workerId": "youtube-monitor",
+  "profile": "youtube-monitor",
+  "name": "YouTube Monitor",
+  "role": "YouTube Pregnancy/Parenting Content Monitor",
+  "state": "idle",
+  "mission": "Monitor YouTube pregnancy/parenting videos and comments for Prepared Paige buying signals.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T15:04:15.564376Z",
+  "checkpoint": null
+}

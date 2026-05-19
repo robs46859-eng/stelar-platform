@@ -1,0 +1,18 @@
+{
+  "type": "domain_acquisition",
+  "source": "manual",
+  "feature": {
+    "domain": "tryarcai.ai",
+    "score": 58,
+    "tld": "ai",
+    "length": 8,
+    "is_dictionary": false,
+    "has_history": false,
+    "estimated_value": "",
+    "target_vertical": "AI / SaaS / Digital Services",
+    "prospective_clients": [],
+    "business_ideas": []
+  },
+  "stakeholders": {},
+  "notes": "Domain Hunter v2 scored 58/100. Verdict: product + flip"
+}

@@ -1,0 +1,15 @@
+{
+  "type": "promote_offer",
+  "source": "manual",
+  "offer": {
+    "title": "",
+    "url": "",
+    "buyer": ""
+  },
+  "channels": [
+    "linkedin",
+    "email",
+    "community"
+  ],
+  "notes": "Draft promotion assets only; do not publish."
+}

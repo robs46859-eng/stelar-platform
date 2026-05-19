@@ -1,0 +1,14 @@
+{
+  "type": "affiliate_review",
+  "source": "partnership-scout",
+  "affiliate": {
+    "partner_name": "",
+    "partner_type": "",
+    "provisional_link": "",
+    "commission_pct": 0,
+    "terms_draft": "",
+    "compliance_check_needed": true
+  },
+  "stakeholders": {},
+  "notes": "Affiliate agreement requires compliance review and human approval."
+}

@@ -1,0 +1,15 @@
+{
+  "type": "closed_won",
+  "source": "manual",
+  "customer": {
+    "company": "",
+    "contact": ""
+  },
+  "project": {
+    "title": "",
+    "scope": "",
+    "startDate": "",
+    "dueDate": ""
+  },
+  "notes": "Paste approved scope and terms."
+}

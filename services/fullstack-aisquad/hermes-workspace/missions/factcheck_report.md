@@ -1,0 +1,1 @@
+# Fact Checker Report\nTotal week files expected: 12\nMissing files: 0\nAll week files present.\nAll files have content (>0 bytes).\nNo obvious placeholder text detected.\nCombined manuscript written to: /home/azureuser/fullstack-aisquad/missions/final_manual.md\nCombined size: 113600 characters

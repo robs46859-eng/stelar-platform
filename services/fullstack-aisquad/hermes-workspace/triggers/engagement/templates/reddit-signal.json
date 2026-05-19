@@ -1,0 +1,16 @@
+{
+  "type": "reddit_signal",
+  "source": "reddit-monitor",
+  "signal": {
+    "subreddit": "",
+    "url": "",
+    "author": "",
+    "title": "",
+    "content": "",
+    "type": "post",
+    "matched_patterns": [],
+    "score": 0
+  },
+  "stakeholders": {},
+  "notes": "Reddit buying signal detected."
+}

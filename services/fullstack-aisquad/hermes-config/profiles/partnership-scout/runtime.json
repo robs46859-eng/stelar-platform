@@ -1,0 +1,11 @@
+{
+  "workerId": "partnership-scout",
+  "profile": "partnership-scout",
+  "name": "Partnership Scout",
+  "role": "Influencer / Expert Partner Finder and Outreach Drafter",
+  "state": "idle",
+  "mission": "Find and warm-outreach-draft to IBCLCs, postpartum doulas, small mom-influencers, and complementary creators. Manage affiliate roster with attribution links, payout tracking, and quarterly check-ins.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T15:32:09.730724Z",
+  "checkpoint": null
+}

@@ -1,0 +1,22 @@
+{
+  "type": "domain_flip",
+  "source": "manual",
+  "offer": {
+    "domain": "",
+    "tld": "",
+    "score": 0,
+    "estimated_value": "",
+    "acquisition_cost": "",
+    "target_buyer_profile": "",
+    "vertical": "",
+    "listing_channels": [
+      "Sedo",
+      "Afternic",
+      "Dan.com",
+      "Namecheap Marketplace"
+    ],
+    "brand_materials_path": ""
+  },
+  "lead": {},
+  "notes": ""
+}

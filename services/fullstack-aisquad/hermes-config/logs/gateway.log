@@ -1,0 +1,14 @@
+2026-05-15 02:45:20,333 INFO gateway.run: Starting Hermes Gateway...
+2026-05-15 02:45:20,334 INFO gateway.run: Session storage: /home/azureuser/.hermes/sessions
+2026-05-15 02:45:20,343 INFO gateway.run: Agent budget: max_iterations=60 (agent.max_turns from config.yaml, or HERMES_MAX_ITERATIONS from .env, or default 90)
+2026-05-15 02:45:20,346 INFO gateway.run: Secret redaction: ENABLED (tool output, logs, and chat responses are scrubbed before delivery)
+2026-05-15 02:45:20,356 WARNING gateway.run: No user allowlists configured. All unauthorized users will be denied. Set GATEWAY_ALLOW_ALL_USERS=true in ~/.hermes/.env to allow open access, or configure platform allowlists (e.g., TELEGRAM_ALLOWED_USERS=your_id).
+2026-05-15 02:45:20,499 INFO gateway.run: Connecting to api_server...
+2026-05-15 02:45:20,512 WARNING gateway.platforms.api_server: [Api_Server] ⚠️  No API key configured (API_SERVER_KEY / platforms.api_server.key). All requests will be accepted without authentication. Set an API key for production deployments to prevent unauthorized access to sessions, responses, and cron jobs.
+2026-05-15 02:45:20,514 INFO gateway.platforms.api_server: [Api_Server] API server listening on http://127.0.0.1:8642 (model: hermes-agent)
+2026-05-15 02:45:20,522 INFO gateway.run: ✓ api_server connected
+2026-05-15 02:45:20,527 INFO gateway.run: Gateway running with 1 platform(s)
+2026-05-15 02:45:20,541 INFO gateway.run: Channel directory built: 0 target(s)
+2026-05-15 02:45:21,543 INFO gateway.run: Press Ctrl+C to stop
+2026-05-15 02:45:21,596 INFO gateway.run: Cron ticker started (interval=60s)
+2026-05-15 02:45:26,547 INFO gateway.run: kanban dispatcher: embedded in gateway (interval=60.0s)

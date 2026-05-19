@@ -1,0 +1,14 @@
+{
+  "type": "customer_issue",
+  "source": "manual",
+  "customer": {
+    "company": "",
+    "contact": ""
+  },
+  "issue": {
+    "summary": "",
+    "severity": "",
+    "system": ""
+  },
+  "notes": "Paste customer message or issue details."
+}

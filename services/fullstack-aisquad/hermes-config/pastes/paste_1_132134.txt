@@ -1,0 +1,192 @@
+ Now I have the full picture. Here's my current status and recommendations:
+    
+    
+    
+    Current State Analysis
+    
+    Domain Hunter (/home/azureuser/domain-hunter/domain_hunter.py)
+    - What it does well: 4 sources (expireddomains.net, NameJet, DropCatch, SnapNames), scoring 0-100, RDAP availability, Wayback history, daily HTML email
+    - Gaps: Only expired/dropped domains, no brandable generator, no auction monitoring, no keyword-based search, no trend integration, no connection to your swarms
+    
+    
+    
+    Recommendations to Strengthen Domain Hunter
+    
+    1. Add More Discovery Engines (high impact)
+    
+    Auction & Drop Engines (currently underutilized or missing):
+    - GoDaddy Auctions — largest auction marketplace, scrape closing auctions + buy-now
+    - Dynadot Marketplace — good for brandable domains, API available with free key
+    - Sedo Marketplace — premium domain marketplace, has API
+    - Namecheap Closeouts — $5-$10 closeout section, often overlooked gems
+    - FreshDrop / FreshCom.com — daily lists of domains about to drop
+    - DomCop API — paid but comprehensive expired domain data with metrics
+    
+    Proactive Discovery Engines:
+    - Brandable name generator — generate .coms from trending keywords (use your media swarm's content-researcher to find trending topics, then combine into domain names)
+    - Keyword combination engine — take trending business keywords and combine with prefixes/suffixes: get, use, try, build, AI, App, HQ, Lab, etc.
+    - Trademark-safe checker — USPTO TESS screening before you register anything
+    
+    2. Focus Scoring on Digital Services/Sales Potential
+    
+    Add scoring factors for service-domain fit:
+    - Commercial intent keywords: "build", "create", "make", "design", "ship", "deploy", "host", "manage" etc. (+15 pts)
+    - B2B signal: 2-word combinations that sound like products/services (e.g., "buildflow.com", "shipmetric.io") (+10 pts)
+    - Trend alignment: Cross-reference with current tech trends (AI tools, automations, no-code) (+10 pts)
+    - Service-readiness: Does this sound like a SaaS product, agency name, or consulting firm? (+5-15 pts)
+    
+    3. Connect to Your Swarms (the big play)
+    
+    This is where it gets powerful. Here's the workflow:
+    
+    
+    Domain Hunter finds available "buildflow.com" (score 82)
+           │
+           ▼
+    Trigger: "new-domain" in Product Swarm
+           │
+           ├── Product Manager: PRD — what could we build on this domain?
+           ├── Content Writer: Landing page copy for "BuildFlow"
+           ├── Content Producer: SaaS landing page HTML prototype
+           ├── Visual Designer: Logo + brand assets
+           │
+           ▼
+    Trigger: "list_offer" in Revenue Swarm
+           │
+           ├── Offer Architect: Package as SaaS/agency offer
+           ├── Listing Manager: Service listing for the domain/product
+           ├── Sales Closer: Sales page + pitch
+           │
+           ▼
+    Trigger: "content_idea" in Media Swarm
+           │
+           ├── Content Writer: Blog posts, social content
+           ├── Distribution Manager: SEO + social promotion plan
+    
+    
+    The domain becomes the anchor for a full product + marketing pipeline instead of just a parked listing.
+    
+    4. Add a "Domain Opportunity Pipeline"
+    
+    Create a new trigger type in the product swarm called domain_acquisition:
+    - Takes scored available domains as input
+    - Routes high-score domains (>75) to PM + PED for concept development
+    - Routes lower-score domains to PM for flip-only evaluation
+    - Creates artifacts: landing page mockup, brand concept, and potential service offering
+    
+    5. Operational Improvements
+    
+    - JSON output mode: Besides email, output results as JSON for programmatic consumption
+    - Duplicate tracking: Track domains you evaluated before so you don't repeat work
+    - Portfolio tracker: Keep a file of domains you've registered with purchase date, cost, and listing status
+    - Flip pipeline: Integrate with listing-manager to automatically draft marketplace listings (Sedo, Afternic, Dan.com)
+    
+    
+    
+    My Recommendation: Where to Start
+    
+    I recommend building in this order:
+    
+    1. Enhanced scoring — add service-readiness, commercial keywords, trend alignment factors to domain_hunter.py (quick win, 2-3 hours)
+    
+    2. 2 new sources — GoDaddy Auctions + Dynadot Marketplace scrape (moderate effort, 4-6 hours)
+    
+    3. Domain Acquisition trigger — new product swarm trigger that connects hunter output to your swarm pipeline (architectural, 3-4 hours)
+    
+    4. JSON output + portfolio tracker — programmatic output so other systems can consume it (quick, 1-2 hours)
+    
+    
+    
+    Want me to start building? I can tackle #1 (enhanced scoring) first since it's the highest-ROI change with the lowest effort, then we iterate on the rest. Or if you prefer a different start point, let me know.
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+────────────────────────────────────────
+● can you create agent swarms to complete these tasks and run them? keep the swarms available for future use. Can you add in a branding visionary to 
+bolster the products/services  sold with customized marketing materials/samples created specific to the prospective client?
+
+────────────────────────────────────────
+  ┊ 📋 preparing todo…
+  ┊ 📋 plan      7 task(s)  0.0s
+  ┊ 📋 preparing todo…
+  ┊ 📋 plan      7 task(s)  0.0s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    Now let me build everything. Starting with the brand-visionary worker + new triggers + dispatcher.
+    
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+  ┊ 🐍 preparing execute_code…
+  ┊ 🐍 exec      from hermes_tools import write_file, terminal  1.3s
+  ┊ 📖 preparing read_file…
+  ┊ 📖 read      /home/azureuser/hermes-workspace/swarm.yaml  0.9s
+  ┊ 📖 preparing read_file…
+  ┊ 📖 read      /home/azureuser/hermes-workspace/swarm.yaml  0.8s
+  ┊ 🔧 preparing patch…
+  ┊ 🔧 patch       2.6s
+  ┊ review diff
+a//home/azureuser/hermes-workspace/swarm.yaml → b//home/azureuser/hermes-workspace/swarm.yaml
+@@ -1584,3 +1584,52 @@
+   pluginToolsets: []
+   mcpServers: []
+   wrapper: qa:verify
++
++- id: brand-visionary
++  name: Brand Visionary
++  role: Brand Identity / Sales Samples / Prospective Client Materials Agent
++  specialty: brand concepts, custom landing pages, prospect-specific pitch decks, tailored case studies, logo directions, sales kits, ROI demonstrations
++  model: openrouter/inclusionai/ring-2.6-1t:free
++  mission: Transform generic domain concepts into compelling, prospect-specific brand visions with customized marketing materials, sales samples, and client-tailored pitch packages.
++  profile: brand-visionary
++  modes:
++  - brand
++  - pitch
++  tools:
++  - file
++  - terminal
++  - web
++  - browser
++  - vision
++  - session_search
++  - skills
++  - todo
++  skills:
++  - brand-visionary-core
++  - humanizer
++  - defuddle
++  capabilities:
++  - brand-concepts
++  - pitch-materials
++  - sales-samples
++  - prospect-customization
++  - case-studies
++  - roi-demonstration
++  preferredTaskTypes:
++  - branding
++  - pitch
++  - sales-materials
++  - prospect-outreach
++  - case-study
++  greenlightRequiredFor:
++  - publish
++  - external-send
++  - prospect-outreach
++  - public-claim
++  maxConcurrentTasks: 1
++  acceptsBroadcast: true
++  plugins: []
++  pluginToolsets: []
++  mcpServers: []
++  wrapper: bv:brand
++
+  ┊ 🐍 preparing execute_code…
+  ┊ 🐍 exec      from hermes_tools import write_file, terminal, read_file  5.8s
+  ┊ 📋 preparing todo…
+  ┊ 📋 plan      7 task(s)  0.0s
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    Now let me add the domain_acquisition trigger to the product swarm trigger-map and the product-trigger-dispatch script, and the domain_flip trigger to the revenue swarm.
+    
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+  ┊ 🐍 preparing execute_code…
+  ┊ 🐍 exec      from hermes_tools import read_file, patch, write_file, terminal  6.4s
+  ┊ 📋 preparing todo…
+  ┊ 📋 plan      7 task(s)  0.0s

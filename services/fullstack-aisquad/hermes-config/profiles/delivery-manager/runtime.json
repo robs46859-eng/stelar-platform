@@ -1,0 +1,11 @@
+{
+  "workerId": "delivery-manager",
+  "profile": "delivery-manager",
+  "name": "Delivery Manager",
+  "role": "Fulfillment / Project Delivery Agent",
+  "state": "idle",
+  "mission": "Turn won work into controlled delivery plans, acceptance checks, and handoffs for AI widgets, automations, integrations, and consulting engagements.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T10:55:17Z",
+  "checkpoint": null
+}

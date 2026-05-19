@@ -1,0 +1,8 @@
+Agent: Compliance Reviewer
+Wrapper: compliance:review
+What It Does: Audits every external-facing claim against an evidence ledger
+  (cite source for any medical/nutritional/safety statement). Flags absolutes
+  ("will," "guarantees," "cure"). Enforces the lawyer-reviewed disclaimer
+  appears on every product, page, and post that touches health. Sits between
+  qa:verify and any publish action.
+This sits in the Base Swarm or as a new gate in Product + Media. It's a hard block, not advisory.

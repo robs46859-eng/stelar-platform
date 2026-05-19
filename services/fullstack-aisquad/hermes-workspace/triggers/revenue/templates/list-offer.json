@@ -1,0 +1,16 @@
+{
+  "type": "list_offer",
+  "source": "manual",
+  "offer": {
+    "title": "",
+    "buyer": "",
+    "deliverables": [],
+    "priceBand": ""
+  },
+  "channels": [
+    "website",
+    "marketplace",
+    "linkedin"
+  ],
+  "notes": "Listing draft request."
+}

@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-05-15T13:35:52.731757",
+  "total_domains": 1,
+  "available_domains": 1,
+  "dedup_skipped": 0,
+  "product_dispatched": 1,
+  "revenue_dispatched": 1,
+  "dispatched_domains": [
+    "shipai.io"
+  ],
+  "summary": [
+    {
+      "domain": "shipai.io",
+      "score": 64,
+      "verdict": "product + flip",
+      "dispatched_to": [
+        "product",
+        "revenue"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "workerId": "qa",
+  "profile": "qa",
+  "name": "QA",
+  "role": "Browser / Workflow / CLI Smoke Verification",
+  "state": "idle",
+  "mission": "Verify user-visible behavior with concrete smoke evidence and concise bug reports.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T02:52:43Z",
+  "checkpoint": null
+}

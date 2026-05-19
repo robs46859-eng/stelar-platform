@@ -1,0 +1,15 @@
+{
+  "type": "youtube_signal",
+  "source": "youtube-monitor",
+  "signal": {
+    "channel": "",
+    "video_url": "",
+    "comment_author": "",
+    "comment": "",
+    "video_title": "",
+    "matched_patterns": [],
+    "score": 0
+  },
+  "stakeholders": {},
+  "notes": "YouTube comment buying signal detected."
+}

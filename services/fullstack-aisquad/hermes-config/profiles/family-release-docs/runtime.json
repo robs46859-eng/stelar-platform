@@ -1,0 +1,20 @@
+{
+  "workerId": "family-release-docs",
+  "state": "blocked",
+  "checkpointStatus": "blocked",
+  "projectRoot": "/home/azureuser/family-companion",
+  "lastSummary": "Dispatched task: Trigger payload:\n{\n  \"type\": \"ship_merger\",\n  \"source\": \"manual\",\n  \"project\": {\n    \"name\": \"family-companion merger\",\n    \"root\": \"/home/azureuser/family-companion\",\n    \"backend",
+  "phase": "dispatched",
+  "currentTask": "Trigger payload:\n{\n  \"type\": \"ship_merger\",\n  \"source\": \"manual\",\n  \"project\": {\n    \"name\": \"family-companion merger\",\n    \"root\": \"/home/azureuser/family-companion\",\n    \"backend\": \"/home/azureuser/family-companion/backend\",\n    \"android\": \"/home/azureuser/family-companion/android\",\n    \"local_model\": \"gemma4:26b\",\n    \"ollama_base_url\": \"http://localhost:11434/v1\",\n    \"backend_smoke_port\": 8001\n  },\n  \"ship_criteria\": [\n    \"Ollama exposes gemma4:26b and chat completion smoke succeeds.\",\n    \"Backend Android endpoints smoke cleanly against updated code.\",\n    \"Database tables/enums are created through repeatable migration or safe bootstrap path.\",\n    \"Android Retrofit/Repository/ViewModel wiring compiles or has exact blockers.\",\n    \"Runbook and demo checklist contain actual VM paths and commands.\"\n  ],\n  \"notes\": \"Launched after backend chat smoke passed locally; DB tables were bootstrapped via SQLAlchemy create_all and need repeatable migration work.\"\n}\n\nUpdate or draft the merger runbook/demo checklist so it reflects actual VM paths, model tag gemma4:26b, Ollama URL, backend smoke commands, Android build commands, and remaining ship blockers. Do not claim unverified tests passed.\n\nProject constants:\n- Root: /home/azureuser/family-companion\n- Backend: /home/azureuser/family-companion/backend\n- Android: /home/azureuser/family-companion/android\n- Ollama OpenAI-compatible base URL: http://localhost:11434/v1\n- Required model: gemma4:26b\n\nRules:\n- Preserve dirty worktree changes and do not revert unrelated edits.\n- Production deploys, destructive DB actions, credential use, external sends, and public announcements require human greenlight.\n- Return the required checkpoint format with exact proof and next action.",
+  "currentMissionId": "mission-mp8u7syf-e09x3o",
+  "currentAssignmentId": "assign-mp8u7syf-q9krtp",
+  "needsHuman": false,
+  "blockedReason": "session_id: 20260516_210741_361c9b",
+  "lastDispatchAt": 1778965672628,
+  "lastDispatchMode": "oneshot",
+  "lastDispatchResult": "session_id: 20260516_210741_361c9b",
+  "lastCheckIn": "2026-05-16T21:07:52.628Z",
+  "lastControlMessage": "Dispatched task: Trigger payload:\n{\n  \"type\": \"ship_merger\",\n  \"source\": \"manual\",\n  \"project\": {\n    \"name\": \"family-companion merger\",\n    \"root\": \"/home/azureuser/family-companion\",\n    \"backend",
+  "nextAction": "Worker should execute and return the required checkpoint format.",
+  "notifySessionKey": "family-companion"
+}

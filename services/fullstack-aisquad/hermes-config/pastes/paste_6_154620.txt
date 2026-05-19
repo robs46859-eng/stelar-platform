@@ -1,0 +1,262 @@
+Phase 0 — Initialize
+Step 0.1 — Set the mission
+
+base:orchestrator:plan
+  mission: "Ship 4th Trimester Operating Manual on Stan Store.
+            Target: 100 paid units before kill check.
+            Kill criteria: <30 organic sales/month after 3 sales cycles."
+Step 0.2 — Lock the wedge and exits
+
+strategist:review
+  inputs: mission, ICP.md
+  outputs: confirmed wedge, bets, kill criteria → brain
+Step 0.3 — Load context into the brain
+
+km:health
+  ingest: ICP.md, this playbook, disclaimer template, brand guidelines
+Phase 1 — Engagement (Listen Mode)
+Runs BEFORE product build. Output feeds product. Stays running thereafter.
+
+Step 1.1 — Configure signal orchestration
+
+signal:orchestrate
+  mode: LISTEN_ONLY
+  icp: Prepared Paige, postpartum 0–12w
+  min_score: 70
+  prime_window: 21:00–01:00 ET
+Step 1.2 — Activate monitors (parallel)
+
+reddit:monitor  → r/BabyBumps, r/beyondthebump, r/breastfeeding, r/sleeptrain
+quora:monitor   → postpartum recovery, BF pain, baby sleep weeks 1–12, red flags
+yt:monitor      → top 50 pregnancy/parenting channels, new uploads + comments
+ig:monitor      → #4thtrimester #postpartumlife #firsttimemom #newbornlife
+                  (burner account, view-only)
+Step 1.3 — Triage the listening output
+
+signal:orchestrate (review queue)
+  human gate: read top 100 signals
+  tag: pain phrases, exact-language pull-quotes, competitor mentions,
+       emergency-fear topics, recurring questions per week postpartum
+  output: signals_dossier.md (raw input for content:research)
+Phase 2 — Product Creation
+Step 2.1 — Research brief grounded in signals
+
+content:research
+  inputs: signals_dossier.md, ICP.md
+  outputs: per-week pain map, language register,
+           competitor product list, claim-evidence ledger seed
+Step 2.2 — Frame the product
+
+product:orchestrate
+  mission: "Build 4th Trimester Operating Manual per ICP and research brief"
+pm:frame
+  outputs: PRD —
+    - 12 weekly chapters × 5 fixed sections (body / baby / mental / partner / call doctor)
+    - 3 appendices (decision tree, feeding+diaper log, scripts)
+    - Acceptance: <8000 words core, ≤90-min audio,
+                  every health claim citation-backed,
+                  6th-grade reading level
+Step 2.3 — Source the content (parallel per chapter)
+
+researcher:quick × 12
+  per chapter: medical sources for body week N,
+               developmental milestones for baby week N,
+               PPD/PPA screening, red-flag thresholds
+  outputs: chapter_N_sources.md (citations only, no prose)
+Step 2.4 — Draft the chapters (sequential for voice consistency)
+
+content:write
+  inputs: PRD, signals_dossier, chapter_N_sources
+  constraints: no "should"; prefer "many moms"; no absolutes;
+               cite credentialed reviewer name once per chapter
+  outputs: chapter_N_draft.md, appendix_decision_tree.md
+Step 2.5 — Design the experience (parallel)
+
+ped:vision
+  outputs: PDF layout spec — mobile-first; 1 chapter = 4–6 vertical screens;
+           audio companion timing; decision-tree interaction model
+visual:design
+  outputs: cover, 12 chapter dividers, decision-tree infographic
+           (decision-tree designed as standalone shareable asset
+            in 4 formats: IG carousel, Pinterest pin, TikTok overlay, PDF page)
+content:produce
+  outputs: 12 × ~8-min audio episodes from approved drafts
+  human gate: voice choice (yours vs licensed AI voice) before recording
+Step 2.6 — Brand kit
+
+bv:brand
+  outputs: brand identity doc, sales-page visual language,
+           social-asset templates (Reels, carousels, Pinterest pins, YouTube thumbs)
+Phase 3 — Optimization & Gates
+Step 3.1 — QA pass
+
+qa:verify
+  checks: factual accuracy vs sources, internal consistency,
+          accessibility (alt text, contrast), readability score,
+          mobile-pdf rendering on iPhone
+  output: pass/fail per chapter; blocking
+Step 3.2 — Compliance pass
+
+compliance:review
+  checks:
+    - every health/nutritional/safety claim has a cited source
+    - no absolutes ("will," "cures," "guarantees")
+    - lawyer-approved disclaimer on PDF cover, audio intro, sales page, checkout
+    - refund policy meets FTC + Stan requirements
+    - no impermissible IBCLC/medical-advice framing
+  output: BLOCKING report
+Step 3.3 — Human gates (cannot be skipped)
+
+not done
+Credentialed RN, CNM, or IBCLC reviews manuscript (paid $500–1500); redlines applied
+not done
+Lawyer approves disclaimer + refund policy ($300–500)
+not done
+You read every chapter end-to-end on an iPhone
+Step 3.4 — Re-run after redlines
+
+content:write  → apply reviewer redlines
+qa:verify      → re-run
+compliance:review → re-run
+Phase 4 — Stan Store Listing
+Step 4.1 — Design the SKUs and price ladder
+
+revenue:orchestrate
+  mission: "List Operating Manual on Stan (primary), Etsy + Gumroad (tests)"
+offer:design
+  outputs:
+    SKU-001  $39   core
+    SKU-002  $29   founding price, first 100 buyers, time-boxed
+    SKU-003  $49   gift edition (alt cover, gift note)
+    BUNDLE   $59   Operating Manual + Decision Tree + Partner Playbook
+                   (held in draft; release after 200 sales)
+Step 4.2 — Draft the listings
+
+listing:publish
+  per platform draft: title, subtitle, long description,
+                      hero image, gallery, tags, price,
+                      refund policy block, delivery method, upsell config
+  stan-specific:      link-in-bio block layout, checkout customization,
+                      abandoned-cart copy, Apple Pay enabled
+  output: drafts in queue (no auto-publish)
+  human gate: you publish each listing manually
+Step 4.3 — Stand up the funnel around the listing
+
+funnel:nurture
+  outputs:
+    - lead magnet: "Is this an emergency?" decision-tree PDF (free)
+    - welcome sequence (5 emails over 7 days)
+    - post-purchase sequence (testimonial ask at 14d + 45d)
+    - abandoned-cart sequence (2 emails, 24h)
+    - weekly broadcast template
+  tool: Kit / ConvertKit
+  human gate: approve every email before send
+Step 4.4 — Launch narrative + assets
+
+pmm:launch
+  outputs: positioning doc, 5 hook variations for A/B test,
+           "founding mothers" launch narrative,
+           outreach scripts for IBCLC/doula partners
+content:plan
+  outputs: editorial calendar (next 30 publishes):
+    - 3 Reels/wk built from decision-tree variations
+    - 2 carousels/wk from chapter excerpts
+    - 5 Pinterest pins/wk from chapter assets
+    - 1 YouTube Short/wk
+    - 1 email broadcast/wk
+content:write + visual:design + content:produce
+  outputs: full first-30-publishes content batch ready to schedule
+distribution:manage
+  outputs: scheduled queue across IG, TikTok, YouTube, Pinterest, email
+  human gate: you approve the schedule
+Step 4.5 — Partnership pipeline
+
+partner:scout
+  targets: 25 IBCLCs with newsletters, 25 postpartum doulas with lists,
+           mom-influencers 5K–50K in postpartum niche
+  outputs: warm-intro drafts (batch of 10/day to review queue),
+           affiliate program one-pager (40% revshare),
+           tracking links per partner
+  human gate: you approve every outbound message
+Phase 5 — Engagement (Active Mode)
+Switch the monitoring swarm from listen to engage.
+
+Step 5.1 — Flip mode
+
+signal:orchestrate
+  mode: ENGAGE
+Step 5.2 — Draft authentic responses
+
+engage:write
+  per signal (score ≥70):
+    reddit: casual honest energy, 2–4 sentences, no link unless asked
+    quora:  helpful personal tone, 1 paragraph, citation if claim
+    youtube: conversational comment, 1–2 sentences
+    instagram: warm short reply, 1 sentence + emoji where natural
+  hard rule: do NOT mention the product unless directly asked
+  hard rule: every draft passes humanizer + compliance:review before queue
+  output: drafts → review queue (no auto-post)
+Step 5.3 — Seed the founding mothers (manual, not agent)
+
+DM-and-deliver in 5 Facebook bumper groups: 20 free copies for testimonial
+This is the first external touch — you do it personally
+Phase 6 — Ongoing Optimization Loop
+Recurring rhythm; no fixed timing.
+
+Step 6.1 — Approval cadence (you)
+
+engage:write queue            → approve 10–20 comments per session
+distribution:manage queue     → approve next batch of scheduled posts
+funnel:nurture queue          → approve outbound email sends
+partner:scout queue           → approve outbound partnership messages
+listing:publish queue         → approve listing edits + price tests
+Step 6.2 — Analytics review
+
+analytics:review
+  outputs:
+    - per-hook conversion rate
+    - per-channel CPA + ROAS
+    - per-asset save / share / click rates
+    - refund rate
+    - gift-buyer fraction (test: >25% → lean into gift positioning)
+    - email list growth, open, CTR, revenue / subscriber
+Step 6.3 — Re-prioritize content
+
+content:plan
+  inputs: analytics:review output
+  action: double down on top 3 converting hooks — 5 variations of each
+  action: kill bottom-quartile formats
+Step 6.4 — Strategy check against kill criteria
+
+strategist:review
+  cadence: every full sales cycle
+  inputs: analytics + cohort behavior
+  decision:
+    PASS (≥30 organic sales / cycle):
+      → release the $59 BUNDLE SKU
+      → spin up Tier 2 product (Weeks 13–26 companion)
+      → activate registry affiliate page
+    FAIL:
+      → diagnose: audience size, hook, price, product
+      → 1 adjustment per cycle, not 4 at once
+      → if 2 consecutive fails, invoke kill criteria
+Step 6.5 — Knowledge management
+
+km:health
+  cadence: end of every sales cycle
+  action: capture what worked, what failed, what surprised, into brain
+  action: prune stale assumptions from ICP.md
+Approval Gates — Master List
+These never auto-execute. The agent drafts; you publish.
+
+Gate	Drafted by	Approved by
+Manuscript final	content:write	RN/IBCLC reviewer + you
+Disclaimer + refund policy	compliance:review	Lawyer + you
+Stan / Etsy / Gumroad listings	listing:publish	You
+Pricing changes	offer:design	You
+Email sends	funnel:nurture	You
+Social posts	distribution:manage	You
+Engagement comments	engage:write	You
+Partner outreach	partner:scout	You
+Affiliate payouts	partner:scout	You
+Any public claim	compliance:review

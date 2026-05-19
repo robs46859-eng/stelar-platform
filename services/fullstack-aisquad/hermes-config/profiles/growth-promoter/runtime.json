@@ -1,0 +1,11 @@
+{
+  "workerId": "growth-promoter",
+  "profile": "growth-promoter",
+  "name": "Growth Promoter",
+  "role": "Promotion / Content / Campaign Agent",
+  "state": "idle",
+  "mission": "Create approval-ready promotion plans and campaign assets that drive qualified conversations without spam or unapproved publishing.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T10:55:17Z",
+  "checkpoint": null
+}

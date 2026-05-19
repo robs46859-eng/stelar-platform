@@ -1,0 +1,54 @@
+version: 1
+greenlight: Releases, external announcements, pricing changes, platform deployments, and customer-facing communications require human approval.
+triggers:
+  new_feature:
+  - product-manager
+  - product-experience-director
+  - product-engineer
+  - project-manager
+  - product-orchestrator
+  user_feedback:
+  - product-manager
+  - product-experience-director
+  - product-qa
+  - project-manager
+  competitive_gap:
+  - product-manager
+  - product-marketing-manager
+  - product-engineer
+  - product-orchestrator
+  market_opportunity:
+  - product-manager
+  - product-marketing-manager
+  - product-experience-director
+  internal_innovation:
+  - product-engineer
+  - product-manager
+  - product-orchestrator
+  feature_release:
+  - project-manager
+  - product-qa
+  - product-marketing-manager
+  - product-orchestrator
+  - product-engineer
+  product_update:
+  - product-manager
+  - product-marketing-manager
+  - project-manager
+  beta_launch:
+  - project-manager
+  - product-qa
+  - product-marketing-manager
+  - product-engineer
+  optimization_experiment:
+  - product-manager
+  - product-qa
+  - product-engineer
+  - project-manager
+  domain_acquisition:
+  - product-manager
+  - brand-visionary
+  - product-experience-director
+  - product-engineer
+  - content-writer
+  - product-orchestrator

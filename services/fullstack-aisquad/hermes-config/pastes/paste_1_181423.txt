@@ -1,0 +1,20 @@
+# 1. Find the new disk (should be /dev/sdc)
+lsblk
+
+# 2. Partition, format, and mount it
+sudo parted /dev/sdc --script mklabel gpt mkpart primary ext4 0% 100%
+sudo mkfs.ext4 /dev/sdc1
+sudo mkdir -p /mnt/gemma4
+
+# 3. Mount it and make it persist across reboots
+sudo mount /dev/sdc1 /mnt/gemma4
+echo "UUID=$(sudo blkid -s UUID -o value /dev/sdc1)  /mnt/gemma4  ext4  defaults,nofail  0  2" | sudo tee -a /etc/fstab
+
+# 4. Point Ollama's model store at the new disk
+sudo mkdir -p /mnt/gemma4/ollama
+sudo chown -R $USER:$USER /mnt/gemma4/ollama
+echo 'export OLLAMA_MODELS=/mnt/gemma4/ollama' >> ~/.bashrc
+source ~/.bashrc
+
+# 5. Pull Gemma 4 27B
+ollama pull gemma4:27b

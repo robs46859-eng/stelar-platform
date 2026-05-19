@@ -1,0 +1,95 @@
+● Its gemma 27B (27 billion parameters) the hackathon win is very important so 
+gemma models and llama for the special category yes 
+1. COMPETITION-SPECIFIC TERMS
+... (+120 more lines)
+GENERAL COMPETITION RULES - BINDING AGREEMENT
+────────────────────────────────────────
+
+╭─ ⚕ Hermes ───────────────────────────────────────────────────────────────────╮
+    Based on our exploration and the hackathon details you've provided, here's a strategic approach for the Gemma 4 Good Hackathon with your fscompanion project:
+    
+    Current Progress Summary
+    ✅ Hermes Workspace Swarm Ready: Created llm-integrator worker with llm:integrate wrapper  
+    ✅ Skill Established: llm-integration-core for local LLM integration workflows  
+    ✅ Profile Configureded: Isolated environment for Gemma 4 27B development  
+    ✅ Codebase Analyzed: fscompanion has Gemma module but services use templates (opportunity for real LLM integration)  
+    
+    Hackathon Strategy: "FamilyGuardian" Submission
+    
+    Core Concept
+    Leverage Gemma 4 27B to transform fscompanion into a local-first family stability guardian that provides offline AI support for vulnerable families during crises, education challenges, and health transitions—directly addressing multiple prize tracks.
+    
+    Track-Targeted Implementation
+    
+    🏆 Main Track Targets (Real-World Impact)
+    1. Future of Education ($10k): 
+       - Gemma-powered learning assistant for children in unstable homes
+       - Adaptive tutoring that works offline when internet is unavailable
+       - Multi-lingual support for refugee/immigrant families
+    
+    2. Digital Equity & Inclusivity ($10k):
+       - Local-first design eliminates dependency on consistent internet
+       - Runs on low-end Android devices via Ollama/llama.cpp
+       - Voice-first interface for low-literacy users
+    
+    3. Safety & Trust ($10k):
+       - Local processing ensures zero data leaves device (critical for abuse victims)
+       - Explainable AI shows family why suggestions are made
+       - Offline safety protocols work during network blackouts
+    
+    4. Global Resilience ($10k):
+       - Functions in disaster zones with no connectivity
+       - Resource management guidance for families in crisis
+       - Multilingual crisis support without external APIs
+    
+    🏆 Special Technology Tracks ($10k each)
+    1. Ollama Prize: Primary implementation using Ollama for Gemma 4 27B local deployment
+    2. LiteRT Prize: Android app optimized with Google AI Edge LiteRT for Gemma 4
+    3. llama.cpp Prize: Fallback implementation for extreme low-resource scenarios
+    4. Cactus Prize: Local-first mobile app that intelligently routes between:
+       - Local Gemma 4 27B (private/family data)
+       - Cloud models (when available & appropriate)
+       - Rule-based systems (ultra-low power modes)
+    5. Unsloth Prize: Domain-specific fine-tuning for:
+       - Family crisis detection
+       - Child development guidance
+       - Resource navigation for social services
+    
+    Technical Architecture (Hermes-Ready)
+    
+    Phase 1: Local LLM Foundation (llm-integrator worker)
+    - Deploy Gemma 4 27B via Ollama in Docker container
+    - Create local client wrapper mimicking Gemini API interface
+    - Implement dual-mode: Local (Ollama) ↔ Cloud (Gemini API) fallback
+    
+    Phase 2: Android Integration (Navigate Mama enhancement)
+    - Add LiteRT-optimized Gemma 4 for on-device inference
+    - Create local-first data sync (Room DB + periodic cloud backup)
+    - Implement model routing logic: 
+      
+      if sensitive_data: local_model
+      elif connectivity: cloud_model  
+      else: rule-based_fallback
+      
+    
+    Phase 3: Competition-Specific Features
+    - Cactus Prize: Task router that sends:
+      - Crisis detection → Local Gemma 4 27B (immediate, private)
+      - Lesson planning → Cloud model (richer, non-sensitive)
+      - Medication reminders → Rule-based (zero latency)
+    - Unsloth Prize: Fine-tune Gemma 4 27B on:
+      - Family therapy transcripts (de-identified)
+      - Child development milestones datasets
+      - Social services eligibility criteria
+    
+    Why This Wins
+    1. Technical Excellence: Hits all 5 special technology tracks
+    2. Real Impact: Addresses vulnerable populations during actual crises
+    3. Local-First Privacy: Critical for trust in family/safety contexts
+    4. Scalability: Works from high-end servers to low-end Android phones
+    5. Hermes Advantage: Your workspace already has the swarm infrastructure to parallelize development
+    
+    Immediate Next Steps (via llm:integrate)
+    1. Model Acquisition: llm:integrate chat "Pull Gemma 4 27B via Ollama and test basic inference"
+    2. Android LiteRT: llm:integrate chat "Research LiteRT implementation for Gemma 4 on Android"
+    3. Fine-tuning Prep: llm:integrate chat "Identify datasets for Unsloth fine-tuning of Gemma 4 27B for family support"

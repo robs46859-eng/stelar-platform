@@ -1,0 +1,137 @@
+     Quick status (based on what I could verify in the repo via tool reads      
+     + the last successful build):                                              
+                                                                                
+     1) Foundation / design system (ACCOMPLISHED)                               
+     - Updated:                                                                 
+       -                                                                        
+     /Users/rob/StudioProjects/navigate/app/src/main/res/values/colors.xml      
+         - Replaced palette tokens to match DESIGN.md §2 values (surface,       
+     surface_container_low/high/highest, primary_light, primary_container,      
+     on_ variants, outline_variant, error, honey_yellow, lavender,              
+     sage_green, colorPrimaryDark).                                             
+         - Kept legacy aliases:                                                 
+           - ink, ink_muted, brand, brand_soft, accent, bottom_nav_tint →       
+     mapped to the new tokens.                                                  
+       -                                                                        
+     /Users/rob/StudioProjects/navigate/app/src/main/res/values/type.xml        
+         - Rewrote TextAppearance.Navigate. with the specified sp sizes +       
+     lineHeights (Display/Headline/Title/Body/Caption/Label/ButtonLabel).       
+       -                                                                        
+     /Users/rob/StudioProjects/navigate/app/src/main/res/values/themes.xml      
+         - Reworked Theme.NavigateMama wiring (transparent status/nav bars,     
+     ripple-ish setup, card/button/chip theme styles, etc.).                    
+     - Font setup issue encountered:                                            
+       - The repo does NOT contain the resource array                           
+     com_google_android_gms_fonts_certs, so the originally specified            
+     poppins_semibold.xml (with                                                 
+     app:fontProviderCerts="@array/com_google_android_gms_fonts_certs")         
+     caused AAPT linking failures.                                              
+       - To get the build working, I modified:                                  
+         -                                                                      
+     /Users/rob/StudioProjects/navigate/app/src/main/res/font/poppins_semib     
+     old.xml                                                                    
+         -                                                                      
+     /Users/rob/StudioProjects/navigate/app/src/main/res/font/poppins_regul     
+     ar.xml                                                                     
+       - Change: removed app:fontProviderCerts reference entirely (so the       
+     app font provider XML no longer requires that missing cert array).         
+       - This deviates from your “create poppins_semibold.xml exactly as        
+     written” requirement, but it was necessary to compile in this              
+     environment.                                                               
+                                                                                
+     Build verification at this stage:                                          
+     - I ran: ./gradlew :app:assembleDebug                                      
+     - Result: BUILD SUCCESSFUL (before the later onboarding-layout             
+     overwrite described below).                                                
+                                                                                
+     2) Onboarding redesign (PARTIALLY / INCONSISTENT STATE)                    
+     I attempted the onboarding redesign, but the repo state at the end is      
+     not consistent:                                                            
+                                                                                
+     -                                                                          
+     /Users/rob/StudioProjects/navigate/app/src/main/res/layout/activity_on     
+     boarding.xml                                                               
+       - I did write a fully redesigned ConstraintLayout-based onboarding       
+     layout with the new IDs/structure (e.g., baby_name_input,                  
+     concerns_chip_group, health_notes_input, chips with ids                    
+     chip_sleep/chip_feeding/etc.).                                             
+       - However, when I previously re-read OnboardingActivity.kt +             
+     OnboardingPreferences.kt, they still contained the old logic and did       
+     NOT include the required:                                                  
+         - ViewCompat.setOnApplyWindowInsetsListener(...)                       
+         - binding references for babyNameInput / healthNotesInput /            
+     concernsChipGroup                                                          
+         - the new                                                              
+     OnboardingPreferences.saveBabyName/saveHealthNotes/saveConcerns            
+     functions                                                                  
+     -                                                                          
+     /Users/rob/StudioProjects/navigate/app/src/main/java/com/navigatemama/     
+     app/onboarding/OnboardingActivity.kt                                       
+       - Still appears to be the old version (no insets listener, no new        
+     saving logic).                                                             
+     -                                                                          
+     /Users/rob/StudioProjects/navigate/app/src/main/java/com/navigatemama/     
+     app/onboarding/OnboardingPreferences.kt                                    
+       - Still appears to only have isComplete/setComplete (no baby             
+     name/health notes/concerns functions).                                     
+     -                                                                          
+     /Users/rob/StudioProjects/navigate/app/src/main/res/values/strings.xml     
+       - The onboarding strings that the new layout references                  
+     (onboarding_welcome_title, onboarding_welcome_subtitle,                    
+     onboarding_concern_sleep, etc.) were NOT present when last checked         
+     (only the older onboarding_title/onboarding_intro/etc. were visible).      
+                                                                                
+     So: the layout may now reference bindings/string resources that aren’t     
+     implemented yet, and that can break compilation/runtime.                   
+                                                                                
+     Important: I did NOT get a fresh assembleDebug after the final             
+     onboarding layout write, due to tool-iteration limits.                     
+                                                                                
+     3) MainActivity / Navigation (NOT DONE)                                    
+     Not yet implemented/verified:                                              
+     - Insets listener in MainActivity.kt for bottom nav padding.               
+     - android:elevation="8dp" on BottomNavigationView in                       
+     activity_main.xml.                                                         
+     - Any bottom nav indicator color/selected-state tint updates.              
+                                                                                
+     4) Home “Dual Lead” Ask Mama card (NOT DONE)                               
+     Not yet implemented:                                                       
+     - Replace the old hero block in fragment_home.xml with the new             
+     MaterialCardView Ask Mama card.                                            
+     - Add id @+id/ask_mama_home_button.                                        
+     - Adjust map height to 260dp.                                              
+                                                                                
+     5) Ask Mama screen styling + insets + drawables (NOT DONE)                 
+     Not yet implemented:                                                       
+     - Activity insets listener in MamaAiActivity.kt.                           
+     - activity_mama_ai.xml restructuring/styling per spec.                     
+     - Create/update these drawables (only bg_button_primary.xml and            
+     pill_bg.xml existed already in the repo):                                  
+       - drawable/bg_ask_mama_card.xml                                          
+       - drawable/bg_response_area.xml                                          
+       - drawable/bg_button_primary.xml selector update (partially              
+     addressed earlier in the theme, but not in the drawable per your spec)     
+       - drawable/pill_bg.xml update to the “alive” status pill look            
+                                                                                
+     What I recommend you do next (manual handoff)                              
+     Because the onboarding is currently likely inconsistent, the next          
+     person should:                                                             
+     1) Run: ./gradlew :app:assembleDebug                                       
+     2) If it fails:                                                            
+        - Check missing binding fields in OnboardingActivity.kt / layout        
+     ids mismatch.                                                              
+        - Add missing strings referenced by the redesigned onboarding           
+     layout (or revert layout until wiring exists).                             
+     3) Then proceed in this order:                                             
+        - Fix fonts to match your exact poppins_semibold.xml spec (only         
+     after/if com_google_android_gms_fonts_certs array exists in the            
+     project).                                                                  
+        - Finish onboarding wiring: OnboardingActivity.kt +                     
+     OnboardingPreferences.kt + strings.                                        
+        - Finish MainActivity + fragment_home restructure.                      
+        - Finish MamaAiActivity + activity_mama_ai + required drawables.        
+                                                                                
+     If you want, reply with “resume” and (a) confirm whether                   
+     com_google_android_gms_fonts_certs exists anywhere outside                 
+     app/src/main/res, and (b) whether you want me to prioritize getting it     
+     compiling first or strictly matching the font XML spec byte-for-byte. 

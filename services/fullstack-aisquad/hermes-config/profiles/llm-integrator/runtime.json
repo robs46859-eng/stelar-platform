@@ -1,0 +1,11 @@
+{
+  "workerId": "market-intel",
+  "profile": "market-intel",
+  "name": "Market Intel",
+  "role": "Market / Lead Research Agent",
+  "state": "idle",
+  "mission": "Find and qualify reachable B2B opportunities for custom AI widgets, automations, integrations, and consulting with source-backed evidence.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T10:55:17Z",
+  "checkpoint": null
+}

@@ -1,0 +1,3173 @@
+{
+  "scan_metadata": {
+    "scan_time_utc": "2026-05-15T15:57:13.322765+00:00",
+    "mode": "LISTEN_ONLY",
+    "subreddits_scanned": [
+      "BabyBumps",
+      "beyondthebump",
+      "breastfeeding",
+      "sleeptrain"
+    ],
+    "total_posts_scanned": 100,
+    "signals_40_plus": 65,
+    "signals_70_plus": 8,
+    "watch_list_40_69": 57
+  },
+  "significant_signals": [
+    {
+      "score": 83,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Can my LO\u2019s nursing schedule affect my supply?",
+      "body_preview": "<!-- SC_OFF --> I think this question is coming from a place of anxiety after a rocky breastfeeding start, so I\u2019d really appreciate some perspective from experienced moms. My baby is 6 weeks old now. In the beginning, we had issues with weight loss, jaundice, and low supply concerns, so supplementation with formula was introduced early. I was constantly told my milk wasn\u2019t enough, which honestly left me pretty scarred and anxious about supply. Over the past few weeks, with a lot of perseverance,",
+      "author": "/u/spectator1988",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdx7dx/can_my_los_nursing_schedule_affect_my_supply/",
+      "post_id": "t3_1tdx7dx",
+      "pub_time": "2026-05-15T13:59:10+00:00",
+      "scanned_at": "2026-05-15T15:57:13.278488+00:00"
+    },
+    {
+      "score": 83,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Sleep cycle issues?",
+      "body_preview": "<!-- SC_OFF --> My daughter is almost 5 months old. She is EBF. From a newborn she did 2-3 hour stretches overnight. Around 10-12 weeks she would generally sleep through from 10/11pm to 5/6am feed and then back to sleep until 9am. Around that time she could take a while to get to sleep, we\u2019d battle the witching hours and probable overtiredness for a few hours before she finally settled. Whatever method worked - feeding, rocking, walking around etc. Around 3.5-4 months her sleep changed dramatica",
+      "author": "/u/Few_Pirate_9402",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdw2me/sleep_cycle_issues/",
+      "post_id": "t3_1tdw2me",
+      "pub_time": "2026-05-15T13:15:50+00:00",
+      "scanned_at": "2026-05-15T15:57:13.310800+00:00"
+    },
+    {
+      "score": 78,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "6 MO sleep dumpster fire - help plz!",
+      "body_preview": "<!-- SC_OFF --> LO turned 6M on 5/4. We went on a 10 day long vacation to visit family that week and I expected sleep to deteriorate some, but it is just getting worse and worse. Current schedule - 3.25-3.5/3.5/3.75 DWT - 6:45ish Bedtime - 8pm There is a range because we are losing our minds trying to figure out her awake time and honestly it\u2019s just getting worse. According to huckleberry her 7 day average is 13hrs of sleep total, her 14 day average is 13h10m. Her naps average 2.5hrs so nights a",
+      "author": "/u/AnazitontasOurano",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdymfq/6_mo_sleep_dumpster_fire_help_plz/",
+      "post_id": "t3_1tdymfq",
+      "pub_time": "2026-05-15T14:50:31+00:00",
+      "scanned_at": "2026-05-15T15:57:13.298009+00:00"
+    },
+    {
+      "score": 78,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "7 month old refusing all naps - HELP PLEASE!",
+      "body_preview": "<!-- SC_OFF --> My baby just turned 7 months old. As of the past 2 weeks, she has been able to put herself to bed at night time using CIO. During those 2 weeks, I tried with her naps as well just to give it a shot, and she picked up on it GREAT! Never more than 8 minutes of crying in her crib, able to self settle on her own, I was so impressed. She was a cosleeping boob monster before that. THIS WEEK? Everything hit the fan. She will cry nonstop when she s put in the crib. What on earth happened",
+      "author": "/u/pursuitofhappiness01",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdyleo/7_month_old_refusing_all_naps_help_please/",
+      "post_id": "t3_1tdyleo",
+      "pub_time": "2026-05-15T14:49:29+00:00",
+      "scanned_at": "2026-05-15T15:57:13.299404+00:00"
+    },
+    {
+      "score": 78,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Split Nights Help - 13 Month Old",
+      "body_preview": "<!-- SC_OFF --> My 13\u2011month\u2011old has been having split nights for almost a week now. Before this, her sleep wasn\u2019t great, but she could go back to sleep if we rocked her or co\u2011slept (which we don\u2019t want to continue). Without doing that, we\u2019d be awake for 2\u20133 hours. Now, no matter what we try, she\u2019s been waking around 9:30pm and staying up until midnight almost every night this week. If this were a one\u2011off, I could handle it, but we haven\u2019t had consistently good nights since December, and I\u2019m comp",
+      "author": "/u/sohappy10",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdvbyv/split_nights_help_13_month_old/",
+      "post_id": "t3_1tdvbyv",
+      "pub_time": "2026-05-15T12:46:39+00:00",
+      "scanned_at": "2026-05-15T15:57:13.313735+00:00"
+    },
+    {
+      "score": 78,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "evening_posting",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Desperately need help with 10 month old sleep",
+      "body_preview": "<!-- SC_OFF --> My baby is 10 months old and on a 3/3,5/3,5 schedule with total 3 hours naps per day. Naps are both capped at 1,5 hours. Wake time is 7am and bed time is 8pm. He was sleep trained at 6 months and it was extremely easy, it took 3 nights and he didn t cry for more than 15 minutes each time. He sleep trained himself for naps at 8 months. My baby just turned 10 months and is like a switch went off, suddenly his sleep is terrible again. He is fighting naps to the point I need to rock ",
+      "author": "/u/AnoniemGebruiker",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdqf1s/desperately_need_help_with_10_month_old_sleep/",
+      "post_id": "t3_1tdqf1s",
+      "pub_time": "2026-05-15T08:47:01+00:00",
+      "scanned_at": "2026-05-15T15:57:13.321350+00:00"
+    },
+    {
+      "score": 73,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Help, I\u2019m about to throw in the towel 6 weeks postpartum due to sleep deprivation",
+      "body_preview": "<!-- SC_OFF --> I\u2019m exclusively breastfeeding my second baby right now and he has a great latch and great weight gain (he\u2019s over 100th %ile) but just does not sleep for long stretches. Every night the longest stretch I get between feeds is typically 3 hours, but sometimes only 2.5. Which of course means less than 3 hours of sleep for me. Originally my husband and I were doing shifts where at 8 I\u2019d feed the baby while pumping on the other side. At 10 my husband would give the bottle and come to b",
+      "author": "/u/KaylaDraws",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdx5ls/help_im_about_to_throw_in_the_towel_6_weeks/",
+      "post_id": "t3_1tdx5ls",
+      "pub_time": "2026-05-15T13:57:14+00:00",
+      "scanned_at": "2026-05-15T15:57:13.279798+00:00"
+    },
+    {
+      "score": 70,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Sleep help!!",
+      "body_preview": "<!-- SC_OFF --> My 11 month old is in the same routine every night. He goes down and it never fails 1-2 hours later he is up screaming and it takes an hour or more for him to settle back down. He typically wakes between 7-8am, then he\u2019s ready for naps at 9:30/10 and then 2:30/3. He\u2019s a catnapper so some naps last 30 minutes and some rarely over an hour. We do occasionally need a third nap if he catnaps both. We start bedtime around 7:30 (lotion, book, bottle) and in bed asleep around 8. We rock ",
+      "author": "/u/Miserable-Sweet6468",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdwfbj/sleep_help/",
+      "post_id": "t3_1tdwfbj",
+      "pub_time": "2026-05-15T13:29:33+00:00",
+      "scanned_at": "2026-05-15T15:57:13.306796+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Question about how to know if producing enough milk at 10months based on what happened after pumping one time",
+      "body_preview": "<!-- SC_OFF --> If I haven t been engorged in a long time overnight and suddenly become engorged one over night after pumping around 10pm about 5oz in a 20 minute session does that mean that my baby is not sucking enough or I am not making enough milk and the pumping sort of kickstarted it? My baby is 10months old. I have been exclusively breastfeeding since she was born with sometimes pumping for an occasional bottle. I haven t pumped or used my elvie catch to save the letdown in months (maybe ",
+      "author": "/u/musiclovaesp",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdz4ii/question_about_how_to_know_if_producing_enough/",
+      "post_id": "t3_1tdz4ii",
+      "pub_time": "2026-05-15T15:08:19+00:00",
+      "scanned_at": "2026-05-15T15:57:13.271892+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "How well did your EBF babe sleep at 2 months?",
+      "body_preview": "<!-- SC_OFF --> I m losing my mind here. \ud83d\ude05 My first born was a NICU baby so I pumped for 10 months and her schedule was predictable due to the NICU schedule (every three hours) so although I was still barely getting any sleep, I could count on her to take her pumped bottle, hold her up/burp, pump, and put her down in her bassinet between feeds. Fast forward 4 years, I had my son- now 2 months old and he is EBF. He will sleep a great first stretch in his bassinet and then refuse to go in his bass",
+      "author": "/u/erinsboiledgatorade",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdz0ts/how_well_did_your_ebf_babe_sleep_at_2_months/",
+      "post_id": "t3_1tdz0ts",
+      "pub_time": "2026-05-15T15:04:44+00:00",
+      "scanned_at": "2026-05-15T15:57:13.273045+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Coming to the end of our journey",
+      "body_preview": "<!-- SC_OFF --> Wanted to take a moment to share a positive story. I want to preface this post with so much solidarity and support to all the moms out there on this journey. Wherever you are on it, I see you!! My daughter is about to be 2 in a few weeks and we are winding down our breastfeeding journey together! We always planned to nurse. But I know that breastfeeding is hard and doubted my ability to make this happen for the long term. I broke goals into smaller goals such as \u201clets make it to ",
+      "author": "/u/turquoisefr0g",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdw9s4/coming_to_the_end_of_our_journey/",
+      "post_id": "t3_1tdw9s4",
+      "pub_time": "2026-05-15T13:23:37+00:00",
+      "scanned_at": "2026-05-15T15:57:13.282856+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Hormonal bleeding non stop 5 months postpartum. Anyone else?",
+      "body_preview": "<!-- SC_OFF --> Hi everyone, I am in need of advice or just hearing ur own stories...I am at the end of hoping for things to get better. I have been basically bleeding everyday since birth(I gave birth first week of December) so I m like 5 months pp, of course after like 4/6 weeks it tapered off but not even a week later it started again....we thought it was my period but when it would just like basically never stop we started to think it s hormonal, it fluctuates between bright red bleeding day",
+      "author": "/u/StateFabulous9622",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdu1c8/hormonal_bleeding_non_stop_5_months_postpartum/",
+      "post_id": "t3_1tdu1c8",
+      "pub_time": "2026-05-15T11:52:51+00:00",
+      "scanned_at": "2026-05-15T15:57:13.291084+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Can i get baby to 11 hours?",
+      "body_preview": "<!-- SC_OFF --> Hi, sleep trained 7 months old- combo of ferber and cry it out. I\u2019ve made a few posts on here now. We are stuck at 10 hour nights on the dot now. Schedule is 2.75/3.25/4.Typically does 2.5 hours of sleep across 2 naps. So 10 hours awake +2.5 hours naps=11.5 hours for night time. People have told me my math was wrong on other posts so I have made some changes. What I ACTUALLY get are 10 hours of sleep on the dot and then 1.5 hours of him fussing in his crib and going in and out of",
+      "author": "/u/happythoughts2021",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdx66e/can_i_get_baby_to_11_hours/",
+      "post_id": "t3_1tdx66e",
+      "pub_time": "2026-05-15T13:57:53+00:00",
+      "scanned_at": "2026-05-15T15:57:13.304782+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Baby trapped in 30 minute naps during day - connects cycles at night. Help PLEASE",
+      "body_preview": "<!-- SC_OFF --> Hello! Baby age: 7 months 3 weeks Current schedule: 3/3/3 (we try) Bedtime Routine: (Baby has special medical needs) Low sensory time starts at 5:00pm and given bottle, at 5:30 we clean her G-Tube site and give medications, attach her tube and get her feeding pump ready, at 6:00pm lights are dimmed and we read a book and sing songs in her rocking chair Sleep Trained: I m just learning about sleep training, but I think she sort of is DWT: She typically wakes up on her own between ",
+      "author": "/u/W0ketheFUP",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdwbsw/baby_trapped_in_30_minute_naps_during_day/",
+      "post_id": "t3_1tdwbsw",
+      "pub_time": "2026-05-15T13:25:45+00:00",
+      "scanned_at": "2026-05-15T15:57:13.309049+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "TWIN advice on sleep training",
+      "body_preview": "<!-- SC_OFF --> 8 month twins. In own room for last 4 weeks which has helped I will say. Current routine: wake 7:30am Nap1 9:50-11am Nap2 1:30-2:40pm Nap3 5:05-5:30pm Bed 7:40pm, asleep from 7:50/8pm usually. I know wake windows on lower end but they were 3 weeks early and this is working for now.. Bed time and naps is where I need some advice. One twin has always cried at bedtime. Sometimes its 5 minutes and on bad nights its up to 40 minutes. Other twin usually ignores and sleeps but at the mi",
+      "author": "/u/flymetothemoon-e",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdvhbb/twin_advice_on_sleep_training/",
+      "post_id": "t3_1tdvhbb",
+      "pub_time": "2026-05-15T12:52:40+00:00",
+      "scanned_at": "2026-05-15T15:57:13.312678+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Previously sleeptrained ~3yo suddenly waking up crying 4-5 times per night",
+      "body_preview": "<!-- SC_OFF --> I have a boy that turns three in July this year he has been a good sleeper since he was a baby, and we did cried out method at six months after which he has slept through the night excluding small regressions here and there. However, we moved him to a big boy bed about a month ago. First, he slept great in the new bed with no issues and he generally stays in bed and does not climb out of it at all at night. However he has started to wake up and cry at night, 4 to 5 times every ni",
+      "author": "/u/GlumBarnacle4545",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdv4ui/previously_sleeptrained_3yo_suddenly_waking_up/",
+      "post_id": "t3_1tdv4ui",
+      "pub_time": "2026-05-15T12:38:39+00:00",
+      "scanned_at": "2026-05-15T15:57:13.314830+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Massive regression after a good first week.",
+      "body_preview": "<!-- SC_OFF --> My 6mo has always been a terrible sleeper. She contact napped until 3 months when the weather got better and now takes all naps in a stroller outside. At night she will ONLY be put down by feeding to sleep. I\u2019ve tried it all. This is mainly the reason why we wanted to sleep train. Her schedule is 2/2,5/2,5/3 8am to 8pm. It was a little shorter when we first started but after browsing this sub for tips I decided to elongate her wake windows to what I wrote above. We chose a gentle",
+      "author": "/u/Smashed_potato",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdrnbb/massive_regression_after_a_good_first_week/",
+      "post_id": "t3_1tdrnbb",
+      "pub_time": "2026-05-15T09:57:11+00:00",
+      "scanned_at": "2026-05-15T15:57:13.319611+00:00"
+    },
+    {
+      "score": 67,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Has anyone dealt with having a newborn when a formerly adopted child rejoins their life?",
+      "body_preview": "<!-- SC_OFF --> My husband and I are expecting our first baby this year and are very excited. Before we started dating, he told me that he and an ex-girlfriend had given up a child for adoption, which was open on the other family s side i.e. they knew all the child s birth parent info and could choose to share information if they wanted. This was almost 18 years ago, and over the years he learned through second hand information that a lot of tragic events had happened in the family - essentially",
+      "author": "/u/Regular-Message9591",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdys6b/has_anyone_dealt_with_having_a_newborn_when_a/",
+      "post_id": "t3_1tdys6b",
+      "pub_time": "2026-05-15T14:56:20+00:00",
+      "scanned_at": "2026-05-15T15:57:13.219422+00:00"
+    },
+    {
+      "score": 67,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Low fetal fraction, now early anatomy scan",
+      "body_preview": "<!-- SC_OFF --> I\u2019m 38, first-time pregnant, 206 lbs/5\u20196\u201d (important bc everyone says high BMI can cause low fetal fraction) blood drawn at 12w6d and my NIPT came back with low fetal fraction 3.1% and increased risk for trisomy 13, 18, etc. I\u2019m 15 weeks now. My OB had me meet with a genetic counselor and now I\u2019m scheduled for an ultrasound that is essentially an early anatomy scan, as I understand it, at 17w. The counselor said this scan would be able to tell if there are any abnormalities in li",
+      "author": "/u/notlola17",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdxhod/low_fetal_fraction_now_early_anatomy_scan/",
+      "post_id": "t3_1tdxhod",
+      "pub_time": "2026-05-15T14:09:23+00:00",
+      "scanned_at": "2026-05-15T15:57:13.224296+00:00"
+    },
+    {
+      "score": 65,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "7 month old sleep help!",
+      "body_preview": "<!-- SC_OFF --> We\u2019ve never sleep trained and our baby has fallen asleep independently at night (not naps) since she was about 8 weeks old (she turned 7 months yesterday), and was only waking really once to feed and slept like 7:30-6:30 ish otherwise. however the last 2 weeks she\u2019s cried hard when we put her down, stands up holding the rails (she\u2019s been crawling for a month and pulling to stand a lot recently) and has had more night wakes and has also been sooo much harder to get back to sleep a",
+      "author": "/u/Front_Tumbleweed_305",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdxptv/7_month_old_sleep_help/",
+      "post_id": "t3_1tdxptv",
+      "pub_time": "2026-05-15T14:17:25+00:00",
+      "scanned_at": "2026-05-15T15:57:13.245647+00:00"
+    },
+    {
+      "score": 65,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Taking daddy\u2019s girl to a whole new level!",
+      "body_preview": "<!-- SC_OFF --> My LO has been all over with sleep for months. Refusing to go to bed until somewhere between 3am-6am (even though she would turn into a complete gremlin at 6pm), get up every 1-2hrs through the night, wake up between 9am-11am, and only nap about 3hrs during the day. No matter what I did, nothing would work longer than a few days and I exhausted every resource possible to get this baby to sleep\u2026 so what fixed it? Well you see, my husband has been working the same job for 12 years.",
+      "author": "/u/Kyzer577",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdt7dr/taking_daddys_girl_to_a_whole_new_level/",
+      "post_id": "t3_1tdt7dr",
+      "pub_time": "2026-05-15T11:15:09+00:00",
+      "scanned_at": "2026-05-15T15:57:13.261524+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Boob pain",
+      "body_preview": "<!-- SC_OFF --> Hello, I am trying to exclusively breastfeed but it s been a long journey and we are not there yet. I have an appointment with a lactation consultant on Monday and I wrote her that I have a lot of pain in my right boob because the nipple is cracked. I am not breastfeeding with that breast at the moment to ensure it gets at least somewhat better before the LC visit. She recommended I continue to pump on a setting no higher than 4 (Meleda professional pump, rented from hospital). B",
+      "author": "/u/Sad_Display_2951",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdz635/boob_pain/",
+      "post_id": "t3_1tdz635",
+      "pub_time": "2026-05-15T15:09:59+00:00",
+      "scanned_at": "2026-05-15T15:57:13.270916+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "What replaced the snooze button feed after night weaning?",
+      "body_preview": "<!-- SC_OFF --> I have a 12 month old and she still wakes anywhere from 2-6 times a night. I cosleep with her and just give her the boob because it\u2019s the easiest way for both of us to fall back to sleep. I\u2019m getting tired of nursing at night and I think it\u2019s time to start night weaning, but my worry is that it will be even harder to get her back to sleep when she wakes up at night. I also love how easy it is to get an extra 40 minutes of sleep by doing a snooze button feed. I tried cuddling her ",
+      "author": "/u/mimixoxo76",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdyhga/what_replaced_the_snooze_button_feed_after_night/",
+      "post_id": "t3_1tdyhga",
+      "pub_time": "2026-05-15T14:45:31+00:00",
+      "scanned_at": "2026-05-15T15:57:13.274382+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Low supply sadness",
+      "body_preview": "<!-- SC_OFF --> 2 weeks pp and I can only produce like a teaspoon of milk with each pump. BF has been so much work and so disheartening, I really want to BF little one but he barely even tries now. My boobs are just pacifiers to him. In each 3-4 hr feed cycle us takes at least 2 hours to get him fed by the vreast and bottle. I barely have time for Pumping. I m so upset :( any advice appreciated. <!-- SC_ON --> submitted by /u/Optimal_Maintenance1 [link] [comments]",
+      "author": "/u/Optimal_Maintenance1",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdv1gg/low_supply_sadness/",
+      "post_id": "t3_1tdv1gg",
+      "pub_time": "2026-05-15T12:34:50+00:00",
+      "scanned_at": "2026-05-15T15:57:13.286793+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "13 mo ready for one nap?",
+      "body_preview": "<!-- SC_OFF --> What was your 2-1 nap transition like? Was it sudden? Baby boy will be 13 months next week. We were on a 3/3.5/4 schedule since 9 months, taking 1-1.25 hr naps easily and often capping nap. Sleeping through the night. It seems like out of the blue he began refusing both naps at the usual time Yesterday he did a 3.75/7.5 schedule and slept through the night peacefully. Fought the first nap and fell asleep late. Then I woke him after an hour anticipating a second nap that never hap",
+      "author": "/u/sonderal",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdye2w/13_mo_ready_for_one_nap/",
+      "post_id": "t3_1tdye2w",
+      "pub_time": "2026-05-15T14:42:05+00:00",
+      "scanned_at": "2026-05-15T15:57:13.302513+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Is a nap schedule not as important as long as you\u2019re meeting proper wake windows and day time sleep?",
+      "body_preview": "<!-- SC_OFF --> Parent of a 4 year old with another baby on the way. Honestly I kinda blocked out some of those early months and I\u2019m having a hard time remembering what we did for my kiddo when he was a newborn. All I know is he was a great sleeper and wasn\u2019t super fussy. I know baby\u2019s can be random and unpredictable but at the same I\u2019d like to try and get a head start on everything! <!-- SC_ON --> submitted by /u/pizza_with_ranch [link] [comments]",
+      "author": "/u/pizza_with_ranch",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdvop6/is_a_nap_schedule_not_as_important_as_long_as/",
+      "post_id": "t3_1tdvop6",
+      "pub_time": "2026-05-15T13:00:49+00:00",
+      "scanned_at": "2026-05-15T15:57:13.311296+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Help troubleshooting schedule please \ud83d\ude4f",
+      "body_preview": "<!-- SC_OFF --> Hello guys, Would really appreciate any tips or insights into what I\u2019m getting wrong here with my 6 month old. He\u2019s currently 6 months and 1 week old. For the past 3 weeks he\u2019s been sleeping independently for both bedtime and his 3 naps. He only fusses for a few minutes or coos to himself before falling asleep. His sleep schedule is: Awake 8:30am roughly. First nap - 10:45am - 11:45am Second nap - 2:15pm - 3:15pm Third nap - 5:45pm - 6:05pm ish Bedtime - 9pm. So roughly a 2:25/2.",
+      "author": "/u/03022023",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdsajq/help_troubleshooting_schedule_please/",
+      "post_id": "t3_1tdsajq",
+      "pub_time": "2026-05-15T10:31:03+00:00",
+      "scanned_at": "2026-05-15T15:57:13.318074+00:00"
+    },
+    {
+      "score": 60,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Overwhelmed but so happy",
+      "body_preview": "<!-- SC_OFF --> Hi all, new to this sub. I just found out I m pregnant yesterday, and told my husband. I m 4 weeks 4 days. We were seriously trying for the last 3-4 months but I somehow did not expect it to happen so quickly. (Many of our friends struggled so we just assumed we might too). I m so grateful we didn t need help, but now that it actually happened I m just so overwhelmed by all these thoughts. There s so much to think about, to plan and prepare for. I just can t turn off my brain! <!",
+      "author": "/u/ananda_yogi",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdw9y1/overwhelmed_but_so_happy/",
+      "post_id": "t3_1tdw9y1",
+      "pub_time": "2026-05-15T13:23:47+00:00",
+      "scanned_at": "2026-05-15T15:57:13.227428+00:00"
+    },
+    {
+      "score": 60,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "evening_posting"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Extended Rear Facing Car Seat- ISO fix?",
+      "body_preview": "<!-- SC_OFF --> We re pretty set on upgrading to an ERF car seat now that my 1yo is close to the height limit on his infant seat. We re in the UK so not as many options unfortunately, and we re limited by a car with not *that* much room in the back seats. Some of the ones we like are highly rated for safety but not ISO fixed. How important is that? Is it much different in terms of stability and safety in a crash? Also happy to take any recommendations you have! <!-- SC_ON --> submitted by /u/Neo",
+      "author": "/u/NeonExp",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdq03c/extended_rear_facing_car_seat_iso_fix/",
+      "post_id": "t3_1tdq03c",
+      "pub_time": "2026-05-15T08:23:43+00:00",
+      "scanned_at": "2026-05-15T15:57:13.263765+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Tips and tricks to increase supply?",
+      "body_preview": "<!-- SC_OFF --> Please share your tips and tricks for increasing supply if any! And im not talking &quot;stay hydrated&quot; was there anything else that surprisingly seemed to do it for you? Im 8 weeks pp and went from a slight over supply that allowed a small stash, to a sudden drop that required me to use up said stash, to now making just enough if not a little less. I feel like im chasing the feeds and cant depend on having enough for the next. Ive had to introduce a small amount of formula ",
+      "author": "/u/No-Good-4476",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdxkx4/tips_and_tricks_to_increase_supply/",
+      "post_id": "t3_1tdxkx4",
+      "pub_time": "2026-05-15T14:12:31+00:00",
+      "scanned_at": "2026-05-15T15:57:13.276271+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Maintain Supply without Nursing at Night?",
+      "body_preview": "<!-- SC_OFF --> Hi, TLDR : 2nd baby; no previous supply issues; going 9 hours overnight without nursing while baby gets bottles, in the morning I pump what he drank overnight. Still producing full supply each day. Do I need to worry supply will dip over time given the long stretches without nursing? This is my second baby. I exclusively breastfed my first and had no supply issues. My baby is 3 weeks old today. Since he s been born, he s been getting formula during the night so I can sleep. I had",
+      "author": "/u/nostromosigningoff",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdwtel/maintain_supply_without_nursing_at_night/",
+      "post_id": "t3_1tdwtel",
+      "pub_time": "2026-05-15T13:44:34+00:00",
+      "scanned_at": "2026-05-15T15:57:13.281013+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "mild_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Transitioning away from triple feeding",
+      "body_preview": "<!-- SC_OFF --> My 3.5 week old baby was primarily formula fed for the first week and a half of her life due to a NICU stay, jaundice, and an 11% weight loss, combined with my re-admittance to the hospital for preeclampsia. Baby has been gaining well and we have been working with a lactation consultant to up my supply to meet her demand and have been triple feeding. Baby is very happy on the breast and is definitely transferring milk but is a slow eater. My concern, however, is that as we transi",
+      "author": "/u/CarelessResponse25",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdvljx/transitioning_away_from_triple_feeding/",
+      "post_id": "t3_1tdvljx",
+      "pub_time": "2026-05-15T12:57:26+00:00",
+      "scanned_at": "2026-05-15T15:57:13.285335+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Nursing strike or self weaning?",
+      "body_preview": "<!-- SC_OFF --> Currently breastfeeding my 15 month old son 3 times a day. When he first gets up in the morning, before his nap, and before bed. On Wednesday when I was getting ready to nurse him for his nap he bit me twice (he\u2019s got 10 almost 11 teeth now). I jumped both times and after the second he pulled off and started crying, absolutely refused to latch again. I just had to rock him to sleep. That night he refused to nurse and had a complete meltdown. Again, I rocked and sang him to sleep.",
+      "author": "/u/Dreambeanz",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdv4i3/nursing_strike_or_self_weaning/",
+      "post_id": "t3_1tdv4i3",
+      "pub_time": "2026-05-15T12:38:15+00:00",
+      "scanned_at": "2026-05-15T15:57:13.286445+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Can I have a supply if I just nurse for sleep?",
+      "body_preview": "<!-- SC_OFF --> So this is probably individual but kinda looking for other people\u2019s experiences. Baby is almost 9 months and I\u2019m pretty sure he\u2019s getting most of his calories in at night instead of the day. I\u2019ve been debating just going to bottles/formula 100% except I don\u2019t want to give up nursing to sleep for naps. I do think my supply is dipping during the day. It\u2019s a combo of he\u2019s super distracted, and I\u2019m grabbing bottles more and more. And I\u2019m dropping weight (not meant to be a brag but a ",
+      "author": "/u/Ok_Potato_7025",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tduwrc/can_i_have_a_supply_if_i_just_nurse_for_sleep/",
+      "post_id": "t3_1tduwrc",
+      "pub_time": "2026-05-15T12:29:38+00:00",
+      "scanned_at": "2026-05-15T15:57:13.287700+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "mild_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "How to have sex again (as a BF new mom)",
+      "body_preview": "<!-- SC_OFF --> Hi moms! I feel like I am crazy and overeacting\u2026 I am 9mo pp. Ever since giving birth and starting breastfeeding I cannot see myself as a person with sexual needs. I see myself as a mom, and my body as a \u2018tool\u2019 of comforting and feeding my baby. As a safe and warm place for him. I can\u2019t stand my husband touching my boobs. I know this is irrational, but for me this is for baby and baby is so innocent so I can\u2019t stand my breasts being sexualized. It is very hard for me to get in th",
+      "author": "/u/Orange-Fiction",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tduhr2/how_to_have_sex_again_as_a_bf_new_mom/",
+      "post_id": "t3_1tduhr2",
+      "pub_time": "2026-05-15T12:12:18+00:00",
+      "scanned_at": "2026-05-15T15:57:13.288827+00:00"
+    },
+    {
+      "score": 57,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Partner was texting a younger colleague to meet up whilst I was 30-weeks pregnant",
+      "body_preview": "<!-- SC_OFF --> Looking for some outside perspectives. He states I am overreacting and reading something in to the messages that aren\u2019t there, I feel devastated. Saw over my partners shoulder in bed a few weeks ago that he had been messaging a younger female colleague (a decade younger than him, and 12-years younger than me) on Instagram over the past four weeks. He has not mentioned her existence to me in the entire time they have worked together, nor that they have been messaging. He says it\u2019s",
+      "author": "/u/Empty_Shallot_3776",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdzzqu/partner_was_texting_a_younger_colleague_to_meet/",
+      "post_id": "t3_1tdzzqu",
+      "pub_time": "2026-05-15T15:38:47+00:00",
+      "scanned_at": "2026-05-15T15:57:13.214692+00:00"
+    },
+    {
+      "score": 57,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "4/4 missed Mother\u2019s Days",
+      "body_preview": "<!-- SC_OFF --> I have a good husband and a good life. I\u2019m the day to day, I am lucky. My husband helps out with as much as he can (housework and kids) despite working way too much. Like I\u2019m talking above and beyond. He has a good income so we are well taken care of. But I\u2019m just so disappointed. The first mother day, I was only pregnant so I thought, yeah I guess it doesn\u2019t really need to be celebrated yet, despite carrying a baby for 7 months. The second one, we had just moved to a new country",
+      "author": "/u/ink_pots",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdtkfs/44_missed_mothers_days/",
+      "post_id": "t3_1tdtkfs",
+      "pub_time": "2026-05-15T11:31:40+00:00",
+      "scanned_at": "2026-05-15T15:57:13.259449+00:00"
+    },
+    {
+      "score": 55,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Can I get reassurance, from those who got pregnant without eliminating all the \u201cendocrine disruptors\u201c",
+      "body_preview": "<!-- SC_OFF --> My husband and I(29 this year, he just turned 37) plan to try for our first baby this October/November at the soonest, super early 2027 at the latest. So essentially, soon. Just for General health reasons and not just for pregnancy reasons, I\u2019ve already eliminated a lot of of our plastic Tupperware, switched to safer cleaning products(for the most part), we use safer room sprays, We plan to regift all candles from here on out, unless they are explicitly safe. Luckily, there is a ",
+      "author": "/u/nursejooliet",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdsrvf/can_i_get_reassurance_from_those_who_got_pregnant/",
+      "post_id": "t3_1tdsrvf",
+      "pub_time": "2026-05-15T10:54:51+00:00",
+      "scanned_at": "2026-05-15T15:57:13.230489+00:00"
+    },
+    {
+      "score": 55,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Husband feeling.. Lonely?",
+      "body_preview": "<!-- SC_OFF --> We had our daughter last January and I m just missing my wife is the best way I can describe it. We ve been married 8 years and were engaged 5 years before that while she finished school so we ve known each other for awhile. We were never really like all over each other after the first couple years but after she became pregnant the intimacy completely vanished. She had a rough pregnancy with a large subchorionic hemotoma, we were instructed to refrain from sexual activity. Everyt",
+      "author": "/u/Frogoker",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdy6ww/husband_feeling_lonely/",
+      "post_id": "t3_1tdy6ww",
+      "pub_time": "2026-05-15T14:34:48+00:00",
+      "scanned_at": "2026-05-15T15:57:13.244014+00:00"
+    },
+    {
+      "score": 55,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Bleeding 5 months Post Partum...help! Anybody else?",
+      "body_preview": "<!-- SC_OFF --> Hi everyone, I am in need of advice or just hearing ur own stories...I am at the end of hoping for things to get better. I have been basically bleeding everyday since birth(I gave birth first week of December) so I m like 5 months pp, of course after like 4/6 weeks it tapered off but not even a week later it started again....we thought it was my period but when it would just like basically never stop we started to think it s hormonal, it fluctuates between bright red bleeding day",
+      "author": "/u/StateFabulous9622",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdu06b/bleeding_5_months_post_partumhelp_anybody_else/",
+      "post_id": "t3_1tdu06b",
+      "pub_time": "2026-05-15T11:51:25+00:00",
+      "scanned_at": "2026-05-15T15:57:13.257329+00:00"
+    },
+    {
+      "score": 53,
+      "category": "WATCH",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Everything is a fight",
+      "body_preview": "<!-- SC_OFF --> Proud mom of a 9.5 month old boy who I love very much but lately it just feels like everything is a struggle. Diaper changes. Putting baby in the car seat. Feeding a bottle. Feeding solids. Putting baby to sleep. Getting baby in the stroller. Putting baby in the walker. It just seems like he hates everything, and fights me on everything. He THRASHES, flips, kicks and screams every single time I try to change him or dress him, every single time I try to put him in a high chair, or",
+      "author": "/u/CommunistCetacean",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdxlos/everything_is_a_fight/",
+      "post_id": "t3_1tdxlos",
+      "pub_time": "2026-05-15T14:13:15+00:00",
+      "scanned_at": "2026-05-15T15:57:13.248970+00:00"
+    },
+    {
+      "score": 53,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Baby won\u2019t let me sit on the couch",
+      "body_preview": "<!-- SC_OFF --> Does anyone else\u2019s baby not let you sit down on the couch? My son is 8 months, and he\u2019ll happily play independently if I\u2019m walking around doing things. He\u2019s fine if I\u2019m in the kitchen cleaning up or making food, he\u2019s fine if I\u2019m standing in the living room folding laundry, he\u2019s fine when I\u2019m actively doing things. Within two minutes of sitting on the couch, without fail, he starts whining while crawling over to me. He doesn\u2019t want to sit on my lap either, he wants me to stand up.",
+      "author": "/u/Kodakisababy",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdvoha/baby_wont_let_me_sit_on_the_couch/",
+      "post_id": "t3_1tdvoha",
+      "pub_time": "2026-05-15T13:00:38+00:00",
+      "scanned_at": "2026-05-15T15:57:13.253070+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Concerning blood tests",
+      "body_preview": "<!-- SC_OFF --> I had a blood test done last week due to my entire body hurting all the time & EXTREME itchiness, dry mouth even though I drink over a gallon of water a day. All of my tests were normal until today I just had another metabolic panel done that included calcium. It is 8 points over the \u201cnormal\u201d The dr called me and wants me to come back in to do more testing and an ultrasound of my kidneys. I literally went to the hospital the other day due to the itchiness and assuming it was scab",
+      "author": "/u/Ok-Cardiologist6243",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdzn8e/concerning_blood_tests/",
+      "post_id": "t3_1tdzn8e",
+      "pub_time": "2026-05-15T15:26:33+00:00",
+      "scanned_at": "2026-05-15T15:57:13.270216+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Changes in supply",
+      "body_preview": "<!-- SC_OFF --> I am 2 weeks pp and exclusively pumping due to baby not latching well. Normally while pumping I get anywhere from 7-11oz from both sides each pump. I know that this is technically a lot & I have about 30oz frozen so far, but yesterday I had a dip where I barely got 2oz during my last 2 pumps of the day. My breasts were extremely engorged & I tried a few things, hot compress, hot shower, massages, even tried latching baby but nothing gave. I woke up in the middle of the night to m",
+      "author": "/u/TurbulentSlide4552",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdymmc/changes_in_supply/",
+      "post_id": "t3_1tdymmc",
+      "pub_time": "2026-05-15T14:50:42+00:00",
+      "scanned_at": "2026-05-15T15:57:13.273776+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Baby latching on and off a million times",
+      "body_preview": "<!-- SC_OFF --> Curious if anyone else experienced this? My baby is nearly 8 months now and ever since she was about 5 months or so she started latching and unlatching a million times during a feed. It drives me insane and lately it\u2019s only been worse! She hasn\u2019t got any teeth yet but I am terrified of what she is going to do once she does. After lots of reflection I feel like this must be partly impatience about waiting for letdown to happen and partly just her unable to relax and lean into nurs",
+      "author": "/u/marmaladeonsourdough",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdxrgk/baby_latching_on_and_off_a_million_times/",
+      "post_id": "t3_1tdxrgk",
+      "pub_time": "2026-05-15T14:18:59+00:00",
+      "scanned_at": "2026-05-15T15:57:13.275190+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "8 months EBF - do I stop?",
+      "body_preview": "<!-- SC_OFF --> Hello, I have EBF my 8 month old (pumped and given bottle a handful of times), its been a relatively easy process too. However, recently, hes become so fussy on the boob, only drinks for a few minutes, pulls away with nipple in mouth and is so wriggly I have to wrestle him every time. Im not enjoying it anymore. Does it get better? Is it just a phase at the moment? Do I just start moving to formula, but thats something new I have to learn and get him on board with. Is it worth ju",
+      "author": "/u/catasha7",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdxk3s/8_months_ebf_do_i_stop/",
+      "post_id": "t3_1tdxk3s",
+      "pub_time": "2026-05-15T14:11:45+00:00",
+      "scanned_at": "2026-05-15T15:57:13.276716+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "I\u2019m pregnant with my first and plan on breastfeeding. What is your order of getting things done during night feedings?",
+      "body_preview": "<!-- SC_OFF --> Hi! I\u2019m just wondering what the best course of action might be with a newborn during night feedings and changing their diaper, unswaddling, etc. When your baby wakes up in the middle of the night, do you change or feed them first? Does it depend on what\u2019s in the diaper? Also if you swaddle them, do you keep them unswaddled the whole time or swaddle them back up when changing to the other breast? Also when do you burp them during all of this, in between breasts or at the end of th",
+      "author": "/u/gimmepesto",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdwe3w/im_pregnant_with_my_first_and_plan_on/",
+      "post_id": "t3_1tdwe3w",
+      "pub_time": "2026-05-15T13:28:14+00:00",
+      "scanned_at": "2026-05-15T15:57:13.281523+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "How to sleep train naps?",
+      "body_preview": "<!-- SC_OFF --> Hello I trained my 19 weeks baby boy with Ferber for night sleeping and it worked in 7 days, he no longer fusses or cries when it\u2019s bed time which is a blessing But the naps are getting exhausting! I have to spend 15-20 minutes of rocking and shushing and patting for him to fall asleep. And he sometimes he only sleeps for 30 minutes and wakes up fully alert. Advice please <!-- SC_ON --> submitted by /u/lululama94 [link] [comments]",
+      "author": "/u/lululama94",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdyems/how_to_sleep_train_naps/",
+      "post_id": "t3_1tdyems",
+      "pub_time": "2026-05-15T14:42:39+00:00",
+      "scanned_at": "2026-05-15T15:57:13.300743+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "16 month old post-vacation troubles",
+      "body_preview": "<!-- SC_OFF --> Looking for the advice/support on 16 month old s sleep woes. Some back story: We (mom, dad, toddler) went on vacation for mother s Day. Toddler slept great and took great naps during our trip, however, he had to sleep in bed with us. Once we got home, as soon as we lay him down for bedtime and shut the door he will stand up and scream until he s sweaty and hysterical. We tried letting him cry it out, but it lasted about an hour both nights with him not sleeping. We eventually res",
+      "author": "/u/Dismal-Muffin-955",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdsgnk/16_month_old_postvacation_troubles/",
+      "post_id": "t3_1tdsgnk",
+      "pub_time": "2026-05-15T10:39:26+00:00",
+      "scanned_at": "2026-05-15T15:57:13.315688+00:00"
+    },
+    {
+      "score": 50,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "FEAR OF FASD",
+      "body_preview": "<!-- SC_OFF --> Posting on the behalf of my friend due to her not having internet access She has just found out she is 16week pregnant, she hasn\u2019t had periods for a while due to her own health issues etc. but her breast started to grow and ache, she got a ultrasound and she\u2019s 16week pregnant! (She was on birth control) Her worries are that she has been binge drinking hard before she know (about 50 units a week) Some weeks more some weeks not at all. And some times 1G cocaine a week. She\u2019s now ve",
+      "author": "/u/OkDinner3555",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdxrdj/fear_of_fasd/",
+      "post_id": "t3_1tdxrdj",
+      "pub_time": "2026-05-15T14:18:54+00:00",
+      "scanned_at": "2026-05-15T15:57:13.222045+00:00"
+    },
+    {
+      "score": 50,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Almost there and physically miserable, y\u2019all who went through this rule!",
+      "body_preview": "<!-- SC_OFF --> 37+2 and have my c-section scheduled at 39 weeks (baby\u2019s breech). I had what is considered an easy and uncomplicated pregnancy: no nausea, gained just over 30 lbs, exercised most of it, low blood pressure, etc. And yet I haven\u2019t slept in weeks due to insomnia and nasal congestion, and every day around the afternoon I start feeling like my belly is about to burst or is full or rocks, this usually lasts until about 2-3am. I\u2019m exhausted! Just want to express my admiration of all of ",
+      "author": "/u/Resident-Strategy524",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tds9fo/almost_there_and_physically_miserable_yall_who/",
+      "post_id": "t3_1tds9fo",
+      "pub_time": "2026-05-15T10:29:29+00:00",
+      "scanned_at": "2026-05-15T15:57:13.231903+00:00"
+    },
+    {
+      "score": 49,
+      "category": "WATCH",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Mastitis at 6 months",
+      "body_preview": "<!-- SC_OFF --> At like 3am yesterday i woke up with aggressive chills and pain in my boob where i couldnt even move. I kept getting on and off fevers and bad nausea so I went to the ER and they gave me antibiotics. My boob is even more red now (hurts less) but its hard in one area. Im still getting chills and fevers and for some reason its taking FOREVER for it to letdown to the point my baby gets so frustrated. I literally feel like death \ud83d\ude2d Can you guys share your experience with mastitis and ",
+      "author": "/u/Effective-Dig-984",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdzvxb/mastitis_at_6_months/",
+      "post_id": "t3_1tdzvxb",
+      "pub_time": "2026-05-15T15:35:00+00:00",
+      "scanned_at": "2026-05-15T15:57:13.269232+00:00"
+    },
+    {
+      "score": 49,
+      "category": "WATCH",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Separation anxiety only at night",
+      "body_preview": "<!-- SC_OFF --> Hi my baby is currently 16 months and I am struggling with what I think is separation anxiety so bad but only at night. She was sleep trained and was sleeping through the night for quite a while before this but now it\u2019s been 3 ish weeks where every night is a battle for bed. We do our normal routine and she\u2019ll be so tired in my arms but the moment I set her down she loses it! Stands up screams and we have been trying to let her go but then she\u2019s so worked up we have to go in. And",
+      "author": "/u/nwatson20",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdzsxo/separation_anxiety_only_at_night/",
+      "post_id": "t3_1tdzsxo",
+      "pub_time": "2026-05-15T15:32:02+00:00",
+      "scanned_at": "2026-05-15T15:57:13.295660+00:00"
+    },
+    {
+      "score": 48,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "doula or no doula? first pregnancy",
+      "body_preview": "<!-- SC_OFF --> I m still early in my first pregnancy (9 weeks) and am now considering whether I should use a doula or not. I would only do it if covered by insurance. We have a family friend (husband s godmother s DIL) who is a doula that I believe I would feel comfortable with. That said, I m planning on delivering at a small community hospital (9 birthing beds) and just toured it, where they said the nurses are very proactive in guiding you through the birth and are on shift for 12 hrs at a t",
+      "author": "/u/mm_honey",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdycsg/doula_or_no_doula_first_pregnancy/",
+      "post_id": "t3_1tdycsg",
+      "pub_time": "2026-05-15T14:40:45+00:00",
+      "scanned_at": "2026-05-15T15:57:13.220068+00:00"
+    },
+    {
+      "score": 48,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "What specific exercises helped you recover from prolapse?",
+      "body_preview": "<!-- SC_OFF --> Struggling at 5 months pp and any advice welcome! I saw my pelvic floor therapist very early on and didn\u2019t seem to have issues. But now I am. My midwife said I probably have 1st maybe every 2nd degree prolapse and she recommended to see PFT. However, we\u2019re on a super tight budget and trying to time out wake windows with my LO has been so hard with getting out of the house. (She no longer naps when we\u2019re out- serious FOMO, so it\u2019s brutal when those are off schedule.) Also, finally",
+      "author": "/u/Dangerous-Analyst854",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdxn2u/what_specific_exercises_helped_you_recover_from/",
+      "post_id": "t3_1tdxn2u",
+      "pub_time": "2026-05-15T14:14:38+00:00",
+      "scanned_at": "2026-05-15T15:57:13.247212+00:00"
+    },
+    {
+      "score": 48,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "substantive_post",
+        "deep_post",
+        "evening_posting",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "13 month old sleeping less over night since dropping to one nap",
+      "body_preview": "<!-- SC_OFF --> Our 1 year old has moved to one nap a day very recently (i.e he has only been on his new schedule for 4 days). Previously he would have 2-2.5 hours worth of overall sleep during his two daytime naps. Now he has one daytime nap of around 2.25. He used to sleep about 10-10.5 hours overnight, going to bed about 8.30pm with no resistance (although the reason we dropped to one nap is when this changed and he did keep resisting and the nap got pushed later and later and so did his bed ",
+      "author": "/u/decobelle",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdpbjv/13_month_old_sleeping_less_over_night_since/",
+      "post_id": "t3_1tdpbjv",
+      "pub_time": "2026-05-15T07:45:40+00:00",
+      "scanned_at": "2026-05-15T15:57:13.322705+00:00"
+    },
+    {
+      "score": 47,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Unsupportive mother.",
+      "body_preview": "<!-- SC_OFF --> Im 29 and have recently found out i was4 weeks pregnant with my first child. My boyfriend is very happy and very supportive, He has been helping me build up the courage to tell my mother and assured me he had my back in every way. While I was nervous I managed to tell her thinking she would be happy and give me support since this would be her first grandchild but I was completely wrong. Her first words to me was at your age you should know how to use protection and later that day",
+      "author": "/u/Anon_peanut",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdru08/unsupportive_mother/",
+      "post_id": "t3_1tdru08",
+      "pub_time": "2026-05-15T10:07:02+00:00",
+      "scanned_at": "2026-05-15T15:57:13.234104+00:00"
+    },
+    {
+      "score": 41,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "My body held onto the weight until after I weaned",
+      "body_preview": "<!-- SC_OFF --> Just in case any of you, like me, saw countless posts and heard countless stories about how, \u201call my weight just shed off while I was breastfeeding!\u201d I was not one of those blessed unicorns. My body held onto my last 10 bonus pounds while I breastfed for 16months. I weaned a couple weeks ago, and I have already dropped 5 pounds without having changed any of my habits. While I never minded having extra weight, while providing for my child, I was starting to wonder if it was my bod",
+      "author": "/u/doriswillie",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdvxg2/my_body_held_onto_the_weight_until_after_i_weaned/",
+      "post_id": "t3_1tdvxg2",
+      "pub_time": "2026-05-15T13:10:16+00:00",
+      "scanned_at": "2026-05-15T15:57:13.284113+00:00"
+    },
+    {
+      "score": 41,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "5 month old contact napping during the day and sleeping in crib at night",
+      "body_preview": "<!-- SC_OFF --> We sleep trained our baby when he was almost 4 months using Ferber and it worked really well. However I feel like we\u2019ve been working on the nap training now for over a month. He can contact naps for hourssss but if you put him in the crib it only lasts 15-20 minutes. 30 minutes max on a good day. And that\u2019s if the transfer is successful. He has cried for about an hour before when trying to Ferber the naps. He still wakes up 1-2x in the middle of night for a bottle. Usually around",
+      "author": "/u/Outrageous-Let7040",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdy8dm/5_month_old_contact_napping_during_the_day_and/",
+      "post_id": "t3_1tdy8dm",
+      "pub_time": "2026-05-15T14:36:17+00:00",
+      "scanned_at": "2026-05-15T15:57:13.303465+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "confused about fetal movement..",
+      "body_preview": "<!-- SC_OFF --> I\u2019m feeling confused about fetal movement\u2026 I\u2019m going to be 28 weeks in 3 days. I have a posterior placenta, have been feeling movement since about 22 weeks. I am kind of picking up on baby\u2019s patterns but they are still inconsistent. ex - movement in the morning, after work, some before bed. The movement is quite subtle, more shifts/jerks, more lower pelvis where they used to be up by navel area. The thing is that I\u2019m feeling daily movement, usually getting 6-10 movements in 2hrs ",
+      "author": "/u/Psychosocial5555",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdxooi/confused_about_fetal_movement/",
+      "post_id": "t3_1tdxooi",
+      "pub_time": "2026-05-15T14:16:16+00:00",
+      "scanned_at": "2026-05-15T15:57:13.222998+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Number 4!",
+      "body_preview": "<!-- SC_OFF --> Hey everyone! I\u2019m pregnant with number four, I\u2019ve had two C-sections with my first two, and a spontaneous natural birth with my last! She was scheduled for a C-section four days after she was born. I\u2019m wondering if anybody has had any experience with this and was able to have a natural birth. Just looking for solidarity. \ud83d\ude05 thank you! <!-- SC_ON --> submitted by /u/Lochnessie0 [link] [comments]",
+      "author": "/u/Lochnessie0",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdudci/number_4/",
+      "post_id": "t3_1tdudci",
+      "pub_time": "2026-05-15T12:07:11+00:00",
+      "scanned_at": "2026-05-15T15:57:13.229003+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "New symptom pp after I weaned from breast feeding- should I be worried?",
+      "body_preview": "<!-- SC_OFF --> I have been completely done breast feeding for two months now. These symptoms were just happening around my period. But I currently just experienced them two days in a row and I\u2019m not on my period and won\u2019t be for 3 more weeks. Out of the blue, I will start feeling really off. Then my entire body gets super hot and I feel like I\u2019m going to pass out. It\u2019s a terrible feeling. Only lasts a couple minutes at most. I know it takes a really long time for your hormones to regulate after",
+      "author": "/u/throwaway84583077",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1te09yk/new_symptom_pp_after_i_weaned_from_breast_feeding/",
+      "post_id": "t3_1te09yk",
+      "pub_time": "2026-05-15T15:48:59+00:00",
+      "scanned_at": "2026-05-15T15:57:13.239512+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Tell me the things to look forward to",
+      "body_preview": "<!-- SC_OFF --> My little one is 13.5 months and I\u2019ll admit, some days I\u2019m a little emo when I think about all of this passing by so quickly. I used to cry when she was a newborn knowing that stage was temporary. However, now that shes at this age, shes so funny and interactive that while I do miss her being a tiny little potato, I enjoy this more. So I\u2019m wondering, what other things should I look forward to for when I feel down somedays? My mind has a habit of traveling in the future.. like 20 ",
+      "author": "/u/iOcean_Eyes",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdwk0y/tell_me_the_things_to_look_forward_to/",
+      "post_id": "t3_1tdwk0y",
+      "pub_time": "2026-05-15T13:34:38+00:00",
+      "scanned_at": "2026-05-15T15:57:13.250560+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Ovulating early after baby!",
+      "body_preview": "<!-- SC_OFF --> Maybe TMI BUT my little one is 20 months. Pre baby I used to know I was ovulating approx 2 weeks into my cycle from some egg white thick ish discharge. Now? The day after my period ends I m having literally blobs of thick clear jelly discharge for 3-4 days. Has anyone else had this?! Does it go back to normal? Or am I just a jelly girl forever <!-- SC_ON --> submitted by /u/saraharchie93 [link] [comments]",
+      "author": "/u/saraharchie93",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdweds/ovulating_early_after_baby/",
+      "post_id": "t3_1tdweds",
+      "pub_time": "2026-05-15T13:28:33+00:00",
+      "scanned_at": "2026-05-15T15:57:13.252149+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "mild_intent",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Hatch help",
+      "body_preview": "<!-- SC_OFF --> We use the hatch rest second GEN, never had any issues. All of a sudden, last night I go to turn it on and it will turn on the light settings for 2 to 3 seconds with no sound, but then shut off. We left it unplugged all last night. So far this morning, I have updated the device, made sure my Wi-Fi connection is good. I\u2019ve done a reset. I\u2019ve deleted the playlists from the app and reinstalled them. I\u2019ve checked that the cord is properly plugged in. I told it it is smart, it is kind",
+      "author": "/u/Top_Leg3999",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdvcve/hatch_help/",
+      "post_id": "t3_1tdvcve",
+      "pub_time": "2026-05-15T12:47:39+00:00",
+      "scanned_at": "2026-05-15T15:57:13.253944+00:00"
+    }
+  ],
+  "all_scored_posts": [
+    {
+      "score": 83,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Can my LO\u2019s nursing schedule affect my supply?",
+      "body_preview": "<!-- SC_OFF --> I think this question is coming from a place of anxiety after a rocky breastfeeding start, so I\u2019d really appreciate some perspective from experienced moms. My baby is 6 weeks old now. In the beginning, we had issues with weight loss, jaundice, and low supply concerns, so supplementation with formula was introduced early. I was constantly told my milk wasn\u2019t enough, which honestly left me pretty scarred and anxious about supply. Over the past few weeks, with a lot of perseverance,",
+      "author": "/u/spectator1988",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdx7dx/can_my_los_nursing_schedule_affect_my_supply/",
+      "post_id": "t3_1tdx7dx",
+      "pub_time": "2026-05-15T13:59:10+00:00",
+      "scanned_at": "2026-05-15T15:57:13.278488+00:00"
+    },
+    {
+      "score": 83,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Sleep cycle issues?",
+      "body_preview": "<!-- SC_OFF --> My daughter is almost 5 months old. She is EBF. From a newborn she did 2-3 hour stretches overnight. Around 10-12 weeks she would generally sleep through from 10/11pm to 5/6am feed and then back to sleep until 9am. Around that time she could take a while to get to sleep, we\u2019d battle the witching hours and probable overtiredness for a few hours before she finally settled. Whatever method worked - feeding, rocking, walking around etc. Around 3.5-4 months her sleep changed dramatica",
+      "author": "/u/Few_Pirate_9402",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdw2me/sleep_cycle_issues/",
+      "post_id": "t3_1tdw2me",
+      "pub_time": "2026-05-15T13:15:50+00:00",
+      "scanned_at": "2026-05-15T15:57:13.310800+00:00"
+    },
+    {
+      "score": 78,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "6 MO sleep dumpster fire - help plz!",
+      "body_preview": "<!-- SC_OFF --> LO turned 6M on 5/4. We went on a 10 day long vacation to visit family that week and I expected sleep to deteriorate some, but it is just getting worse and worse. Current schedule - 3.25-3.5/3.5/3.75 DWT - 6:45ish Bedtime - 8pm There is a range because we are losing our minds trying to figure out her awake time and honestly it\u2019s just getting worse. According to huckleberry her 7 day average is 13hrs of sleep total, her 14 day average is 13h10m. Her naps average 2.5hrs so nights a",
+      "author": "/u/AnazitontasOurano",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdymfq/6_mo_sleep_dumpster_fire_help_plz/",
+      "post_id": "t3_1tdymfq",
+      "pub_time": "2026-05-15T14:50:31+00:00",
+      "scanned_at": "2026-05-15T15:57:13.298009+00:00"
+    },
+    {
+      "score": 78,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "7 month old refusing all naps - HELP PLEASE!",
+      "body_preview": "<!-- SC_OFF --> My baby just turned 7 months old. As of the past 2 weeks, she has been able to put herself to bed at night time using CIO. During those 2 weeks, I tried with her naps as well just to give it a shot, and she picked up on it GREAT! Never more than 8 minutes of crying in her crib, able to self settle on her own, I was so impressed. She was a cosleeping boob monster before that. THIS WEEK? Everything hit the fan. She will cry nonstop when she s put in the crib. What on earth happened",
+      "author": "/u/pursuitofhappiness01",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdyleo/7_month_old_refusing_all_naps_help_please/",
+      "post_id": "t3_1tdyleo",
+      "pub_time": "2026-05-15T14:49:29+00:00",
+      "scanned_at": "2026-05-15T15:57:13.299404+00:00"
+    },
+    {
+      "score": 78,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Split Nights Help - 13 Month Old",
+      "body_preview": "<!-- SC_OFF --> My 13\u2011month\u2011old has been having split nights for almost a week now. Before this, her sleep wasn\u2019t great, but she could go back to sleep if we rocked her or co\u2011slept (which we don\u2019t want to continue). Without doing that, we\u2019d be awake for 2\u20133 hours. Now, no matter what we try, she\u2019s been waking around 9:30pm and staying up until midnight almost every night this week. If this were a one\u2011off, I could handle it, but we haven\u2019t had consistently good nights since December, and I\u2019m comp",
+      "author": "/u/sohappy10",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdvbyv/split_nights_help_13_month_old/",
+      "post_id": "t3_1tdvbyv",
+      "pub_time": "2026-05-15T12:46:39+00:00",
+      "scanned_at": "2026-05-15T15:57:13.313735+00:00"
+    },
+    {
+      "score": 78,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "evening_posting",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Desperately need help with 10 month old sleep",
+      "body_preview": "<!-- SC_OFF --> My baby is 10 months old and on a 3/3,5/3,5 schedule with total 3 hours naps per day. Naps are both capped at 1,5 hours. Wake time is 7am and bed time is 8pm. He was sleep trained at 6 months and it was extremely easy, it took 3 nights and he didn t cry for more than 15 minutes each time. He sleep trained himself for naps at 8 months. My baby just turned 10 months and is like a switch went off, suddenly his sleep is terrible again. He is fighting naps to the point I need to rock ",
+      "author": "/u/AnoniemGebruiker",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdqf1s/desperately_need_help_with_10_month_old_sleep/",
+      "post_id": "t3_1tdqf1s",
+      "pub_time": "2026-05-15T08:47:01+00:00",
+      "scanned_at": "2026-05-15T15:57:13.321350+00:00"
+    },
+    {
+      "score": 73,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Help, I\u2019m about to throw in the towel 6 weeks postpartum due to sleep deprivation",
+      "body_preview": "<!-- SC_OFF --> I\u2019m exclusively breastfeeding my second baby right now and he has a great latch and great weight gain (he\u2019s over 100th %ile) but just does not sleep for long stretches. Every night the longest stretch I get between feeds is typically 3 hours, but sometimes only 2.5. Which of course means less than 3 hours of sleep for me. Originally my husband and I were doing shifts where at 8 I\u2019d feed the baby while pumping on the other side. At 10 my husband would give the bottle and come to b",
+      "author": "/u/KaylaDraws",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdx5ls/help_im_about_to_throw_in_the_towel_6_weeks/",
+      "post_id": "t3_1tdx5ls",
+      "pub_time": "2026-05-15T13:57:14+00:00",
+      "scanned_at": "2026-05-15T15:57:13.279798+00:00"
+    },
+    {
+      "score": 70,
+      "category": "ENGAGE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Sleep help!!",
+      "body_preview": "<!-- SC_OFF --> My 11 month old is in the same routine every night. He goes down and it never fails 1-2 hours later he is up screaming and it takes an hour or more for him to settle back down. He typically wakes between 7-8am, then he\u2019s ready for naps at 9:30/10 and then 2:30/3. He\u2019s a catnapper so some naps last 30 minutes and some rarely over an hour. We do occasionally need a third nap if he catnaps both. We start bedtime around 7:30 (lotion, book, bottle) and in bed asleep around 8. We rock ",
+      "author": "/u/Miserable-Sweet6468",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdwfbj/sleep_help/",
+      "post_id": "t3_1tdwfbj",
+      "pub_time": "2026-05-15T13:29:33+00:00",
+      "scanned_at": "2026-05-15T15:57:13.306796+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Question about how to know if producing enough milk at 10months based on what happened after pumping one time",
+      "body_preview": "<!-- SC_OFF --> If I haven t been engorged in a long time overnight and suddenly become engorged one over night after pumping around 10pm about 5oz in a 20 minute session does that mean that my baby is not sucking enough or I am not making enough milk and the pumping sort of kickstarted it? My baby is 10months old. I have been exclusively breastfeeding since she was born with sometimes pumping for an occasional bottle. I haven t pumped or used my elvie catch to save the letdown in months (maybe ",
+      "author": "/u/musiclovaesp",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdz4ii/question_about_how_to_know_if_producing_enough/",
+      "post_id": "t3_1tdz4ii",
+      "pub_time": "2026-05-15T15:08:19+00:00",
+      "scanned_at": "2026-05-15T15:57:13.271892+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "How well did your EBF babe sleep at 2 months?",
+      "body_preview": "<!-- SC_OFF --> I m losing my mind here. \ud83d\ude05 My first born was a NICU baby so I pumped for 10 months and her schedule was predictable due to the NICU schedule (every three hours) so although I was still barely getting any sleep, I could count on her to take her pumped bottle, hold her up/burp, pump, and put her down in her bassinet between feeds. Fast forward 4 years, I had my son- now 2 months old and he is EBF. He will sleep a great first stretch in his bassinet and then refuse to go in his bass",
+      "author": "/u/erinsboiledgatorade",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdz0ts/how_well_did_your_ebf_babe_sleep_at_2_months/",
+      "post_id": "t3_1tdz0ts",
+      "pub_time": "2026-05-15T15:04:44+00:00",
+      "scanned_at": "2026-05-15T15:57:13.273045+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Coming to the end of our journey",
+      "body_preview": "<!-- SC_OFF --> Wanted to take a moment to share a positive story. I want to preface this post with so much solidarity and support to all the moms out there on this journey. Wherever you are on it, I see you!! My daughter is about to be 2 in a few weeks and we are winding down our breastfeeding journey together! We always planned to nurse. But I know that breastfeeding is hard and doubted my ability to make this happen for the long term. I broke goals into smaller goals such as \u201clets make it to ",
+      "author": "/u/turquoisefr0g",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdw9s4/coming_to_the_end_of_our_journey/",
+      "post_id": "t3_1tdw9s4",
+      "pub_time": "2026-05-15T13:23:37+00:00",
+      "scanned_at": "2026-05-15T15:57:13.282856+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Hormonal bleeding non stop 5 months postpartum. Anyone else?",
+      "body_preview": "<!-- SC_OFF --> Hi everyone, I am in need of advice or just hearing ur own stories...I am at the end of hoping for things to get better. I have been basically bleeding everyday since birth(I gave birth first week of December) so I m like 5 months pp, of course after like 4/6 weeks it tapered off but not even a week later it started again....we thought it was my period but when it would just like basically never stop we started to think it s hormonal, it fluctuates between bright red bleeding day",
+      "author": "/u/StateFabulous9622",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdu1c8/hormonal_bleeding_non_stop_5_months_postpartum/",
+      "post_id": "t3_1tdu1c8",
+      "pub_time": "2026-05-15T11:52:51+00:00",
+      "scanned_at": "2026-05-15T15:57:13.291084+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Can i get baby to 11 hours?",
+      "body_preview": "<!-- SC_OFF --> Hi, sleep trained 7 months old- combo of ferber and cry it out. I\u2019ve made a few posts on here now. We are stuck at 10 hour nights on the dot now. Schedule is 2.75/3.25/4.Typically does 2.5 hours of sleep across 2 naps. So 10 hours awake +2.5 hours naps=11.5 hours for night time. People have told me my math was wrong on other posts so I have made some changes. What I ACTUALLY get are 10 hours of sleep on the dot and then 1.5 hours of him fussing in his crib and going in and out of",
+      "author": "/u/happythoughts2021",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdx66e/can_i_get_baby_to_11_hours/",
+      "post_id": "t3_1tdx66e",
+      "pub_time": "2026-05-15T13:57:53+00:00",
+      "scanned_at": "2026-05-15T15:57:13.304782+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Baby trapped in 30 minute naps during day - connects cycles at night. Help PLEASE",
+      "body_preview": "<!-- SC_OFF --> Hello! Baby age: 7 months 3 weeks Current schedule: 3/3/3 (we try) Bedtime Routine: (Baby has special medical needs) Low sensory time starts at 5:00pm and given bottle, at 5:30 we clean her G-Tube site and give medications, attach her tube and get her feeding pump ready, at 6:00pm lights are dimmed and we read a book and sing songs in her rocking chair Sleep Trained: I m just learning about sleep training, but I think she sort of is DWT: She typically wakes up on her own between ",
+      "author": "/u/W0ketheFUP",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdwbsw/baby_trapped_in_30_minute_naps_during_day/",
+      "post_id": "t3_1tdwbsw",
+      "pub_time": "2026-05-15T13:25:45+00:00",
+      "scanned_at": "2026-05-15T15:57:13.309049+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "TWIN advice on sleep training",
+      "body_preview": "<!-- SC_OFF --> 8 month twins. In own room for last 4 weeks which has helped I will say. Current routine: wake 7:30am Nap1 9:50-11am Nap2 1:30-2:40pm Nap3 5:05-5:30pm Bed 7:40pm, asleep from 7:50/8pm usually. I know wake windows on lower end but they were 3 weeks early and this is working for now.. Bed time and naps is where I need some advice. One twin has always cried at bedtime. Sometimes its 5 minutes and on bad nights its up to 40 minutes. Other twin usually ignores and sleeps but at the mi",
+      "author": "/u/flymetothemoon-e",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdvhbb/twin_advice_on_sleep_training/",
+      "post_id": "t3_1tdvhbb",
+      "pub_time": "2026-05-15T12:52:40+00:00",
+      "scanned_at": "2026-05-15T15:57:13.312678+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Previously sleeptrained ~3yo suddenly waking up crying 4-5 times per night",
+      "body_preview": "<!-- SC_OFF --> I have a boy that turns three in July this year he has been a good sleeper since he was a baby, and we did cried out method at six months after which he has slept through the night excluding small regressions here and there. However, we moved him to a big boy bed about a month ago. First, he slept great in the new bed with no issues and he generally stays in bed and does not climb out of it at all at night. However he has started to wake up and cry at night, 4 to 5 times every ni",
+      "author": "/u/GlumBarnacle4545",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdv4ui/previously_sleeptrained_3yo_suddenly_waking_up/",
+      "post_id": "t3_1tdv4ui",
+      "pub_time": "2026-05-15T12:38:39+00:00",
+      "scanned_at": "2026-05-15T15:57:13.314830+00:00"
+    },
+    {
+      "score": 68,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Massive regression after a good first week.",
+      "body_preview": "<!-- SC_OFF --> My 6mo has always been a terrible sleeper. She contact napped until 3 months when the weather got better and now takes all naps in a stroller outside. At night she will ONLY be put down by feeding to sleep. I\u2019ve tried it all. This is mainly the reason why we wanted to sleep train. Her schedule is 2/2,5/2,5/3 8am to 8pm. It was a little shorter when we first started but after browsing this sub for tips I decided to elongate her wake windows to what I wrote above. We chose a gentle",
+      "author": "/u/Smashed_potato",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdrnbb/massive_regression_after_a_good_first_week/",
+      "post_id": "t3_1tdrnbb",
+      "pub_time": "2026-05-15T09:57:11+00:00",
+      "scanned_at": "2026-05-15T15:57:13.319611+00:00"
+    },
+    {
+      "score": 67,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Has anyone dealt with having a newborn when a formerly adopted child rejoins their life?",
+      "body_preview": "<!-- SC_OFF --> My husband and I are expecting our first baby this year and are very excited. Before we started dating, he told me that he and an ex-girlfriend had given up a child for adoption, which was open on the other family s side i.e. they knew all the child s birth parent info and could choose to share information if they wanted. This was almost 18 years ago, and over the years he learned through second hand information that a lot of tragic events had happened in the family - essentially",
+      "author": "/u/Regular-Message9591",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdys6b/has_anyone_dealt_with_having_a_newborn_when_a/",
+      "post_id": "t3_1tdys6b",
+      "pub_time": "2026-05-15T14:56:20+00:00",
+      "scanned_at": "2026-05-15T15:57:13.219422+00:00"
+    },
+    {
+      "score": 67,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Low fetal fraction, now early anatomy scan",
+      "body_preview": "<!-- SC_OFF --> I\u2019m 38, first-time pregnant, 206 lbs/5\u20196\u201d (important bc everyone says high BMI can cause low fetal fraction) blood drawn at 12w6d and my NIPT came back with low fetal fraction 3.1% and increased risk for trisomy 13, 18, etc. I\u2019m 15 weeks now. My OB had me meet with a genetic counselor and now I\u2019m scheduled for an ultrasound that is essentially an early anatomy scan, as I understand it, at 17w. The counselor said this scan would be able to tell if there are any abnormalities in li",
+      "author": "/u/notlola17",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdxhod/low_fetal_fraction_now_early_anatomy_scan/",
+      "post_id": "t3_1tdxhod",
+      "pub_time": "2026-05-15T14:09:23+00:00",
+      "scanned_at": "2026-05-15T15:57:13.224296+00:00"
+    },
+    {
+      "score": 65,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "7 month old sleep help!",
+      "body_preview": "<!-- SC_OFF --> We\u2019ve never sleep trained and our baby has fallen asleep independently at night (not naps) since she was about 8 weeks old (she turned 7 months yesterday), and was only waking really once to feed and slept like 7:30-6:30 ish otherwise. however the last 2 weeks she\u2019s cried hard when we put her down, stands up holding the rails (she\u2019s been crawling for a month and pulling to stand a lot recently) and has had more night wakes and has also been sooo much harder to get back to sleep a",
+      "author": "/u/Front_Tumbleweed_305",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdxptv/7_month_old_sleep_help/",
+      "post_id": "t3_1tdxptv",
+      "pub_time": "2026-05-15T14:17:25+00:00",
+      "scanned_at": "2026-05-15T15:57:13.245647+00:00"
+    },
+    {
+      "score": 65,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Taking daddy\u2019s girl to a whole new level!",
+      "body_preview": "<!-- SC_OFF --> My LO has been all over with sleep for months. Refusing to go to bed until somewhere between 3am-6am (even though she would turn into a complete gremlin at 6pm), get up every 1-2hrs through the night, wake up between 9am-11am, and only nap about 3hrs during the day. No matter what I did, nothing would work longer than a few days and I exhausted every resource possible to get this baby to sleep\u2026 so what fixed it? Well you see, my husband has been working the same job for 12 years.",
+      "author": "/u/Kyzer577",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdt7dr/taking_daddys_girl_to_a_whole_new_level/",
+      "post_id": "t3_1tdt7dr",
+      "pub_time": "2026-05-15T11:15:09+00:00",
+      "scanned_at": "2026-05-15T15:57:13.261524+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Boob pain",
+      "body_preview": "<!-- SC_OFF --> Hello, I am trying to exclusively breastfeed but it s been a long journey and we are not there yet. I have an appointment with a lactation consultant on Monday and I wrote her that I have a lot of pain in my right boob because the nipple is cracked. I am not breastfeeding with that breast at the moment to ensure it gets at least somewhat better before the LC visit. She recommended I continue to pump on a setting no higher than 4 (Meleda professional pump, rented from hospital). B",
+      "author": "/u/Sad_Display_2951",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdz635/boob_pain/",
+      "post_id": "t3_1tdz635",
+      "pub_time": "2026-05-15T15:09:59+00:00",
+      "scanned_at": "2026-05-15T15:57:13.270916+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "What replaced the snooze button feed after night weaning?",
+      "body_preview": "<!-- SC_OFF --> I have a 12 month old and she still wakes anywhere from 2-6 times a night. I cosleep with her and just give her the boob because it\u2019s the easiest way for both of us to fall back to sleep. I\u2019m getting tired of nursing at night and I think it\u2019s time to start night weaning, but my worry is that it will be even harder to get her back to sleep when she wakes up at night. I also love how easy it is to get an extra 40 minutes of sleep by doing a snooze button feed. I tried cuddling her ",
+      "author": "/u/mimixoxo76",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdyhga/what_replaced_the_snooze_button_feed_after_night/",
+      "post_id": "t3_1tdyhga",
+      "pub_time": "2026-05-15T14:45:31+00:00",
+      "scanned_at": "2026-05-15T15:57:13.274382+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Low supply sadness",
+      "body_preview": "<!-- SC_OFF --> 2 weeks pp and I can only produce like a teaspoon of milk with each pump. BF has been so much work and so disheartening, I really want to BF little one but he barely even tries now. My boobs are just pacifiers to him. In each 3-4 hr feed cycle us takes at least 2 hours to get him fed by the vreast and bottle. I barely have time for Pumping. I m so upset :( any advice appreciated. <!-- SC_ON --> submitted by /u/Optimal_Maintenance1 [link] [comments]",
+      "author": "/u/Optimal_Maintenance1",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdv1gg/low_supply_sadness/",
+      "post_id": "t3_1tdv1gg",
+      "pub_time": "2026-05-15T12:34:50+00:00",
+      "scanned_at": "2026-05-15T15:57:13.286793+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "13 mo ready for one nap?",
+      "body_preview": "<!-- SC_OFF --> What was your 2-1 nap transition like? Was it sudden? Baby boy will be 13 months next week. We were on a 3/3.5/4 schedule since 9 months, taking 1-1.25 hr naps easily and often capping nap. Sleeping through the night. It seems like out of the blue he began refusing both naps at the usual time Yesterday he did a 3.75/7.5 schedule and slept through the night peacefully. Fought the first nap and fell asleep late. Then I woke him after an hour anticipating a second nap that never hap",
+      "author": "/u/sonderal",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdye2w/13_mo_ready_for_one_nap/",
+      "post_id": "t3_1tdye2w",
+      "pub_time": "2026-05-15T14:42:05+00:00",
+      "scanned_at": "2026-05-15T15:57:13.302513+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Is a nap schedule not as important as long as you\u2019re meeting proper wake windows and day time sleep?",
+      "body_preview": "<!-- SC_OFF --> Parent of a 4 year old with another baby on the way. Honestly I kinda blocked out some of those early months and I\u2019m having a hard time remembering what we did for my kiddo when he was a newborn. All I know is he was a great sleeper and wasn\u2019t super fussy. I know baby\u2019s can be random and unpredictable but at the same I\u2019d like to try and get a head start on everything! <!-- SC_ON --> submitted by /u/pizza_with_ranch [link] [comments]",
+      "author": "/u/pizza_with_ranch",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdvop6/is_a_nap_schedule_not_as_important_as_long_as/",
+      "post_id": "t3_1tdvop6",
+      "pub_time": "2026-05-15T13:00:49+00:00",
+      "scanned_at": "2026-05-15T15:57:13.311296+00:00"
+    },
+    {
+      "score": 61,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Help troubleshooting schedule please \ud83d\ude4f",
+      "body_preview": "<!-- SC_OFF --> Hello guys, Would really appreciate any tips or insights into what I\u2019m getting wrong here with my 6 month old. He\u2019s currently 6 months and 1 week old. For the past 3 weeks he\u2019s been sleeping independently for both bedtime and his 3 naps. He only fusses for a few minutes or coos to himself before falling asleep. His sleep schedule is: Awake 8:30am roughly. First nap - 10:45am - 11:45am Second nap - 2:15pm - 3:15pm Third nap - 5:45pm - 6:05pm ish Bedtime - 9pm. So roughly a 2:25/2.",
+      "author": "/u/03022023",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdsajq/help_troubleshooting_schedule_please/",
+      "post_id": "t3_1tdsajq",
+      "pub_time": "2026-05-15T10:31:03+00:00",
+      "scanned_at": "2026-05-15T15:57:13.318074+00:00"
+    },
+    {
+      "score": 60,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Overwhelmed but so happy",
+      "body_preview": "<!-- SC_OFF --> Hi all, new to this sub. I just found out I m pregnant yesterday, and told my husband. I m 4 weeks 4 days. We were seriously trying for the last 3-4 months but I somehow did not expect it to happen so quickly. (Many of our friends struggled so we just assumed we might too). I m so grateful we didn t need help, but now that it actually happened I m just so overwhelmed by all these thoughts. There s so much to think about, to plan and prepare for. I just can t turn off my brain! <!",
+      "author": "/u/ananda_yogi",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdw9y1/overwhelmed_but_so_happy/",
+      "post_id": "t3_1tdw9y1",
+      "pub_time": "2026-05-15T13:23:47+00:00",
+      "scanned_at": "2026-05-15T15:57:13.227428+00:00"
+    },
+    {
+      "score": 60,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "evening_posting"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Extended Rear Facing Car Seat- ISO fix?",
+      "body_preview": "<!-- SC_OFF --> We re pretty set on upgrading to an ERF car seat now that my 1yo is close to the height limit on his infant seat. We re in the UK so not as many options unfortunately, and we re limited by a car with not *that* much room in the back seats. Some of the ones we like are highly rated for safety but not ISO fixed. How important is that? Is it much different in terms of stability and safety in a crash? Also happy to take any recommendations you have! <!-- SC_ON --> submitted by /u/Neo",
+      "author": "/u/NeonExp",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdq03c/extended_rear_facing_car_seat_iso_fix/",
+      "post_id": "t3_1tdq03c",
+      "pub_time": "2026-05-15T08:23:43+00:00",
+      "scanned_at": "2026-05-15T15:57:13.263765+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Tips and tricks to increase supply?",
+      "body_preview": "<!-- SC_OFF --> Please share your tips and tricks for increasing supply if any! And im not talking &quot;stay hydrated&quot; was there anything else that surprisingly seemed to do it for you? Im 8 weeks pp and went from a slight over supply that allowed a small stash, to a sudden drop that required me to use up said stash, to now making just enough if not a little less. I feel like im chasing the feeds and cant depend on having enough for the next. Ive had to introduce a small amount of formula ",
+      "author": "/u/No-Good-4476",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdxkx4/tips_and_tricks_to_increase_supply/",
+      "post_id": "t3_1tdxkx4",
+      "pub_time": "2026-05-15T14:12:31+00:00",
+      "scanned_at": "2026-05-15T15:57:13.276271+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Maintain Supply without Nursing at Night?",
+      "body_preview": "<!-- SC_OFF --> Hi, TLDR : 2nd baby; no previous supply issues; going 9 hours overnight without nursing while baby gets bottles, in the morning I pump what he drank overnight. Still producing full supply each day. Do I need to worry supply will dip over time given the long stretches without nursing? This is my second baby. I exclusively breastfed my first and had no supply issues. My baby is 3 weeks old today. Since he s been born, he s been getting formula during the night so I can sleep. I had",
+      "author": "/u/nostromosigningoff",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdwtel/maintain_supply_without_nursing_at_night/",
+      "post_id": "t3_1tdwtel",
+      "pub_time": "2026-05-15T13:44:34+00:00",
+      "scanned_at": "2026-05-15T15:57:13.281013+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "mild_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Transitioning away from triple feeding",
+      "body_preview": "<!-- SC_OFF --> My 3.5 week old baby was primarily formula fed for the first week and a half of her life due to a NICU stay, jaundice, and an 11% weight loss, combined with my re-admittance to the hospital for preeclampsia. Baby has been gaining well and we have been working with a lactation consultant to up my supply to meet her demand and have been triple feeding. Baby is very happy on the breast and is definitely transferring milk but is a slow eater. My concern, however, is that as we transi",
+      "author": "/u/CarelessResponse25",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdvljx/transitioning_away_from_triple_feeding/",
+      "post_id": "t3_1tdvljx",
+      "pub_time": "2026-05-15T12:57:26+00:00",
+      "scanned_at": "2026-05-15T15:57:13.285335+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Nursing strike or self weaning?",
+      "body_preview": "<!-- SC_OFF --> Currently breastfeeding my 15 month old son 3 times a day. When he first gets up in the morning, before his nap, and before bed. On Wednesday when I was getting ready to nurse him for his nap he bit me twice (he\u2019s got 10 almost 11 teeth now). I jumped both times and after the second he pulled off and started crying, absolutely refused to latch again. I just had to rock him to sleep. That night he refused to nurse and had a complete meltdown. Again, I rocked and sang him to sleep.",
+      "author": "/u/Dreambeanz",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdv4i3/nursing_strike_or_self_weaning/",
+      "post_id": "t3_1tdv4i3",
+      "pub_time": "2026-05-15T12:38:15+00:00",
+      "scanned_at": "2026-05-15T15:57:13.286445+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Can I have a supply if I just nurse for sleep?",
+      "body_preview": "<!-- SC_OFF --> So this is probably individual but kinda looking for other people\u2019s experiences. Baby is almost 9 months and I\u2019m pretty sure he\u2019s getting most of his calories in at night instead of the day. I\u2019ve been debating just going to bottles/formula 100% except I don\u2019t want to give up nursing to sleep for naps. I do think my supply is dipping during the day. It\u2019s a combo of he\u2019s super distracted, and I\u2019m grabbing bottles more and more. And I\u2019m dropping weight (not meant to be a brag but a ",
+      "author": "/u/Ok_Potato_7025",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tduwrc/can_i_have_a_supply_if_i_just_nurse_for_sleep/",
+      "post_id": "t3_1tduwrc",
+      "pub_time": "2026-05-15T12:29:38+00:00",
+      "scanned_at": "2026-05-15T15:57:13.287700+00:00"
+    },
+    {
+      "score": 58,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "mild_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "How to have sex again (as a BF new mom)",
+      "body_preview": "<!-- SC_OFF --> Hi moms! I feel like I am crazy and overeacting\u2026 I am 9mo pp. Ever since giving birth and starting breastfeeding I cannot see myself as a person with sexual needs. I see myself as a mom, and my body as a \u2018tool\u2019 of comforting and feeding my baby. As a safe and warm place for him. I can\u2019t stand my husband touching my boobs. I know this is irrational, but for me this is for baby and baby is so innocent so I can\u2019t stand my breasts being sexualized. It is very hard for me to get in th",
+      "author": "/u/Orange-Fiction",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tduhr2/how_to_have_sex_again_as_a_bf_new_mom/",
+      "post_id": "t3_1tduhr2",
+      "pub_time": "2026-05-15T12:12:18+00:00",
+      "scanned_at": "2026-05-15T15:57:13.288827+00:00"
+    },
+    {
+      "score": 57,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Partner was texting a younger colleague to meet up whilst I was 30-weeks pregnant",
+      "body_preview": "<!-- SC_OFF --> Looking for some outside perspectives. He states I am overreacting and reading something in to the messages that aren\u2019t there, I feel devastated. Saw over my partners shoulder in bed a few weeks ago that he had been messaging a younger female colleague (a decade younger than him, and 12-years younger than me) on Instagram over the past four weeks. He has not mentioned her existence to me in the entire time they have worked together, nor that they have been messaging. He says it\u2019s",
+      "author": "/u/Empty_Shallot_3776",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdzzqu/partner_was_texting_a_younger_colleague_to_meet/",
+      "post_id": "t3_1tdzzqu",
+      "pub_time": "2026-05-15T15:38:47+00:00",
+      "scanned_at": "2026-05-15T15:57:13.214692+00:00"
+    },
+    {
+      "score": 57,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "4/4 missed Mother\u2019s Days",
+      "body_preview": "<!-- SC_OFF --> I have a good husband and a good life. I\u2019m the day to day, I am lucky. My husband helps out with as much as he can (housework and kids) despite working way too much. Like I\u2019m talking above and beyond. He has a good income so we are well taken care of. But I\u2019m just so disappointed. The first mother day, I was only pregnant so I thought, yeah I guess it doesn\u2019t really need to be celebrated yet, despite carrying a baby for 7 months. The second one, we had just moved to a new country",
+      "author": "/u/ink_pots",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdtkfs/44_missed_mothers_days/",
+      "post_id": "t3_1tdtkfs",
+      "pub_time": "2026-05-15T11:31:40+00:00",
+      "scanned_at": "2026-05-15T15:57:13.259449+00:00"
+    },
+    {
+      "score": 55,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Can I get reassurance, from those who got pregnant without eliminating all the \u201cendocrine disruptors\u201c",
+      "body_preview": "<!-- SC_OFF --> My husband and I(29 this year, he just turned 37) plan to try for our first baby this October/November at the soonest, super early 2027 at the latest. So essentially, soon. Just for General health reasons and not just for pregnancy reasons, I\u2019ve already eliminated a lot of of our plastic Tupperware, switched to safer cleaning products(for the most part), we use safer room sprays, We plan to regift all candles from here on out, unless they are explicitly safe. Luckily, there is a ",
+      "author": "/u/nursejooliet",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdsrvf/can_i_get_reassurance_from_those_who_got_pregnant/",
+      "post_id": "t3_1tdsrvf",
+      "pub_time": "2026-05-15T10:54:51+00:00",
+      "scanned_at": "2026-05-15T15:57:13.230489+00:00"
+    },
+    {
+      "score": 55,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Husband feeling.. Lonely?",
+      "body_preview": "<!-- SC_OFF --> We had our daughter last January and I m just missing my wife is the best way I can describe it. We ve been married 8 years and were engaged 5 years before that while she finished school so we ve known each other for awhile. We were never really like all over each other after the first couple years but after she became pregnant the intimacy completely vanished. She had a rough pregnancy with a large subchorionic hemotoma, we were instructed to refrain from sexual activity. Everyt",
+      "author": "/u/Frogoker",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdy6ww/husband_feeling_lonely/",
+      "post_id": "t3_1tdy6ww",
+      "pub_time": "2026-05-15T14:34:48+00:00",
+      "scanned_at": "2026-05-15T15:57:13.244014+00:00"
+    },
+    {
+      "score": 55,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Bleeding 5 months Post Partum...help! Anybody else?",
+      "body_preview": "<!-- SC_OFF --> Hi everyone, I am in need of advice or just hearing ur own stories...I am at the end of hoping for things to get better. I have been basically bleeding everyday since birth(I gave birth first week of December) so I m like 5 months pp, of course after like 4/6 weeks it tapered off but not even a week later it started again....we thought it was my period but when it would just like basically never stop we started to think it s hormonal, it fluctuates between bright red bleeding day",
+      "author": "/u/StateFabulous9622",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdu06b/bleeding_5_months_post_partumhelp_anybody_else/",
+      "post_id": "t3_1tdu06b",
+      "pub_time": "2026-05-15T11:51:25+00:00",
+      "scanned_at": "2026-05-15T15:57:13.257329+00:00"
+    },
+    {
+      "score": 53,
+      "category": "WATCH",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Everything is a fight",
+      "body_preview": "<!-- SC_OFF --> Proud mom of a 9.5 month old boy who I love very much but lately it just feels like everything is a struggle. Diaper changes. Putting baby in the car seat. Feeding a bottle. Feeding solids. Putting baby to sleep. Getting baby in the stroller. Putting baby in the walker. It just seems like he hates everything, and fights me on everything. He THRASHES, flips, kicks and screams every single time I try to change him or dress him, every single time I try to put him in a high chair, or",
+      "author": "/u/CommunistCetacean",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdxlos/everything_is_a_fight/",
+      "post_id": "t3_1tdxlos",
+      "pub_time": "2026-05-15T14:13:15+00:00",
+      "scanned_at": "2026-05-15T15:57:13.248970+00:00"
+    },
+    {
+      "score": 53,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Baby won\u2019t let me sit on the couch",
+      "body_preview": "<!-- SC_OFF --> Does anyone else\u2019s baby not let you sit down on the couch? My son is 8 months, and he\u2019ll happily play independently if I\u2019m walking around doing things. He\u2019s fine if I\u2019m in the kitchen cleaning up or making food, he\u2019s fine if I\u2019m standing in the living room folding laundry, he\u2019s fine when I\u2019m actively doing things. Within two minutes of sitting on the couch, without fail, he starts whining while crawling over to me. He doesn\u2019t want to sit on my lap either, he wants me to stand up.",
+      "author": "/u/Kodakisababy",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdvoha/baby_wont_let_me_sit_on_the_couch/",
+      "post_id": "t3_1tdvoha",
+      "pub_time": "2026-05-15T13:00:38+00:00",
+      "scanned_at": "2026-05-15T15:57:13.253070+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Concerning blood tests",
+      "body_preview": "<!-- SC_OFF --> I had a blood test done last week due to my entire body hurting all the time & EXTREME itchiness, dry mouth even though I drink over a gallon of water a day. All of my tests were normal until today I just had another metabolic panel done that included calcium. It is 8 points over the \u201cnormal\u201d The dr called me and wants me to come back in to do more testing and an ultrasound of my kidneys. I literally went to the hospital the other day due to the itchiness and assuming it was scab",
+      "author": "/u/Ok-Cardiologist6243",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdzn8e/concerning_blood_tests/",
+      "post_id": "t3_1tdzn8e",
+      "pub_time": "2026-05-15T15:26:33+00:00",
+      "scanned_at": "2026-05-15T15:57:13.270216+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Changes in supply",
+      "body_preview": "<!-- SC_OFF --> I am 2 weeks pp and exclusively pumping due to baby not latching well. Normally while pumping I get anywhere from 7-11oz from both sides each pump. I know that this is technically a lot & I have about 30oz frozen so far, but yesterday I had a dip where I barely got 2oz during my last 2 pumps of the day. My breasts were extremely engorged & I tried a few things, hot compress, hot shower, massages, even tried latching baby but nothing gave. I woke up in the middle of the night to m",
+      "author": "/u/TurbulentSlide4552",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdymmc/changes_in_supply/",
+      "post_id": "t3_1tdymmc",
+      "pub_time": "2026-05-15T14:50:42+00:00",
+      "scanned_at": "2026-05-15T15:57:13.273776+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Baby latching on and off a million times",
+      "body_preview": "<!-- SC_OFF --> Curious if anyone else experienced this? My baby is nearly 8 months now and ever since she was about 5 months or so she started latching and unlatching a million times during a feed. It drives me insane and lately it\u2019s only been worse! She hasn\u2019t got any teeth yet but I am terrified of what she is going to do once she does. After lots of reflection I feel like this must be partly impatience about waiting for letdown to happen and partly just her unable to relax and lean into nurs",
+      "author": "/u/marmaladeonsourdough",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdxrgk/baby_latching_on_and_off_a_million_times/",
+      "post_id": "t3_1tdxrgk",
+      "pub_time": "2026-05-15T14:18:59+00:00",
+      "scanned_at": "2026-05-15T15:57:13.275190+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "8 months EBF - do I stop?",
+      "body_preview": "<!-- SC_OFF --> Hello, I have EBF my 8 month old (pumped and given bottle a handful of times), its been a relatively easy process too. However, recently, hes become so fussy on the boob, only drinks for a few minutes, pulls away with nipple in mouth and is so wriggly I have to wrestle him every time. Im not enjoying it anymore. Does it get better? Is it just a phase at the moment? Do I just start moving to formula, but thats something new I have to learn and get him on board with. Is it worth ju",
+      "author": "/u/catasha7",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdxk3s/8_months_ebf_do_i_stop/",
+      "post_id": "t3_1tdxk3s",
+      "pub_time": "2026-05-15T14:11:45+00:00",
+      "scanned_at": "2026-05-15T15:57:13.276716+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "I\u2019m pregnant with my first and plan on breastfeeding. What is your order of getting things done during night feedings?",
+      "body_preview": "<!-- SC_OFF --> Hi! I\u2019m just wondering what the best course of action might be with a newborn during night feedings and changing their diaper, unswaddling, etc. When your baby wakes up in the middle of the night, do you change or feed them first? Does it depend on what\u2019s in the diaper? Also if you swaddle them, do you keep them unswaddled the whole time or swaddle them back up when changing to the other breast? Also when do you burp them during all of this, in between breasts or at the end of th",
+      "author": "/u/gimmepesto",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdwe3w/im_pregnant_with_my_first_and_plan_on/",
+      "post_id": "t3_1tdwe3w",
+      "pub_time": "2026-05-15T13:28:14+00:00",
+      "scanned_at": "2026-05-15T15:57:13.281523+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "How to sleep train naps?",
+      "body_preview": "<!-- SC_OFF --> Hello I trained my 19 weeks baby boy with Ferber for night sleeping and it worked in 7 days, he no longer fusses or cries when it\u2019s bed time which is a blessing But the naps are getting exhausting! I have to spend 15-20 minutes of rocking and shushing and patting for him to fall asleep. And he sometimes he only sleeps for 30 minutes and wakes up fully alert. Advice please <!-- SC_ON --> submitted by /u/lululama94 [link] [comments]",
+      "author": "/u/lululama94",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdyems/how_to_sleep_train_naps/",
+      "post_id": "t3_1tdyems",
+      "pub_time": "2026-05-15T14:42:39+00:00",
+      "scanned_at": "2026-05-15T15:57:13.300743+00:00"
+    },
+    {
+      "score": 51,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "16 month old post-vacation troubles",
+      "body_preview": "<!-- SC_OFF --> Looking for the advice/support on 16 month old s sleep woes. Some back story: We (mom, dad, toddler) went on vacation for mother s Day. Toddler slept great and took great naps during our trip, however, he had to sleep in bed with us. Once we got home, as soon as we lay him down for bedtime and shut the door he will stand up and scream until he s sweaty and hysterical. We tried letting him cry it out, but it lasted about an hour both nights with him not sleeping. We eventually res",
+      "author": "/u/Dismal-Muffin-955",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdsgnk/16_month_old_postvacation_troubles/",
+      "post_id": "t3_1tdsgnk",
+      "pub_time": "2026-05-15T10:39:26+00:00",
+      "scanned_at": "2026-05-15T15:57:13.315688+00:00"
+    },
+    {
+      "score": 50,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "FEAR OF FASD",
+      "body_preview": "<!-- SC_OFF --> Posting on the behalf of my friend due to her not having internet access She has just found out she is 16week pregnant, she hasn\u2019t had periods for a while due to her own health issues etc. but her breast started to grow and ache, she got a ultrasound and she\u2019s 16week pregnant! (She was on birth control) Her worries are that she has been binge drinking hard before she know (about 50 units a week) Some weeks more some weeks not at all. And some times 1G cocaine a week. She\u2019s now ve",
+      "author": "/u/OkDinner3555",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdxrdj/fear_of_fasd/",
+      "post_id": "t3_1tdxrdj",
+      "pub_time": "2026-05-15T14:18:54+00:00",
+      "scanned_at": "2026-05-15T15:57:13.222045+00:00"
+    },
+    {
+      "score": 50,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Almost there and physically miserable, y\u2019all who went through this rule!",
+      "body_preview": "<!-- SC_OFF --> 37+2 and have my c-section scheduled at 39 weeks (baby\u2019s breech). I had what is considered an easy and uncomplicated pregnancy: no nausea, gained just over 30 lbs, exercised most of it, low blood pressure, etc. And yet I haven\u2019t slept in weeks due to insomnia and nasal congestion, and every day around the afternoon I start feeling like my belly is about to burst or is full or rocks, this usually lasts until about 2-3am. I\u2019m exhausted! Just want to express my admiration of all of ",
+      "author": "/u/Resident-Strategy524",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tds9fo/almost_there_and_physically_miserable_yall_who/",
+      "post_id": "t3_1tds9fo",
+      "pub_time": "2026-05-15T10:29:29+00:00",
+      "scanned_at": "2026-05-15T15:57:13.231903+00:00"
+    },
+    {
+      "score": 49,
+      "category": "WATCH",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Mastitis at 6 months",
+      "body_preview": "<!-- SC_OFF --> At like 3am yesterday i woke up with aggressive chills and pain in my boob where i couldnt even move. I kept getting on and off fevers and bad nausea so I went to the ER and they gave me antibiotics. My boob is even more red now (hurts less) but its hard in one area. Im still getting chills and fevers and for some reason its taking FOREVER for it to letdown to the point my baby gets so frustrated. I literally feel like death \ud83d\ude2d Can you guys share your experience with mastitis and ",
+      "author": "/u/Effective-Dig-984",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdzvxb/mastitis_at_6_months/",
+      "post_id": "t3_1tdzvxb",
+      "pub_time": "2026-05-15T15:35:00+00:00",
+      "scanned_at": "2026-05-15T15:57:13.269232+00:00"
+    },
+    {
+      "score": 49,
+      "category": "WATCH",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Separation anxiety only at night",
+      "body_preview": "<!-- SC_OFF --> Hi my baby is currently 16 months and I am struggling with what I think is separation anxiety so bad but only at night. She was sleep trained and was sleeping through the night for quite a while before this but now it\u2019s been 3 ish weeks where every night is a battle for bed. We do our normal routine and she\u2019ll be so tired in my arms but the moment I set her down she loses it! Stands up screams and we have been trying to let her go but then she\u2019s so worked up we have to go in. And",
+      "author": "/u/nwatson20",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdzsxo/separation_anxiety_only_at_night/",
+      "post_id": "t3_1tdzsxo",
+      "pub_time": "2026-05-15T15:32:02+00:00",
+      "scanned_at": "2026-05-15T15:57:13.295660+00:00"
+    },
+    {
+      "score": 48,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "doula or no doula? first pregnancy",
+      "body_preview": "<!-- SC_OFF --> I m still early in my first pregnancy (9 weeks) and am now considering whether I should use a doula or not. I would only do it if covered by insurance. We have a family friend (husband s godmother s DIL) who is a doula that I believe I would feel comfortable with. That said, I m planning on delivering at a small community hospital (9 birthing beds) and just toured it, where they said the nurses are very proactive in guiding you through the birth and are on shift for 12 hrs at a t",
+      "author": "/u/mm_honey",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdycsg/doula_or_no_doula_first_pregnancy/",
+      "post_id": "t3_1tdycsg",
+      "pub_time": "2026-05-15T14:40:45+00:00",
+      "scanned_at": "2026-05-15T15:57:13.220068+00:00"
+    },
+    {
+      "score": 48,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "What specific exercises helped you recover from prolapse?",
+      "body_preview": "<!-- SC_OFF --> Struggling at 5 months pp and any advice welcome! I saw my pelvic floor therapist very early on and didn\u2019t seem to have issues. But now I am. My midwife said I probably have 1st maybe every 2nd degree prolapse and she recommended to see PFT. However, we\u2019re on a super tight budget and trying to time out wake windows with my LO has been so hard with getting out of the house. (She no longer naps when we\u2019re out- serious FOMO, so it\u2019s brutal when those are off schedule.) Also, finally",
+      "author": "/u/Dangerous-Analyst854",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdxn2u/what_specific_exercises_helped_you_recover_from/",
+      "post_id": "t3_1tdxn2u",
+      "pub_time": "2026-05-15T14:14:38+00:00",
+      "scanned_at": "2026-05-15T15:57:13.247212+00:00"
+    },
+    {
+      "score": 48,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "substantive_post",
+        "deep_post",
+        "evening_posting",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "13 month old sleeping less over night since dropping to one nap",
+      "body_preview": "<!-- SC_OFF --> Our 1 year old has moved to one nap a day very recently (i.e he has only been on his new schedule for 4 days). Previously he would have 2-2.5 hours worth of overall sleep during his two daytime naps. Now he has one daytime nap of around 2.25. He used to sleep about 10-10.5 hours overnight, going to bed about 8.30pm with no resistance (although the reason we dropped to one nap is when this changed and he did keep resisting and the nap got pushed later and later and so did his bed ",
+      "author": "/u/decobelle",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdpbjv/13_month_old_sleeping_less_over_night_since/",
+      "post_id": "t3_1tdpbjv",
+      "pub_time": "2026-05-15T07:45:40+00:00",
+      "scanned_at": "2026-05-15T15:57:13.322705+00:00"
+    },
+    {
+      "score": 47,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Unsupportive mother.",
+      "body_preview": "<!-- SC_OFF --> Im 29 and have recently found out i was4 weeks pregnant with my first child. My boyfriend is very happy and very supportive, He has been helping me build up the courage to tell my mother and assured me he had my back in every way. While I was nervous I managed to tell her thinking she would be happy and give me support since this would be her first grandchild but I was completely wrong. Her first words to me was at your age you should know how to use protection and later that day",
+      "author": "/u/Anon_peanut",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdru08/unsupportive_mother/",
+      "post_id": "t3_1tdru08",
+      "pub_time": "2026-05-15T10:07:02+00:00",
+      "scanned_at": "2026-05-15T15:57:13.234104+00:00"
+    },
+    {
+      "score": 41,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "My body held onto the weight until after I weaned",
+      "body_preview": "<!-- SC_OFF --> Just in case any of you, like me, saw countless posts and heard countless stories about how, \u201call my weight just shed off while I was breastfeeding!\u201d I was not one of those blessed unicorns. My body held onto my last 10 bonus pounds while I breastfed for 16months. I weaned a couple weeks ago, and I have already dropped 5 pounds without having changed any of my habits. While I never minded having extra weight, while providing for my child, I was starting to wonder if it was my bod",
+      "author": "/u/doriswillie",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdvxg2/my_body_held_onto_the_weight_until_after_i_weaned/",
+      "post_id": "t3_1tdvxg2",
+      "pub_time": "2026-05-15T13:10:16+00:00",
+      "scanned_at": "2026-05-15T15:57:13.284113+00:00"
+    },
+    {
+      "score": 41,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "competitor_mention",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "5 month old contact napping during the day and sleeping in crib at night",
+      "body_preview": "<!-- SC_OFF --> We sleep trained our baby when he was almost 4 months using Ferber and it worked really well. However I feel like we\u2019ve been working on the nap training now for over a month. He can contact naps for hourssss but if you put him in the crib it only lasts 15-20 minutes. 30 minutes max on a good day. And that\u2019s if the transfer is successful. He has cried for about an hour before when trying to Ferber the naps. He still wakes up 1-2x in the middle of night for a bottle. Usually around",
+      "author": "/u/Outrageous-Let7040",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdy8dm/5_month_old_contact_napping_during_the_day_and/",
+      "post_id": "t3_1tdy8dm",
+      "pub_time": "2026-05-15T14:36:17+00:00",
+      "scanned_at": "2026-05-15T15:57:13.303465+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "confused about fetal movement..",
+      "body_preview": "<!-- SC_OFF --> I\u2019m feeling confused about fetal movement\u2026 I\u2019m going to be 28 weeks in 3 days. I have a posterior placenta, have been feeling movement since about 22 weeks. I am kind of picking up on baby\u2019s patterns but they are still inconsistent. ex - movement in the morning, after work, some before bed. The movement is quite subtle, more shifts/jerks, more lower pelvis where they used to be up by navel area. The thing is that I\u2019m feeling daily movement, usually getting 6-10 movements in 2hrs ",
+      "author": "/u/Psychosocial5555",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdxooi/confused_about_fetal_movement/",
+      "post_id": "t3_1tdxooi",
+      "pub_time": "2026-05-15T14:16:16+00:00",
+      "scanned_at": "2026-05-15T15:57:13.222998+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Number 4!",
+      "body_preview": "<!-- SC_OFF --> Hey everyone! I\u2019m pregnant with number four, I\u2019ve had two C-sections with my first two, and a spontaneous natural birth with my last! She was scheduled for a C-section four days after she was born. I\u2019m wondering if anybody has had any experience with this and was able to have a natural birth. Just looking for solidarity. \ud83d\ude05 thank you! <!-- SC_ON --> submitted by /u/Lochnessie0 [link] [comments]",
+      "author": "/u/Lochnessie0",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdudci/number_4/",
+      "post_id": "t3_1tdudci",
+      "pub_time": "2026-05-15T12:07:11+00:00",
+      "scanned_at": "2026-05-15T15:57:13.229003+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "New symptom pp after I weaned from breast feeding- should I be worried?",
+      "body_preview": "<!-- SC_OFF --> I have been completely done breast feeding for two months now. These symptoms were just happening around my period. But I currently just experienced them two days in a row and I\u2019m not on my period and won\u2019t be for 3 more weeks. Out of the blue, I will start feeling really off. Then my entire body gets super hot and I feel like I\u2019m going to pass out. It\u2019s a terrible feeling. Only lasts a couple minutes at most. I know it takes a really long time for your hormones to regulate after",
+      "author": "/u/throwaway84583077",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1te09yk/new_symptom_pp_after_i_weaned_from_breast_feeding/",
+      "post_id": "t3_1te09yk",
+      "pub_time": "2026-05-15T15:48:59+00:00",
+      "scanned_at": "2026-05-15T15:57:13.239512+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Tell me the things to look forward to",
+      "body_preview": "<!-- SC_OFF --> My little one is 13.5 months and I\u2019ll admit, some days I\u2019m a little emo when I think about all of this passing by so quickly. I used to cry when she was a newborn knowing that stage was temporary. However, now that shes at this age, shes so funny and interactive that while I do miss her being a tiny little potato, I enjoy this more. So I\u2019m wondering, what other things should I look forward to for when I feel down somedays? My mind has a habit of traveling in the future.. like 20 ",
+      "author": "/u/iOcean_Eyes",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdwk0y/tell_me_the_things_to_look_forward_to/",
+      "post_id": "t3_1tdwk0y",
+      "pub_time": "2026-05-15T13:34:38+00:00",
+      "scanned_at": "2026-05-15T15:57:13.250560+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "frustrated_overwhelmed",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Ovulating early after baby!",
+      "body_preview": "<!-- SC_OFF --> Maybe TMI BUT my little one is 20 months. Pre baby I used to know I was ovulating approx 2 weeks into my cycle from some egg white thick ish discharge. Now? The day after my period ends I m having literally blobs of thick clear jelly discharge for 3-4 days. Has anyone else had this?! Does it go back to normal? Or am I just a jelly girl forever <!-- SC_ON --> submitted by /u/saraharchie93 [link] [comments]",
+      "author": "/u/saraharchie93",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdweds/ovulating_early_after_baby/",
+      "post_id": "t3_1tdweds",
+      "pub_time": "2026-05-15T13:28:33+00:00",
+      "scanned_at": "2026-05-15T15:57:13.252149+00:00"
+    },
+    {
+      "score": 40,
+      "category": "WATCH",
+      "signals_hit": [
+        "demographic_match",
+        "mild_intent",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Hatch help",
+      "body_preview": "<!-- SC_OFF --> We use the hatch rest second GEN, never had any issues. All of a sudden, last night I go to turn it on and it will turn on the light settings for 2 to 3 seconds with no sound, but then shut off. We left it unplugged all last night. So far this morning, I have updated the device, made sure my Wi-Fi connection is good. I\u2019ve done a reset. I\u2019ve deleted the playlists from the app and reinstalled them. I\u2019ve checked that the cord is properly plugged in. I told it it is smart, it is kind",
+      "author": "/u/Top_Leg3999",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdvcve/hatch_help/",
+      "post_id": "t3_1tdvcve",
+      "pub_time": "2026-05-15T12:47:39+00:00",
+      "scanned_at": "2026-05-15T15:57:13.253944+00:00"
+    },
+    {
+      "score": 39,
+      "category": "IGNORE",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Baby fussy over slow milkflow",
+      "body_preview": "<!-- SC_OFF --> My 3m old boy got abit spoiled with fast milkflow after a few days of overproduction in my breasts after pumping. Its now regulated back to normal. Now he gets so fussy when my boobs aren\u2019t filled to the brim it seems and he seems hungry after every feeding. He gains weight as he should and has a lot of wet diapers though. At the same time he sometimes feed poorly during the night wich makes my boobs fill up and give him that fast flow in the morning and a couple hours along. The",
+      "author": "/u/Dollyblondie",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdugx0/baby_fussy_over_slow_milkflow/",
+      "post_id": "t3_1tdugx0",
+      "pub_time": "2026-05-15T12:11:21+00:00",
+      "scanned_at": "2026-05-15T15:57:13.289612+00:00"
+    },
+    {
+      "score": 39,
+      "category": "IGNORE",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Going out after sleep training",
+      "body_preview": "<!-- SC_OFF --> I sleep trained my 19 weeks baby with Ferber method for night sleeping and I\u2019m scared of going out around his bed time because I don\u2019t wanna mess what he learnt I did Ferber for 7 days and it worked amazingly The reason why I want to go out is to visit the families which they usually spend the gatherings at night time unfortunately and I don\u2019t want to be rude by declining the invitation every week. I\u2019ve been trying to leave early before his bedtime but it\u2019s not socially sustainab",
+      "author": "/u/lululama94",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdyi01/going_out_after_sleep_training/",
+      "post_id": "t3_1tdyi01",
+      "pub_time": "2026-05-15T14:46:04+00:00",
+      "scanned_at": "2026-05-15T15:57:13.300161+00:00"
+    },
+    {
+      "score": 38,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "substantive_post",
+        "evening_posting"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Took the Zyertec\u2026 hoping my milk supply doesn\u2019t drop.",
+      "body_preview": "<!-- SC_OFF --> My toddler tested positive for RSV last weekend and now I\u2019m fighting the breastfeeding fight. Typically I don\u2019t take anything other than Tylenol or Advil while breastfeeding just to be safe. But this cold/RSV came on fast and strong for me and I\u2019m supposed to be traveling this weekend for the first time away from my 5 week old. I\u2019ve heard that Zyrtec can lower your milk supply but I\u2019m desperate \ud83d\ude2b I\u2019m hoping that just one dose of it will be enough to get over the worst of this and",
+      "author": "/u/One_Squirrel9446",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdq6j3/took_the_zyertec_hoping_my_milk_supply_doesnt_drop/",
+      "post_id": "t3_1tdq6j3",
+      "pub_time": "2026-05-15T08:33:45+00:00",
+      "scanned_at": "2026-05-15T15:57:13.263163+00:00"
+    },
+    {
+      "score": 38,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "substantive_post",
+        "deep_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "So upset",
+      "body_preview": "<!-- SC_OFF --> So my 12 month old, who was sleeping through the night since 8 months and putting himself down for sleep independently, has now completely stopped. We sleep trained him gently at 7 months and it was hard but I felt it was the right step for our family. A week ago he got sick for the first time. Throwing up, fever, congestion etc. our sleep went out the window and I did a lot of contact and co sleeping. It\u2019s been about a week of this and his sleep is horrible. I thought he would k",
+      "author": "/u/Relevant-Raise-8835",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdsdld/so_upset/",
+      "post_id": "t3_1tdsdld",
+      "pub_time": "2026-05-15T10:35:19+00:00",
+      "scanned_at": "2026-05-15T15:57:13.317035+00:00"
+    },
+    {
+      "score": 35,
+      "category": "IGNORE",
+      "signals_hit": [
+        "explicit_buying_intent",
+        "substantive_post",
+        "deep_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "AITA?",
+      "body_preview": "<!-- SC_OFF --> AITA Today I asked him if we could finally get our daughters room done. (A lot needs done, as we moved under a year ago) We agreed around 6 months that we wanna get this done by her birthday. We re coming up for that. He gave me a response I ve been hearing almost every week since shes 8 months: &quot;we ll see about getting around to it this weekend&quot; I responded (many times) with: &quot;yeah, we ll see&quot; After being let down a lot in general (by him and family), I hate ",
+      "author": "/u/Desperate_Process670",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tduszs/aita/",
+      "post_id": "t3_1tduszs",
+      "pub_time": "2026-05-15T12:25:06+00:00",
+      "scanned_at": "2026-05-15T15:57:13.255824+00:00"
+    },
+    {
+      "score": 35,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "explicit_buying_intent",
+        "short_post_mobile"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "I saw someone do tips for FTM, I\u2019m looking for 2 under 2 tips!",
+      "body_preview": "<!-- SC_OFF --> My first will be 15 months when baby is born in November, send me all the life hacks and helpful advice! I\u2019m so nervous! <!-- SC_ON --> submitted by /u/mindlessmuffin123 [link] [comments]",
+      "author": "/u/mindlessmuffin123",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdrihe/i_saw_someone_do_tips_for_ftm_im_looking_for_2/",
+      "post_id": "t3_1tdrihe",
+      "pub_time": "2026-05-15T09:49:34+00:00",
+      "scanned_at": "2026-05-15T15:57:13.262283+00:00"
+    },
+    {
+      "score": 31,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Having trouble with EBF baby drinking whole milk",
+      "body_preview": "<!-- SC_OFF --> What are you giving your previously breast-fed baby before bed if they\u2019re refusing whole milk and are no longer on breast milk? Trying to wean due to drop in supply, but almost 12m old isn\u2019t taking to whole milk well. Emphasis on looking to see what others are doing before bed to replace milk. <!-- SC_ON --> submitted by /u/sunchip93 [link] [comments]",
+      "author": "/u/sunchip93",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdzyxz/having_trouble_with_ebf_baby_drinking_whole_milk/",
+      "post_id": "t3_1tdzyxz",
+      "pub_time": "2026-05-15T15:38:01+00:00",
+      "scanned_at": "2026-05-15T15:57:13.268734+00:00"
+    },
+    {
+      "score": 31,
+      "category": "IGNORE",
+      "signals_hit": [
+        "explicit_buying_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "breastfeeding",
+      "title": "Non Dairy Snacks?",
+      "body_preview": "<!-- SC_OFF --> What are we doing for high protein snacks for kiddos with dairy intolerance? One of my boys seems very sensitive to dairy (definitely not CMPA, but he\u2019s still very uncomfortable). He seems to be able to tolerate dairy cooked into things, but cheese, yogurt, cottage cheese, etc\u2026 seem to cause him quite a bit of distress. If I cut out that stuff he\u2019s much less spitty and unsettled. Of course because that stuff is higher in protein, I\u2019m also now on the hunt for higher protein snacks",
+      "author": "/u/Odd_Rent283",
+      "url": "https://www.reddit.com/r/breastfeeding/comments/1tdxcf5/non_dairy_snacks/",
+      "post_id": "t3_1tdxcf5",
+      "pub_time": "2026-05-15T14:04:04+00:00",
+      "scanned_at": "2026-05-15T15:57:13.277569+00:00"
+    },
+    {
+      "score": 31,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Sleeping through the night expectation?",
+      "body_preview": "<!-- SC_OFF --> Now should I be expecting my 19 weeks baby to be sleeping through the night or is he still too young? He wakes up every 2h30m and I feed him thinking that he\u2019s hungry but he has done a couple of times where he slept four hours in a row and only woke up twice in the night. I did Ferber training this last week and it worked out great! I tried to do the training also for night wakings but I just couldn\u2019t, he kept on crying and I just fed him. I was also tired and didn\u2019t know how to ",
+      "author": "/u/lululama94",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdyqt1/sleeping_through_the_night_expectation/",
+      "post_id": "t3_1tdyqt1",
+      "pub_time": "2026-05-15T14:54:59+00:00",
+      "scanned_at": "2026-05-15T15:57:13.296390+00:00"
+    },
+    {
+      "score": 30,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "High preeclamspia risk - total freak out.",
+      "body_preview": "<!-- SC_OFF --> I just recieved all my results from 1st trimester scan. I m 13 weeks today. I m super scared because I m taking 150 mg of aspirin since ovulation and my results are still bad. I tried to talk to the doctor (not my doctor just the one that gave me the results) if aspirin in that case is enough since I take from the start. I have appointment with my OB on Tuesday. For now everyone keeps telling me I should continue aspirin but I feel like they should give me heparin. I also fave PA",
+      "author": "/u/AntonineKitty",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdzk8w/high_preeclamspia_risk_total_freak_out/",
+      "post_id": "t3_1tdzk8w",
+      "pub_time": "2026-05-15T15:23:37+00:00",
+      "scanned_at": "2026-05-15T15:57:13.217902+00:00"
+    },
+    {
+      "score": 30,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "competitor_mention",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Qualcuna ha avuto ciclo all\u2019inizio della gravidanza?",
+      "body_preview": "<!-- SC_OFF --> Ciao ragazze, sto vivendo una situazione un po\u2019 strana e vorrei capire se qualcuna ha avuto un\u2019esperienza simile. Ho cicli molto regolari, mediamente di 27 giorni. Il mese scorso ho avuto un rapporto non protetto in finestra fertile, ma senza eiaculazione interna. Successivamente per\u00f2 ho avuto il mio \u201cciclo\u201d, durato circa 3 giorni (io normalmente ho mestruazioni piuttosto brevi), anche se forse leggermente meno intenso e meno doloroso del solito. Ora per\u00f2 sono al 32\u00b0 giorno di ci",
+      "author": "/u/Beautiful-Dingo-1235",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdxfep/qualcuna_ha_avuto_ciclo_allinizio_della_gravidanza/",
+      "post_id": "t3_1tdxfep",
+      "pub_time": "2026-05-15T14:07:09+00:00",
+      "scanned_at": "2026-05-15T15:57:13.225935+00:00"
+    },
+    {
+      "score": 30,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "mild_intent",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Tummy tuck before pregnancy",
+      "body_preview": "<!-- SC_OFF --> Heyo! I had a FDL about 6 years ago due to major weight loss, I lost over 180 pounds with my gastric sleeve. I m now 6 weeks 4 days pregnant with my first successful IVF baby. My question is how are you relieving the pain? Everything feels so tight in my stomach right now, I can t have anything touching my stomach, I m walking around with everything sitting below my waist. If I have to wear pants I have to keep my hand on the waist band to stop so much pressure. Plz help LOL than",
+      "author": "/u/Blond3bunny",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdsiaz/tummy_tuck_before_pregnancy/",
+      "post_id": "t3_1tdsiaz",
+      "pub_time": "2026-05-15T10:41:42+00:00",
+      "scanned_at": "2026-05-15T15:57:13.231193+00:00"
+    },
+    {
+      "score": 29,
+      "category": "IGNORE",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "mild_intent",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "Schedule help",
+      "body_preview": "<!-- SC_OFF --> 9.5m old baby boy is on a two nap schedule 3/3/4 with previous wake ups around 7-730 and bedtime at 8pm. He sleeps about 80 minutes per nap so about 2.5h daytime sleep. Goes to sleep independently all naps and nighttime (sleep trained at 5m, wave method). He has been hitting some major milestones (crawling, teething, etc) and having early morning wakeups (530am\u2026). Not completing second nap after first sleep cycle (40m). Will rescue for additional ~40-60min. Do I need to cap naps ",
+      "author": "/u/Low-Presentation-500",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdyeix/schedule_help/",
+      "post_id": "t3_1tdyeix",
+      "pub_time": "2026-05-15T14:42:31+00:00",
+      "scanned_at": "2026-05-15T15:57:13.301653+00:00"
+    },
+    {
+      "score": 28,
+      "category": "IGNORE",
+      "signals_hit": [
+        "explicit_buying_intent",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Where are you buying your dates?",
+      "body_preview": "<!-- SC_OFF --> I did the 6 dates a day with my first and had a fairly smooth and quick labor/delivery. Who knows if that was why, but to me it\u2019s worth doing again. The problem now is that they seem so expensive! I usually get the bag of Joolies Medjool pit free dates but I go through 2 bags a week and they are like $8/bag. Maybe I\u2019m too much of a penny pincher, but curious if anyone has found them cheaper somewhere else. Or if I should be getting a different kind of date? <!-- SC_ON --> submitt",
+      "author": "/u/B1rdsTheW0rd",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdx14a/where_are_you_buying_your_dates/",
+      "post_id": "t3_1tdx14a",
+      "pub_time": "2026-05-15T13:52:32+00:00",
+      "scanned_at": "2026-05-15T15:57:13.226782+00:00"
+    },
+    {
+      "score": 28,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Spotting and worried",
+      "body_preview": "<!-- SC_OFF --> Hi, as the title says I have been spotting since week 5 began. I am currently 5w 4d. Spotting has been every day it ranges from a light pink to a brown, to this morning a red color. It is still light in nature but the red seems like fresh blood. My OB said to contact if it becomes heavy bleeding but the fact that it s every single day has me worried. Today is day 4 of spotting. I have light cramping and it s random, so a spot in the middle of the night, or early morning then noth",
+      "author": "/u/Bike-Far",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tds9dh/spotting_and_worried/",
+      "post_id": "t3_1tds9dh",
+      "pub_time": "2026-05-15T10:29:24+00:00",
+      "scanned_at": "2026-05-15T15:57:13.232682+00:00"
+    },
+    {
+      "score": 28,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Transitioning off of breast feeding",
+      "body_preview": "<!-- SC_OFF --> Exactly what the title says! I wanted to breastfeed for as long as possible to be honest but my LO will be a year old at the end of this month and her chomping my nipples is becoming an almost constant thing. Paired with the fact my production seems to be decreasing as she is less interested in my milk and more interested in solids, how do I start the transition? She has already tried and enjoys milk (I\u2019ve given her sips of lactose free milk) but as a FTM I feel so ignorant and I",
+      "author": "/u/Every-Key874",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdxorb/transitioning_off_of_breast_feeding/",
+      "post_id": "t3_1tdxorb",
+      "pub_time": "2026-05-15T14:16:20+00:00",
+      "scanned_at": "2026-05-15T15:57:13.246338+00:00"
+    },
+    {
+      "score": 28,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "breastfeeding_or_sleep_topic",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "My co-sleeping baby just spent his first night alone!",
+      "body_preview": "<!-- SC_OFF --> My boy is almost 1 and has been cosleeping with me since he was just a week or two old. We recently found out we\u2019re expecting #2 and I knew I couldn\u2019t keep the cosleeping up and needed to get him in his own room before baby got here. We tried a few weeks ago to sleep train to no avail and he quickly ended up back in bed with us. We started again this week after a couple days of some crying from him and anxiety on my side, he just put himself to bed and slept 12 hours in his own b",
+      "author": "/u/SouthernCancel6117",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdx31z/my_cosleeping_baby_just_spent_his_first_night/",
+      "post_id": "t3_1tdx31z",
+      "pub_time": "2026-05-15T13:54:32+00:00",
+      "scanned_at": "2026-05-15T15:57:13.249793+00:00"
+    },
+    {
+      "score": 28,
+      "category": "IGNORE",
+      "signals_hit": [
+        "frustrated_overwhelmed",
+        "substantive_post",
+        "evening_posting"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Baby slept 12 hours",
+      "body_preview": "<!-- SC_OFF --> I know this sounds like a brag and I should be grateful, but my 11 week old slept from 8pm to 8am and I feel\u2026concerned? She can usually get 4-6 hour stretches at night if we\u2019re lucky, but she\u2019s never stayed asleep this long. She managed a whole 9 hours last night and even that felt shocking. I fed her a couple of times throughout the 12 because I was concerned, and she basically sleep-ate. Important to note that she\u2019s awake now and acting/eating like her normal self, normal diape",
+      "author": "/u/generalraisinkane",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdpn3h/baby_slept_12_hours/",
+      "post_id": "t3_1tdpn3h",
+      "pub_time": "2026-05-15T08:03:25+00:00",
+      "scanned_at": "2026-05-15T15:57:13.264911+00:00"
+    },
+    {
+      "score": 26,
+      "category": "IGNORE",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "mild_intent",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Please help me get my boob loving child to sleep in the crib",
+      "body_preview": "<!-- SC_OFF --> My 10 month old has always been a horrible sleeper. In the early days he would sleep and nap in his crib in our room. I thought after my first horrible sleeper I was blessed with a good sleeper\u2026wrong. I was up until 4am last night. We co-sleep because that\u2019s the only way he was able to sleep since 4mo and I was dying. The crib is still in our room because we don\u2019t have another room for it to go in. EBF but eats throughout the day both milk and solids. For naps, if I move he immed",
+      "author": "/u/Goldieeloxx123",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdzyb1/please_help_me_get_my_boob_loving_child_to_sleep/",
+      "post_id": "t3_1tdzyb1",
+      "pub_time": "2026-05-15T15:37:24+00:00",
+      "scanned_at": "2026-05-15T15:57:13.241486+00:00"
+    },
+    {
+      "score": 26,
+      "category": "IGNORE",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "frustrated_overwhelmed",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "When to put baby in the nursery?",
+      "body_preview": "<!-- SC_OFF --> We just put baby in her own room a few nights ago. She\u2019s 4 weeks. I know guidelines suggest room sharing for 6 months but we all seem to sleep better this way. Anyone else transition to their own room this early? I feel like a bad parent and I do have anxiety not being in the same room\u2026 but I also don\u2019t sleep well in her room either. My husband and I do shifts and I can sleep when he\u2019s in charge but during my shifts I feel like I can\u2019t sleep either way. <!-- SC_ON --> submitted b",
+      "author": "/u/HumbleTrack2532",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdweg0/when_to_put_baby_in_the_nursery/",
+      "post_id": "t3_1tdweg0",
+      "pub_time": "2026-05-15T13:28:36+00:00",
+      "scanned_at": "2026-05-15T15:57:13.251592+00:00"
+    },
+    {
+      "score": 26,
+      "category": "IGNORE",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "frustrated_overwhelmed",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Exhausted",
+      "body_preview": "<!-- SC_OFF --> I am literally exhausted. I go to sleep at a reasonable time once toddler is asleep (we co sleep) and I wake up and feel fine, two hours later I hit a wall of exhaustion and I can barely move. Also being like this in work is hard! Is it because of my toddler or am I probably lacking in nutrients/Vitamins? I can t go on like this! <!-- SC_ON --> submitted by /u/rawraw34 [link] [comments]",
+      "author": "/u/rawraw34",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tds5p7/exhausted/",
+      "post_id": "t3_1tds5p7",
+      "pub_time": "2026-05-15T10:23:50+00:00",
+      "scanned_at": "2026-05-15T15:57:13.261977+00:00"
+    },
+    {
+      "score": 25,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "frustrated_overwhelmed",
+        "short_post_mobile"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "Sitting hurts 10m pp",
+      "body_preview": "<!-- SC_OFF --> Anyone else\u2019s tailbone still hurt 10 months post-labour? This is nuts. It hurts to sit, hurts to lie on back from the pressure to my tailbone. Donut pillow, pelvic physio, nothing is helping. Don\u2019t know what to do. <!-- SC_ON --> submitted by /u/swngnamiss1 [link] [comments]",
+      "author": "/u/swngnamiss1",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdwfn3/sitting_hurts_10m_pp/",
+      "post_id": "t3_1tdwfn3",
+      "pub_time": "2026-05-15T13:29:55+00:00",
+      "scanned_at": "2026-05-15T15:57:13.250984+00:00"
+    },
+    {
+      "score": 21,
+      "category": "IGNORE",
+      "signals_hit": [
+        "breastfeeding_or_sleep_topic",
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "When do you start the clock for wake windows??",
+      "body_preview": "<!-- SC_OFF --> We have recently made tweaks to our 6.5 month schedule due to early morning wake ups and wake windows extending. We are now on 2/2.5/2.5/3 and it seems to be working well. Bedtime is 7:30pm and she usually wakes around 6:45am, but we don\u2019t go and get her from her crib until 7am. During that time she will just lay quietly or babble to herself. Should we be counting the wake window from 7am when we open blinds and turn off the sound machine and she is actually fully alert? Or when ",
+      "author": "/u/Own_Aside5628",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdwj4u/when_do_you_start_the_clock_for_wake_windows/",
+      "post_id": "t3_1tdwj4u",
+      "pub_time": "2026-05-15T13:33:41+00:00",
+      "scanned_at": "2026-05-15T15:57:13.305663+00:00"
+    },
+    {
+      "score": 20,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Big baby?",
+      "body_preview": "<!-- SC_OFF --> I was told that my baby is measuring about 2 weeks ahead of schedule at 36 weeks via ultrasound. I don\u2019t want to be pressured into an induction, so I\u2019m wondering how accurate these readings have been for everyone else? <!-- SC_ON --> submitted by /u/Strange-Travel-3521 [link] [comments]",
+      "author": "/u/Strange-Travel-3521",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdy625/big_baby/",
+      "post_id": "t3_1tdy625",
+      "pub_time": "2026-05-15T14:33:57+00:00",
+      "scanned_at": "2026-05-15T15:57:13.220539+00:00"
+    },
+    {
+      "score": 20,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Crying all the time",
+      "body_preview": "<!-- SC_OFF --> Long story short i had emergency c section 5 days ago , it was traumatic and all i want to do is cry , like literally i look forward to the time my husband and newborn sleep so i can bawl my eyes out Any similar experience \ud83e\udd79\ud83d\udc94 <!-- SC_ON --> submitted by /u/Newbie__117 [link] [comments]",
+      "author": "/u/Newbie__117",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdunxc/crying_all_the_time/",
+      "post_id": "t3_1tdunxc",
+      "pub_time": "2026-05-15T12:19:18+00:00",
+      "scanned_at": "2026-05-15T15:57:13.228510+00:00"
+    },
+    {
+      "score": 20,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "substantive_post"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "How to decide which TOG swaddle to use in summer",
+      "body_preview": "<!-- SC_OFF --> Baby mostly sleeps in a bassinet next to my bedside but during the summer I like my AC set to about 67 degrees or I can\u2019t sleep, we also have the fan on low to circulate air. For reference, I live in New England and during the winter we turn the heat off and open a window to sleep. I prefer staying warm under the covers in fresh, cool air. I have 2 2.5 TOG sleep swaddles but even with the ambient temp dropping to 65-68 at night in the room, she feels a little overheated in her sw",
+      "author": "/u/FigurativeNews",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdt8ld/how_to_decide_which_tog_swaddle_to_use_in_summer/",
+      "post_id": "t3_1tdt8ld",
+      "pub_time": "2026-05-15T11:16:39+00:00",
+      "scanned_at": "2026-05-15T15:57:13.260410+00:00"
+    },
+    {
+      "score": 18,
+      "category": "IGNORE",
+      "signals_hit": [
+        "mild_intent",
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Elective C-section Raleigh, NC",
+      "body_preview": "<!-- SC_OFF --> Few months ago I moved to Raleigh so I could use your help :) Because of medical condition I have to schedule elective C-section. What are your experiences at Rex Hospital? Do you have a recommendations who to choose to safely deliver my baby but also is specialized in ultra low bikini incisions with minimal scarring? Thank youuu!! <!-- SC_ON --> submitted by /u/Better-Permission-26 [link] [comments]",
+      "author": "/u/Better-Permission-26",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdvm3b/elective_csection_raleigh_nc/",
+      "post_id": "t3_1tdvm3b",
+      "pub_time": "2026-05-15T12:58:04+00:00",
+      "scanned_at": "2026-05-15T15:57:13.228054+00:00"
+    },
+    {
+      "score": 15,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "short_post_mobile"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "TW! Late loss and next pregnancy birth guidance",
+      "body_preview": "submitted by /u/Turbulent_One_8015 [link] [comments]",
+      "author": "/u/Turbulent_One_8015",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdx7f9/tw_late_loss_and_next_pregnancy_birth_guidance/",
+      "post_id": "t3_1tdx7f9",
+      "pub_time": "2026-05-15T13:59:12+00:00",
+      "scanned_at": "2026-05-15T15:57:13.226101+00:00"
+    },
+    {
+      "score": 15,
+      "category": "IGNORE",
+      "signals_hit": [
+        "demographic_match",
+        "short_post_mobile"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "What strange pregnancy cravings that you had?",
+      "body_preview": "submitted by /u/La3ck [link] [comments]",
+      "author": "/u/La3ck",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdtzl7/what_strange_pregnancy_cravings_that_you_had/",
+      "post_id": "t3_1tdtzl7",
+      "pub_time": "2026-05-15T11:50:40+00:00",
+      "scanned_at": "2026-05-15T15:57:13.229154+00:00"
+    },
+    {
+      "score": 11,
+      "category": "IGNORE",
+      "signals_hit": [
+        "substantive_post",
+        "high_affinity_sub"
+      ],
+      "subreddit": "sleeptrain",
+      "title": "2nd night in baby is falling asleep independently, 3 wakes per night",
+      "body_preview": "<!-- SC_OFF --> 8 month old is falling asleep independently after a cuddle then into got awake and falls asleep no tears. Amazing! Still waking 3 times a night usually at 10, 1-2 and then 4-5ish feeding every time. Tips to reduce or eliminate these? <!-- SC_ON --> submitted by /u/Commercial_One5048 [link] [comments]",
+      "author": "/u/Commercial_One5048",
+      "url": "https://www.reddit.com/r/sleeptrain/comments/1tdrcji/2nd_night_in_baby_is_falling_asleep_independently/",
+      "post_id": "t3_1tdrcji",
+      "pub_time": "2026-05-15T09:40:05+00:00",
+      "scanned_at": "2026-05-15T15:57:13.320151+00:00"
+    },
+    {
+      "score": 8,
+      "category": "IGNORE",
+      "signals_hit": [
+        "substantive_post"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Do people still send out birth announcements?",
+      "body_preview": "<!-- SC_OFF --> Do people still send out mailed birth announcements? I know social media is common for this but I do feel like a mailed card might be a little more special. But is that a little ego centric? I mean babies are born every day and obviously our immediate families will know almost immediately. I could see some people raising an eyebrow at anything beyond a group text or a facebook post. Is a card too bougie? <!-- SC_ON --> submitted by /u/kokomo318 [link] [comments]",
+      "author": "/u/kokomo318",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdxwxw/do_people_still_send_out_birth_announcements/",
+      "post_id": "t3_1tdxwxw",
+      "pub_time": "2026-05-15T14:24:40+00:00",
+      "scanned_at": "2026-05-15T15:57:13.221247+00:00"
+    },
+    {
+      "score": 3,
+      "category": "IGNORE",
+      "signals_hit": [
+        "short_post_mobile"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "IVF",
+      "body_preview": "submitted by /u/Ok-Scholar3862 [link] [comments]",
+      "author": "/u/Ok-Scholar3862",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdzymj/ivf/",
+      "post_id": "t3_1tdzymj",
+      "pub_time": "2026-05-15T15:37:42+00:00",
+      "scanned_at": "2026-05-15T15:57:13.216554+00:00"
+    },
+    {
+      "score": 3,
+      "category": "IGNORE",
+      "signals_hit": [
+        "short_post_mobile"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "Accepting Job Offer at 21 Weeks",
+      "body_preview": "submitted by /u/ohhaykt [link] [comments]",
+      "author": "/u/ohhaykt",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdwns2/accepting_job_offer_at_21_weeks/",
+      "post_id": "t3_1tdwns2",
+      "pub_time": "2026-05-15T13:38:41+00:00",
+      "scanned_at": "2026-05-15T15:57:13.226926+00:00"
+    },
+    {
+      "score": 3,
+      "category": "IGNORE",
+      "signals_hit": [
+        "short_post_mobile"
+      ],
+      "subreddit": "BabyBumps",
+      "title": "when did you start to break out?",
+      "body_preview": "submitted by /u/LandscapeOwn8096 [link] [comments]",
+      "author": "/u/LandscapeOwn8096",
+      "url": "https://www.reddit.com/r/BabyBumps/comments/1tdthk0/when_did_you_start_to_break_out/",
+      "post_id": "t3_1tdthk0",
+      "pub_time": "2026-05-15T11:28:12+00:00",
+      "scanned_at": "2026-05-15T15:57:13.229305+00:00"
+    },
+    {
+      "score": 3,
+      "category": "IGNORE",
+      "signals_hit": [
+        "short_post_mobile"
+      ],
+      "subreddit": "beyondthebump",
+      "title": "The phase I say the most",
+      "body_preview": "<!-- SC_OFF --> Stop following meeeeee \ud83e\udee9\ud83d\ude2d\ud83d\ude02 <!-- SC_ON --> submitted by /u/CrowEquivalent [link] [comments]",
+      "author": "/u/CrowEquivalent",
+      "url": "https://www.reddit.com/r/beyondthebump/comments/1tdxr2i/the_phase_i_say_the_most/",
+      "post_id": "t3_1tdxr2i",
+      "pub_time": "2026-05-15T14:18:36+00:00",
+      "scanned_at": "2026-05-15T15:57:13.244260+00:00"
+    }
+  ]
+}

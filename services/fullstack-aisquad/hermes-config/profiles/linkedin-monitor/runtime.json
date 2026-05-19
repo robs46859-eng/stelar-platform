@@ -1,0 +1,11 @@
+{
+  "workerId": "linkedin-monitor",
+  "profile": "linkedin-monitor",
+  "name": "LinkedIn Monitor",
+  "role": "LinkedIn Career & Funding Signal Monitor",
+  "state": "idle",
+  "mission": "Monitor LinkedIn for career transitions, funding announcements, and work-life discussions relevant to Prepared Paige ICP or competitor tracking.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T15:04:19.137222Z",
+  "checkpoint": null
+}

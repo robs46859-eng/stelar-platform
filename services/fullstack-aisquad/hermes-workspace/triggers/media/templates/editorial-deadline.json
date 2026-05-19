@@ -1,0 +1,13 @@
+{
+  "type": "editorial_deadline",
+  "source": "cron",
+  "content": {
+    "deadline": "",
+    "piece_title": "",
+    "assigned_writer": "",
+    "channel": "",
+    "status": "outline | draft | editing | ready"
+  },
+  "channel": "",
+  "notes": ""
+}

@@ -1,0 +1,12 @@
+{
+  "type": "campaign_review",
+  "source": "engagement-writer",
+  "engagement": {
+    "drafts_count": 0,
+    "pending_review": [],
+    "platform_breakdown": {},
+    "compliance_status": "pending | approved | blocked"
+  },
+  "stakeholders": {},
+  "notes": "Engagement drafts ready for human and compliance review."
+}

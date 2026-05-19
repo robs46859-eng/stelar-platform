@@ -1,0 +1,1279 @@
+# Family Stability Companion (FSC)
+
+### Final Product Specification, Definitions, Architecture, and Implementation Plan
+
+
+---
+
+1. Product Definition
+
+Product Name
+
+Family Stability Companion (FSC)
+
+Product Category
+
+AI-assisted family operational support and caregiver stability platform.
+
+Core Purpose
+
+Reduce operational, emotional, logistical, and administrative burden for families supporting:
+
+aging caregivers
+
+disabled family members
+
+psychiatric complexity
+
+chronic illness
+
+geographically distributed family systems
+
+high-context family environments
+
+
+The system is designed around Gemma by Google models and Google-native infrastructure.
+
+
+---
+
+2. Product Philosophy
+
+Foundational Principles
+
+2.1 Human-Centered Support
+
+The system adapts to the family instead of requiring the family to adapt to the system.
+
+2.2 Low-Friction Adoption
+
+The system must function for users resistant to:
+
+technology
+
+change
+
+dashboards
+
+AI terminology
+
+new workflows
+
+
+2.3 Context Humility
+
+The system assumes incomplete understanding and avoids false certainty.
+
+2.4 Non-Coercion
+
+The system may support but never:
+
+manipulate
+
+guilt
+
+pressure
+
+diagnose
+
+control
+
+emotionally bind users
+
+
+2.5 Dynamic Role Modeling
+
+Caregiver status is never fixed to a person identity.
+
+Caregiving is modeled as:
+
+temporary
+
+contextual
+
+task-specific
+
+revalidated over time
+
+
+2.6 Sealed Sensitive Context
+
+Psychiatric-related context is isolated into a sealed response-calibration system used only to improve safety and response scoring.
+
+
+---
+
+3. Product Scope
+
+The System IS
+
+operational family memory
+
+caregiver support infrastructure
+
+contextual planning engine
+
+longitudinal support system
+
+quality-of-life optimizer
+
+communication simplifier
+
+event and logistics coordinator
+
+drift-aware AI environment
+
+
+The System IS NOT
+
+therapist
+
+psychiatrist
+
+emergency authority
+
+medical decision maker
+
+autonomous caregiver
+
+surveillance platform
+
+social scoring system
+
+
+
+---
+
+4. Core System Components
+
+
+---
+
+4.1 Family Intake Engine
+
+Purpose
+
+Convert years of family operational context into structured memory.
+
+Functions
+
+conversational intake
+
+structured intake forms
+
+relationship mapping
+
+conflict pattern capture
+
+mobility/accessibility profiling
+
+communication preference capture
+
+financial stress mapping
+
+family event history
+
+support preference mapping
+
+consent mapping
+
+
+Output
+
+Structured Family Operational Graph.
+
+
+---
+
+4.2 Operational Memory Graph
+
+Purpose
+
+Persistent contextual memory layer.
+
+Stores
+
+verified facts
+
+routines
+
+relationship dynamics
+
+role assignments
+
+support patterns
+
+event histories
+
+travel behaviors
+
+caregiver transitions
+
+logistical constraints
+
+
+Memory Rules
+
+Every memory object includes:
+
+source
+
+confidence
+
+expiration/review date
+
+consent scope
+
+visibility scope
+
+validation status
+
+
+
+---
+
+4.3 Dynamic Role Engine
+
+Purpose
+
+Model caregiving as fluid operational responsibility.
+
+Principles
+
+Caregiver ≠ permanent identity.
+
+Caregiver = temporary role assignment.
+
+Tracks
+
+active support roles
+
+temporary responsibilities
+
+availability windows
+
+burnout transitions
+
+authority scopes
+
+role reassignment events
+
+
+
+---
+
+4.4 Family Support Agent
+
+Purpose
+
+Primary assistance layer.
+
+Functions
+
+reminders
+
+summaries
+
+communication drafting
+
+planning assistance
+
+task coordination
+
+logistics support
+
+event preparation
+
+family update generation
+
+
+Interfaces
+
+SMS
+
+Gmail
+
+Google Calendar
+
+lightweight dashboard
+
+printable reports
+
+
+
+---
+
+4.5 Background Routine Learning Worker
+
+Purpose
+
+Learn operational family patterns.
+
+Learns
+
+caregiver fatigue timing
+
+transportation bottlenecks
+
+communication rhythms
+
+event overload patterns
+
+travel timing
+
+grocery/pharmacy cycles
+
+holiday stress
+
+support availability
+
+social isolation periods
+
+
+Outputs
+
+Quiet low-friction assistance suggestions.
+
+
+---
+
+4.6 Quality of Life Monitor
+
+Purpose
+
+Measure whether the system is actually improving daily life.
+
+Tracks
+
+caregiver burden reduction
+
+scheduling friction
+
+missed-task reduction
+
+communication quality
+
+event recovery timing
+
+family contact continuity
+
+support responsiveness
+
+overload frequency
+
+
+Important Constraint
+
+No psychiatric scoring.
+
+
+---
+
+4.7 Digital Twin Layer
+
+Purpose
+
+Model the operational state of the support ecosystem.
+
+Inputs
+
+routines
+
+caregiver data
+
+QoL metrics
+
+logistical patterns
+
+event density
+
+support availability
+
+Arkham red-team findings
+
+
+Does NOT Model
+
+The brother as a predictive psychiatric object.
+
+Role
+
+The digital twin models:
+
+support systems
+
+workflows
+
+burden flow
+
+environmental strain
+
+operational resilience
+
+
+
+---
+
+4.8 Sealed Response Calibration Dataset
+
+Purpose
+
+Improve safe response behavior in psychiatric-context communication.
+
+Isolation Rules
+
+This dataset:
+
+never feeds household scoring
+
+never feeds prediction
+
+never feeds stability calculations
+
+never feeds planning optimization
+
+
+Allowed Uses
+
+response scoring
+
+safety evaluation
+
+drift testing
+
+red-team calibration
+
+
+
+---
+
+4.9 Safety Auditor
+
+Purpose
+
+Prevent harmful AI behavior.
+
+Blocks
+
+coercion
+
+manipulation
+
+fake certainty
+
+diagnosis
+
+guilt framing
+
+emotional dependency
+
+hallucinated memories
+
+unsafe escalation
+
+privacy overreach
+
+
+Requires
+
+uncertainty acknowledgment
+
+consent checking
+
+human escalation paths
+
+
+
+---
+
+4.10 Stability Forecasting Engine
+
+Purpose
+
+Forecast operational strain windows.
+
+Inputs
+
+schedules
+
+routines
+
+weather
+
+appointments
+
+transportation
+
+financial timing
+
+caregiver load
+
+event density
+
+
+Outputs
+
+support-needed periods
+
+lighter scheduling suggestions
+
+planning recommendations
+
+
+
+---
+
+4.11 Family Connection Layer
+
+Purpose
+
+Preserve human connection safely.
+
+Handles
+
+birthdays
+
+holidays
+
+reunions
+
+vacations
+
+anniversaries
+
+grief-sensitive dates
+
+loved-one contact continuity
+
+
+Goal
+
+Support connection without creating obligation pressure.
+
+
+---
+
+4.12 Vacation & Event Coordination System
+
+Purpose
+
+Reduce travel/event stress.
+
+Functions
+
+accessibility-aware planning
+
+recovery-day spacing
+
+travel timing
+
+pharmacy backup planning
+
+route optimization
+
+event load balancing
+
+
+
+---
+
+4.13 Resource Discovery Engine
+
+Purpose
+
+Find practical support systems.
+
+Searches
+
+caregiver support
+
+transportation programs
+
+disability services
+
+local aid
+
+food programs
+
+respite care
+
+grants
+
+support groups
+
+
+
+---
+
+4.14 Human Escalation Layer
+
+Purpose
+
+Route responsibility to humans when necessary.
+
+Escalation Targets
+
+family
+
+clinicians
+
+trusted contacts
+
+crisis plans
+
+988
+
+emergency services
+
+
+Constraint
+
+The AI never acts as emergency authority.
+
+
+---
+
+4.15 Arkham Prison Red-Team Attachment
+
+Purpose
+
+Portable adversarial testing system.
+
+Tests
+
+coercion resistance
+
+false authority
+
+data trade temptation
+
+dependency formation
+
+memory poisoning
+
+emotional manipulation
+
+policy erosion
+
+hallucinated certainty
+
+
+Architecture
+
+Separate attachable module.
+
+Never tests on live families.
+
+
+---
+
+5. Technical Architecture
+
+
+---
+
+5.1 Infrastructure Stack
+
+Cloud
+
+Google Cloud Run
+
+Cloud SQL (Postgres)
+
+Cloud Storage
+
+Pub/Sub
+
+Cloud Scheduler
+
+Secret Manager
+
+
+AI
+
+Gemma 4 model family
+
+Vertex AI or self-hosted Gemma deployment
+
+
+APIs
+
+Gmail API
+
+Google Calendar API
+
+Google Maps Platform
+
+Google Forms API
+
+
+
+---
+
+5.2 Data Architecture
+
+Structured Storage
+
+Postgres:
+
+families
+
+people
+
+roles
+
+role_assignments
+
+memory_facts
+
+routines
+
+appointments
+
+events
+
+vacations
+
+caregiver_load
+
+qol_metrics
+
+digital_twin_states
+
+safety_reviews
+
+escalation_events
+
+
+Vector Storage
+
+pgvector:
+
+intake embeddings
+
+historical summaries
+
+relationship patterns
+
+communication context
+
+support patterns
+
+
+Artifact Storage
+
+Cloud Storage:
+
+reports
+
+exports
+
+audit snapshots
+
+red-team artifacts
+
+
+
+---
+
+5.3 Worker Architecture
+
+Async Workers
+
+Cloud Scheduler → Pub/Sub → Cloud Run Jobs
+
+Workers
+
+intake parser
+
+routine mapper
+
+QoL monitor
+
+event planner
+
+caregiver load analyzer
+
+stability forecaster
+
+drift watcher
+
+memory validator
+
+resource finder
+
+
+
+---
+
+5.4 Agent Architecture
+
+Agent	Role
+
+Intake Agent	Parse family context
+Support Agent	Generate support actions
+Tone Agent	Simplify communication
+Logistics Agent	Travel/scheduling optimization
+Relationship Agent	Contact continuity
+Resource Agent	Support discovery
+Safety Auditor	Harm prevention
+Drift Watcher	Behavioral stability
+Memory Validator	Truth maintenance
+
+
+
+---
+
+6. Data Governance
+
+Consent Rules
+
+All data tagged by:
+
+visibility
+
+retention
+
+sharing scope
+
+expiration
+
+sensitivity
+
+review requirements
+
+
+Protected Classes
+
+Psychiatric-context data isolated by design.
+
+
+---
+
+7. Safety Definitions
+
+Allowed
+
+reminders
+
+summaries
+
+planning help
+
+support suggestions
+
+event coordination
+
+crisis-plan retrieval
+
+
+Prohibited
+
+diagnosis
+
+psychiatric prediction
+
+emotional coercion
+
+forced optimization
+
+autonomous intervention
+
+manipulation
+
+hidden surveillance
+
+
+
+---
+
+8. Quality-of-Life Scoring
+
+Internal-only operational metric.
+
+Measures
+
+reduced burden
+
+fewer missed tasks
+
+smoother events
+
+reduced overload
+
+improved support continuity
+
+
+Never Measures
+
+personal worth
+
+psychiatric stability
+
+compliance
+
+emotional obedience
+
+
+
+---
+
+9. Implementation Plan
+
+
+---
+
+Phase 0 — Foundation Definition & Risk Architecture
+
+Objectives
+
+Define:
+
+consent architecture
+
+data boundaries
+
+sealed dataset rules
+
+safety policies
+
+escalation boundaries
+
+infrastructure inventory
+
+secrets management
+
+deployment topology
+
+logging restrictions
+
+retention policies
+
+crisis handling policies
+
+
+Deliverables
+
+architecture specification
+
+governance specification
+
+consent matrix
+
+data classification matrix
+
+sealed-dataset protocol
+
+threat model
+
+drift-testing specification
+
+QoL metric specification
+
+
+
+---
+
+Phase 1 — Core Infrastructure
+
+Build
+
+Cloud SQL
+
+Pub/Sub
+
+Cloud Run services
+
+Secret Manager
+
+authentication
+
+role engine
+
+intake API
+
+memory graph
+
+audit logging
+
+
+Deliverables
+
+deployable backend
+
+encrypted storage
+
+baseline APIs
+
+family graph schema
+
+
+
+---
+
+Phase 2 — Intake & Operational Memory
+
+Build
+
+intake workflows
+
+family graph generation
+
+memory validation
+
+role-transition engine
+
+consent enforcement
+
+
+Deliverables
+
+operational memory system
+
+role-flow system
+
+memory review process
+
+
+
+---
+
+Phase 3 — Family Support System
+
+Build
+
+SMS/Gmail support layer
+
+reminder system
+
+weekly briefs
+
+logistics assistance
+
+event coordination
+
+low-friction communication workflows
+
+
+Deliverables
+
+usable caregiver support environment
+
+
+
+---
+
+Phase 4 — Background Learning & QoL Monitoring
+
+Build
+
+routine workers
+
+QoL metrics
+
+caregiver-load monitoring
+
+stability forecasting
+
+family connection engine
+
+vacation/reunion planning
+
+
+Deliverables
+
+adaptive support behaviors
+
+QoL dashboards
+
+
+
+---
+
+Phase 5 — Safety & Drift Systems
+
+Build
+
+Safety Auditor
+
+Drift Watcher
+
+memory poisoning detection
+
+hallucination checks
+
+coercion checks
+
+uncertainty enforcement
+
+
+Deliverables
+
+hardened production safety layer
+
+
+
+---
+
+Phase 6 — Digital Twin Layer
+
+Build
+
+family operational twin
+
+burden-flow simulation
+
+planning simulation
+
+event stress simulation
+
+resource balancing
+
+
+Deliverables
+
+support optimization twin
+
+operational forecasting
+
+
+
+---
+
+Phase 7 — Arkham Prison Integration
+
+Build
+
+synthetic family twins
+
+warden agents
+
+coercion environments
+
+response scoring
+
+red-team pipelines
+
+deployment gating
+
+
+Deliverables
+
+portable adversarial testing framework
+
+
+
+---
+
+Phase 8 — Production Hardening
+
+Build
+
+monitoring
+
+backup/recovery
+
+scaling
+
+operator tooling
+
+reporting
+
+policy enforcement
+
+deployment automation
+
+
+Deliverables
+
+production-ready deployment
+
+
+
+---
+
+10. Closeout Documentation
+
+Final Documentation Package
+
+Technical
+
+architecture diagrams
+
+deployment topology
+
+infrastructure manifests
+
+API specifications
+
+schema definitions
+
+worker definitions
+
+model routing policies
+
+
+Governance
+
+consent policy
+
+data classification matrix
+
+retention policy
+
+escalation policy
+
+red-team governance
+
+QoL policy
+
+psychiatric-data isolation policy
+
+
+Operations
+
+onboarding guide
+
+caregiver guide
+
+operator handbook
+
+support procedures
+
+recovery procedures
+
+incident response
+
+
+Safety
+
+drift-testing reports
+
+hallucination testing
+
+coercion testing
+
+escalation validation
+
+model rollback procedures
+
+
+Product
+
+positioning brief
+
+feature definitions
+
+workflow diagrams
+
+UX philosophy
+
+accessibility standards
+
+
+
+---
+
+Final System Definition
+
+Family Stability Companion is a longitudinal, consent-aware, low-friction AI support infrastructure designed to improve caregiver quality of life through contextual operational memory, dynamic role modeling, adaptive support planning, and hardened safety systems while preserving human autonomy, uncertainty, and dignity.

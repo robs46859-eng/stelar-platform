@@ -1,0 +1,13 @@
+{
+  "type": "performance_review",
+  "source": "manual",
+  "content": {
+    "piece_title": "",
+    "channel": "",
+    "metrics": {},
+    "period": "7d | 30d | 90d",
+    "comparison": ""
+  },
+  "channel": "",
+  "notes": ""
+}

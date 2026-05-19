@@ -1,0 +1,15 @@
+{
+  "type": "follow_up_due",
+  "source": "manual",
+  "customer": {
+    "company": "",
+    "contact": "",
+    "email": ""
+  },
+  "project": {
+    "title": "",
+    "stage": ""
+  },
+  "reason": "check-in",
+  "notes": "Follow-up context."
+}

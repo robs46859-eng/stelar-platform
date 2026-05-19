@@ -1,0 +1,11 @@
+{
+  "workerId": "maintainer",
+  "profile": "maintainer",
+  "name": "Maintainer",
+  "role": "Upstream Dependency / Patch Hygiene",
+  "state": "idle",
+  "mission": "Keep local forks and upstream dependencies healthy without losing local patches or dirty-worktree context.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T02:52:43Z",
+  "checkpoint": null
+}

@@ -1,0 +1,15 @@
+{
+  "type": "optimization_experiment",
+  "source": "manual",
+  "feature": {
+    "area_to_optimize": "",
+    "current_metric": "",
+    "target_metric": "",
+    "experiment_type": "ab_test | multivariate | cohort",
+    "hypothesis": "",
+    "traffic_split": ""
+  },
+  "product": {},
+  "stakeholders": {},
+  "notes": ""
+}

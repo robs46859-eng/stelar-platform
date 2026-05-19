@@ -1,0 +1,30 @@
+version: 1
+greenlight: Publishing, platform changes, ad spend, external posts, and account modifications require human approval.
+triggers:
+  content_idea:
+  - content-researcher
+  - content-planner
+  - media-orchestrator
+  trend_alert:
+  - content-researcher
+  - content-planner
+  production_request:
+  - content-producer
+  - visual-designer
+  editorial_deadline:
+  - content-writer
+  - content-planner
+  - distribution-manager
+  publish_ready:
+  - distribution-manager
+  - media-orchestrator
+  - analytics-reviewer
+  performance_review:
+  - analytics-reviewer
+  - content-planner
+  channel_update:
+  - distribution-manager
+  - content-producer
+  content_audit:
+  - analytics-reviewer
+  - content-researcher

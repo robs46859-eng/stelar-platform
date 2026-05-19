@@ -1,0 +1,14 @@
+{
+  "type": "market_opportunity",
+  "source": "manual",
+  "feature": {
+    "opportunity": "",
+    "market_segment": "",
+    "estimated_size": "",
+    "time_to_window": "",
+    "competitive_landscape": ""
+  },
+  "product": {},
+  "stakeholders": {},
+  "notes": ""
+}

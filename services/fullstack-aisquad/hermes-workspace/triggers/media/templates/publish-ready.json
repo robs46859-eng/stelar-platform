@@ -1,0 +1,14 @@
+{
+  "type": "publish_ready",
+  "source": "manual",
+  "content": {
+    "title": "",
+    "body_path": "",
+    "assets": [],
+    "seo_metadata": {},
+    "target_channels": [],
+    "scheduled_date": ""
+  },
+  "channel": "",
+  "notes": ""
+}

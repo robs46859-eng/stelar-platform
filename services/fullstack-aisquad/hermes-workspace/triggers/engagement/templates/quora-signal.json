@@ -1,0 +1,15 @@
+{
+  "type": "quora_signal",
+  "source": "quora-monitor",
+  "signal": {
+    "question_url": "",
+    "question_text": "",
+    "author": "",
+    "topic": "",
+    "answer_count": 0,
+    "matched_patterns": [],
+    "score": 0
+  },
+  "stakeholders": {},
+  "notes": "Quora high-intent parenting question detected."
+}

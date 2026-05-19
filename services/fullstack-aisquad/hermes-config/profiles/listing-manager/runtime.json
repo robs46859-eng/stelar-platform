@@ -1,0 +1,11 @@
+{
+  "workerId": "listing-manager",
+  "profile": "listing-manager",
+  "name": "Listing Manager",
+  "role": "Listings / Catalog / Marketplace Agent",
+  "state": "idle",
+  "mission": "Draft and maintain service listings for AI widgets, automations, integrations, and consulting without publishing claims or posts without approval.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T10:55:17Z",
+  "checkpoint": null
+}

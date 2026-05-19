@@ -1,0 +1,17 @@
+{
+  "type": "user_feedback",
+  "source": "customer",
+  "feature": {
+    "affected_area": "",
+    "feedback_type": "bug | enhancement | usability | missing_feature",
+    "user_quote": "",
+    "frequency": "one-off | recurring | widespread",
+    "severity": "low | medium | high | critical"
+  },
+  "product": {
+    "version": "",
+    "module": ""
+  },
+  "stakeholders": {},
+  "notes": ""
+}

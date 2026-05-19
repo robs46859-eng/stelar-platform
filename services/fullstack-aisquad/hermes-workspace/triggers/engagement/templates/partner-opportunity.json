@@ -1,0 +1,21 @@
+{
+  "type": "partner_opportunity",
+  "source": "partnership-scout",
+  "partner": {
+    "name": "",
+    "type": "IBCLC | doula | influencer | complementary",
+    "platform": "Instagram | TikTok | Podcast | YouTube",
+    "handle": "",
+    "audience_size": 0,
+    "engagement_rate": 0.0,
+    "content_alignment": "high | medium | low",
+    "proposed_collaboration": ""
+  },
+  "outreach_draft": {
+    "channel": "DM | email | comment",
+    "subject": "",
+    "body": ""
+  },
+  "stakeholders": {},
+  "notes": "Partnership opportunity identified, outreach draft ready for review."
+}

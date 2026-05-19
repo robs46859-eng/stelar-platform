@@ -1,0 +1,14 @@
+{
+  "type": "new_feature",
+  "source": "manual",
+  "feature": {
+    "name": "",
+    "description": "",
+    "target_persona": "",
+    "problem_statement": "",
+    "priority": "p0 | p1 | p2 | p3",
+    "related_issues": []
+  },
+  "stakeholders": {},
+  "notes": ""
+}

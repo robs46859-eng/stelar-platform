@@ -1,0 +1,15 @@
+{
+  "type": "instagram_signal",
+  "source": "instagram-monitor",
+  "signal": {
+    "post_url": "",
+    "author": "",
+    "content_type": "reel",
+    "comment_text": "",
+    "hashtags": [],
+    "matched_patterns": [],
+    "score": 0
+  },
+  "stakeholders": {},
+  "notes": "Instagram buying signal detected."
+}

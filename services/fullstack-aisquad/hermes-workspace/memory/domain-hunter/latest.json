@@ -1,0 +1,1203 @@
+{
+  "date": "2026-05-19",
+  "total_domains": 23559,
+  "available": 50,
+  "results": [
+    {
+      "domain": "praito.com",
+      "availability": "available",
+      "score": 50,
+      "service_score": 32,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 15,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$10/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "clailo.com",
+      "availability": "available",
+      "score": 50,
+      "service_score": 32,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 15,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$10/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "fraixa.com",
+      "availability": "available",
+      "score": 50,
+      "service_score": 32,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 15,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$10/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraizo.com",
+      "availability": "available",
+      "score": 50,
+      "service_score": 32,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 15,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$10/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraimo.com",
+      "availability": "available",
+      "score": 50,
+      "service_score": 32,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 15,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$10/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "praito.ai",
+      "availability": "available",
+      "score": 48,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 13,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$80/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "praito.io",
+      "availability": "available",
+      "score": 45,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 10,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$45/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "clailo.ai",
+      "availability": "available",
+      "score": 48,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 13,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$80/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "clailo.io",
+      "availability": "available",
+      "score": 45,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 10,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$45/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "fraixa.ai",
+      "availability": "available",
+      "score": 48,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 13,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$80/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "fraixa.io",
+      "availability": "available",
+      "score": 45,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 10,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$45/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraizo.ai",
+      "availability": "available",
+      "score": 48,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 13,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$80/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraizo.io",
+      "availability": "available",
+      "score": 45,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 10,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$45/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "traivo.ai",
+      "availability": "available",
+      "score": 48,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 13,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$80/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "traivo.io",
+      "availability": "available",
+      "score": 45,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 10,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$45/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "braizo.ai",
+      "availability": "available",
+      "score": 48,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 13,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$80/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "braizo.io",
+      "availability": "available",
+      "score": 45,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 10,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$45/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "slaido.ai",
+      "availability": "available",
+      "score": 48,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 13,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$80/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "slaido.io",
+      "availability": "available",
+      "score": 45,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 10,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$45/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraimo.ai",
+      "availability": "available",
+      "score": 48,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 13,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$80/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraimo.io",
+      "availability": "available",
+      "score": 45,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 10,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$45/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "plaino.io",
+      "availability": "available",
+      "score": 45,
+      "service_score": 31,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 10,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$45/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "praito.co",
+      "availability": "available",
+      "score": 46,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 11,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$28/yr",
+      "registrar": "GoDaddy",
+      "wayback_history": false
+    },
+    {
+      "domain": "praito.app",
+      "availability": "available",
+      "score": 43,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 8,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$20/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "clailo.co",
+      "availability": "available",
+      "score": 46,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 11,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$28/yr",
+      "registrar": "GoDaddy",
+      "wayback_history": false
+    },
+    {
+      "domain": "clailo.app",
+      "availability": "available",
+      "score": 43,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 8,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$20/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "fraixa.co",
+      "availability": "available",
+      "score": 46,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 11,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$28/yr",
+      "registrar": "GoDaddy",
+      "wayback_history": false
+    },
+    {
+      "domain": "fraixa.app",
+      "availability": "available",
+      "score": 43,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 8,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$20/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraizo.co",
+      "availability": "available",
+      "score": 46,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 11,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$28/yr",
+      "registrar": "GoDaddy",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraizo.app",
+      "availability": "available",
+      "score": 43,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 8,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$20/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "braizo.co",
+      "availability": "available",
+      "score": 46,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 11,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$28/yr",
+      "registrar": "GoDaddy",
+      "wayback_history": false
+    },
+    {
+      "domain": "braizo.app",
+      "availability": "available",
+      "score": 43,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 8,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$20/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "slaido.co",
+      "availability": "available",
+      "score": 46,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 11,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$28/yr",
+      "registrar": "GoDaddy",
+      "wayback_history": false
+    },
+    {
+      "domain": "slaido.app",
+      "availability": "available",
+      "score": 43,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 8,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$20/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraimo.co",
+      "availability": "available",
+      "score": 46,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 11,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$28/yr",
+      "registrar": "GoDaddy",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraimo.app",
+      "availability": "available",
+      "score": 43,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 8,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$20/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "plaino.app",
+      "availability": "available",
+      "score": 43,
+      "service_score": 30,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 8,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$20/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "praito.dev",
+      "availability": "available",
+      "score": 42,
+      "service_score": 29,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 7,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$14/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "clailo.dev",
+      "availability": "available",
+      "score": 42,
+      "service_score": 29,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 7,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$14/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "fraixa.dev",
+      "availability": "available",
+      "score": 42,
+      "service_score": 29,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 7,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$14/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraizo.dev",
+      "availability": "available",
+      "score": 42,
+      "service_score": 29,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 7,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$14/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "traivo.dev",
+      "availability": "available",
+      "score": 42,
+      "service_score": 29,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 7,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$14/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "braizo.dev",
+      "availability": "available",
+      "score": 42,
+      "service_score": 29,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 7,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$14/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "slaido.dev",
+      "availability": "available",
+      "score": 42,
+      "service_score": 29,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 7,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$14/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "wraimo.dev",
+      "availability": "available",
+      "score": 42,
+      "service_score": 29,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 7,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$14/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "plaino.dev",
+      "availability": "available",
+      "score": 42,
+      "service_score": 29,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 7,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ai"
+        ],
+        "service_readiness": 6
+      },
+      "price": "~$14/yr",
+      "registrar": "Google Domains",
+      "wayback_history": false
+    },
+    {
+      "domain": "prorze.com",
+      "availability": "available",
+      "score": 39,
+      "service_score": 22,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 15,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [],
+        "service_readiness": 3
+      },
+      "price": "~$10/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "grarto.com",
+      "availability": "available",
+      "score": 43,
+      "service_score": 21,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 15,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ar"
+        ],
+        "service_readiness": 3
+      },
+      "price": "~$10/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "knarmo.com",
+      "availability": "available",
+      "score": 43,
+      "service_score": 21,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 15,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [
+          "ar"
+        ],
+        "service_readiness": 3
+      },
+      "price": "~$10/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    },
+    {
+      "domain": "prorze.ai",
+      "availability": "available",
+      "score": 37,
+      "service_score": 21,
+      "verdict": "potential",
+      "factors": {
+        "tld_pts": 13,
+        "length": 6,
+        "clean": true,
+        "no_digits": true,
+        "dictionary": false,
+        "has_history": false,
+        "commercial_keywords": [],
+        "b2b_signals": [],
+        "trend_words": [],
+        "service_readiness": 3
+      },
+      "price": "~$80/yr",
+      "registrar": "Namecheap",
+      "wayback_history": false
+    }
+  ]
+}

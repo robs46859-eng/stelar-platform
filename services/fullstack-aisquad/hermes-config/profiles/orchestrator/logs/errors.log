@@ -1,0 +1,64 @@
+2026-05-16 18:33:01,524 ERROR asyncio: unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-1' coro=<Application.run_async() done, defined at /home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py:620> exception=OSError(5, 'Input/output error')>
+Traceback (most recent call last):
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 641, in run_until_complete
+    self.run_forever()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 608, in run_forever
+    self._run_once()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py", line 1936, in _run_once
+    handle._run()
+  File "/home/azureuser/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 1158, in _on_background_task_done
+    def _on_background_task_done(self, task: asyncio.Task[None]) -> None:
+    
+  File "/home/azureuser/.hermes/hermes-agent/cli.py", line 13089, in _signal_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 746, in _run_async
+    result = await f
+             ^^^^^^^
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 751, in _run_async
+    self._redraw(render_as_done=True)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 543, in _redraw
+    self.context.copy().run(run_in_context)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 524, in run_in_context
+    self.renderer.render(self, self.layout, is_done=render_as_done)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/renderer.py", line 726, in render
+    output.flush()
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/output/vt100.py", line 706, in flush
+    flush_stdout(self.stdout, data)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/output/flush_stdout.py", line 37, in flush_stdout
+    stdout.flush()
+OSError: [Errno 5] Input/output error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 886, in run_async
+    return await _run_async(f)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/application/application.py", line 756, in _run_async
+    self.renderer.reset()
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/renderer.py", line 429, in reset
+    self.output.flush()
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/output/vt100.py", line 706, in flush
+    flush_stdout(self.stdout, data)
+  File "/home/azureuser/.hermes/hermes-agent/venv/lib/python3.11/site-packages/prompt_toolkit/output/flush_stdout.py", line 37, in flush_stdout
+    stdout.flush()
+OSError: [Errno 5] Input/output error

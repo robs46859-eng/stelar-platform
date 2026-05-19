@@ -1,0 +1,25 @@
+{
+  "type": "domain_flip",
+  "source": "domain-hunter-pipeline",
+  "offer": {
+    "domain": "",
+    "tld": "",
+    "score": 0,
+    "service_score": 0,
+    "estimated_value": "",
+    "acquisition_cost": "",
+    "target_buyer_profile": "domain investor / startup",
+    "vertical": "",
+    "listing_channels": [
+      "Sedo",
+      "Afternic",
+      "Dan.com",
+      "Namecheap Marketplace"
+    ],
+    "brand_materials_path": "",
+    "verdict": "",
+    "registrar": ""
+  },
+  "lead": {},
+  "notes": "Discovered by domain hunter pipeline. Verdict indicates flip potential."
+}

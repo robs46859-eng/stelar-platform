@@ -1,0 +1,11 @@
+{
+  "workerId": "solution-builder",
+  "profile": "solution-builder",
+  "name": "Solution Builder",
+  "role": "AI Widget / Automation / Integration Builder",
+  "state": "idle",
+  "mission": "Create scoped demos, implementation plans, widgets, automations, and integration artifacts that support sales and delivery.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T10:55:17Z",
+  "checkpoint": null
+}

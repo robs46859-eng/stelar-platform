@@ -1,0 +1,11 @@
+{
+  "workerId": "strategist",
+  "profile": "strategist",
+  "name": "Strategist",
+  "role": "Wedges / Bets / Kill Criteria",
+  "state": "idle",
+  "mission": "Turn ambiguity into crisp wedges, bets, constraints, and kill criteria without over-planning.",
+  "model": "openrouter/inclusionai/ring-2.6-1t:free",
+  "updatedAt": "2026-05-15T02:52:43Z",
+  "checkpoint": null
+}

@@ -1,0 +1,24 @@
+{
+  "type": "funnel_flow_active",
+  "source": "funnel-manager",
+  "funnel": {
+    "sequence_type": "welcome | nurture | abandoned-cart | post-purchase | broadcast",
+    "lead_source": "",
+    "product": "",
+    "subscriber_email": "",
+    "draft_email": {
+      "subject": "",
+      "preview": "",
+      "body": "",
+      "cta": ""
+    },
+    "metrics": {
+      "list_size": 0,
+      "open_rate": 0.0,
+      "click_rate": 0.0,
+      "revenue_per_subscriber": 0.0
+    }
+  },
+  "stakeholders": {},
+  "notes": "Funnel sequence requires human approval before sending."
+}

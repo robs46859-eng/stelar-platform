@@ -1,0 +1,20 @@
+{
+  "workerId": "family-qa-smoke",
+  "state": "blocked",
+  "checkpointStatus": "blocked",
+  "projectRoot": "/home/azureuser/family-companion",
+  "lastSummary": "Dispatched task: Trigger payload:\n{\n  \"type\": \"ship_merger\",\n  \"source\": \"manual\",\n  \"project\": {\n    \"name\": \"family-companion merger\",\n    \"root\": \"/home/azureuser/family-companion\",\n    \"backend",
+  "phase": "dispatched",
+  "currentTask": "Trigger payload:\n{\n  \"type\": \"ship_merger\",\n  \"source\": \"manual\",\n  \"project\": {\n    \"name\": \"family-companion merger\",\n    \"root\": \"/home/azureuser/family-companion\",\n    \"backend\": \"/home/azureuser/family-companion/backend\",\n    \"android\": \"/home/azureuser/family-companion/android\",\n    \"local_model\": \"gemma4:26b\",\n    \"ollama_base_url\": \"http://localhost:11434/v1\",\n    \"backend_smoke_port\": 8001\n  },\n  \"ship_criteria\": [\n    \"Ollama exposes gemma4:26b and chat completion smoke succeeds.\",\n    \"Backend Android endpoints smoke cleanly against updated code.\",\n    \"Database tables/enums are created through repeatable migration or safe bootstrap path.\",\n    \"Android Retrofit/Repository/ViewModel wiring compiles or has exact blockers.\",\n    \"Runbook and demo checklist contain actual VM paths and commands.\"\n  ],\n  \"notes\": \"Launched after backend chat smoke passed locally; DB tables were bootstrapped via SQLAlchemy create_all and need repeatable migration work.\"\n}\n\nProduce a ship/hold smoke report covering: Ollama /v1/models and chat completion for gemma4:26b; backend /health; Android chat endpoint route/model proof; journey create/read; health metric create/filter; places; and Android compile/build status. Include exact commands, ports, status codes, and response excerpts.\n\nProject constants:\n- Root: /home/azureuser/family-companion\n- Backend: /home/azureuser/family-companion/backend\n- Android: /home/azureuser/family-companion/android\n- Ollama OpenAI-compatible base URL: http://localhost:11434/v1\n- Required model: gemma4:26b\n\nRules:\n- Preserve dirty worktree changes and do not revert unrelated edits.\n- Production deploys, destructive DB actions, credential use, external sends, and public announcements require human greenlight.\n- Return the required checkpoint format with exact proof and next action.",
+  "currentMissionId": "mission-mp8u7syf-e09x3o",
+  "currentAssignmentId": "assign-mp8u7syf-jb0yi1",
+  "needsHuman": false,
+  "blockedReason": "session_id: 20260516_210741_72a015",
+  "lastDispatchAt": 1778965670018,
+  "lastDispatchMode": "oneshot",
+  "lastDispatchResult": "session_id: 20260516_210741_72a015",
+  "lastCheckIn": "2026-05-16T21:07:50.018Z",
+  "lastControlMessage": "Dispatched task: Trigger payload:\n{\n  \"type\": \"ship_merger\",\n  \"source\": \"manual\",\n  \"project\": {\n    \"name\": \"family-companion merger\",\n    \"root\": \"/home/azureuser/family-companion\",\n    \"backend",
+  "nextAction": "Worker should execute and return the required checkpoint format.",
+  "notifySessionKey": "family-companion"
+}

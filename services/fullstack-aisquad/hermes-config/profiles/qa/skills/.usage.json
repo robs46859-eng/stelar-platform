@@ -1,0 +1,80 @@
+{
+  "Agent Swarm Design": {
+    "archived_at": null,
+    "created_at": "2026-05-13T10:50:29.024774+00:00",
+    "created_by": null,
+    "last_patched_at": null,
+    "last_used_at": "2026-05-13T10:50:29.038716+00:00",
+    "last_viewed_at": "2026-05-13T10:50:29.024786+00:00",
+    "patch_count": 0,
+    "pinned": false,
+    "state": "active",
+    "use_count": 1,
+    "view_count": 1
+  },
+  "FastAPI Async Service Pattern": {
+    "archived_at": null,
+    "created_at": "2026-05-13T10:50:29.012953+00:00",
+    "created_by": null,
+    "last_patched_at": null,
+    "last_used_at": "2026-05-13T10:50:29.029505+00:00",
+    "last_viewed_at": "2026-05-13T10:50:29.012971+00:00",
+    "patch_count": 0,
+    "pinned": false,
+    "state": "active",
+    "use_count": 1,
+    "view_count": 1
+  },
+  "Gemma LLM Integration Layer": {
+    "archived_at": null,
+    "created_at": "2026-05-13T10:50:29.020160+00:00",
+    "created_by": null,
+    "last_patched_at": null,
+    "last_used_at": "2026-05-13T10:50:29.033997+00:00",
+    "last_viewed_at": "2026-05-13T10:50:29.020179+00:00",
+    "patch_count": 0,
+    "pinned": false,
+    "state": "active",
+    "use_count": 1,
+    "view_count": 1
+  },
+  "agent-swarm-design": {
+    "archived_at": null,
+    "created_at": "2026-05-13T10:48:49.575126+00:00",
+    "created_by": "agent",
+    "last_patched_at": "2026-05-13T10:50:16.687501+00:00",
+    "last_used_at": null,
+    "last_viewed_at": null,
+    "patch_count": 3,
+    "pinned": false,
+    "state": "active",
+    "use_count": 0,
+    "view_count": 0
+  },
+  "fastapi-async-service-pattern": {
+    "archived_at": null,
+    "created_at": "2026-05-13T10:49:47.643182+00:00",
+    "created_by": "agent",
+    "last_patched_at": "2026-05-13T10:50:22.004359+00:00",
+    "last_used_at": null,
+    "last_viewed_at": null,
+    "patch_count": 1,
+    "pinned": false,
+    "state": "active",
+    "use_count": 0,
+    "view_count": 0
+  },
+  "gemma-llm-integration": {
+    "archived_at": null,
+    "created_at": "2026-05-13T10:50:08.036271+00:00",
+    "created_by": "agent",
+    "last_patched_at": null,
+    "last_used_at": null,
+    "last_viewed_at": null,
+    "patch_count": 0,
+    "pinned": false,
+    "state": "active",
+    "use_count": 0,
+    "view_count": 0
+  }
+}

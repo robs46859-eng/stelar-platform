@@ -1,0 +1,9 @@
+{
+  "name": "FullStack AiSquad",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "fullstack-aisquad",
+  "workspaceFolder": "/app",
+  "overrideCommand": false,
+  "forwardPorts": [3000, 8642],
+  "postCreateCommand": "echo 'Set ANTHROPIC_API_KEY in .env to get started'"
+}

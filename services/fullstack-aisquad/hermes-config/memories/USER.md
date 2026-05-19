@@ -1,0 +1,1 @@
+User prefers using delegate_task (swarm workers) for heavy implementation work rather than doing it inline. This conserves context window tokens in the main session. When doing multi-file builds, delegate to builder:task with clear, detailed contexts. Always verify delegation output with a quick grep/read pass before marking complete.

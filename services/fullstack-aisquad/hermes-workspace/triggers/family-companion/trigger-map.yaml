@@ -1,0 +1,21 @@
+version: 1
+greenlight: Production deploys, destructive database actions, credential use, public announcements, and external sends require human approval.
+triggers:
+  ship_merger:
+  - family-db-migration
+  - family-backend-integrator
+  - family-android-integrator
+  - family-qa-smoke
+  - family-release-docs
+  backend_smoke:
+  - family-backend-integrator
+  - family-qa-smoke
+  android_sync:
+  - family-android-integrator
+  - family-qa-smoke
+  release_gate:
+  - family-db-migration
+  - family-backend-integrator
+  - family-android-integrator
+  - family-qa-smoke
+  - family-release-docs

@@ -1,0 +1,13 @@
+{
+  "type": "content_audit",
+  "source": "manual",
+  "content": {
+    "scope": "all | channel-specific | date-range",
+    "channels": [],
+    "focus": "seo | engagement | conversion | freshness | broken-links",
+    "date_from": "",
+    "date_to": ""
+  },
+  "channel": "",
+  "notes": ""
+}

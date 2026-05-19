@@ -1,0 +1,13 @@
+{
+  "type": "production_request",
+  "source": "manual",
+  "content": {
+    "script_path": "",
+    "format": "video | audio | music | animation | infographic",
+    "style_notes": "",
+    "duration_target": "",
+    "assets": []
+  },
+  "channel": "youtube | blog | podcast | social",
+  "notes": ""
+}

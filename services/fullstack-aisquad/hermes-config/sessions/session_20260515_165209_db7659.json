@@ -1,0 +1,1094 @@
+{
+  "session_id": "20260515_165209_db7659",
+  "model": "nvidia/nemotron-3-super-120b-a12b:free",
+  "base_url": "https://openrouter.ai/api/v1",
+  "platform": "cli",
+  "session_start": "2026-05-15T16:52:09.377432",
+  "last_updated": "2026-05-15T16:52:34.311618",
+  "system_prompt": "# Hermes Agent Persona\n\n<!--\nThis file defines the agent's personality and tone.\nThe agent will embody whatever you write here.\nEdit this to customize how Hermes communicates with you.\n\nExamples:\n  - \"You are a warm, playful assistant who uses kaomoji occasionally.\"\n  - \"You are a concise technical expert. No fluff, just facts.\"\n  - \"You speak like a friendly coworker who happens to know everything.\"\n\nThis file is loaded fresh each message -- no restart needed.\nDelete the contents (or this file) to use the default personality.\n-->\n\nIf the user asks about configuring, setting up, or using Hermes Agent itself, load the `hermes-agent` skill with skill_view(name='hermes-agent') before answering. Docs: https://hermes-agent.nousresearch.com/docs\n\nYou have persistent memory across sessions. Save durable facts using the memory tool: user preferences, environment details, tool quirks, and stable conventions. Memory is injected into every turn, so keep it compact and focused on facts that will still matter later.\nPrioritize what reduces future user steering — the most valuable memory is one that prevents the user from having to correct or remind you again. User preferences and recurring corrections matter more than procedural task details.\nDo NOT save task progress, session outcomes, completed-work logs, or temporary TODO state to memory; use session_search to recall those from past transcripts. Specifically: do not record PR numbers, issue numbers, commit SHAs, 'fixed bug X', 'submitted PR Y', 'Phase N done', file counts, or any artifact that will be stale in 7 days. If a fact will be stale in a week, it does not belong in memory. If you've discovered a new way to do something, solved a problem that could be necessary later, save it as a skill with the skill tool.\nWrite memories as declarative facts, not instructions to yourself. 'User prefers concise responses' ✓ — 'Always respond concisely' ✗. 'Project uses pytest with xdist' ✓ — 'Run tests with pytest -n 4' ✗. Imperative phrasing gets re-read as a directive in later sessions and can cause repeated work or override the user's current request. Procedures and workflows belong in skills, not memory. When the user references something from a past conversation or you suspect relevant cross-session context exists, use session_search to recall it before asking them to repeat themselves. After completing a complex task (5+ tool calls), fixing a tricky error, or discovering a non-trivial workflow, save the approach as a skill with skill_manage so you can reuse it next time.\nWhen using a skill and finding it outdated, incomplete, or wrong, patch it immediately with skill_manage(action='patch') — don't wait to be asked. Skills that aren't maintained become liabilities.\n\n## Skills (mandatory)\nBefore replying, scan the skills below. If a skill matches or is even partially relevant to your task, you MUST load it with skill_view(name) and follow its instructions. Err on the side of loading — it is always better to have context you don't need than to miss critical steps, pitfalls, or established workflows. Skills contain specialized knowledge — API endpoints, tool-specific commands, and proven workflows that outperform general-purpose approaches. Load the skill even if you think you could handle the task with basic tools like web_search or terminal. Skills also encode the user's preferred approach, conventions, and quality standards for tasks like code review, planning, and testing — load them even for tasks you already know how to do, because the skill defines how it should be done here.\nWhenever the user asks you to configure, set up, install, enable, disable, modify, or troubleshoot Hermes Agent itself — its CLI, config, models, providers, tools, skills, voice, gateway, plugins, or any feature — load the `hermes-agent` skill first. It has the actual commands (e.g. `hermes config set …`, `hermes tools`, `hermes setup`) so you don't have to guess or invent workarounds.\nIf a skill has issues, fix it with skill_manage(action='patch').\nAfter difficult/iterative tasks, offer to save as a skill. If a skill you loaded was missing steps, had wrong commands, or needed pitfalls you discovered, update it before finishing.\n\n<available_skills>\n  autonomous-ai-agents: Skills for spawning and orchestrating autonomous AI coding agents and multi-agent workflows — running independent agent processes, delegating tasks, and coordinating parallel workstreams.\n    - claude-code: Delegate coding to Claude Code CLI (features, PRs).\n    - codex: Delegate coding to OpenAI Codex CLI (features, PRs).\n    - hermes-agent: Configure, extend, or contribute to Hermes Agent.\n    - opencode: Delegate coding to OpenCode CLI (features, PR review).\n  creative: Creative content generation — ASCII art, hand-drawn style diagrams, and visual design tools.\n    - architecture-diagram: Dark-themed SVG architecture/cloud/infra diagrams as HTML.\n    - ascii-art: ASCII art: pyfiglet, cowsay, boxes, image-to-ascii.\n    - ascii-video: ASCII video: convert video/audio to colored ASCII MP4/GIF.\n    - baoyu-comic: Knowledge comics (知识漫画): educational, biography, tutorial.\n    - baoyu-infographic: Infographics: 21 layouts x 21 styles (信息图, 可视化).\n    - claude-design: Design one-off HTML artifacts (landing, deck, prototype).\n    - comfyui: Generate images, video, and audio with ComfyUI — install,...\n    - design-md: Author/validate/export Google's DESIGN.md token spec files.\n    - excalidraw: Hand-drawn Excalidraw JSON diagrams (arch, flow, seq).\n    - humanizer: Humanize text: strip AI-isms and add real voice.\n    - ideation: Generate project ideas via creative constraints.\n    - manim-video: Manim CE animations: 3Blue1Brown math/algo videos.\n    - p5js: p5.js sketches: gen art, shaders, interactive, 3D.\n    - pixel-art: Pixel art w/ era palettes (NES, Game Boy, PICO-8).\n    - popular-web-designs: 54 real design systems (Stripe, Linear, Vercel) as HTML/CSS.\n    - pretext: Use when building creative browser demos with @chenglou/p...\n    - sketch: Throwaway HTML mockups: 2-3 design variants to compare.\n    - songwriting-and-ai-music: Songwriting craft and Suno AI music prompts.\n    - touchdesigner-mcp: Control a running TouchDesigner instance via twozero MCP ...\n  data-science: Skills for data science workflows — interactive exploration, Jupyter notebooks, data analysis, and visualization.\n    - jupyter-live-kernel: Iterative Python via live Jupyter kernel (hamelnb).\n  devops:\n    - hermes-workspace-swarm-authoring: Build new Hermes Workspace swarms — workers, skills, prof...\n    - kanban-orchestrator: Decomposition playbook + anti-temptation rules for an orc...\n    - kanban-worker: Pitfalls, examples, and edge cases for Hermes Kanban work...\n    - swarm-worker-provisioning: Add new swarm workers to Hermes Workspace — skills, profi...\n    - web-integration-engineer: Build web service integrations (APIs, OAuth, scraping, SD...\n    - webhook-subscriptions: Webhook subscriptions: event-driven agent runs.\n  dogfood:\n    - dogfood: Exploratory QA of web apps: find bugs, evidence, reports.\n  domain-hunter-pipeline:\n    - domain-hunter-pipeline: Domain Hunter v2 scoring, discovery, and pipeline dispatc...\n  email: Skills for sending, receiving, searching, and managing email from the terminal.\n    - himalaya: Himalaya CLI: IMAP/SMTP email from terminal.\n  engagement:\n    - engagement-writer-core: Use for writing authentic, context-aware, platform-approp...\n    - instagram-monitor-core: Use for monitoring Instagram Reels, carousels, and Storie...\n    - linkedin-monitor-core: Use for monitoring LinkedIn career transitions, funding a...\n    - quora-monitor-core: Use for monitoring Quora parenting questions — pregnancy ...\n    - reddit-monitor-core: Use for monitoring Reddit parenting communities — r/BabyB...\n    - signal-orchestrator-core: Use for central coordination of platform signal monitors ...\n    - youtube-monitor-core: Use for monitoring YouTube pregnancy/parenting content — ...\n  engagement-signal-monitoring:\n    - engagement-signal-monitoring: Monitor social platforms for buying signals from a target...\n  gaming: Skills for setting up, configuring, and managing game servers, modpacks, and gaming-related infrastructure.\n    - minecraft-modpack-server: Host modded Minecraft servers (CurseForge, Modrinth).\n    - pokemon-player: Play Pokemon via headless emulator + RAM reads.\n  github: GitHub workflow skills for managing repositories, pull requests, code reviews, issues, and CI/CD pipelines using the gh CLI and git via terminal.\n    - codebase-inspection: Inspect codebases w/ pygount: LOC, languages, ratios.\n    - github-auth: GitHub auth setup: HTTPS tokens, SSH keys, gh CLI login.\n    - github-code-review: Review PRs: diffs, inline comments via gh or REST.\n    - github-issues: Create, triage, label, assign GitHub issues via gh or REST.\n    - github-pr-workflow: GitHub PR lifecycle: branch, commit, open, CI, merge.\n    - github-repo-management: Clone/create/fork repos; manage remotes, releases.\n  mcp: Skills for working with MCP (Model Context Protocol) servers, tools, and integrations. Documents the built-in native MCP client — configure servers in config.yaml for automatic tool discovery.\n    - native-mcp: MCP client: connect servers, register tools (stdio/HTTP).\n  media: Skills for working with media content — YouTube transcripts, GIF search, music generation, and audio visualization.\n    - analytics-reviewer-core: Use for analyzing content performance, auditing existing ...\n    - content-planner-core: Use for editorial calendar creation, content strategy, an...\n    - content-producer-core: Use for generating or assembling video, audio, music, ani...\n    - content-researcher-core: Use for topic research, trend discovery, competitor conte...\n    - content-writer-core: Use for writing scripts, blog posts, newsletters, social ...\n    - distribution-manager-core: Use for preparing content for publishing across channels,...\n    - gif-search: Search/download GIFs from Tenor via curl + jq.\n    - heartmula: HeartMuLa: Suno-like song generation from lyrics + tags.\n    - media-orchestrator-core: Use for routing media/content triggers into research, pla...\n    - media-trigger-core: Use when processing local, cron, webhook, social, inbox, ...\n    - songsee: Audio spectrograms/features (mel, chroma, MFCC) via CLI.\n    - spotify: Spotify: play, search, queue, manage playlists and devices.\n    - visual-designer-core: Use for creating thumbnails, infographics, diagrams, data...\n    - youtube-content: YouTube transcripts to summaries, threads, blogs.\n  mlops: Knowledge and Tools for Machine Learning Operations - tools and frameworks for training, fine-tuning, deploying, and optimizing ML/AI models\n    - Gemma LLM Integration Layer: Structured integration with Google Gemma via Gemini API —...\n    - huggingface-hub: HuggingFace hf CLI: search/download/upload models, datasets.\n  mlops/evaluation: Model evaluation benchmarks, experiment tracking, data curation, tokenizers, and interpretability tools.\n    - evaluating-llms-harness: lm-eval-harness: benchmark LLMs (MMLU, GSM8K, etc.).\n    - weights-and-biases: W&B: log ML experiments, sweeps, model registry, dashboards.\n  mlops/inference: Model serving, quantization (GGUF/GPTQ), structured output, inference optimization, and model surgery tools for deploying and running LLMs.\n    - llama-cpp: llama.cpp local GGUF inference + HF Hub model discovery.\n    - obliteratus: OBLITERATUS: abliterate LLM refusals (diff-in-means).\n    - serving-llms-vllm: vLLM: high-throughput LLM serving, OpenAI API, quantization.\n  mlops/models: Specific model architectures and tools — image segmentation (Segment Anything / SAM) and audio generation (AudioCraft / MusicGen). Additional model skills (CLIP, Stable Diffusion, Whisper, LLaVA) are available as optional skills.\n    - audiocraft-audio-generation: AudioCraft: MusicGen text-to-music, AudioGen text-to-sound.\n    - segment-anything-model: SAM: zero-shot image segmentation via points, boxes, masks.\n  mlops/research: ML research frameworks for building and optimizing AI systems with declarative programming.\n    - dspy: DSPy: declarative LM programs, auto-optimize prompts, RAG.\n  note-taking: Note taking skills, to save information, assist with research, and collab on multi-session planning and information sharing.\n    - obsidian: Read, search, create, and edit notes in the Obsidian vault.\n  product:\n    - brand-visionary-core: Use for creating customized brand identities, marketing m...\n    - product-engineer-core: Use for technical feasibility assessment, system design, ...\n    - product-experience-director-core: Use for UX strategy, design system alignment, user journe...\n    - product-manager-core: Use for problem framing, product strategy, requirements d...\n    - product-marketing-core: Use for go-to-market strategy, product positioning, messa...\n    - product-orchestrator-core: Use for routing product development triggers into ideatio...\n    - product-qa-core: Use for product quality assurance, test strategy, release...\n    - product-trigger-core: Use when processing local, cron, webhook, jira, github, o...\n    - project-manager-core: Use for project planning, milestone tracking, resource al...\n  productivity: Skills for document creation, presentations, spreadsheets, and other productivity workflows.\n    - airtable: Airtable REST API via curl. Records CRUD, filters, upserts.\n    - google-workspace: Gmail, Calendar, Drive, Docs, Sheets via gws CLI or Python.\n    - linear: Linear: manage issues, projects, teams via GraphQL + curl.\n    - maps: Geocode, POIs, routes, timezones via OpenStreetMap/OSRM.\n    - nano-pdf: Edit PDF text/typos/titles via nano-pdf CLI (NL prompts).\n    - notion: Notion API via curl: pages, databases, blocks, search.\n    - ocr-and-documents: Extract text from PDFs/scans (pymupdf, marker-pdf).\n    - powerpoint: Create, read, edit .pptx decks, slides, notes, templates.\n    - teams-meeting-pipeline: Operate the Teams meeting summary pipeline via Hermes CLI...\n  red-teaming:\n    - godmode: Jailbreak LLMs: Parseltongue, GODMODE, ULTRAPLINIAN.\n  research: Skills for academic research, paper discovery, literature review, domain reconnaissance, market data, content monitoring, and scientific knowledge retrieval.\n    - arxiv: Search arXiv papers by keyword, author, category, or ID.\n    - blogwatcher: Monitor blogs and RSS/Atom feeds via blogwatcher-cli tool.\n    - llm-wiki: Karpathy's LLM Wiki: build/query interlinked markdown KB.\n    - polymarket: Query Polymarket: markets, prices, orderbooks, history.\n  revenue:\n    - compliance-greenlight: Use for sales, marketing, customer, and public-facing wor...\n    - customer-success-core: Use for customer onboarding, follow-up, support triage, r...\n    - delivery-manager-core: Use for converting won work into scoped delivery plans, m...\n    - growth-promoter-core: Use for ethical promotion plans, content drafts, campaign...\n    - listing-manager-core: Use for drafting service listings, landing pages, marketp...\n    - market-intel-core: Use for B2B niche, lead, competitor, and pain-point resea...\n    - offer-architect-core: Use for packaging custom AI widgets, automations, integra...\n    - revenue-orchestrator-core: Use for routing revenue triggers into market, offer, buil...\n    - revenue-trigger-core: Use when processing local, cron, webhook, CRM, inbox, or ...\n    - sales-closer-core: Use for sales discovery, lead qualification, proposal dra...\n    - solution-builder-core: Use for creating scoped AI-widget, automation, or integra...\n  smart-home: Skills for controlling smart home devices — lights, switches, sensors, and home automation systems.\n    - openhue: Control Philips Hue lights, scenes, rooms via OpenHue CLI.\n  social-media: Skills for interacting with social platforms and social-media workflows — posting, reading, monitoring, and account operations.\n    - xurl: X/Twitter via xurl CLI: post, search, DM, media, v2 API.\n  software-development:\n    - Agent Swarm Design: Design and build multi-agent systems with a base agent + ...\n    - FastAPI Async Service Pattern: Standard pattern for building async FastAPI routes with S...\n    - debugging-hermes-tui-commands: Debug Hermes TUI slash commands: Python, gateway, Ink UI.\n    - hermes-agent-skill-authoring: Author in-repo SKILL.md: frontmatter, validator, structure.\n    - node-inspect-debugger: Debug Node.js via --inspect + Chrome DevTools Protocol CLI.\n    - plan: Plan mode: write markdown plan to .hermes/plans/, no exec.\n    - python-debugpy: Debug Python: pdb REPL + debugpy remote (DAP).\n    - requesting-code-review: Pre-commit review: security scan, quality gates, auto-fix.\n    - spike: Throwaway experiments to validate an idea before build.\n    - subagent-driven-development: Execute plans via delegate_task subagents (2-stage review).\n    - systematic-debugging: 4-phase root cause debugging: understand bugs before fixing.\n    - test-driven-development: TDD: enforce RED-GREEN-REFACTOR, tests before code.\n    - writing-plans: Write implementation plans: bite-sized tasks, paths, code.\n  swarm:\n    - autoresearch: Use for mechanical optimization loops where success can b...\n    - browser-harness-power-use: Use for browser automation and screenshot-based verificat...\n    - builder-core: Use for scoped implementation workers that change code, r...\n    - defuddle: Use for extracting useful signal from captured links, art...\n    - gbrain: Use when a worker should consult a configured GBrain or l...\n    - gstack-for-hermes: Use for Hermes agent planning with outcome-first wedges, ...\n    - inbox-triage-core: Use for routing incoming material into discard, task, res...\n    - json-canvas: Use for JSON Canvas files where nodes, edges, positions, ...\n    - km-agent-core: Use for durable knowledge stewardship: memory hygiene, so...\n    - maintainer-core: Use for upstream tracking, dependency hygiene, branch/pat...\n    - obsidian-bases: Use for Obsidian Bases or table-like note views where sch...\n    - obsidian-cli: Use when operating on an Obsidian vault through local she...\n    - obsidian-markdown: Use for writing Obsidian-compatible Markdown notes with s...\n    - ops-watch-core: Use for low-risk local runtime health checks covering Her...\n    - orchestrator-core: Use for mission decomposition, role routing, checkpoint i...\n    - qa-core: Use for browser, API, CLI, and workflow smoke verificatio...\n    - researcher-autoresearch: Use only for bounded autoresearch loops with locked scope...\n    - researcher-core: Use for decision-grade research that combines local memor...\n    - researcher-quick: Use for fast research: local context first, source collec...\n    - reviewer-core: Use for independent review gates that inspect diffs, iden...\n    - strategist-core: Use for turning ambiguous goals into wedges, bets, constr...\n    - workspace-dispatch: Single-agent mission orchestrator. Decomposes a mission i...\n  yuanbao:\n    - yuanbao: Yuanbao (元宝) groups: @mention users, query info/members.\n</available_skills>\n\nOnly proceed without loading a skill if genuinely none are relevant to the task.\n\nHost: Linux (6.17.0-1013-azure)\nUser home directory: /home/azureuser\nCurrent working directory: /home/azureuser\n\nYou are a CLI AI Agent. Try not to use markdown but simple text renderable inside a terminal. File delivery: there is no attachment channel — the user reads your response directly in their terminal. Do NOT emit MEDIA:/path tags (those are only intercepted on messaging platforms like Telegram, Discord, Slack, etc.; on the CLI they render as literal text). When referring to a file you created or changed, just state its absolute path in plain text; the user can open it from there.\n\n══════════════════════════════════════════════\nMEMORY (your personal notes) [20% — 447/2,200 chars]\n══════════════════════════════════════════════\nfscompanion project: ~55 source files built in session. Core infra, models, schemas, services, agent swarm (10 + base), Gemma/LLM layer, API routes (12) all done. Remaining: integrations (sms/gmail/calendar/maps), tests (11 modules), docs (6 files), infrastructure (pyproject.toml, Dockerfile, docker-compose, .env.example, .gitignore, alembic.ini, scripts), and GitHub push to robs46859-eng/fscompanion. Project root: /home/azureuser/fscompanion.\n\nConversation started: Friday, May 15, 2026 04:52 PM\nModel: nvidia/nemotron-3-super-120b-a12b:free\nProvider: openrouter",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "browser_back",
+        "description": "Navigate back to the previous page in browser history. Requires browser_navigate to be called first.",
+        "parameters": {
+          "type": "object",
+          "properties": {}
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "browser_click",
+        "description": "Click on an element identified by its ref ID from the snapshot (e.g., '@e5'). The ref IDs are shown in square brackets in the snapshot output. Requires browser_navigate and browser_snapshot to be called first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "description": "The element reference from the snapshot (e.g., '@e5', '@e12')"
+            }
+          },
+          "required": [
+            "ref"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "browser_console",
+        "description": "Get browser console output and JavaScript errors from the current page. Returns console.log/warn/error/info messages and uncaught JS exceptions. Use this to detect silent JavaScript errors, failed API calls, and application warnings. Requires browser_navigate to be called first. When 'expression' is provided, evaluates JavaScript in the page context and returns the result — use this for DOM inspection, reading page state, or extracting data programmatically.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "clear": {
+              "type": "boolean",
+              "default": false,
+              "description": "If true, clear the message buffers after reading"
+            },
+            "expression": {
+              "type": "string",
+              "description": "JavaScript expression to evaluate in the page context. Runs in the browser like DevTools console — full access to DOM, window, document. Return values are serialized to JSON. Example: 'document.title' or 'document.querySelectorAll(\"a\").length'"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "browser_get_images",
+        "description": "Get a list of all images on the current page with their URLs and alt text. Useful for finding images to analyze with the vision tool. Requires browser_navigate to be called first.",
+        "parameters": {
+          "type": "object",
+          "properties": {}
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "browser_navigate",
+        "description": "Navigate to a URL in the browser. Initializes the session and loads the page. Must be called before other browser tools. For simple information retrieval, prefer web_search or web_extract (faster, cheaper). For plain-text endpoints — URLs ending in .md, .txt, .json, .yaml, .yml, .csv, .xml, raw.githubusercontent.com, or any documented API endpoint — prefer curl via the terminal tool or web_extract; the browser stack is overkill and much slower for these. Use browser tools when you need to interact with a page (click, fill forms, dynamic content). Returns a compact page snapshot with interactive elements and ref IDs — no need to call browser_snapshot separately after navigating.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The URL to navigate to (e.g., 'https://example.com')"
+            }
+          },
+          "required": [
+            "url"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "browser_press",
+        "description": "Press a keyboard key. Useful for submitting forms (Enter), navigating (Tab), or keyboard shortcuts. Requires browser_navigate to be called first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "Key to press (e.g., 'Enter', 'Tab', 'Escape', 'ArrowDown')"
+            }
+          },
+          "required": [
+            "key"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "browser_scroll",
+        "description": "Scroll the page in a direction. Use this to reveal more content that may be below or above the current viewport. Requires browser_navigate to be called first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "direction": {
+              "type": "string",
+              "enum": [
+                "up",
+                "down"
+              ],
+              "description": "Direction to scroll"
+            }
+          },
+          "required": [
+            "direction"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "browser_snapshot",
+        "description": "Get a text-based snapshot of the current page's accessibility tree. Returns interactive elements with ref IDs (like @e1, @e2) for browser_click and browser_type. full=false (default): compact view with interactive elements. full=true: complete page content. Snapshots over 8000 chars are truncated or LLM-summarized. Requires browser_navigate first. Note: browser_navigate already returns a compact snapshot — use this to refresh after interactions that change the page, or with full=true for complete content.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "full": {
+              "type": "boolean",
+              "description": "If true, returns complete page content. If false (default), returns compact view with interactive elements only.",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "browser_type",
+        "description": "Type text into an input field identified by its ref ID. Clears the field first, then types the new text. Requires browser_navigate and browser_snapshot to be called first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "description": "The element reference from the snapshot (e.g., '@e3')"
+            },
+            "text": {
+              "type": "string",
+              "description": "The text to type into the field"
+            }
+          },
+          "required": [
+            "ref",
+            "text"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "browser_vision",
+        "description": "Take a screenshot of the current page and analyze it with vision AI. Use this when you need to visually understand what's on the page - especially useful for CAPTCHAs, visual verification challenges, complex layouts, or when the text snapshot doesn't capture important visual information. Returns both the AI analysis and a screenshot_path that you can share with the user by including MEDIA:<screenshot_path> in your response. Requires browser_navigate to be called first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string",
+              "description": "What you want to know about the page visually. Be specific about what you're looking for."
+            },
+            "annotate": {
+              "type": "boolean",
+              "default": false,
+              "description": "If true, overlay numbered [N] labels on interactive elements. Each [N] maps to ref @eN for subsequent browser commands. Useful for QA and spatial reasoning about page layout."
+            }
+          },
+          "required": [
+            "question"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "clarify",
+        "description": "Ask the user a question when you need clarification, feedback, or a decision before proceeding. Supports two modes:\n\n1. **Multiple choice** — provide up to 4 choices. The user picks one or types their own answer via a 5th 'Other' option.\n2. **Open-ended** — omit choices entirely. The user types a free-form response.\n\nUse this tool when:\n- The task is ambiguous and you need the user to choose an approach\n- You want post-task feedback ('How did that work out?')\n- You want to offer to save a skill or update memory\n- A decision has meaningful trade-offs the user should weigh in on\n\nDo NOT use this tool for simple yes/no confirmation of dangerous commands (the terminal tool handles that). Prefer making a reasonable default choice yourself when the decision is low-stakes.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string",
+              "description": "The question to present to the user."
+            },
+            "choices": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 4,
+              "description": "Up to 4 answer choices. Omit this parameter entirely to ask an open-ended question. When provided, the UI automatically appends an 'Other (type your answer)' option."
+            }
+          },
+          "required": [
+            "question"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "cronjob",
+        "description": "Manage scheduled cron jobs with a single compressed tool.\n\nUse action='create' to schedule a new job from a prompt or one or more skills.\nUse action='list' to inspect jobs.\nUse action='update', 'pause', 'resume', 'remove', or 'run' to manage an existing job.\n\nTo stop a job the user no longer wants: first action='list' to find the job_id, then action='remove' with that job_id. Never guess job IDs — always list first.\n\nJobs run in a fresh session with no current-chat context, so prompts must be self-contained.\nIf skills are provided on create, the future cron run loads those skills in order, then follows the prompt as the task instruction.\nOn update, passing skills=[] clears attached skills.\n\nNOTE: The agent's final response is auto-delivered to the target. Put the primary\nuser-facing content in the final response. Cron jobs run autonomously with no user\npresent — they cannot ask questions or request clarification.\n\nImportant safety rule: cron-run sessions should not recursively schedule more cron jobs.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "description": "One of: create, list, update, pause, resume, remove, run"
+            },
+            "job_id": {
+              "type": "string",
+              "description": "Required for update/pause/resume/remove/run"
+            },
+            "prompt": {
+              "type": "string",
+              "description": "For create: the full self-contained prompt. If skills are also provided, this becomes the task instruction paired with those skills."
+            },
+            "schedule": {
+              "type": "string",
+              "description": "For create/update: '30m', 'every 2h', '0 9 * * *', or ISO timestamp"
+            },
+            "name": {
+              "type": "string",
+              "description": "Optional human-friendly name"
+            },
+            "repeat": {
+              "type": "integer",
+              "description": "Optional repeat count. Omit for defaults (once for one-shot, forever for recurring)."
+            },
+            "deliver": {
+              "type": "string",
+              "description": "Omit this parameter to auto-deliver back to the current chat and topic (recommended). Auto-detection preserves thread/topic context. Only set explicitly when the user asks to deliver somewhere OTHER than the current conversation. Values: 'origin' (same as omitting), 'local' (no delivery, save only), 'all' (fan out to every connected home channel), or platform:chat_id:thread_id for a specific destination. Combine with comma: 'origin,all' delivers to the origin plus every other connected channel. Examples: 'telegram:-1001234567890:17585', 'discord:#engineering', 'sms:+15551234567', 'all'. WARNING: 'platform:chat_id' without :thread_id loses topic targeting. 'all' resolves at fire time, so a job created before a channel was wired up will pick it up automatically once connected."
+            },
+            "skills": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Optional ordered list of skill names to load before executing the cron prompt. On update, pass an empty array to clear attached skills."
+            },
+            "model": {
+              "type": "object",
+              "description": "Optional per-job model override. If provider is omitted, the current main provider is pinned at creation time so the job stays stable.",
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "description": "Provider name (e.g. 'openrouter', 'anthropic', or 'custom:<name>' for a provider defined in custom_providers config — always include the ':<name>' suffix, never pass the bare 'custom'). Omit to use and pin the current provider."
+                },
+                "model": {
+                  "type": "string",
+                  "description": "Model name (e.g. 'anthropic/claude-sonnet-4', 'claude-sonnet-4')"
+                }
+              },
+              "required": [
+                "model"
+              ]
+            },
+            "script": {
+              "type": "string",
+              "description": "Optional path to a script that runs each tick. In the default mode its stdout is injected into the agent's prompt as context (data-collection / change-detection pattern). With no_agent=True, the script IS the job and its stdout is delivered verbatim (classic watchdog pattern). Relative paths resolve under ~/.hermes/scripts/. ``.sh``/``.bash`` extensions run via bash, everything else via Python. On update, pass empty string to clear."
+            },
+            "no_agent": {
+              "type": "boolean",
+              "default": false,
+              "description": "Default: False (LLM-driven job — the agent runs the prompt each tick). Set True to skip the LLM entirely: the scheduler just runs ``script`` on schedule and delivers its stdout verbatim. No tokens, no agent loop, no model override honoured. \n\nREQUIREMENTS when True: ``script`` MUST be set (``prompt`` and ``skills`` are ignored). \n\nDELIVERY SEMANTICS when True: (a) non-empty stdout is sent verbatim as the message; (b) EMPTY stdout means SILENT — nothing is sent to the user and they won't see anything happened, so design your script to stay quiet when there's nothing to report (the watchdog pattern); (c) non-zero exit / timeout sends an error alert so a broken watchdog can't fail silently. \n\nWHEN TO USE True: recurring script-only pings where the script itself produces the exact message text (memory/disk/GPU watchdogs, threshold alerts, heartbeats, CI notifications, API pollers with a fixed output shape). WHEN TO USE False (default): anything that needs reasoning — summarize a feed, draft a daily briefing, pick interesting items, rephrase data for a human, follow conditional logic based on content."
+            },
+            "context_from": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Optional job ID or list of job IDs whose most recent completed output is injected into the prompt as context before each run. Use this to chain cron jobs: job A collects data, job B processes it. Each entry must be a valid job ID (from cronjob action='list'). Note: injects the most recent completed output — does not wait for upstream jobs running in the same tick. On update, pass an empty array to clear."
+            },
+            "enabled_toolsets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Optional list of toolset names to restrict the job's agent to (e.g. [\"web\", \"terminal\", \"file\", \"delegation\"]). When set, only tools from these toolsets are loaded, significantly reducing input token overhead. When omitted, all default tools are loaded. Infer from the job's prompt — e.g. use \"web\" if it calls web_search, \"terminal\" if it runs scripts, \"file\" if it reads files, \"delegation\" if it calls delegate_task. On update, pass an empty array to clear."
+            },
+            "workdir": {
+              "type": "string",
+              "description": "Optional absolute path to run the job from. When set, AGENTS.md / CLAUDE.md / .cursorrules from that directory are injected into the system prompt, and the terminal/file/code_exec tools use it as their working directory — useful for running a job inside a specific project repo. Must be an absolute path that exists. When unset (default), preserves the original behaviour: no project context files, tools use the scheduler's cwd. On update, pass an empty string to clear. Jobs with workdir run sequentially (not parallel) to keep per-job directories isolated."
+            }
+          },
+          "required": [
+            "action"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "delegate_task",
+        "description": "Spawn one or more subagents to work on tasks in isolated contexts. Each subagent gets its own conversation, terminal session, and toolset. Only the final summary is returned -- intermediate tool results never enter your context window.\n\nTWO MODES (one of 'goal' or 'tasks' is required):\n1. Single task: provide 'goal' (+ optional context, toolsets)\n2. Batch (parallel): provide 'tasks' array with up to 3 items concurrently for this user (configured via delegation.max_concurrent_children in config.yaml). All run in parallel and results are returned together. Nested delegation is OFF for this user (max_spawn_depth=1): every child is a leaf and cannot delegate further. Raise delegation.max_spawn_depth in config.yaml to enable nesting.\n\nWHEN TO USE delegate_task:\n- Reasoning-heavy subtasks (debugging, code review, research synthesis)\n- Tasks that would flood your context with intermediate data\n- Parallel independent workstreams (research A and B simultaneously)\n\nWHEN NOT TO USE (use these instead):\n- Mechanical multi-step work with no reasoning needed -> use execute_code\n- Single tool call -> just call the tool directly\n- Tasks needing user interaction -> subagents cannot use clarify\n- Durable long-running work that must outlive the current turn -> use cronjob (action='create') or terminal(background=True, notify_on_complete=True) instead. delegate_task runs SYNCHRONOUSLY inside the parent turn: if the parent is interrupted (user sends a new message, /stop, /new) the child is cancelled with status='interrupted' and its work is discarded. Children cannot continue in the background.\n\nIMPORTANT:\n- Subagents have NO memory of your conversation. Pass all relevant info (file paths, error messages, constraints) via the 'context' field.\n- If the user is writing in a non-English language, or asked for output in a specific language / tone / style, say so in 'context' (e.g. \"respond in Chinese\", \"return output in Japanese\"). Otherwise subagents default to English and their summaries will contaminate your final reply with the wrong language.\n- Subagent summaries are SELF-REPORTS, not verified facts. A subagent that claims \"uploaded successfully\" or \"file written\" may be wrong. For operations with external side-effects (HTTP POST/PUT, remote writes, file creation at shared paths, publishing), require the subagent to return a verifiable handle (URL, ID, absolute path, HTTP status) and verify it yourself — fetch the URL, stat the file, read back the content — before telling the user the operation succeeded.\n- Leaf subagents (role='leaf', the default) CANNOT call: delegate_task, clarify, memory, send_message, execute_code.\n- Orchestrator subagents (role='orchestrator') retain delegate_task so they can spawn their own workers, but still cannot use clarify, memory, send_message, or execute_code. Orchestrators are bounded by max_spawn_depth=1 for this user and can be disabled globally via delegation.orchestrator_enabled=false.\n- Each subagent gets its own terminal session (separate working directory and state).\n- Results are always returned as an array, one entry per task.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "goal": {
+              "type": "string",
+              "description": "What the subagent should accomplish. Be specific and self-contained -- the subagent knows nothing about your conversation history."
+            },
+            "context": {
+              "type": "string",
+              "description": "Background information the subagent needs: file paths, error messages, project structure, constraints. The more specific you are, the better the subagent performs."
+            },
+            "toolsets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Toolsets to enable for this subagent. Default: inherits your enabled toolsets. Available toolsets: 'browser', 'computer_use', 'cronjob', 'discord', 'discord_admin', 'feishu_doc', 'feishu_drive', 'file', 'homeassistant', 'image_gen', 'kanban', 'search', 'session_search', 'skills', 'spotify', 'terminal', 'todo', 'tts', 'video', 'vision', 'web', 'yuanbao'. Common patterns: ['terminal', 'file'] for code work, ['web'] for research, ['browser'] for web interaction, ['terminal', 'file', 'web'] for full-stack tasks."
+            },
+            "tasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "goal": {
+                    "type": "string",
+                    "description": "Task goal"
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "Task-specific context"
+                  },
+                  "toolsets": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Toolsets for this specific task. Available: 'browser', 'computer_use', 'cronjob', 'discord', 'discord_admin', 'feishu_doc', 'feishu_drive', 'file', 'homeassistant', 'image_gen', 'kanban', 'search', 'session_search', 'skills', 'spotify', 'terminal', 'todo', 'tts', 'video', 'vision', 'web', 'yuanbao'. Use 'web' for network access, 'terminal' for shell, 'browser' for web interaction."
+                  },
+                  "acp_command": {
+                    "type": "string",
+                    "description": "Per-task ACP command override (e.g. 'copilot'). Overrides the top-level acp_command for this task only. Do NOT set unless the user explicitly told you an ACP CLI is installed."
+                  },
+                  "acp_args": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Per-task ACP args override. Leave empty unless acp_command is set."
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "leaf",
+                      "orchestrator"
+                    ],
+                    "description": "Per-task role override. See top-level 'role' for semantics."
+                  }
+                },
+                "required": [
+                  "goal"
+                ]
+              },
+              "description": "Batch mode: tasks to run in parallel (up to 3 for this user, set via delegation.max_concurrent_children). Each gets its own subagent with isolated context and terminal session. When provided, top-level goal/context/toolsets are ignored."
+            },
+            "role": {
+              "type": "string",
+              "enum": [
+                "leaf",
+                "orchestrator"
+              ],
+              "description": "Role of the child agent. 'leaf' (default) = focused worker, cannot delegate further. 'orchestrator' = can use delegate_task to spawn its own workers. Nesting is OFF for this user (max_spawn_depth=1); 'orchestrator' is silently forced to 'leaf'. Raise delegation.max_spawn_depth in config.yaml to enable."
+            },
+            "acp_command": {
+              "type": "string",
+              "description": "Override ACP command for child agents (e.g. 'copilot'). When set, children use ACP subprocess transport instead of inheriting the parent's transport. Requires an ACP-compatible CLI (currently GitHub Copilot CLI via 'copilot --acp --stdio'). See agent/copilot_acp_client.py for the implementation. IMPORTANT: Do NOT set this unless the user has explicitly told you a specific ACP-compatible CLI is installed and configured. Leave empty to use the parent's default transport (Hermes subagents)."
+            },
+            "acp_args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Arguments for the ACP command (default: ['--acp', '--stdio']). Only used when acp_command is set. Leave empty unless acp_command is explicitly provided."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "execute_code",
+        "description": "Run a Python script that can call Hermes tools programmatically. Use this when you need 3+ tool calls with processing logic between them, need to filter/reduce large tool outputs before they enter your context, need conditional branching (if X then Y else Z), or need to loop (fetch N pages, process N files, retry on failure).\n\nUse normal tool calls instead when: single tool call with no processing, you need to see the full result and apply complex reasoning, or the task requires interactive user input.\n\nAvailable via `from hermes_tools import ...`:\n\n  web_search(query: str, limit: int = 5) -> dict\n    Returns {\"data\": {\"web\": [{\"url\", \"title\", \"description\"}, ...]}}\n  web_extract(urls: list[str]) -> dict\n    Returns {\"results\": [{\"url\", \"title\", \"content\", \"error\"}, ...]} where content is markdown\n  read_file(path: str, offset: int = 1, limit: int = 500) -> dict\n    Lines are 1-indexed. Returns {\"content\": \"...\", \"total_lines\": N}\n  write_file(path: str, content: str) -> dict\n    Always overwrites the entire file.\n  search_files(pattern: str, target=\"content\", path=\".\", file_glob=None, limit=50) -> dict\n    target: \"content\" (search inside files) or \"files\" (find files by name). Returns {\"matches\": [...]}\n  patch(path: str, old_string: str, new_string: str, replace_all: bool = False) -> dict\n    Replaces old_string with new_string in the file.\n  terminal(command: str, timeout=None, workdir=None) -> dict\n    Foreground only (no background/pty). Returns {\"output\": \"...\", \"exit_code\": N}\n\nLimits: 5-minute timeout, 50KB stdout cap, max 50 tool calls per script. terminal() is foreground-only (no background or pty).\n\nScripts run in the session's working directory with the active venv's python, so project deps (pandas, etc.) and relative paths work like in terminal().\n\nPrint your final result to stdout. Use Python stdlib (json, re, math, csv, datetime, collections, etc.) for processing between tool calls.\n\nAlso available (no import needed — built into hermes_tools):\n  json_parse(text: str) — json.loads with strict=False; use for terminal() output with control chars\n  shell_quote(s: str) — shlex.quote(); use when interpolating dynamic strings into shell commands\n  retry(fn, max_attempts=3, delay=2) — retry with exponential backoff for transient failures",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Python code to execute. Import tools with `from hermes_tools import web_search, terminal, ...` and print your final result to stdout."
+            }
+          },
+          "required": [
+            "code"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "memory",
+        "description": "Save durable information to persistent memory that survives across sessions. Memory is injected into future turns, so keep it compact and focused on facts that will still matter later.\n\nWHEN TO SAVE (do this proactively, don't wait to be asked):\n- User corrects you or says 'remember this' / 'don't do that again'\n- User shares a preference, habit, or personal detail (name, role, timezone, coding style)\n- You discover something about the environment (OS, installed tools, project structure)\n- You learn a convention, API quirk, or workflow specific to this user's setup\n- You identify a stable fact that will be useful again in future sessions\n\nPRIORITY: User preferences and corrections > environment facts > procedural knowledge. The most valuable memory prevents the user from having to repeat themselves.\n\nDo NOT save task progress, session outcomes, completed-work logs, or temporary TODO state to memory; use session_search to recall those from past transcripts.\nIf you've discovered a new way to do something, solved a problem that could be necessary later, save it as a skill with the skill tool.\n\nTWO TARGETS:\n- 'user': who the user is -- name, role, preferences, communication style, pet peeves\n- 'memory': your notes -- environment facts, project conventions, tool quirks, lessons learned\n\nACTIONS: add (new entry), replace (update existing -- old_text identifies it), remove (delete -- old_text identifies it).\n\nSKIP: trivial/obvious info, things easily re-discovered, raw data dumps, and temporary task state.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "add",
+                "replace",
+                "remove"
+              ],
+              "description": "The action to perform."
+            },
+            "target": {
+              "type": "string",
+              "enum": [
+                "memory",
+                "user"
+              ],
+              "description": "Which memory store: 'memory' for personal notes, 'user' for user profile."
+            },
+            "content": {
+              "type": "string",
+              "description": "The entry content. Required for 'add' and 'replace'."
+            },
+            "old_text": {
+              "type": "string",
+              "description": "Short unique substring identifying the entry to replace or remove."
+            }
+          },
+          "required": [
+            "action",
+            "target"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "patch",
+        "description": "Targeted find-and-replace edits in files. Use this instead of sed/awk in terminal. Uses fuzzy matching (9 strategies) so minor whitespace/indentation differences won't break it. Returns a unified diff. Auto-runs syntax checks after editing.\n\nREPLACE MODE (mode='replace', default): find a unique string and replace it. REQUIRED PARAMETERS: mode, path, old_string, new_string.\nPATCH MODE (mode='patch'): apply V4A multi-file patches for bulk changes. REQUIRED PARAMETERS: mode, patch.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "replace",
+                "patch"
+              ],
+              "description": "Edit mode. 'replace' (default): requires path + old_string + new_string. 'patch': requires patch content only.",
+              "default": "replace"
+            },
+            "path": {
+              "type": "string",
+              "description": "REQUIRED when mode='replace'. File path to edit."
+            },
+            "old_string": {
+              "type": "string",
+              "description": "REQUIRED when mode='replace'. Exact text to find and replace. Must be unique in the file unless replace_all=true. Include surrounding context lines to ensure uniqueness."
+            },
+            "new_string": {
+              "type": "string",
+              "description": "REQUIRED when mode='replace'. Replacement text. Pass empty string '' to delete the matched text."
+            },
+            "replace_all": {
+              "type": "boolean",
+              "description": "Replace all occurrences instead of requiring a unique match (default: false)",
+              "default": false
+            },
+            "patch": {
+              "type": "string",
+              "description": "REQUIRED when mode='patch'. V4A format patch content. Format:\n*** Begin Patch\n*** Update File: path/to/file\n@@ context hint @@\n context line\n-removed line\n+added line\n*** End Patch"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "process",
+        "description": "Manage background processes started with terminal(background=true). Actions: 'list' (show all), 'poll' (check status + new output), 'log' (full output with pagination), 'wait' (block until done or timeout), 'kill' (terminate), 'write' (send raw stdin data without newline), 'submit' (send data + Enter, for answering prompts), 'close' (close stdin/send EOF).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "list",
+                "poll",
+                "log",
+                "wait",
+                "kill",
+                "write",
+                "submit",
+                "close"
+              ],
+              "description": "Action to perform on background processes"
+            },
+            "session_id": {
+              "type": "string",
+              "description": "Process session ID (from terminal background output). Required for all actions except 'list'."
+            },
+            "data": {
+              "type": "string",
+              "description": "Text to send to process stdin (for 'write' and 'submit' actions)"
+            },
+            "timeout": {
+              "type": "integer",
+              "description": "Max seconds to block for 'wait' action. Returns partial output on timeout.",
+              "minimum": 1
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Line offset for 'log' action (default: last 200 lines)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max lines to return for 'log' action",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "action"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file",
+        "description": "Read a text file with line numbers and pagination. Use this instead of cat/head/tail in terminal. Output format: 'LINE_NUM|CONTENT'. Suggests similar filenames if not found. Use offset and limit for large files. Reads exceeding ~100K characters are rejected; use offset and limit to read specific sections of large files. NOTE: Cannot read images or binary files — use vision_analyze for images.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Path to the file to read (absolute, relative, or ~/path)"
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Line number to start reading from (1-indexed, default: 1)",
+              "default": 1,
+              "minimum": 1
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of lines to read (default: 500, max: 2000)",
+              "default": 500,
+              "maximum": 2000
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "search_files",
+        "description": "Search file contents or find files by name. Use this instead of grep/rg/find/ls in terminal. Ripgrep-backed, faster than shell equivalents.\n\nContent search (target='content'): Regex search inside files. Output modes: full matches with line numbers, file paths only, or match counts.\n\nFile search (target='files'): Find files by glob pattern (e.g., '*.py', '*config*'). Also use this instead of ls — results sorted by modification time.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "description": "Regex pattern for content search, or glob pattern (e.g., '*.py') for file search"
+            },
+            "target": {
+              "type": "string",
+              "enum": [
+                "content",
+                "files"
+              ],
+              "description": "'content' searches inside file contents, 'files' searches for files by name",
+              "default": "content"
+            },
+            "path": {
+              "type": "string",
+              "description": "Directory or file to search in (default: current working directory)",
+              "default": "."
+            },
+            "file_glob": {
+              "type": "string",
+              "description": "Filter files by pattern in grep mode (e.g., '*.py' to only search Python files)"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of results to return (default: 50)",
+              "default": 50
+            },
+            "offset": {
+              "type": "integer",
+              "description": "Skip first N results for pagination (default: 0)",
+              "default": 0
+            },
+            "output_mode": {
+              "type": "string",
+              "enum": [
+                "content",
+                "files_only",
+                "count"
+              ],
+              "description": "Output format for grep mode: 'content' shows matching lines with line numbers, 'files_only' lists file paths, 'count' shows match counts per file",
+              "default": "content"
+            },
+            "context": {
+              "type": "integer",
+              "description": "Number of context lines before and after each match (grep mode only)",
+              "default": 0
+            }
+          },
+          "required": [
+            "pattern"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "send_message",
+        "description": "Send a message to a connected messaging platform, or list available targets.\n\nIMPORTANT: When the user asks to send to a specific channel or person (not just a bare platform name), call send_message(action='list') FIRST to see available targets, then send to the correct one.\nIf the user just says a platform name like 'send to telegram', send directly to the home channel without listing first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "send",
+                "list"
+              ],
+              "description": "Action to perform. 'send' (default) sends a message. 'list' returns all available channels/contacts across connected platforms."
+            },
+            "target": {
+              "type": "string",
+              "description": "Delivery target. Format: 'platform' (uses home channel), 'platform:#channel-name', 'platform:chat_id', or 'platform:chat_id:thread_id' for Telegram topics and Discord threads. Examples: 'telegram', 'telegram:-1001234567890:17585', 'discord:999888777:555444333', 'discord:#bot-home', 'slack:#engineering', 'signal:+155****4567', 'matrix:!roomid:server.org', 'matrix:@user:server.org', 'yuanbao:direct:<account_id>' (DM), 'yuanbao:group:<group_code>' (group chat)"
+            },
+            "message": {
+              "type": "string",
+              "description": "The message text to send. To send an image or file, include MEDIA:<local_path> (e.g. 'MEDIA:/tmp/hermes/cache/img_xxx.jpg') in the message — the platform will deliver it as a native media attachment."
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "session_search",
+        "description": "Search your long-term memory of past conversations, or browse recent sessions. This is your recall -- every past session is searchable, and this tool summarizes what happened.\n\nTWO MODES:\n1. Recent sessions (no query): Call with no arguments to see what was worked on recently. Returns titles, previews, and timestamps. Zero LLM cost, instant. Start here when the user asks what were we working on or what did we do recently.\n2. Keyword search (with query): Search for specific topics across all past sessions. Returns LLM-generated summaries of matching sessions.\n\nUSE THIS PROACTIVELY when:\n- The user says 'we did this before', 'remember when', 'last time', 'as I mentioned'\n- The user asks about a topic you worked on before but don't have in current context\n- The user references a project, person, or concept that seems familiar but isn't in memory\n- You want to check if you've solved a similar problem before\n- The user asks 'what did we do about X?' or 'how did we fix Y?'\n\nDon't hesitate to search when it is actually cross-session -- it's fast and cheap. Better to search and confirm than to guess or ask the user to repeat themselves.\n\nSearch syntax: keywords joined with OR for broad recall (elevenlabs OR baseten OR funding), phrases for exact match (\"docker networking\"), boolean (python NOT java), prefix (deploy*). IMPORTANT: Use OR between keywords for best results — FTS5 defaults to AND which misses sessions that only mention some terms. If a broad OR query returns nothing, try individual keyword searches in parallel. Returns summaries of the top matching sessions.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Search query — keywords, phrases, or boolean expressions to find in past sessions. Omit this parameter entirely to browse recent sessions instead (returns titles, previews, timestamps with no LLM cost)."
+            },
+            "role_filter": {
+              "type": "string",
+              "description": "Optional: only search messages from specific roles (comma-separated). E.g. 'user,assistant' to skip tool outputs."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Max sessions to summarize (default: 3, max: 5).",
+              "default": 3
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "skill_manage",
+        "description": "Manage skills (create, update, delete). Skills are your procedural memory — reusable approaches for recurring task types. New skills go to ~/.hermes/skills/; existing skills can be modified wherever they live.\n\nActions: create (full SKILL.md + optional category), patch (old_string/new_string — preferred for fixes), edit (full SKILL.md rewrite — major overhauls only), delete, write_file, remove_file.\n\nOn delete, pass `absorbed_into=<umbrella>` when you're merging this skill's content into another one, or `absorbed_into=\"\"` when you're pruning it with no forwarding target. This lets the curator tell consolidation from pruning without guessing, so downstream consumers (cron jobs that reference the old skill name, etc.) get updated correctly. The target you name in `absorbed_into` must already exist — create/patch the umbrella first, then delete.\n\nCreate when: complex task succeeded (5+ calls), errors overcome, user-corrected approach worked, non-trivial workflow discovered, or user asks you to remember a procedure.\nUpdate when: instructions stale/wrong, OS-specific failures, missing steps or pitfalls found during use. If you used a skill and hit issues not covered by it, patch it immediately.\n\nAfter difficult/iterative tasks, offer to save as a skill. Skip for simple one-offs. Confirm with user before creating/deleting.\n\nGood skills: trigger conditions, numbered steps with exact commands, pitfalls section, verification steps. Use skill_view() to see format examples.\n\nPinned skills are protected from deletion only — skill_manage(action='delete') will refuse with a message pointing the user to `hermes curator unpin <name>`. Patches and edits go through on pinned skills so you can still improve them as pitfalls come up; pin only guards against irrecoverable loss.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "create",
+                "patch",
+                "edit",
+                "delete",
+                "write_file",
+                "remove_file"
+              ],
+              "description": "The action to perform."
+            },
+            "name": {
+              "type": "string",
+              "description": "Skill name (lowercase, hyphens/underscores, max 64 chars). Must match an existing skill for patch/edit/delete/write_file/remove_file."
+            },
+            "content": {
+              "type": "string",
+              "description": "Full SKILL.md content (YAML frontmatter + markdown body). Required for 'create' and 'edit'. For 'edit', read the skill first with skill_view() and provide the complete updated text."
+            },
+            "old_string": {
+              "type": "string",
+              "description": "Text to find in the file (required for 'patch'). Must be unique unless replace_all=true. Include enough surrounding context to ensure uniqueness."
+            },
+            "new_string": {
+              "type": "string",
+              "description": "Replacement text (required for 'patch'). Can be empty string to delete the matched text."
+            },
+            "replace_all": {
+              "type": "boolean",
+              "description": "For 'patch': replace all occurrences instead of requiring a unique match (default: false)."
+            },
+            "category": {
+              "type": "string",
+              "description": "Optional category/domain for organizing the skill (e.g., 'devops', 'data-science', 'mlops'). Creates a subdirectory grouping. Only used with 'create'."
+            },
+            "file_path": {
+              "type": "string",
+              "description": "Path to a supporting file within the skill directory. For 'write_file'/'remove_file': required, must be under references/, templates/, scripts/, or assets/. For 'patch': optional, defaults to SKILL.md if omitted."
+            },
+            "file_content": {
+              "type": "string",
+              "description": "Content for the file. Required for 'write_file'."
+            },
+            "absorbed_into": {
+              "type": "string",
+              "description": "For 'delete' only — declares intent so the curator can tell consolidation from pruning without guessing. Pass the umbrella skill name when this skill's content was merged into another (the target must already exist). Pass an empty string when the skill is truly stale and being pruned with no forwarding target. Omitting the arg on delete is supported for backward compatibility but downstream tooling (e.g. cron-job skill reference rewriting) will have to guess at intent."
+            }
+          },
+          "required": [
+            "action",
+            "name"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "skill_view",
+        "description": "Skills allow for loading information about specific tasks and workflows, as well as scripts and templates. Load a skill's full content or access its linked files (references, templates, scripts). First call returns SKILL.md content plus a 'linked_files' dict showing available references/templates/scripts. To access those, call again with file_path parameter.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The skill name (use skills_list to see available skills). For plugin-provided skills, use the qualified form 'plugin:skill' (e.g. 'superpowers:writing-plans')."
+            },
+            "file_path": {
+              "type": "string",
+              "description": "OPTIONAL: Path to a linked file within the skill (e.g., 'references/api.md', 'templates/config.yaml', 'scripts/validate.py'). Omit to get the main SKILL.md content."
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "skills_list",
+        "description": "List available skills (name + description). Use skill_view(name) to load full content.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "description": "Optional category filter to narrow results"
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "terminal",
+        "description": "Execute shell commands on a Linux environment. Filesystem usually persists between calls.\n\nDo NOT use cat/head/tail to read files — use read_file instead.\nDo NOT use grep/rg/find to search — use search_files instead.\nDo NOT use ls to list directories — use search_files(target='files') instead.\nDo NOT use sed/awk to edit files — use patch instead.\nDo NOT use echo/cat heredoc to create files — use write_file instead.\nReserve terminal for: builds, installs, git, processes, scripts, network, package managers, and anything that needs a shell.\n\nForeground (default): Commands return INSTANTLY when done, even if the timeout is high. Set timeout=300 for long builds/scripts — you'll still get the result in seconds if it's fast. Prefer foreground for short commands.\nBackground: Set background=true to get a session_id. Two patterns:\n  (1) Long-lived processes that never exit (servers, watchers).\n  (2) Long-running tasks with notify_on_complete=true — you can keep working on other things and the system auto-notifies you when the task finishes. Great for test suites, builds, deployments, or anything that takes more than a minute.\nFor servers/watchers, do NOT use shell-level background wrappers (nohup/disown/setsid/trailing '&') in foreground mode. Use background=true so Hermes can track lifecycle and output.\nAfter starting a server, verify readiness with a health check or log signal, then run tests in a separate terminal() call. Avoid blind sleep loops.\nUse process(action=\"poll\") for progress checks, process(action=\"wait\") to block until done.\nWorking directory: Use 'workdir' for per-command cwd.\nPTY mode: Set pty=true for interactive CLI tools (Codex, Claude Code, Python REPL).\n\nDo NOT use vim/nano/interactive tools without pty=true — they hang without a pseudo-terminal. Pipe git output to cat if it might page.\n",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "description": "The command to execute on the VM"
+            },
+            "background": {
+              "type": "boolean",
+              "description": "Run the command in the background. Two patterns: (1) Long-lived processes that never exit (servers, watchers). (2) Long-running tasks paired with notify_on_complete=true — you can keep working and get notified when the task finishes. For short commands, prefer foreground with a generous timeout instead.",
+              "default": false
+            },
+            "timeout": {
+              "type": "integer",
+              "description": "Max seconds to wait (default: 180, foreground max: 600). Returns INSTANTLY when command finishes — set high for long tasks, you won't wait unnecessarily. Foreground timeout above 600s is rejected; use background=true for longer commands.",
+              "minimum": 1
+            },
+            "workdir": {
+              "type": "string",
+              "description": "Working directory for this command (absolute path). Defaults to the session working directory."
+            },
+            "pty": {
+              "type": "boolean",
+              "description": "Run in pseudo-terminal (PTY) mode for interactive CLI tools like Codex, Claude Code, or Python REPL. Only works with local and SSH backends. Default: false.",
+              "default": false
+            },
+            "notify_on_complete": {
+              "type": "boolean",
+              "description": "When true (and background=true), you'll be automatically notified exactly once when the process finishes. **This is the right choice for almost every long-running task** — tests, builds, deployments, multi-item batch jobs, anything that takes over a minute and has a defined end. Use this and keep working on other things; the system notifies you on exit. MUTUALLY EXCLUSIVE with watch_patterns — when both are set, watch_patterns is dropped.",
+              "default": false
+            },
+            "watch_patterns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Strings to watch for in background process output. HARD RATE LIMIT: at most 1 notification per 15 seconds per process — matches arriving inside the cooldown are dropped. After 3 consecutive 15-second windows with dropped matches, watch_patterns is automatically disabled for that process and promoted to notify_on_complete behavior (one notification on exit, no more mid-process spam). USE ONLY for truly rare, one-shot mid-process signals on LONG-LIVED processes that will never exit on their own — e.g. ['Application startup complete'] on a server so you know when to hit its endpoint, or ['migration done'] on a daemon. DO NOT use for: (1) end-of-run markers like 'DONE'/'PASS' — use notify_on_complete instead; (2) error patterns like 'ERROR'/'Traceback' in loops or multi-item batch jobs — they fire on every iteration and you'll hit the strike limit fast; (3) anything you'd ever combine with notify_on_complete. When in doubt, choose notify_on_complete. MUTUALLY EXCLUSIVE with notify_on_complete — set one, not both."
+            }
+          },
+          "required": [
+            "command"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "text_to_speech",
+        "description": "Convert text to speech audio. Returns a MEDIA: path that the platform delivers as native audio. Compatible providers render as a voice bubble on Telegram; otherwise audio is sent as a regular attachment. In CLI mode, saves to ~/voice-memos/. Voice and provider are user-configured (built-in providers like edge/openai or custom command providers under tts.providers.<name>), not model-selected.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to convert to speech. Provider-specific character caps apply and are enforced automatically (OpenAI 4096, xAI 15000, MiniMax 10000, ElevenLabs 5k-40k depending on model); over-long input is truncated."
+            },
+            "output_path": {
+              "type": "string",
+              "description": "Optional custom file path to save the audio. Defaults to ~/.hermes/audio_cache/<timestamp>.mp3"
+            }
+          },
+          "required": [
+            "text"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "todo",
+        "description": "Manage your task list for the current session. Use for complex tasks with 3+ steps or when the user provides multiple tasks. Call with no parameters to read the current list.\n\nWriting:\n- Provide 'todos' array to create/update items\n- merge=false (default): replace the entire list with a fresh plan\n- merge=true: update existing items by id, add any new ones\n\nEach item: {id: string, content: string, status: pending|in_progress|completed|cancelled}\nList order is priority. Only ONE item in_progress at a time.\nMark items completed immediately when done. If something fails, cancel it and add a revised item.\n\nAlways returns the full current list.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "todos": {
+              "type": "array",
+              "description": "Task items to write. Omit to read current list.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Unique item identifier"
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Task description"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "in_progress",
+                      "completed",
+                      "cancelled"
+                    ],
+                    "description": "Current status"
+                  }
+                },
+                "required": [
+                  "id",
+                  "content",
+                  "status"
+                ]
+              }
+            },
+            "merge": {
+              "type": "boolean",
+              "description": "true: update existing items by id, add new ones. false (default): replace the entire list.",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "web_extract",
+        "description": "Extract content from web page URLs. Returns page content in markdown format. Also works with PDF URLs (arxiv papers, documents, etc.) — pass the PDF link directly and it converts to markdown text. Pages under 5000 chars return full markdown; larger pages are LLM-summarized and capped at ~5000 chars per page. Pages over 2M chars are refused. If a URL fails or times out, use the browser tool to access it instead.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "urls": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of URLs to extract content from (max 5 URLs per call)",
+              "maxItems": 5
+            }
+          },
+          "required": [
+            "urls"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "web_search",
+        "description": "Search the web for information. Returns up to 5 results by default with titles, URLs, and descriptions. The query is passed through to the configured backend, so operators such as site:domain, filetype:pdf, intitle:word, -term, and \"exact phrase\" may work when the backend supports them.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The search query to look up on the web. You may include backend-supported operators such as site:example.com, filetype:pdf, intitle:word, -term, or \"exact phrase\"."
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum number of results to return. Defaults to 5.",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 5
+            }
+          },
+          "required": [
+            "query"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file",
+        "description": "Write content to a file, completely replacing existing content. Use this instead of echo/cat heredoc in terminal. Creates parent directories automatically. OVERWRITES the entire file — use 'patch' for targeted edits. Auto-runs syntax checks on .py/.json/.yaml/.toml and other linted languages; only NEW errors introduced by this write are surfaced (pre-existing errors are filtered out).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Path to the file to write (will be created if it doesn't exist, overwritten if it does)"
+            },
+            "content": {
+              "type": "string",
+              "description": "Complete content to write to the file"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ]
+        }
+      }
+    }
+  ],
+  "message_count": 7,
+  "messages": [
+    {
+      "role": "user",
+      "content": "browser_navigate to https://www.instagram.com/accounts/login/"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "I need to navigate to the Instagram login page using the browser_navigate tool. Let me do that first.\n",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "I need to navigate to the Instagram login page using the browser_navigate tool. Let me do that first.\n",
+      "tool_calls": [
+        {
+          "id": "chatcmpl-tool-a9490e4934713ddf",
+          "call_id": "chatcmpl-tool-a9490e4934713ddf",
+          "response_item_id": "fc_chatcmpl-tool-a9490e4934713ddf",
+          "type": "function",
+          "function": {
+            "name": "browser_navigate",
+            "arguments": "{\"url\": \"https://www.instagram.com/accounts/login/\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "browser_navigate",
+      "content": "{\"success\": false, \"error\": \"Auto-launch failed: Chrome exited early (exit code: unknown) without writing DevToolsActivePort\\n(also tried parsing stderr) Chrome exited before providing DevTools URL\\nChrome stderr:\\n  [913274:913274:0515/165215.397232:FATAL:content/browser/zygote_host/zygote_host_impl_linux.cc:128] No usable sandbox! If you are running on Ubuntu 23.10+ or another Linux distro that has disabled unprivileged user namespaces with AppArmor, see https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md. Otherwise see https://chromium.googlesource.com/chromium/src/+/main/docs/linux/suid_sandbox_development.md for more information on developing with the (older) SUID sandbox. If you want to live dangerously and need an immediate workaround, you can try using --no-sandbox.\\n  [0515/165215.404308:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq: No such file or directory (2)\\n  [0515/165215.404345:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq: No such file or directory (2)\\nHint: try --args \\\"--no-sandbox\\\" (required in containers, VMs, and some Linux setups)\"}",
+      "tool_call_id": "chatcmpl-tool-a9490e4934713ddf"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "The user wants to navigate to Instagram login page. The browser_navigate failed due to Chrome sandbox issue. We need to try again with --no-sandbox flag? The tool browser_navigate doesn't have args parameter. However we can maybe use terminal to launch something? But the instruction is to use browser_navigate. Perhaps we can try again? The error suggests we need to add --no-sandbox flag. Maybe we can set an environment variable? Not sure.\n\nWe could try using web_extract instead? But the user explicitly said browser_navigate to that URL. We could try again and see if it works? Might be intermittent.\n\nLet's try again with browser_navigate.\n",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "The user wants to navigate to Instagram login page. The browser_navigate failed due to Chrome sandbox issue. We need to try again with --no-sandbox flag? The tool browser_navigate doesn't have args parameter. However we can maybe use terminal to launch something? But the instruction is to use browser_navigate. Perhaps we can try again? The error suggests we need to add --no-sandbox flag. Maybe we can set an environment variable? Not sure.\n\nWe could try using web_extract instead? But the user explicitly said browser_navigate to that URL. We could try again and see if it works? Might be intermittent.\n\nLet's try again with browser_navigate.\n",
+      "tool_calls": [
+        {
+          "id": "chatcmpl-tool-8f594595bbb86dd2",
+          "call_id": "chatcmpl-tool-8f594595bbb86dd2",
+          "response_item_id": "fc_chatcmpl-tool-8f594595bbb86dd2",
+          "type": "function",
+          "function": {
+            "name": "browser_navigate",
+            "arguments": "{\"url\": \"https://www.instagram.com/accounts/login/\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "browser_navigate",
+      "content": "{\"success\": false, \"error\": \"Auto-launch failed: Chrome exited early (exit code: unknown) without writing DevToolsActivePort\\n(also tried parsing stderr) Chrome exited before providing DevTools URL\\nChrome stderr:\\n  [913360:913360:0515/165224.221530:FATAL:content/browser/zygote_host/zygote_host_impl_linux.cc:128] No usable sandbox! If you are running on Ubuntu 23.10+ or another Linux distro that has disabled unprivileged user namespaces with AppArmor, see https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md. Otherwise see https://chromium.googlesource.com/chromium/src/+/main/docs/linux/suid_sandbox_development.md for more information on developing with the (older) SUID sandbox. If you want to live dangerously and need an immediate workaround, you can try using --no-sandbox.\\n  [0515/165224.228618:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq: No such file or directory (2)\\n  [0515/165224.228656:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq: No such file or directory (2)\\nHint: try --args \\\"--no-sandbox\\\" (required in containers, VMs, and some Linux setups)\"}\n\n[Tool loop warning: repeated_exact_failure_warning; count=2; browser_navigate has failed 2 times with identical arguments. This looks like a loop; inspect the error and change strategy instead of retrying it unchanged.]",
+      "tool_call_id": "chatcmpl-tool-8f594595bbb86dd2"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "We need to handle the sandbox issue. Possibly we need to add --no-sandbox flag? But the tool may not allow args. We could try using web_extract or web_search instead? The user asked to navigate to Instagram login. We could try using web_extract to get the page content? However web_extract may not support JS-heavy login page. But we can attempt to fetch via curl? Use terminal with curl? Let's try using terminal to curl the page and see if we can get HTML. Then we can provide that. Use terminal command: curl -s https://www.instagram.com/accounts/login/ . Let's do that.\n\n",
+      "finish_reason": "tool_calls",
+      "reasoning_content": "We need to handle the sandbox issue. Possibly we need to add --no-sandbox flag? But the tool may not allow args. We could try using web_extract or web_search instead? The user asked to navigate to Instagram login. We could try using web_extract to get the page content? However web_extract may not support JS-heavy login page. But we can attempt to fetch via curl? Use terminal with curl? Let's try using terminal to curl the page and see if we can get HTML. Then we can provide that. Use terminal command: curl -s https://www.instagram.com/accounts/login/ . Let's do that.\n\n",
+      "tool_calls": [
+        {
+          "id": "chatcmpl-tool-9e0cda3c0d188bbe",
+          "call_id": "chatcmpl-tool-9e0cda3c0d188bbe",
+          "response_item_id": "fc_chatcmpl-tool-9e0cda3c0d188bbe",
+          "type": "function",
+          "function": {
+            "name": "terminal",
+            "arguments": "{\"command\": \"curl -s https://www.instagram.com/accounts/login/\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "name": "terminal",
+      "content": "{\"output\": \"<!DOCTYPE html><html class=\\\"_9dls _ar44\\\" lang=\\\"en\\\" dir=\\\"ltr\\\"><head><link data-default-icon=\\\"https://static.cdninstagram.com/rsrc.php/yr/r/rzWiSjZRxk5.webp\\\" rel=\\\"icon\\\" sizes=\\\"192x192\\\" href=\\\"https://static.cdninstagram.com/rsrc.php/yr/r/rzWiSjZRxk5.webp\\\" /><meta name=\\\"bingbot\\\" content=\\\"noarchive\\\" /><meta name=\\\"robots\\\" content=\\\"noarchive, noimageindex\\\" /><meta charset=\\\"utf-8\\\" /><meta name=\\\"apple-mobile-web-app-status-bar-style\\\" content=\\\"default\\\" /><meta name=\\\"mobile-web-app-capable\\\" content=\\\"yes\\\" /><meta id=\\\"viewport\\\" name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2, viewport-fit=cover\\\" /><meta name=\\\"theme-color\\\" content=\\\"#ffffff\\\" /><meta name=\\\"theme-color\\\" content=\\\"#000000\\\" media=\\\"(prefers-color-scheme: dark)\\\" /><link rel=\\\"apple-touch-icon\\\" sizes=\\\"76x76\\\" href=\\\"https://static.cdninstagram.com/rsrc.php/yj/r/f01UdNyJjJj.webp\\\" /><link rel=\\\"apple-touch-icon\\\" sizes=\\\"120x120\\\" href=\\\"https://static.cdninstagram.com/rsrc.php/yL/r/mMvhX4currF.webp\\\" /><link rel=\\\"apple-touch-icon\\\" sizes=\\\"152x152\\\" href=\\\"https://static.cdninstagram.com/rsrc.php/yY/r/5OCV_xUyQ5h.webp\\\" /><link rel=\\\"apple-touch-icon\\\" sizes=\\\"167x167\\\" href=\\\"https://static.cdninstagram.com/rsrc.php/y9/r/MptwNl-B2pS.webp\\\" /><link rel=\\\"apple-touch-icon\\\" sizes=\\\"180x180\\\" href=\\\"https://static.cdninstagram.com/rsrc.php/yw/r/icwX0xAk0pz.webp\\\" /><link data-default-icon=\\\"https://static.cdninstagram.com/rsrc.php/y4/r/QaBlI0OZiks.ico\\\" rel=\\\"shortcut icon\\\" type=\\\"image/x-icon\\\" href=\\\"https://static.cdninstagram.com/rsrc.php/y4/r/QaBlI0OZiks.ico\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/\\\" hreflang=\\\"x-default\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=en\\\" hreflang=\\\"en\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=fr\\\" hreflang=\\\"fr\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=it\\\" hreflang=\\\"it\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=de\\\" hreflang=\\\"de\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es\\\" hreflang=\\\"es\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=zh-cn\\\" hreflang=\\\"zh-cn\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=zh-tw\\\" hreflang=\\\"zh-tw\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=ja\\\" hreflang=\\\"ja\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=ko\\\" hreflang=\\\"ko\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=pt\\\" hreflang=\\\"pt\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=pt-br\\\" hreflang=\\\"pt-br\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=af\\\" hreflang=\\\"af\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=cs\\\" hreflang=\\\"cs\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=da\\\" hreflang=\\\"da\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=el\\\" hreflang=\\\"el\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=fi\\\" hreflang=\\\"fi\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=hr\\\" hreflang=\\\"hr\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=hu\\\" hreflang=\\\"hu\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=id\\\" hreflang=\\\"id\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=ms\\\" hreflang=\\\"ms\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=nb\\\" hreflang=\\\"nb\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=nl\\\" hreflang=\\\"nl\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=pl\\\" hreflang=\\\"pl\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=ru\\\" hreflang=\\\"ru\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=sk\\\" hreflang=\\\"sk\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=sv\\\" hreflang=\\\"sv\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=th\\\" hreflang=\\\"th\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=tl\\\" hreflang=\\\"tl\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=tr\\\" hreflang=\\\"tr\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=hi\\\" hreflang=\\\"hi\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=bn\\\" hreflang=\\\"bn\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=gu\\\" hreflang=\\\"gu\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=kn\\\" hreflang=\\\"kn\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=ml\\\" hreflang=\\\"ml\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=mr\\\" hreflang=\\\"mr\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=pa\\\" hreflang=\\\"pa\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=ta\\\" hreflang=\\\"ta\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=te\\\" hreflang=\\\"te\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=ne\\\" hreflang=\\\"ne\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=si\\\" hreflang=\\\"si\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=vi\\\" hreflang=\\\"vi\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=bg\\\" hreflang=\\\"bg\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=fr-ca\\\" hreflang=\\\"fr-ca\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=ro\\\" hreflang=\\\"ro\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=sr\\\" hreflang=\\\"sr\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=uk\\\" hreflang=\\\"uk\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=zh-hk\\\" hreflang=\\\"zh-hk\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-ar\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-bo\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-cl\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-co\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-cr\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-cu\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-do\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-ec\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-gt\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-hn\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-mx\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-ni\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-pa\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-pr\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-py\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-pe\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-sv\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-uy\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=es-la\\\" hreflang=\\\"es-ve\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=he\\\" hreflang=\\\"he\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=fa\\\" hreflang=\\\"fa\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=ar\\\" hreflang=\\\"ar\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=ur\\\" hreflang=\\\"ur\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=en-gb\\\" hreflang=\\\"en-gb\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=sw-ke\\\" hreflang=\\\"sw-ke\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=ha-ng\\\" hreflang=\\\"ha-ng\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=am-et\\\" hreflang=\\\"am-et\\\" /><link rel=\\\"alternate\\\" href=\\\"https://www.instagram.com/accounts/login/?hl=om-et\\\" hreflang=\\\"om-et\\\" /><meta property=\\\"al:ios:app_name\\\" content=\\\"Instagram\\\" /><meta property=\\\"al:ios:app_store_id\\\" content=\\\"389801252\\\" /><meta property=\\\"al:ios:url\\\" content=\\\"instagram://mainfeed\\\" /><meta property=\\\"al:android:app_name\\\" content=\\\"Instagram\\\" /><meta property=\\\"al:android:package\\\" content=\\\"com.instagram.android\\\" /><meta property=\\\"al:android:url\\\" content=\\\"https://www.instagram.com/_n/mainfeed/\\\" /><meta property=\\\"og:site_name\\\" content=\\\"Instagram\\\" /><meta property=\\\"og:title\\\" content=\\\"Instagram\\\" /><meta property=\\\"og:image\\\" content=\\\"https://static.cdninstagram.com/rsrc.php/v4/yD/r/R0fBIMurK8v.png\\\" /><meta property=\\\"og:url\\\" content=\\\"https://instagram.com/\\\" /><meta property=\\\"fb:app_id\\\" content=\\\"124024574287414\\\" /><meta name=\\\"description\\\" content=\\\"Create an account or log in to Instagram - Share what you&#039;re into with the people who get you.\\\" /><link rel=\\\"canonical\\\" href=\\\"https://www.instagram.com/\\\" /><link rel=\\\"manifest\\\" href=\\\"/data/manifest.json\\\" crossorigin=\\\"use-credentials\\\" /><meta name=\\\"application-title\\\" content=\\\"Instagram\\\" /><meta name=\\\"color-scheme\\\" content=\\\"light\\\" /><style data-btmanifest=\\\"1039591789_main\\\" nonce=\\\"e4MH0okw\\\">:root, .__ig-light-mode:root, .__ig-light-mode {--fds-black:#000000;--fds-black-alpha-05:rgba(0, 0, 0, 0.05);--fds-black-alpha-10:rgba(0, 0, 0, 0.1);--fds-black-alpha-15:rgba(0, 0, 0, 0.15);--fds-black-alpha-20:rgba(0, 0, 0, 0.2);--fds-black-alpha-30:rgba(0, 0, 0, 0.3);--fds-black-alpha-40:rgba(0, 0, 0, 0.4);--fds-black-alpha-50:rgba(0, 0, 0, 0.5);--fds-black-alpha-60:rgba(0, 0, 0, 0.6);--fds-black-alpha-80:rgba(0, 0, 0, 0.8);--fds-blue-05:#ECF3FF;--fds-blue-30:#AAC9FF;--fds-blue-40:#77A7FF;--fds-blue-60:#1877F2;--fds-blue-70:#2851A3;--fds-blue-80:#1D3C78;--fds-button-text:#444950;--fds-comment-background:#F2F3F5;--fds-dark-mode-gray-35:#CCCCCC;--fds-dark-mode-gray-50:#828282;--fds-dark-mode-gray-70:#4A4A4A;--fds-dark-mode-gray-80:#373737;--fds-dark-mode-gray-90:#282828;--fds-dark-mode-gray-100:#1C1C1C;--fds-gray-00:#F5F6F7;--fds-gray-05:#F2F3F5;--fds-gray-10:#EBEDF0;--fds-gray-20:#DADDE1;--fds-gray-25:#CCD0D5;--fds-gray-30:#BEC3C9;--fds-gray-45:#8D949E;--fds-gray-70:#606770;--fds-gray-80:#444950;--fds-gray-90:#303338;--fds-gray-100:#1C1E21;--fds-green-55:#00A400;--fds-green-60:#31A73B;--fds-green-65:#51CE70;--fds-highlight:#3578E5;--fds-highlight-cell-background:#ECF3FF;--fds-primary-icon:#1C1E21;--fds-primary-text:#1C1E21;--fds-red-55:#FA383E;--fds-soft:cubic-bezier(.08,.52,.52,1);--fds-spectrum-aluminum-tint-70:#E4F0F6;--fds-spectrum-blue-gray-tint-70:#CFD1D5;--fds-spectrum-cherry:#F35369;--fds-spectrum-cherry-tint-70:#FBCCD2;--fds-spectrum-grape-tint-70:#DDD5F0;--fds-spectrum-grape-tint-90:#F4F1FA;--fds-spectrum-lemon-dark-1:#F5C33B;--fds-spectrum-lemon-tint-70:#FEF2D1;--fds-spectrum-lime:#A3CE71;--fds-spectrum-lime-tint-70:#E4F0D5;--fds-spectrum-orange-tint-70:#FCDEC5;--fds-spectrum-orange-tint-90:#FEF4EC;--fds-spectrum-seafoam-tint-70:#CAEEF9;--fds-spectrum-slate-dark-2:#89A1AC;--fds-spectrum-slate-tint-70:#EAEFF2;--fds-spectrum-teal:#6BCEBB;--fds-spectrum-teal-dark-1:#4DBBA6;--fds-spectrum-teal-dark-2:#31A38D;--fds-spectrum-teal-tint-70:#D2F0EA;--fds-spectrum-teal-tint-90:#F0FAF8;--fds-spectrum-tomato:#FB724B;--fds-spectrum-tomato-tint-30:#F38E7B;--fds-spectrum-tomato-tint-90:#FDEFED;--fds-strong:cubic-bezier(.12,.8,.32,1);--fds-unified-blue-35:#1455B0;--fds-unified-gray-20:#323436;--fds-white:#FFFFFF;--fds-white-alpha-05:rgba(255, 255, 255, 0.05);--fds-white-alpha-10:rgba(255, 255, 255, 0.1);--fds-white-alpha-20:rgba(255, 255, 255, 0.2);--fds-white-alpha-30:rgba(255, 255, 255, 0.3);--fds-white-alpha-40:rgba(255, 255, 255, 0.4);--fds-white-alpha-50:rgba(255, 255, 255, 0.5);--fds-white-alpha-60:rgba(255, 255, 255, 0.6);--fds-white-alpha-80:rgba(255, 255, 255, 0.8);--fds-yellow-20:#FFBA00;--accent:#0095F6;--always-white:#FFFFFF;--always-black:black;--always-dark-gradient:linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));--always-dark-overlay:rgba(43, 48, 54, 0.8);--always-light-overlay:rgba(255, 255, 255, 0.4);--always-gray-40:#65676B;--always-gray-75:#BCC0C4;--always-gray-95:#F0F2F5;--attachment-footer-background:#F0F2F5;--background-deemphasized:#F0F2F5;--badge-background-color-blue:var(--accent);--badge-background-color-dark-gray:var(--secondary-icon);--badge-background-color-gray:var(--disabled-icon);--badge-background-color-green:var(--positive);--badge-background-color-light-blue:var(--highlight-bg);--badge-background-color-red:var(--notification-badge);--badge-background-color-yellow:var(--base-lemon);--base-blue:#1877F2;--base-cherry:#F3425F;--base-grape:#9360F7;--base-lemon:#F7B928;--base-lime:#45BD62;--base-pink:#FF66BF;--base-seafoam:#54C7EC;--base-teal:#2ABBA7;--base-tomato:#FB724B;--text-badge-info-background:hsl(214, 89%, 52%);--text-badge-success-background:#31A24C;--text-badge-attention-background:hsl(40, 89%, 52%);--text-badge-critical-background:#e41e3f;--blue-link:#00376B;--border-focused:#65676B;--card-background:#FFFFFF;--card-background-flat:#F7F8FA;--comment-background:#F0F2F5;--comment-footer-background:#F6F9FA;--dataviz-primary-1:rgb(0,174,143);--dataviz-blue-primary:#1D85FC;--dataviz-blue-secondary:#043B72;--dataviz-orange:#D06C14;--disabled-button-background:rgba(0, 149, 246, 0.3);--disabled-button-text:#FFFFFF;--disabled-icon:#BCC0C4;--disabled-text:#BCC0C4;--divider:#DBDBDB;--divider-on-color:#CED0D4;--event-date:#F3425F;--fb-wordmark:#0866FF;--fb-logo:#0866FF;--filter-accent:invert(39%) sepia(57%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(147.75%) hue-rotate(202deg) brightness(97%) contrast(96%);--filter-always-white:invert(100%);--filter-disabled-icon:invert(80%) sepia(6%) saturate(200%) saturate(120%) hue-rotate(173deg) brightness(98%) contrast(89%);--filter-placeholder-icon:invert(59%) sepia(11%) saturate(200%) saturate(135%) hue-rotate(176deg) brightness(96%) contrast(94%);--filter-primary-accent:invert(39%) sepia(57%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(147.75%) hue-rotate(202deg) brightness(97%) contrast(96%);--filter-primary-icon:invert(8%) sepia(10%) saturate(200%) saturate(200%) saturate(166%) hue-rotate(177deg) brightness(104%) contrast(91%);--filter-secondary-button-icon-on-media:invert(100%);--filter-secondary-icon:invert(39%) sepia(21%) saturate(200%) saturate(109.5%) hue-rotate(174deg) brightness(94%) contrast(86%);--filter-warning-icon:invert(77%) sepia(29%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(128%) hue-rotate(359deg) brightness(102%) contrast(107%);--filter-blue-link-icon:invert(30%) sepia(98%) saturate(200%) saturate(200%) saturate(200%) saturate(166.5%) hue-rotate(192deg) brightness(91%) contrast(101%);--filter-positive:invert(37%) sepia(61%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(115%) hue-rotate(91deg) brightness(97%) contrast(105%);--filter-primary-deemphasized-button-icon:invert(28%) sepia(100%) saturate(6042%) hue-rotate(202deg) brightness(96%) contrast(101%);--filter-negative:invert(25%) sepia(33%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(200%) saturate(110%) hue-rotate(345deg) brightness(132%) contrast(96%);--focus-ring-blue:#1877F2;--glimmer-base-opaque:#979A9F;--glimmer-high-contrast-base-opaque:#65686C;--glimmer-opacity-high-contrast-max:1;--glimmer-opacity-high-contrast-min:0.08;--glimmer-opacity-max:1;--glimmer-opacity-min:0.25;--glimmer-spinner-icon:#65676B;--hero-banner-background:#FFFFFF;--hosted-view-selected-state:rgba(45, 136, 255, 0.1);--highlight-bg:#E7F3FF;--hover-overlay:rgba(0, 0, 0, 0.05);--inverse-text:var(--always-white);--list-cell-chevron:#65676B;--media-hover:rgba(68, 73, 80, 0.15);--media-inner-border:rgba(0, 0, 0, 0.1);--media-outer-border:#FFFFFF;--media-pressed:rgba(68, 73, 80, 0.35);--messenger-card-background:#FFFFFF;--messenger-card-box-shadow:0px 1px 2px 0px #0000001A;--mwp-header-background-color:var(--messenger-card-background);--mwp-header-button-color:var(--accent);--mwp-message-row-background:var(--messenger-card-background);--messenger-reply-background:#F0F2F5;--overlay-alpha-80:rgba(12, 16, 20, 0.7);--overlay-on-media:rgba(0, 0, 0, 0.6);--nav-bar-background:#FFFFFF;--popover-card-background:var(--card-background);--nav-bar-background-gradient:linear-gradient(to top, #FFFFFF, rgba(255,255,255.9), rgba(255,255,255,.7), rgba(255,255,255,.4), rgba(255,255,255,0));--nav-bar-background-gradient-wash:linear-gradient(to top, #F0F2F5, rgba(240,242,245.9), rgba(240,242,245,.7), rgba(240,242,245,.4), rgba(240,242,245,0));--negative:hsl(350, 87%, 55%);--negative-background:hsl(350, 87%, 55%, 20%);--new-notification-background:#E7F3FF;--non-media-pressed:rgba(68, 73, 80, 0.15);--non-media-pressed-on-dark:rgba(255, 255, 255, 0.3);--notification-badge:#e41e3f;--placeholder-icon:#65676B;--placeholder-image:rgb(164, 167, 171);--placeholder-text:#65676B;--placeholder-text-on-media:rgba(255, 255, 255, 0.5);--popover-background:#FFFFFF;--positive:#31A24C;--positive-background:#DEEFE1;--press-overlay:rgba(0, 0, 0, 0.10);--primary-button-background:#0095F6;--primary-button-icon:#FFFFFF;--primary-button-pressed:#77A7FF;--primary-button-text:#FFFFFF;--primary-deemphasized-button-background:rgba(0, 149, 246, 0.1);--primary-deemphasized-button-pressed:rgba(0, 149, 246, 0.05);--primary-deemphasized-button-pressed-overlay:rgba(0, 149, 246, 0.15);--primary-deemphasized-button-text:#0095F6;--primary-icon:#262626;--primary-text:#262626;--primary-text-on-media:#FFFFFF;--primary-web-focus-indicator:#D24294;--progress-ring-neutral-background:rgba(0, 0, 0, 0.2);--progress-ring-neutral-foreground:#000000;--progress-ring-on-media-background:rgba(255, 255, 255, 0.2);--progress-ring-on-media-foreground:#FFFFFF;--progress-ring-blue-background:rgba(24, 119, 242, 0.2);--progress-ring-blue-foreground:hsl(214, 89%, 52%);--progress-ring-disabled-background:rgba(190,195,201, 0.2);--progress-ring-disabled-foreground:#BEC3C9;--rating-star-active:#EB660D;--scroll-thumb:#BCC0C4;--scroll-shadow:0 1px 2px rgba(0, 0, 0, 0.1), 0 -1px rgba(0, 0, 0, 0.1) inset;--secondary-button-background:transparent;--secondary-button-background-floating:#ffffff;--secondary-button-background-on-dark:rgba(0, 0, 0, 0.4);--secondary-button-pressed:rgba(0, 0, 0, 0.05);--secondary-button-stroke:transparent;--secondary-button-text:#0095F6;--secondary-icon:#8E8E8E;--secondary-text:#8E8E8E;--secondary-text-on-media:rgba(255, 255, 255, 0.9);--section-header-text:#4B4C4F;--shadow-1:rgba(0, 0, 0, 0.1);--shadow-2:rgba(0, 0, 0, 0.2);--shadow-5:rgba(0, 0, 0, 0.5);--shadow-8:rgba(0, 0, 0, 0.8);--shadow-base:0 1px 2px var(--shadow-2);--shadow-elevated:0 8px 20px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);--shadow-emphasis:0 2px 12px var(--shadow-2);--shadow-inset:rgba(255, 255, 255, 0.5);--shadow-on-media:0px 0px 1px rgba(0, 0, 0, 0.62);--shadow-persistent:0px 0px 12px rgba(52, 72, 84, 0.05);--shadow-primary:0px 5px 12px rgba(52, 72, 84, 0.2);--shadow-responsive:0px 8px 16px 0px rgba(0, 0, 0, 0.1);--surface-background:#FFFFFF;--switch-active:hsl(214, 89%, 52%);--switch-inactive:#DBDBDB;--switch-unchecked-background-color:#8F9297;--text-highlight:rgba(24, 119\\n\\n... [OUTPUT TRUNCATED - 551839 chars omitted out of 601839 total] ...\\n\\ncr:6895\\\":{\\\"__bbox\\\":{\\\"__rc\\\":[\\\"cometAsyncRequestHeaders\\\",null]}},\\\"cr:8958\\\":{\\\"__bbox\\\":{\\\"__rc\\\":[\\\"FBJSON\\\",null]}},\\\"cr:12180\\\":{\\\"__bbox\\\":{\\\"__rc\\\":[\\\"QPLUserTimingPlugin\\\",null]}},\\\"cr:925100\\\":{\\\"__bbox\\\":{\\\"__rc\\\":[\\\"RunComet\\\",null]}},\\\"cr:1752405\\\":{\\\"__bbox\\\":{\\\"__rc\\\":[\\\"QPLAddCometRequestHeaders\\\",null]}},\\\"cr:1984081\\\":{\\\"__bbox\\\":{\\\"__rc\\\":[\\\"QPLSapienzPlugin\\\",null]}}},\\\"hsdp\\\":{\\\"bxData\\\":{\\\"237\\\":{\\\"uri\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/yR\\\\/r\\\\/ayqr5HQtlkb.wasm\\\"},\\\"6946\\\":{\\\"uri\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/yf\\\\/r\\\\/rogm88TRRiw.wasm\\\"},\\\"31390\\\":{\\\"uri\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/yl\\\\/r\\\\/php8T1oSIZM.wasm\\\"},\\\"33861\\\":{\\\"uri\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/yJ\\\\/r\\\\/FTWs9bOoreT.wasm\\\"}},\\\"clpData\\\":{\\\"1744178\\\":{\\\"r\\\":1,\\\"s\\\":1},\\\"1838142\\\":{\\\"r\\\":1,\\\"s\\\":1}},\\\"gkxData\\\":{\\\"2160\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"3272\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"4444\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"5679\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"9550\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"20836\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"20935\\\":{\\\"result\\\":true,\\\"hash\\\":null},\\\"21043\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"21050\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"21051\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"21053\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"21055\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"21056\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"21057\\\":{\\\"result\\\":false,\\\"hash\\\":null},\\\"21058\\\":{\\\"result\\\":true,\\\"hash\\\":null},\\\"22038\\\":{\\\"result\\\":true,\\\"hash\\\":null}},\\\"qplData\\\":{\\\"106\\\":{},\\\"418\\\":{\\\"r\\\":1000}},\\\"justknobxData\\\":{\\\"168\\\":{\\\"r\\\":60000},\\\"1276\\\":{\\\"r\\\":true},\\\"2379\\\":{\\\"r\\\":35000}}}},7438],[\\\"cr:34942\\\",[],{\\\"__rc\\\":[null,\\\"Aa4doNV_YbgXTO7xuInUAOizZ1cWazEjMvvzr9g_r2zGJ63SoYRrTVbgy6QZLiZnDlJ3LhTweT2RZd9NGVvSkk2gWS5QAAP9Y9yCHF3YQepngAjwPqaPlyErBA\\\"]},-1],[\\\"cr:34940\\\",[],{\\\"__rc\\\":[null,\\\"Aa4doNV_YbgXTO7xuInUAOizZ1cWazEjMvvzr9g_r2zGJ63SoYRrTVbgy6QZLiZnDlJ3LhTweT2RZd9NGVvSkk2gWS5QAAP9Y9yCHF3YQepngAjwPqaPlyErBA\\\"]},-1],[\\\"cr:6985\\\",[],{\\\"__rc\\\":[null,\\\"Aa4lv4nuiiZb6KH-X7ax3JwUjiSVxy1pB-h2ih4aZ_EwfY2-6iAzJqsjH4ZkHlVJ9hGVBIcST5kNyYmrqnO5mdff7IRajhUUBVwYow6wE00i2vwCvMHGNH-Wpw\\\"]},-1],[\\\"cr:7691\\\",[],{\\\"__rc\\\":[null,\\\"Aa45lWnuk5VrlwtptvOOHqyOuq33E8U1sdGNOt92fsCpwJEr6YPMpZw1BJpluI8FW9a85X00yayE5ru_ZOOwos-kDK5mlX3knmjnM82kcQFoka117XFuTYQTCA\\\"]},-1],[\\\"cr:12252\\\",[],{\\\"__rc\\\":[null,\\\"Aa5Vv5zCeVStL_oJ6vMSXZR1g_hhZYT1Jj6SbPjcDkbMhxnEXGAOuBgJ5VXpVRlluubnLErecvjueWyrmsTc6uk-rrCxe_qNXZNzMdEDvScx6DpgpUCtUpvSgw\\\"]},-1],[\\\"AnalyticsCoreData\\\",[],{\\\"device_id\\\":\\\"4D61732E-8FCD-4BE4-8FD9-FC035B598E5F\\\",\\\"app_id\\\":\\\"936619743392459\\\",\\\"app_version\\\":\\\"1.0.0\\\",\\\"enable_bladerunner\\\":false,\\\"enable_ack\\\":true,\\\"push_phase\\\":\\\"C3\\\",\\\"enable_observer\\\":false,\\\"enable_dataloss_timer\\\":false,\\\"enable_fallback_for_br\\\":true,\\\"queue_activation_experiment\\\":false,\\\"max_delay_br_queue\\\":60000,\\\"max_delay_br_queue_immediate\\\":3,\\\"max_delay_br_init_not_complete\\\":3000,\\\"consents\\\":{},\\\"app_universe\\\":2,\\\"br_stateful_migration_on\\\":false,\\\"enable_non_fb_br_stateless_by_default\\\":false,\\\"use_falco_as_mutex_key\\\":false,\\\"is_intern\\\":false,\\\"identity\\\":{\\\"appScopedIdentity\\\":\\\"\\\",\\\"claim\\\":\\\"hmac_ttl.1778863954.AR1h8YRegOJGZftlF8I_oYdAQAfW-jLaakuG_8KPy5JUnAhr\\\"}},5237],[\\\"MessengerWebInitData\\\",[],{\\\"accountKey\\\":\\\"\\\",\\\"accountKeyV2\\\":\\\"\\\",\\\"activeThreadKeys\\\":[],\\\"allActiveThreadKeys\\\":[],\\\"appId\\\":0,\\\"createdAt\\\":1778863954071,\\\"cryptoAuthToken\\\":null,\\\"logoutToken\\\":\\\"\\\",\\\"sessionId\\\":null,\\\"userKeyBase\\\":\\\"\\\",\\\"userId\\\":0,\\\"gkInboxFollowUpEnabled\\\":false},5895]],\\\"require\\\":[[\\\"SharedOrWebWorkerBootstrapInit\\\",\\\"startServerJS\\\",[\\\"IGDAWMainV4WebWorker\\\"],[{\\\"__m\\\":\\\"IGDAWMainV4WebWorker\\\"}]],[\\\"WebWorkerInitDeferred\\\",\\\"initDeferred\\\",[],[{\\\"blLoggingCavalryFields\\\":{\\\"bl_sample_rate\\\":0,\\\"hr_sample_rate\\\":0,\\\"parent_lid\\\":\\\"7640162507413760588\\\"}}]],[\\\"ServerJS\\\"],[\\\"HasteSupportData\\\"],[\\\"Bootloader\\\"],[\\\"EBDeleteBackupsOnClient\\\"],[\\\"EBMinosDecryptAndValidateMessages\\\"],[\\\"WAGenerateAndUploadPreKeys\\\"],[\\\"WARequestPreKeyDigest\\\"],[\\\"WARotateSignedPreKey\\\"],[\\\"XmaEventsE2eeFalcoEvent\\\"],[\\\"MAWMainThreadLogger\\\"],[\\\"MAWWebWorkerSingleton\\\"],[\\\"CometRelayEnvironment\\\"],[\\\"CometToast.react\\\"],[\\\"EBUploadMessagesFromWorkerMutation\\\"],[\\\"hasDefaultThreadOneToOneCapability\\\"],[\\\"LSDataTraceFlush\\\"],[\\\"PublicKeyCrypto\\\"],[\\\"X25519\\\"],[\\\"MqttLongPollingRunner\\\"],[\\\"EncryptedBackupUploadFailureFalcoEvent\\\"],[\\\"EncryptedBackupUploadSuccessFalcoEvent\\\"],[\\\"sendToSentQPLLogger\\\"],[\\\"LSVoprfWasm\\\"],[\\\"LogWebQplNOP\\\"],[\\\"EBLSResignCdnUrl\\\"],[\\\"MAWBridgeObserver\\\"],[\\\"EBIsEbEnabled\\\"],[\\\"WorkerRelayNetwork\\\"],[\\\"EBGetEBState\\\"],[\\\"EBAddDeviceWithRecoveryCode\\\"],[\\\"EBAddDeviceWithKeys\\\"],[\\\"EBFetchBackupIds\\\"],[\\\"ristretto255\\\"],[\\\"EBInitializeBackup\\\"],[\\\"EBWorkerEBDBApi\\\"],[\\\"EBGenerateRecoveryCode\\\"],[\\\"EBIsEbEnabledSubscriber\\\"],[\\\"bumpVultureJSHash\\\"],[\\\"EBGetLSVirtualDevices\\\"],[\\\"EBAPIWriteMinosPublicKeysForRecipient\\\"],[\\\"EBAPIMinosVerifySingleEpoch\\\"],[\\\"EBMinosVerifySingleEpoch\\\"],[\\\"EBGetContactEpochHead\\\"],[\\\"FbtLogging\\\"],[\\\"EBGetMessageKeys\\\"],[\\\"EBMinosWriteKeyChangeAdminMessage\\\"],[\\\"EBMinosWriteSecureStorageAlert\\\"],[\\\"EBDedupeEncryptedLabyrinthMessages\\\"],[\\\"EBOtcAddDevice\\\"],[\\\"EBSyncEpochs\\\"],[\\\"EBAddVirtualDevice\\\"],[\\\"EBDeleteEncryptedBackup\\\"],[\\\"EBOptOut\\\"],[\\\"EBRevokeVirtualDevice\\\"],[\\\"EBRepairEpochs\\\"],[\\\"ODS\\\"],[\\\"PersistedQueue\\\"],[\\\"IntlQtEventFalcoEvent\\\"],[\\\"MAWClearSignalAndTempStores\\\"],[\\\"MpsMediaManagerV2\\\"],[\\\"GetLsDatabase\\\"],[\\\"TransportSelectingClientSingletonConditional\\\"],[\\\"ReverbWriteFailureFalcoEvent\\\"],[\\\"ReverbWriteSuccessFalcoEvent\\\"],[\\\"EncryptedBackupTaskFailureFalcoEvent\\\"],[\\\"EncryptedBackupTaskIssuedFalcoEvent\\\"],[\\\"EncryptedBackupTaskSkippedFalcoEvent\\\"],[\\\"MWEncryptedBackupsInitializeRestore\\\"],[\\\"MWEBUseLocalStorage\\\"],[\\\"EBMainThreadEBDBApi\\\"],[\\\"MWEncryptedBackupsCreateExtraVirtualDeviceWithRecoveryCodeData\\\"],[\\\"encryptedBackupsOptOutOfBackup\\\"],[\\\"CometExceptionDialog.react\\\"],[\\\"DGWEnvUtil\\\"],[\\\"ContextualConfig\\\"],[\\\"BladeRunnerClient\\\"],[\\\"DGWClient\\\"],[\\\"DGWRequestStreamClient\\\"],[\\\"LSDatascriptEvaluator\\\"],[\\\"WAGetIdentityKeys\\\"],[\\\"WASendMsgUtilV2\\\"],[\\\"WASendPing\\\"],[\\\"WASyncAbProps\\\"],[\\\"WAGetDevices\\\"],[\\\"WARemoveDevice\\\"],[\\\"WANotifyDeviceChange\\\"],[\\\"WARemoveCurrentDevice\\\"],[\\\"WAPublishMessage\\\"],[\\\"WASendAppDataFanoutProtocol\\\"],[\\\"WAGetCurrentUserDeviceList\\\"],[\\\"WADownloadMedia\\\"],[\\\"WADbPersonalSenderKeyStatusTxns\\\"],[\\\"WADbRegistrationApi\\\"],[\\\"WAPublishAppDataProtocol\\\"],[\\\"WAQueryGroupsAndSync\\\"],[\\\"WASignalDbDump\\\"],[\\\"FDSTooltipDeferredImpl.react\\\"],[\\\"SecuredActionTriggerWithAccountID.react\\\"],[\\\"SecuredActionTriggerWithEncryptedContext.react\\\"],[\\\"CometRelayEF\\\"],[\\\"Bootloader\\\",\\\"markComponentsAsImmediate\\\",[],[[\\\"IGDSendMessageTaskHandler\\\",\\\"IGDSendRemoveReactionTaskHandler\\\",\\\"IGDSendMediaMessageTaskHandler\\\",\\\"publishLSPlatformDeidentifiedPayload\\\",\\\"IGDUnsendMessageTaskHandler\\\",\\\"WADebugTools\\\",\\\"MAWDebugDefineFunctions\\\",\\\"MAWWaitForBackendSetup\\\",\\\"EBWriteMinosMailboxKeysToCache\\\"]]],[\\\"Bootloader\\\",\\\"markComponentsAsImmediate\\\",[],[[\\\"LSLocalize\\\"]]],[\\\"Bootloader\\\",\\\"markSupportDataReadyForImmediateBootloads\\\",[],[]],[\\\"RequireDeferredReference\\\",\\\"unblock\\\",[],[[\\\"EBDeleteBackupsOnClient\\\",\\\"EBMinosDecryptAndValidateMessages\\\",\\\"WAGenerateAndUploadPreKeys\\\",\\\"WARequestPreKeyDigest\\\",\\\"WARotateSignedPreKey\\\",\\\"XmaEventsE2eeFalcoEvent\\\",\\\"MAWMainThreadLogger\\\",\\\"MAWWebWorkerSingleton\\\",\\\"CometRelayEnvironment\\\",\\\"CometToast.react\\\",\\\"EBUploadMessagesFromWorkerMutation\\\",\\\"hasDefaultThreadOneToOneCapability\\\",\\\"LSDataTraceFlush\\\",\\\"PublicKeyCrypto\\\",\\\"X25519\\\",\\\"MqttLongPollingRunner\\\",\\\"EncryptedBackupUploadFailureFalcoEvent\\\",\\\"EncryptedBackupUploadSuccessFalcoEvent\\\",\\\"sendToSentQPLLogger\\\",\\\"LSVoprfWasm\\\",\\\"LogWebQplNOP\\\",\\\"EBLSResignCdnUrl\\\",\\\"MAWBridgeObserver\\\",\\\"EBIsEbEnabled\\\",\\\"WorkerRelayNetwork\\\",\\\"EBGetEBState\\\",\\\"EBAddDeviceWithRecoveryCode\\\",\\\"EBAddDeviceWithKeys\\\",\\\"EBFetchBackupIds\\\",\\\"ristretto255\\\",\\\"EBInitializeBackup\\\",\\\"EBWorkerEBDBApi\\\",\\\"EBGenerateRecoveryCode\\\",\\\"EBIsEbEnabledSubscriber\\\",\\\"bumpVultureJSHash\\\",\\\"EBGetLSVirtualDevices\\\",\\\"EBAPIWriteMinosPublicKeysForRecipient\\\",\\\"EBAPIMinosVerifySingleEpoch\\\",\\\"EBMinosVerifySingleEpoch\\\",\\\"EBGetContactEpochHead\\\",\\\"FbtLogging\\\",\\\"EBGetMessageKeys\\\",\\\"EBMinosWriteKeyChangeAdminMessage\\\",\\\"EBMinosWriteSecureStorageAlert\\\",\\\"EBDedupeEncryptedLabyrinthMessages\\\",\\\"EBOtcAddDevice\\\",\\\"EBSyncEpochs\\\",\\\"EBAddVirtualDevice\\\",\\\"EBDeleteEncryptedBackup\\\",\\\"EBOptOut\\\",\\\"EBRevokeVirtualDevice\\\",\\\"EBRepairEpochs\\\",\\\"ODS\\\",\\\"PersistedQueue\\\",\\\"IntlQtEventFalcoEvent\\\",\\\"MAWClearSignalAndTempStores\\\",\\\"MpsMediaManagerV2\\\",\\\"ReverbWriteFailureFalcoEvent\\\",\\\"ReverbWriteSuccessFalcoEvent\\\",\\\"EncryptedBackupTaskFailureFalcoEvent\\\",\\\"EncryptedBackupTaskIssuedFalcoEvent\\\",\\\"EncryptedBackupTaskSkippedFalcoEvent\\\",\\\"MWEncryptedBackupsInitializeRestore\\\",\\\"MWEBUseLocalStorage\\\",\\\"EBMainThreadEBDBApi\\\",\\\"MWEncryptedBackupsCreateExtraVirtualDeviceWithRecoveryCodeData\\\",\\\"encryptedBackupsOptOutOfBackup\\\",\\\"DGWEnvUtil\\\",\\\"ContextualConfig\\\",\\\"BladeRunnerClient\\\",\\\"DGWClient\\\",\\\"DGWRequestStreamClient\\\",\\\"LSDatascriptEvaluator\\\",\\\"WAGetIdentityKeys\\\",\\\"WASendMsgUtilV2\\\",\\\"WASendPing\\\",\\\"WASyncAbProps\\\",\\\"WAGetDevices\\\",\\\"WARemoveDevice\\\",\\\"WANotifyDeviceChange\\\",\\\"WARemoveCurrentDevice\\\",\\\"WAPublishMessage\\\",\\\"WASendAppDataFanoutProtocol\\\",\\\"WAGetCurrentUserDeviceList\\\",\\\"WADownloadMedia\\\",\\\"WADbPersonalSenderKeyStatusTxns\\\",\\\"WADbRegistrationApi\\\",\\\"WAPublishAppDataProtocol\\\",\\\"WAQueryGroupsAndSync\\\",\\\"WASignalDbDump\\\",\\\"CometRelayEF\\\"],\\\"sd\\\"]],[\\\"RequireDeferredReference\\\",\\\"unblock\\\",[],[[\\\"GetLsDatabase\\\",\\\"TransportSelectingClientSingletonConditional\\\",\\\"CometExceptionDialog.react\\\",\\\"FDSTooltipDeferredImpl.react\\\",\\\"SecuredActionTriggerWithAccountID.react\\\",\\\"SecuredActionTriggerWithEncryptedContext.react\\\"],\\\"sd\\\"]],[\\\"RequireDeferredReference\\\",\\\"unblock\\\",[],[[\\\"EBDeleteBackupsOnClient\\\",\\\"EBMinosDecryptAndValidateMessages\\\",\\\"WAGenerateAndUploadPreKeys\\\",\\\"WARequestPreKeyDigest\\\",\\\"WARotateSignedPreKey\\\",\\\"XmaEventsE2eeFalcoEvent\\\",\\\"MAWMainThreadLogger\\\",\\\"MAWWebWorkerSingleton\\\",\\\"CometRelayEnvironment\\\",\\\"CometToast.react\\\",\\\"EBUploadMessagesFromWorkerMutation\\\",\\\"hasDefaultThreadOneToOneCapability\\\",\\\"LSDataTraceFlush\\\",\\\"PublicKeyCrypto\\\",\\\"X25519\\\",\\\"MqttLongPollingRunner\\\",\\\"EncryptedBackupUploadFailureFalcoEvent\\\",\\\"EncryptedBackupUploadSuccessFalcoEvent\\\",\\\"sendToSentQPLLogger\\\",\\\"LSVoprfWasm\\\",\\\"LogWebQplNOP\\\",\\\"EBLSResignCdnUrl\\\",\\\"MAWBridgeObserver\\\",\\\"EBIsEbEnabled\\\",\\\"WorkerRelayNetwork\\\",\\\"EBGetEBState\\\",\\\"EBAddDeviceWithRecoveryCode\\\",\\\"EBAddDeviceWithKeys\\\",\\\"EBFetchBackupIds\\\",\\\"ristretto255\\\",\\\"EBInitializeBackup\\\",\\\"EBWorkerEBDBApi\\\",\\\"EBGenerateRecoveryCode\\\",\\\"EBIsEbEnabledSubscriber\\\",\\\"bumpVultureJSHash\\\",\\\"EBGetLSVirtualDevices\\\",\\\"EBAPIWriteMinosPublicKeysForRecipient\\\",\\\"EBAPIMinosVerifySingleEpoch\\\",\\\"EBMinosVerifySingleEpoch\\\",\\\"EBGetContactEpochHead\\\",\\\"FbtLogging\\\",\\\"EBGetMessageKeys\\\",\\\"EBMinosWriteKeyChangeAdminMessage\\\",\\\"EBMinosWriteSecureStorageAlert\\\",\\\"EBDedupeEncryptedLabyrinthMessages\\\",\\\"EBOtcAddDevice\\\",\\\"EBSyncEpochs\\\",\\\"EBAddVirtualDevice\\\",\\\"EBDeleteEncryptedBackup\\\",\\\"EBOptOut\\\",\\\"EBRevokeVirtualDevice\\\",\\\"EBRepairEpochs\\\",\\\"ODS\\\",\\\"PersistedQueue\\\",\\\"IntlQtEventFalcoEvent\\\",\\\"MAWClearSignalAndTempStores\\\",\\\"MpsMediaManagerV2\\\",\\\"ReverbWriteFailureFalcoEvent\\\",\\\"ReverbWriteSuccessFalcoEvent\\\",\\\"EncryptedBackupTaskFailureFalcoEvent\\\",\\\"EncryptedBackupTaskIssuedFalcoEvent\\\",\\\"EncryptedBackupTaskSkippedFalcoEvent\\\",\\\"MWEncryptedBackupsInitializeRestore\\\",\\\"MWEBUseLocalStorage\\\",\\\"EBMainThreadEBDBApi\\\",\\\"MWEncryptedBackupsCreateExtraVirtualDeviceWithRecoveryCodeData\\\",\\\"encryptedBackupsOptOutOfBackup\\\",\\\"DGWEnvUtil\\\",\\\"ContextualConfig\\\",\\\"BladeRunnerClient\\\",\\\"DGWClient\\\",\\\"DGWRequestStreamClient\\\",\\\"LSDatascriptEvaluator\\\",\\\"WAGetIdentityKeys\\\",\\\"WASendMsgUtilV2\\\",\\\"WASendPing\\\",\\\"WASyncAbProps\\\",\\\"WAGetDevices\\\",\\\"WARemoveDevice\\\",\\\"WANotifyDeviceChange\\\",\\\"WARemoveCurrentDevice\\\",\\\"WAPublishMessage\\\",\\\"WASendAppDataFanoutProtocol\\\",\\\"WAGetCurrentUserDeviceList\\\",\\\"WADownloadMedia\\\",\\\"WADbPersonalSenderKeyStatusTxns\\\",\\\"WADbRegistrationApi\\\",\\\"WAPublishAppDataProtocol\\\",\\\"WAQueryGroupsAndSync\\\",\\\"WASignalDbDump\\\",\\\"CometRelayEF\\\"],\\\"css\\\"]],[\\\"RequireDeferredReference\\\",\\\"unblock\\\",[],[[\\\"GetLsDatabase\\\",\\\"TransportSelectingClientSingletonConditional\\\",\\\"CometExceptionDialog.react\\\",\\\"FDSTooltipDeferredImpl.react\\\",\\\"SecuredActionTriggerWithAccountID.react\\\",\\\"SecuredActionTriggerWithEncryptedContext.react\\\"],\\\"css\\\"]]],\\\"phd2_indexes\\\":\\\":132,318,131,37,130,27,294,302,232,312,306,311,99,92,93,79,313,96,122,292,291,29,98,100,97,88,126,259,94,233,305,289,286,287,295,124,285,304,282,90,63,293,261,258,95,257,11,256,254,255,314,298,288,283,296,297,290,284,23,91,12,231,262,86,117,7,6,5,4,8,25,58,24,50,10,52,82,81,230,315,125,59,62,133,89,28,53,51,14,15,16,21,9,49,13,56,57,19,20,17,260,317,316,61,60,78,234,217,22,18,74,129,118,307,308,309,310,303,235,300,246,299,301,75,68,67,64,66,65,134,236,248,247,245,237,249,241,238,239,243,250,244,253,252,251,240,242,71,123,26,32,30,35,102,105,54,55,128,116,113,111,69,70,112,115,42,34,33,31,40,72,41,84,109,110,77,76,103,106,108,48,47,36,39,45,44,43,73,85,114,107,87,104,46,101\\\"},\\\"allResources\\\":[\\\"hGTKnd\\\\/\\\",\\\"mcc\\\\/dSd\\\",\\\"2fTae9n\\\",\\\"J\\\\/9bxb6\\\",\\\"0BDvHFA\\\"],\\\"tieredResources\\\":{\\\"r\\\":[\\\"hGTKnd\\\\/\\\",\\\"mcc\\\\/dSd\\\",\\\"2fTae9n\\\",\\\"J\\\\/9bxb6\\\"],\\\"rdfds\\\":[],\\\"rds\\\":[\\\"0BDvHFA\\\"]}},\\\"js_env\\\":{}}}}]],[\\\"CometResourceScheduler\\\",\\\"registerHighPriHashes\\\",null,[[\\\"KEc6lX3\\\",\\\"mcc\\\\/dSd\\\"]]]],\\\"phd2_indexes\\\":\\\":208\\\"}},{\\\"__bbox\\\":null},{\\\"__bbox\\\":null}]]]}</script>\\n<script src=\\\"data:text/javascript;base64,cmVxdWlyZUxhenkoWyJTZXJ2ZXJKU1BheWxvYWRMaXN0ZW5lciJdLGZ1bmN0aW9uKG0pe20ucHJvY2VzcygpO30sbnVsbCwweDEwMCk=\\\" nonce=\\\"e4MH0okw\\\" data-btmanifest=\\\"1039591789_main\\\"></script>\\n\\n<script type=\\\"application/json\\\"  data-content-len=\\\"9034\\\" data-sjs>{\\\"require\\\":[[\\\"CometQPLPayloadStore\\\",\\\"storePayloadMap\\\",null,[{\\\"7640162502209830017\\\":{\\\"css\\\\/2hi96kx20xa8sgcg.pkg,css\\\\/4l5mkao5cow04488.pkg,css\\\\/4h9miozwlwcgg4g0.pkg,css\\\\/cf1if5nduncooww0.pkg,css\\\\/20cb3qa4xwbo444s.pkg,css\\\\/3aho6engjg6cs8sk.pkg,css\\\\/1s4rc9d6rl1cwss8.pkg,css\\\\/143w9x1v3hdwooso.pkg,css\\\\/77jzn15kvkgsc48w.pkg,css\\\\/7xx2w3jzmhc80ws8.pkg.__composite__.css\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v5\\\\/yV\\\\/l\\\\/0,cross\\\\/h_jU5Dco48mrsnguAb4gnCAggUcwZVsSSv0lda5Q54a0fgQe914iiBfONMKn3YhINqU49pVNahkCkGzNiZ9AWV5Gs97xFZK--hBruhBENOpKm_.css\\\",\\\"refs\\\":[\\\"htmlStart\\\",\\\"tierOne\\\",\\\"tierTwo\\\",\\\"tierThree\\\"]},\\\"js\\\\/ebugble5ds008cow.pkg.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4\\\\/yQ\\\\/r\\\\/kY5AL4bx3N9.js\\\",\\\"refs\\\":[\\\"htmlStart\\\",\\\"tierOne\\\",\\\"tierTwo\\\",\\\"tierThree\\\",\\\"adp_WebWorkerV2HasteResponsePreloader_IGDAWMainV4WebWorkerBundle_{N}\\\"]},\\\"js\\\\/34eibn82nsis0gg4.pkg,js\\\\/40ouzneulh4w0gcw.pkg,js\\\\/c8e0kolvmvc4okko.pkg,js\\\\/30qox417gs4kc8o8.pkg,js\\\\/155cttatdwiokg00.pkg,js\\\\/3lmzrwvm3mo08wco.pkg,js\\\\/apstsut6kh4ow0c8.pkg,js\\\\/7nlmgy1iti808csc.pkg,js\\\\/78geyf3v5c4k8wg0.pkg,js\\\\/bc465nuep8o4wwws.pkg,js\\\\/5nle0oirxc00wgww.pkg,js\\\\/26w6nmmlxhz4w84c.pkg,js\\\\/d5yf6qggqoocgow0.pkg,js\\\\/32ktznfit4aok0g4.pkg,js\\\\/4nlutzph254w8swc.pkg,js\\\\/2ojo8a933q80sgsk.pkg,js\\\\/2fun1vnefrb40g8s.pkg,js\\\\/6p63cyfm4qgwk8wo.pkg,js\\\\/6fy0sxaoxmw44k0o.pkg,js\\\\/2y12jwz218mc4k4o.pkg,js\\\\/741dyxzzo5c00gwk.pkg,js\\\\/ayqj1lq01vk0w008.pkg,js\\\\/e8y6bcv8keg44844.pkg,js\\\\/62qucs1l59s8cwwc.pkg,js\\\\/b9nlvscirns4osk8.pkg,js\\\\/1luubdsr6t6sgcg4.pkg,js\\\\/7y1gkkttmewww804.pkg,js\\\\/c0592n0levk8s480.pkg,js\\\\/anmzbdd9big4g8sw.pkg,js\\\\/4ztqe59h88cokscs.pkg.__composite__.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4iWZ34\\\\/yh\\\\/l\\\\/en_US\\\\/fCLScVMs7CUVTMs2djWqDHfHzfIYUhymR68DvHtx4S-WxTz9rtlTgrRSQnNf74CMgJ4oCsnT1py0AFeS6dZXW08IYMnrFQOWoORA4Dm3cUem8_CKTVpCM9N3m6GTxF9barZuWaIOxFhKN1LgXdYivvCwsH_gnEMeRZCp77BzqEYppSmOAa2RaoU20UKA1eGSOMeVzPFe8rVu6-pWIf389DKl0BQU7odNDboPV5nEqMCD9GbwfyqUuZVtzi-8ft0d5Zpj03cIgJLVGXUtO-w0NX3NOpBnuEoNCiOJqMVlJN1hgZFicpXdbr9Uu1qAZdRMw-lqV0QWYi.js\\\",\\\"refs\\\":[\\\"htmlStart\\\",\\\"tierOne\\\",\\\"tierTwo\\\",\\\"tierThree\\\"]},\\\"js\\\\/d4akhdvk2vscc8ok.pkg,js\\\\/41sdapn91hs0cgw4.pkg,js\\\\/8r8bz42mf8so088s.pkg,js\\\\/7quhv94khhwckgo0.pkg,js\\\\/ag4iyy57e2gwg8gc.pkg,js\\\\/a9ni7j1220gscgk4.pkg,js\\\\/9ibcc2j97io8gs00.pkg,js\\\\/bylm1nacy3cckg40.pkg,js\\\\/f4emoy5thpcgo0ok.pkg,js\\\\/am0n77tfprsw8ocg.pkg,js\\\\/5vvti1ncxyo8cko0.pkg,js\\\\/ep7tn03ie94oss8k.pkg,js\\\\/a423nt56s68g0c0o.pkg,js\\\\/6pft4l56dy0w8cok.pkg,js\\\\/8gws92gct4w0480c.pkg,js\\\\/7scs6yxp67go0osg.pkg,js\\\\/adxe9cr9h40k80wc.pkg,js\\\\/7e9fqxtyqfks8coc.pkg,js\\\\/808w1bfzv1ookg84.pkg,js\\\\/6beldnaz3vokwkwc.pkg,js\\\\/43cglycpsoaogog8.pkg,js\\\\/epconj3fbhss4ss0.pkg,js\\\\/4t0eeq6wby0wk0c4.pkg,js\\\\/8virzdgdfocgwc08.pkg.__composite__.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4iDJ24\\\\/yN\\\\/l\\\\/en_US\\\\/zJ2sv1hNPa_e9zjvbGn-SSDCW72EUwZWg8kTETkfm7E5L-Zt8Vw6LrUjx0WraUPNANzpUzuAyWGsHzxVnDRG4cePgD_ER7U5MnxRW-9pasXsVUGCDaKkBEGzhPiT7Ml3IWXYeFOyHKlxcfli4TITOG36zSfEXKxzJbolxsErtKw5B8lqEzpF93u5a8BfaeR7ZPLRYVeYnVeJk26hW3g52-73DMChfnzWhHFypIj38Qf2sVyQ3WAd5Md6IA_bT08q3Ns4aO2P.js\\\",\\\"refs\\\":[\\\"htmlStart\\\",\\\"tierOne\\\",\\\"tierTwo\\\",\\\"tierThree\\\"]},\\\"js\\\\/2hk16x9kuqass4s0.pkg,js\\\\/1o9dd5y6rd1c4scs.pkg,js\\\\/cgqp1l4agtkoss4g.pkg,js\\\\/9hierqa73fgg0woc.pkg,js\\\\/dykxi5hi10gkg88s.pkg,js\\\\/6jmdiliamn8kks0k.pkg,js\\\\/dzh0n9hf0xwgkk0k.pkg,js\\\\/5xmjad66wz8cso0s.pkg,js\\\\/4q3u6llxa10kso4o.pkg,js\\\\/3g3azpm531a8w8ow.pkg,js\\\\/debod1ptnmgc4gkw.pkg,js\\\\/b3oygswn1fs4co0o.pkg,js\\\\/6j4zmjmdseg4kcwc.pkg,js\\\\/af1a9xdxx6o0cgoc.pkg,js\\\\/jfbtj7prjg8wg8g8.pkg,js\\\\/cbhbr31wwb488ko0.pkg,js\\\\/9tfilqvc6eckws4w.pkg,js\\\\/2r8j3t1bn884wowk.pkg,js\\\\/19yvkdl3mt5w0wko.pkg,js\\\\/69vkjfbrkjggoock.pkg,js\\\\/ca6e6t4vqo8488k4.pkg,js\\\\/7q9ujy08d7gggs00.pkg,js\\\\/9t6ct8k5ggsgwwkw.pkg,js\\\\/dfyzi0r6f7woo8wk.pkg,js\\\\/1lcvia5alxdwgok4.pkg,js\\\\/celfia4gnvsoks04.pkg,js\\\\/9kvobpycsls8kscc.pkg,js\\\\/e9v21qsd5lw0wo04.pkg,js\\\\/5q6i629bs78ko8w4.pkg,js\\\\/ibnbuwp38m0ckcsk.pkg.__composite__.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4igsq4\\\\/yV\\\\/l\\\\/en_US\\\\/TD5c_j0a4_CwPDDvUfYJo5DwXqZmm520pBSaV-S7OueDA8ohO-dKm4-RtKQGwG0ihEPrsRKaw-Ub_-Qx8lcabVTDOwgx-s7CoHnqDUe5mkBUdwsVjQqltBeBhTcjqCtge5-3ph1swGHhSx_h2otzgdunJlmSYSlxu50UmxhceZaR68thOl6Gkjq0OVecPlfAVsTAuubFIsVKN8OO3hBBEVPzG9h-JZCcc2ZP1MqX28nFuuVkv8pKP0wDkNc81bA8xtVANryZwZHzM1FzTGdLxvKiQ4u-QTAdmh5DEndjkKeHWrECl3_nqr0vhbIBAH0P1HIUYBqZ4h.js\\\",\\\"refs\\\":[\\\"htmlStart\\\",\\\"tierOne\\\",\\\"tierTwo\\\",\\\"tierThree\\\"]},\\\"js\\\\/2pb0dyui4ncwcwg0.pkg,js\\\\/8nn2bdnb8o00o8ww.pkg,js\\\\/1cjiexjul55ww8ok.pkg,js\\\\/4ax8sw6vh084wwg0.pkg,js\\\\/3jdufbpyvlwksoco.pkg,js\\\\/5da822q5fvggwok4.pkg,js\\\\/7jzi3gm48qskc0co.pkg,js\\\\/7yqt1yh50ykg0csw.pkg,js\\\\/14gtjlx9toaowsg8.pkg,js\\\\/fvx218wi8kggo048.pkg,js\\\\/e08dmeasxoo4gcgk.pkg.__composite__.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4iCLm4\\\\/yk\\\\/l\\\\/en_US\\\\/0OlYhyplDTnGba6nc83bWeaTvLpEMiMqY1Ut0jEWncjGenqUgnnin3SSR_169Kn2AO0XJwbaX5ZELUcr6BPouu8FNHdJW5_aAkh3hnHYCsAoGkSS1OrajkDar.js\\\",\\\"refs\\\":[\\\"htmlStart\\\",\\\"tierTwo\\\",\\\"tierThree\\\"]},\\\"js\\\\/3m3k39c5qw2s48cs.pkg.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4iQvT4\\\\/y8\\\\/l\\\\/en_US\\\\/trYkS0wHTsa.js\\\",\\\"refs\\\":[\\\"htmlStart\\\",\\\"tierTwo\\\",\\\"tierThree\\\",\\\"adp_WebWorkerV2HasteResponsePreloader_IGDAWMainV4WebWorkerBundle_{N}\\\"]},\\\"js\\\\/drl78utcb34g800s.pkg.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4\\\\/yO\\\\/r\\\\/nEtr-TaOPGd.js\\\",\\\"refs\\\":[\\\"htmlStart\\\",\\\"tierTwo\\\"]},\\\"js\\\\/cee6rymbip4oos0k.pkg.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4\\\\/yi\\\\/r\\\\/fp_8kBNAp0r.js\\\",\\\"refs\\\":[\\\"htmlStart\\\",\\\"tierTwo\\\",\\\"tierThree\\\"]},\\\"js\\\\/3g4cyp7lwgcg4o8k.pkg.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4\\\\/y3\\\\/r\\\\/pv0ZRpjqU2v.js\\\",\\\"refs\\\":[\\\"htmlStart\\\",\\\"tierTwo\\\",\\\"tierThree\\\"]},\\\"js\\\\/5ygjucus44soko88.pkg,js\\\\/c14qw7ffe2gwg8c8.pkg,js\\\\/edsr356mdw08koks.pkg,js\\\\/26ojynechqdc4gws.pkg,js\\\\/ar3glckfw14oc8wk.pkg,js\\\\/cqnlkt8ylbwcs4cg.pkg,js\\\\/38pz6oz41400sk0w.pkg,js\\\\/b04l25j1kq0owkog.pkg,js\\\\/2852ew2m0x8gw8w8.pkg,js\\\\/2b1jjuhy39xckggw.pkg,js\\\\/c3plxxw7lxc0oo4s.pkg,js\\\\/1octi27o5v9c8kks.pkg,js\\\\/8v6zr2xqvw0s4484.pkg,js\\\\/9d47ooaakfswg88s.pkg,js\\\\/a9ozsba6s5s848k0.pkg,js\\\\/432v86e1f5gkwc8k.pkg,js\\\\/2rw85r8cj7ok8c4c.pkg,js\\\\/26n5nnms0ysk0wc4.pkg,js\\\\/86dzjjn5os4cc4kc.pkg,js\\\\/eiaz6a967fsowog4.pkg,js\\\\/924mag6vcwkcg0cc.pkg,js\\\\/b8dfpgwvusoo8so0.pkg,js\\\\/1lkp5siz7usk8sso.pkg,js\\\\/zg8kr3k1w7kc4wk8.pkg,js\\\\/5c48m2bvzxc0occs.pkg,js\\\\/5mt897a72yw404c8.pkg,js\\\\/37ukt04za5mo0ks4.pkg,js\\\\/8lx5gedmli4gkwcw.pkg,js\\\\/1n7cdxk3xn8gkkgk.pkg,js\\\\/6mbkym9vedwckso8.pkg.__composite__.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4ic2n4\\\\/y-\\\\/l\\\\/en_US\\\\/aO329teVzqorrCxjEFdRGjiFGHh9ozlMIz3mrTJNzVPnQ3-IRxKBM-W93UdBt7KT9LBCH_2wpfyebnKURtGJB5umjD2BK79w8b_IIgYiMCifrCpb0Tjax5QUvesXSMnYXgrVMuqogyjrGNN09gGUdwO433Fk6HbAvYNR4ruVxl3_gsINeUakCPhzOynkN9iSRqT_SxPAmPL2HMeCJ3YY4zTnUpHIBvLY_PzfACAXAqzp11_JpCh3zsi1CQIOPa7eSNpDNxgK8tEUMygLatFJJDchOYIvRE-FZnFf2cMjHVSV2kgeJICmfknyPRau9DU0XeM8sX2SLw.js\\\",\\\"refs\\\":[\\\"tierThree\\\"]},\\\"js\\\\/c1xbn7faecgg8o0g.pkg,js\\\\/dclgjog60bkg00s4.pkg,js\\\\/4ucqm7dobu68cc44.pkg,js\\\\/6ffc0txulbks0004.pkg,js\\\\/eohrvv2jktckco40.pkg,js\\\\/js635k5rjxcgwcsk.pkg,js\\\\/6cplar31e9wko40o.pkg.__composite__.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4ietB4\\\\/yZ\\\\/l\\\\/en_US\\\\/xLpHp7KBnSyqmdfaJLXtn0SPcNCtqwAVttrXSv9Pp21LNEHrxpOwjt3frMyEHglP5th7ZOJiBUHXG.js\\\",\\\"refs\\\":[\\\"tierThree\\\"]},\\\"js\\\\/as7f40ydhigocc8c.pkg.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4ijWG4\\\\/yM\\\\/l\\\\/en_US\\\\/7FArPzslnrK.js\\\",\\\"refs\\\":[\\\"tierThree\\\"]},\\\"js\\\\/2t43hokxi1ick0so.pkg.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4idBq4\\\\/ye\\\\/l\\\\/en_US\\\\/rwXNf31RJQG.js\\\",\\\"refs\\\":[\\\"tierThree\\\"]},\\\"js\\\\/eiwmeegbs34s4c8g.pkg.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4\\\\/yo\\\\/r\\\\/dH5dy8y52rX.js\\\",\\\"refs\\\":[\\\"tierThree\\\"]},\\\"js\\\\/30n2r5co0zcwkgs4.pkg.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4\\\\/yp\\\\/r\\\\/8gxdeYsli01.js\\\",\\\"refs\\\":[\\\"tierThree\\\"]},\\\"js\\\\/e53xohv8lbcoko8k.pkg,js\\\\/4bc81dgxyzuogc8k.pkg,js\\\\/4z3nkg92prkswgko.pkg,js\\\\/4pxg9ha2k8is4kkk.pkg,js\\\\/1xch4ihngam84o8g.pkg,js\\\\/6xxo249sfrswog4s.pkg,js\\\\/5gl752667ysc484o.pkg,js\\\\/8tzpigqmla80ck48.pkg,js\\\\/3a453yxkweg4k0ss.pkg,js\\\\/72seutwjqy88osok.pkg,js\\\\/4bl2rkcg1rokwc4k.pkg,js\\\\/3qwlr8yldfsww0wk.pkg,js\\\\/ip40g1tofvcckckw.pkg,js\\\\/aqqovbsfyj48808k.pkg,js\\\\/dg54t7wrfzwckkcs.pkg,js\\\\/7qv7xuoeb604ks84.pkg,js\\\\/2k0xawuit2ckgwoo.pkg,js\\\\/78qoohhpudooc88c.pkg,js\\\\/5tjhokl35k4k0owk.pkg,js\\\\/ceonj6xr83s48ww4.pkg,js\\\\/b7a7y0ant8g0gokc.pkg,js\\\\/5cm6iskx82ccgswo.pkg,js\\\\/77mjl2glz30ggssc.pkg,js\\\\/69541yas14848o0k.pkg,js\\\\/ecscbtchd5c8c8o8.pkg,js\\\\/5ihuylt5ti0wcc8w.pkg,js\\\\/evuupzivj6gcwkok.pkg,js\\\\/95lo91umeosgooo0.pkg,js\\\\/bypldc71w4gk8csw.pkg,js\\\\/dag491yggu0w80wg.pkg.__composite__.js\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v4inh_4\\\\/yH\\\\/l\\\\/en_US\\\\/9-dBS8IpxGAQUHQlfhgj8zDEYPOIqXnM-I3XLoYQF64vfjO43O8XoSnI6-NhAsCA5L3Nc30dHCikm-Q6aNodDiMDl5DYyMoAdIeZEoStQUE_H75HsuiCTJd5SOQEKEXaGJ8DodTRvzAXfnnzE4xYn60F-AaMkd1CPMwg_6BzgyT8wIXeTjjJUNSMOrBZUKwq77A6aTraTw8LD94AUXRwDHCkV8R1onn-JtdZ7PJ775NzKCi2ScrsOfCedTPWK7a817LCfIEJ80sYO5qoQ8aCFM-z_0Q2ncATCB6ghfjDQwNPdLlL_jGYNh9-DZBIN8j5Wu6jBGHRQa.js\\\",\\\"refs\\\":[\\\"tierThree\\\"]},\\\"css\\\\/xk62g2d2i4gwsk0o.pkg.css\\\":{\\\"url\\\":\\\"https:\\\\/\\\\/static.cdninstagram.com\\\\/rsrc.php\\\\/v5\\\\/yh\\\\/l\\\\/0,cross\\\\/g8T_6-Yirbb.css\\\",\\\"refs\\\":[\\\"tierThree\\\"]}}}]]]}</script>\\n<script src=\\\"data:text/javascript;base64,cmVxdWlyZUxhenkoWyJTZXJ2ZXJKU1BheWxvYWRMaXN0ZW5lciJdLGZ1bmN0aW9uKG0pe20ucHJvY2VzcygpO30sbnVsbCwweDEwMCk=\\\" nonce=\\\"e4MH0okw\\\" data-btmanifest=\\\"1039591789_main\\\"></script>\\n<script type=\\\"application/json\\\"  data-content-len=\\\"69\\\" data-sjs>{\\\"require\\\":[[\\\"qplTagServerJS\\\",null,null,[[\\\"lastServerTagFlushed\\\"]]]]}</script>\\n<script src=\\\"data:text/javascript;base64,cmVxdWlyZUxhenkoWyJTZXJ2ZXJKU1BheWxvYWRMaXN0ZW5lciJdLGZ1bmN0aW9uKG0pe20ucHJvY2VzcygpO30sbnVsbCwweDEwMCk=\\\" nonce=\\\"e4MH0okw\\\" data-btmanifest=\\\"1039591789_main\\\"></script>\\n<script type=\\\"application/json\\\"  data-content-len=\\\"4678\\\" data-sjs>{\\\"require\\\":[[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"earlyFlushStart\\\",13]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genPreloadersStart\\\",13]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genPreloadersEnd\\\",14]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genRouteStart\\\",52]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genRouteEnd\\\",52]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genEFRsrcStart\\\",42]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"htmlStart\\\",47]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genEFRsrcEnd\\\",51]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"earlyFlushEnd\\\",51]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"cometPageRender\\\",52]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"cometSSRProcessEntrypointStart\\\",52]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"cometSSRProcessEntrypointEnd\\\",74]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"ssr_cacheStart\\\",74]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"ssr_cacheEnd\\\",74]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"allPreloadersStart\\\",74]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierOneStart\\\",75]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"requireCorePageComponentsStart\\\",75]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"requireCorePageComponentsEnd\\\",75]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genHeadStart\\\",75]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genHeadEnd\\\",75]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genBodyStart\\\",75]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genRenderSplashScreenStart\\\",75]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genRenderSplashScreenEnd\\\",75]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genBodyEnd\\\",75]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierOneIjsStart\\\",75]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierOneIjsEnd\\\",76]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierOneJSCallStart\\\",76]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierOneJSCallEnd\\\",76]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierOneSsrStart\\\",76]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierOneSsrEnd\\\",76]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierOneHrpStart\\\",95]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"tierOnePreloadersStart\\\",101]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"tierOnePreloadersEnd\\\",101]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierOneHrpEnd\\\",101]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierOneEnd\\\",101]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"tierOne\\\",103]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierTwoStart\\\",103]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"tierTwoPreloadersStart\\\",113]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierTwoEnd\\\",144]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"tierTwo\\\",145]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"ssr_render_pass_0Start\\\",146]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"ssr_renderStart\\\",146]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"tierTwoPreloadersEnd\\\",152]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"ssr_render_pass_0End\\\",232]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"ssr_renderEnd\\\",232]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierThreeStart\\\",232]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"tierThreePreloadersStart\\\",244]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"genTierThreeEnd\\\",245]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"tierThree\\\",246]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"adp_WebWorkerV2HasteResponsePreloader_IGDAWMainV4WebWorkerBundle_{N}\\\",289]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"tierThreePreloadersEnd\\\",289]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"responseEnd\\\",289]],[\\\"qplTimingsServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"responseStart\\\",1]]]}</script>\\n<script src=\\\"data:text/javascript;base64,cmVxdWlyZUxhenkoWyJTZXJ2ZXJKU1BheWxvYWRMaXN0ZW5lciJdLGZ1bmN0aW9uKG0pe20ucHJvY2VzcygpO30sbnVsbCwweDEwMCk=\\\" nonce=\\\"e4MH0okw\\\" data-btmanifest=\\\"1039591789_main\\\"></script>\\n<script type=\\\"application/json\\\"  data-content-len=\\\"1086\\\" data-sjs>{\\\"require\\\":[[\\\"qplAnnotationsIntServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"is_crawler_ssr_html_only_mode\\\",0]],[\\\"qplAnnotationsIntServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"is_defer_js_download_until_dom_content_loaded\\\",0]],[\\\"qplAnnotationsIntServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"haas_preloading\\\",1]],[\\\"qplAnnotationsIntServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"ssr_is_enabled\\\",1]],[\\\"qplAnnotationsIntServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"ssr_flush_without_tier1_js\\\",0]],[\\\"qplAnnotationsIntServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"ssr_preloader_count\\\",0]],[\\\"qplAnnotationsIntServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"ssr_render_to_container\\\",1]],[\\\"qplAnnotationsIntServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"from_ai_agent\\\",0]],[\\\"qplAnnotationsIntServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"haas_warmup_time\\\",28]],[\\\"qplAnnotationsIntServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"haas_cpu_wall_time\\\",76]],[\\\"qplAnnotationsIntServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"vw_guess_value\\\",1366]]]}</script>\\n<script src=\\\"data:text/javascript;base64,cmVxdWlyZUxhenkoWyJTZXJ2ZXJKU1BheWxvYWRMaXN0ZW5lciJdLGZ1bmN0aW9uKG0pe20ucHJvY2VzcygpO30sbnVsbCwweDEwMCk=\\\" nonce=\\\"e4MH0okw\\\" data-btmanifest=\\\"1039591789_main\\\"></script>\\n<script type=\\\"application/json\\\"  data-content-len=\\\"225\\\" data-sjs>{\\\"require\\\":[[\\\"qplAnnotationsStringServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"ssr_qpl_app_id\\\",\\\"936619743392459\\\"]],[\\\"qplAnnotationsStringServerJS\\\",null,null,[\\\"7640162502209830017-server\\\",\\\"vw_guess_source\\\",\\\"fallback\\\"]]]}</script>\\n<script src=\\\"data:text/javascript;base64,cmVxdWlyZUxhenkoWyJTZXJ2ZXJKU1BheWxvYWRMaXN0ZW5lciJdLGZ1bmN0aW9uKG0pe20ucHJvY2VzcygpO30sbnVsbCwweDEwMCk=\\\" nonce=\\\"e4MH0okw\\\" data-btmanifest=\\\"1039591789_main\\\"></script>\\n<script type=\\\"application/json\\\"  data-content-len=\\\"297\\\" data-sjs>{\\\"require\\\":[[\\\"CometQPLPayloadStore\\\",\\\"storePayloadBytesSent\\\",null,[{\\\"htmlStart\\\":[109652,109652],\\\"tierOne\\\":[145474,145474],\\\"tierTwo\\\":[98419,98419],\\\"ssr_render_pass_0End\\\":[3675,3675],\\\"tierThree\\\":[47880,47880],\\\"adp_WebWorkerV2HasteResponsePreloader_IGDAWMainV4WebWorkerBundle_{N}\\\":[179564,179564]}]]]}</script>\\n<script src=\\\"data:text/javascript;base64,cmVxdWlyZUxhenkoWyJTZXJ2ZXJKU1BheWxvYWRMaXN0ZW5lciJdLGZ1bmN0aW9uKG0pe20ucHJvY2VzcygpO30sbnVsbCwweDEwMCk=\\\" nonce=\\\"e4MH0okw\\\" data-btmanifest=\\\"1039591789_main\\\"></script>\\n<div id='has-finished-comet-page' hidden style='display: none;'></div></body></html>\", \"exit_code\": 0, \"error\": null}",
+      "tool_call_id": "chatcmpl-tool-9e0cda3c0d188bbe"
+    }
+  ]
+}

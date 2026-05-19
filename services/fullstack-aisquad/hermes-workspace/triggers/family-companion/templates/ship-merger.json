@@ -1,0 +1,21 @@
+{
+  "type": "ship_merger",
+  "source": "manual",
+  "project": {
+    "name": "family-companion merger",
+    "root": "/home/azureuser/family-companion",
+    "backend": "/home/azureuser/family-companion/backend",
+    "android": "/home/azureuser/family-companion/android",
+    "local_model": "gemma4:26b",
+    "ollama_base_url": "http://localhost:11434/v1",
+    "backend_smoke_port": 8001
+  },
+  "ship_criteria": [
+    "Ollama exposes gemma4:26b and chat completion smoke succeeds.",
+    "Backend Android endpoints smoke cleanly against updated code.",
+    "Database tables/enums are created through repeatable migration or safe bootstrap path.",
+    "Android Retrofit/Repository/ViewModel wiring compiles or has exact blockers.",
+    "Runbook and demo checklist contain actual VM paths and commands."
+  ],
+  "notes": "Launched after backend chat smoke passed locally; DB tables were bootstrapped via SQLAlchemy create_all and need repeatable migration work."
+}
