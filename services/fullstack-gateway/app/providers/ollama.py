@@ -10,11 +10,11 @@ class OllamaProvider:
     async def infer(self, context: RequestContext) -> InferenceResponse:
         settings = get_settings()
         prompt = context.payload.messages[-1].content if context.payload.messages else ""
-        async with httpx.AsyncClient(timeout=120.0) as client:
+        async with httpx.AsyncClient(timeout=180.0) as client:
             resp = await client.post(
-                f"{settings.ollama_bridge_url}/generate",
-                headers={"X-Bridge-Secret": settings.ollama_bridge_shared_secret},
-                json={"model": "gemma4:26b", "prompt": prompt, "stream": False},
+                f"{settings.ollama_bridge_url}/ollama/generate",
+                headers={"X-FullStack-Bridge-Key": settings.ollama_bridge_shared_secret},
+                json={"prompt": prompt, "stream": False},
             )
             resp.raise_for_status()
             data = resp.json()

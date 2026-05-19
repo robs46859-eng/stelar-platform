@@ -40,12 +40,10 @@ class Settings(BaseSettings):
     admin_api_token: str = Field(default="", alias="ADMIN_API_TOKEN")
     dev_api_key_prefix: str = Field(default="ak_live_demo", alias="DEV_API_KEY_PREFIX")
     dev_api_key_secret: str = Field(default="change-me-now", alias="DEV_API_KEY_SECRET")
+    ollama_bridge_url: str = Field(default='http://127.0.0.1:18080', alias='OLLAMA_BRIDGE_URL')
+    ollama_bridge_shared_secret: str = Field(default='', alias='OLLAMA_BRIDGE_SHARED_SECRET')
 
 
 @lru_cache
-
-    ollama_bridge_url: str = 'http://127.0.0.1:18080'
-    ollama_bridge_shared_secret: str = ''
-
 def get_settings() -> Settings:
     return Settings()

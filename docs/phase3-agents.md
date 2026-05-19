@@ -14,7 +14,7 @@
 | # | Agent | Task | Status | Verify |
 |---|---|---|---|---|
 | 1 | `pg-firewall` | Add VM IP to PG firewall, verify all 10 schemas | 🔄 Running | `psql <url> -c "\dn"` shows 10 schemas |
-| 2 | `gateway-smoketest` | Install deps, start gateway on VM, confirm Gemma responds | 🔄 Running | `curl http://localhost:8000/v1/ai/generate` returns output_text |
+| 2 | `gateway-smoketest` | Install deps, start gateway on VM, confirm Gemma responds | ✅ Done | `curl http://localhost:8000/v1/ai/generate` returns output_text |
 | 3 | `stelarpeople-ts` | Port property.js, crm.js, screening.js → TypeScript | ✅ Done | `.ts` files exist, no `.js` service files remain |
 | 4 | `containerapps-bicep` | Write Bicep for gateway + 3 APIs + 2 web apps | ✅ Done | `infra/containerapps/*.bicep` committed |
 | 5 | `arkham-impl` | Implement claim classifier + publish-block service | ✅ Done | `services/arkham-governance/src/` exists, tests pass |
