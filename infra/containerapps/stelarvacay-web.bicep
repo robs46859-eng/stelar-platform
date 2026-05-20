@@ -20,7 +20,7 @@ resource stelarvacayWebApp 'Microsoft.App/containerApps@2023-05-01' = {
         env: [
           { name: 'VITE_API_URL', value: viteApiUrl }
         ]
-        resources: { cpu: '0.25', memory: '0.5Gi' }
+        resources: { cpu: json('0.25'), memory: '0.5Gi' }
         probes: [
           { type: 'Liveness', httpGet: { path: '/', port: 4173 } }
           { type: 'Readiness', httpGet: { path: '/', port: 4173 } }

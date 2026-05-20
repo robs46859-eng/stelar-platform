@@ -9,10 +9,6 @@ resource containerAppsEnv 'Microsoft.App/managedEnvironments@2023-05-01' existin
   name: containerAppsEnvName
 }
 
-resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
-  name: keyVaultName
-}
-
 module gateway 'fullstack-gateway.bicep' = {
   name: 'deploy-fullstack-gateway'
   params: { location: location, containerAppsEnvId: containerAppsEnv.id, keyVaultName: keyVaultName, acrName: acrName }

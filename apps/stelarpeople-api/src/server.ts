@@ -11,7 +11,13 @@ app.use((req: any, _res: any, next: any) => {
   next();
 });
 
-app.get('/api/health', (_req, res) => res.json({ ok: true, service: 'stelarpeople-api', time: new Date().toISOString() }));
-app.get('/api/ready', (_req, res) => res.json({ ok: true }));
+const healthHandler = (_req: express.Request, res: express.Response) =>
+  res.json({ ok: true, service: 'stelarpeople-api', time: new Date().toISOString() });
+const readyHandler = (_req: express.Request, res: express.Response) => res.json({ ok: true });
+
+app.get('/health', healthHandler);
+app.get('/ready', readyHandler);
+app.get('/api/health', healthHandler);
+app.get('/api/ready', readyHandler);
 
 app.listen(config.port, () => console.log(`stelarpeople-api on :${config.port}`));

@@ -3,6 +3,11 @@ import { applyScreeningOutcome } from "./crm.js";
 
 interface ScreeningApplication { id: string; prospect_id?: string; unit_id?: string; status: string; decision?: string; decision_notes?: string; }
 
+type ScreeningOverviewApplication = Record<string, unknown> & {
+  prospect_name: string;
+  decision?: string;
+};
+
 // Deterministic policy evaluation — returns { decision, reasons }
 function evaluatePolicy(input: Record<string, unknown>, policy: Record<string, unknown> | null | undefined, unit: Record<string, unknown> | null | undefined): { decision: string; reasons: string[] } {
   const reasons: string[] = [];
@@ -80,7 +85,7 @@ export async function listScreeningOverview() {
     `,
   );
 
-  const applications = (await queryAll<Record<string, unknown>>(`
+  const applications: ScreeningOverviewApplication[] = (await queryAll<Record<string, unknown>>(`
     SELECT
       sa.*,
       cp.prospect_id AS lead_code,

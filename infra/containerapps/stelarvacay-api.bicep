@@ -3,6 +3,8 @@ param containerAppsEnvId string
 param keyVaultName string
 param acrName string
 
+var keyVaultSecretBaseUrl = 'https://${keyVaultName}.${environment().suffixes.keyvaultDns}/secrets'
+
 resource stelarvacayApiApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'stelarvacay-api'
   location: location
@@ -13,9 +15,9 @@ resource stelarvacayApiApp 'Microsoft.App/containerApps@2023-05-01' = {
       ingress: { external: true, targetPort: 3000 }
       registries: [{ server: '${acrName}.azurecr.io', identity: 'system' }]
       secrets: [
-        { name: 'postgres-url', keyVaultUrl: 'https://${keyVaultName}.vault.azure.net/secrets/POSTGRES-URL', identity: 'system' }
-        { name: 'fullstack-api-key', keyVaultUrl: 'https://${keyVaultName}.vault.azure.net/secrets/FULLSTACK-INTERNAL-API-KEY', identity: 'system' }
-        { name: 'jwt-signing-key', keyVaultUrl: 'https://${keyVaultName}.vault.azure.net/secrets/JWT-SIGNING-KEY', identity: 'system' }
+        { name: 'postgres-url', keyVaultUrl: '${keyVaultSecretBaseUrl}/POSTGRES-URL', identity: 'system' }
+        { name: 'fullstack-api-key', keyVaultUrl: '${keyVaultSecretBaseUrl}/FULLSTACK-INTERNAL-API-KEY', identity: 'system' }
+        { name: 'jwt-signing-key', keyVaultUrl: '${keyVaultSecretBaseUrl}/JWT-SIGNING-KEY', identity: 'system' }
       ]
     }
     template: {
@@ -30,7 +32,7 @@ resource stelarvacayApiApp 'Microsoft.App/containerApps@2023-05-01' = {
           { name: 'AMADEUS_CLIENT_ID', value: '' }
           { name: 'AMADEUS_CLIENT_SECRET', value: '' }
         ]
-        resources: { cpu: '0.5', memory: '1Gi' }
+        resources: { cpu: json('0.5'), memory: '1Gi' }
         probes: [
           { type: 'Liveness', httpGet: { path: '/health', port: 3000 } }
           { type: 'Readiness', httpGet: { path: '/ready', port: 3000 } }
