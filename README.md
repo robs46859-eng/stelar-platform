@@ -2,8 +2,12 @@
 
 The Stelar Platform is a multi-tenant property and travel management ecosystem powered by local LLM intelligence (Gemma 4 26B) and hosted on Azure.
 
-## 🏗 Architecture
+## 🌐 Public Access
+- **Landing**: [https://stelar.host](https://stelar.host)
+- **StelarVacay**: [https://vacay.stelar.host](https://vacay.stelar.host)
+- **StelarPeople**: [https://people.stelar.host](https://people.stelar.host)
 
+## 🏗 Architecture
 ### Infrastructure
 - **Compute**: Azure Container Apps (ACA) for web and API services.
 - **Inference**: High-compute Azure VM (`gemmaco-key`) hosting Gemma 4 26B.
@@ -11,18 +15,14 @@ The Stelar Platform is a multi-tenant property and travel management ecosystem p
 - **Database**: Azure Database for PostgreSQL (Flexible Server).
 - **Secrets**: Azure Key Vault (`kv-stelar-prod`).
 
-### Services
-- **stelarvacay-web**: Consumer-facing travel/rental dashboard.
-- **stelarvacay-api**: Backend for rental search and booking.
-- **stelarpeople-web**: Property management dashboard (Phase 5).
-- **stelarpeople-api**: Backend for property and tenant management.
-- **fullstack-gateway**: Central entry point and inference proxy.
-
-## 🤖 Intelligence Integration
+## 🤖 Intelligence Integration (Phase 6: Current)
 The platform uses a hybrid-cloud model for LLM tasks:
 - **Model**: Gemma 4 26B (Ollama).
-- **Bridge**: A custom Python bridge on the VM (:18080) handles requests from ACA.
-- **Local Access**: `http://localhost:8500/v1/proxy/infer` (via Gateway).
+- **Status**: Connecting AiSquad agents to Gateway proxy.
+- **Sandbox Fix**: Implementation in progress.
+
+## 💳 Billing
+- **Status**: Stripe SDK scaffolded and `STRIPE-SECRET-KEY` configured in Key Vault.
 
 ## 🚀 Deployment
 Deploy the full stack using the Bicep templates:
@@ -30,7 +30,3 @@ Deploy the full stack using the Bicep templates:
 cd infra/containerapps
 bash deploy.sh
 ```
-
-## 🛠 Maintenance
-- **Gateway Venv**: Located at `/tmp/gw-venv` on the VM.
-- **Model Weights**: Located at `/mnt/gemma4/ollama`.
