@@ -34,8 +34,9 @@ resource stelarvacayApiApp 'Microsoft.App/containerApps@2023-05-01' = {
         ]
         resources: { cpu: json('0.5'), memory: '1Gi' }
         probes: [
-          { type: 'Liveness', httpGet: { path: '/health', port: 3000 } }
-          { type: 'Readiness', httpGet: { path: '/ready', port: 3000 } }
+          { type: 'Startup', httpGet: { path: '/health', port: 3000 }, initialDelaySeconds: 5, failureThreshold: 30, periodSeconds: 5 }
+          { type: 'Liveness', httpGet: { path: '/health', port: 3000 }, initialDelaySeconds: 15 }
+          { type: 'Readiness', httpGet: { path: '/ready', port: 3000 }, initialDelaySeconds: 10 }
         ]
       }]
       scale: { minReplicas: 1, maxReplicas: 5 }
