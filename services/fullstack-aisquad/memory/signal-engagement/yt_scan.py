@@ -2,12 +2,13 @@
 """YouTube Monitor scan for Prepared Paige buying signals."""
 
 import json
+import os
 import urllib.request
 import urllib.parse
 import time
 from datetime import datetime, timezone
 
-API_KEY = "AIzaSyAWvtb-VCUC433SgxTNF93SZZIla_mLrC0"
+API_KEY = os.environ["GOOGLE_API_KEY"]
 BASE_URL = "https://www.googleapis.com/youtube/v3"
 OUTPUT_DIR = "/home/azureuser/fullstack-aisquad/memory/signal-engagement/raw-signals"
 

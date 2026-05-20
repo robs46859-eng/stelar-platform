@@ -10,7 +10,7 @@ resource stelarpeopleWebApp 'Microsoft.App/containerApps@2023-05-01' = {
   properties: {
     managedEnvironmentId: containerAppsEnvId
     configuration: {
-      ingress: { external: true, targetPort: 4173 }
+      ingress: { external: true, targetPort: 80 }
       registries: [{ server: '${acrName}.azurecr.io', identity: 'system' }]
     }
     template: {
@@ -22,8 +22,8 @@ resource stelarpeopleWebApp 'Microsoft.App/containerApps@2023-05-01' = {
         ]
         resources: { cpu: json('0.25'), memory: '0.5Gi' }
         probes: [
-          { type: 'Liveness', httpGet: { path: '/', port: 4173 } }
-          { type: 'Readiness', httpGet: { path: '/', port: 4173 } }
+          { type: 'Liveness', httpGet: { path: '/', port: 80 } }
+          { type: 'Readiness', httpGet: { path: '/', port: 80 } }
         ]
       }]
       scale: { minReplicas: 1, maxReplicas: 5 }

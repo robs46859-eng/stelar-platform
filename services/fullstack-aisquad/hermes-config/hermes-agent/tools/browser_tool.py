@@ -1868,16 +1868,21 @@ def _run_browser_command(
             idle_ms = str(BROWSER_SESSION_INACTIVITY_TIMEOUT * 1000)
             browser_env["AGENT_BROWSER_IDLE_TIMEOUT_MS"] = idle_ms
 
-        # Inject --no-sandbox when needed (issue #15765):
+        # Inject --no-sandbox / sandbox-bypass flags when needed:
         # - Running as root: Chromium always refuses to start without it
         # - Ubuntu 23.10+ / AppArmor systems: unprivileged user namespaces
         #   are restricted, causing Chromium to exit with "No usable sandbox"
         #   even for non-root users running under systemd or containers.
+        # - Docker containers without SYS_ADMIN cap: seccomp/namespace limits
+        #   prevent the Chrome sandbox from initialising — always inject.
         if "AGENT_BROWSER_CHROME_FLAGS" not in browser_env:
             _needs_sandbox_bypass = False
             if hasattr(os, "geteuid") and os.geteuid() == 0:
                 _needs_sandbox_bypass = True
                 logger.debug("browser: running as root — injecting --no-sandbox")
+            elif _running_in_docker():
+                _needs_sandbox_bypass = True
+                logger.debug("browser: running in Docker — injecting --no-sandbox")
             else:
                 # Detect AppArmor user namespace restrictions (Ubuntu 23.10+)
                 _userns_restrict = "/proc/sys/kernel/apparmor_restrict_unprivileged_userns"
@@ -1893,7 +1898,7 @@ def _run_browser_command(
                     pass
             if _needs_sandbox_bypass:
                 browser_env["AGENT_BROWSER_CHROME_FLAGS"] = (
-                    "--no-sandbox --disable-dev-shm-usage"
+                    "--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage"
                 )
 
         # Use temp files for stdout/stderr instead of pipes.

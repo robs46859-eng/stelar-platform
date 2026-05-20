@@ -1,7 +1,8 @@
 model:
-  default: gemini-3.1-pro-preview
-  provider: gemini
-  base_url: https://generativelanguage.googleapis.com/v1beta
+  default: gemma4:26b
+  provider: openai
+  base_url: http://localhost:8500/v1
+  api_key: ${FULLSTACK_GATEWAY_KEY}
 providers: {}
 fallback_providers: []
 credential_pool_strategies:

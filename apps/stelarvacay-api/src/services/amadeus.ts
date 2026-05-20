@@ -1,69 +1,61 @@
-import Amadeus from "amadeus";
+// TODO: Amadeus API calls are routed through the fullstack-gateway per SPEC §3.1.6.
+// The gateway acts as the single egress point for all external provider calls.
+// Direct Amadeus SDK usage is replaced by forwarded requests to the gateway's
+// /v1/travel/flights and /v1/travel/hotels endpoints, which proxy to Amadeus
+// using server-side credentials held by the gateway.
+
 import { config } from "../config.ts";
 
-let amadeus: Amadeus | null = null;
-
-if (config.amadeusClientId && config.amadeusClientSecret) {
-  amadeus = new Amadeus({
-    clientId: config.amadeusClientId,
-    clientSecret: config.amadeusClientSecret,
-  });
-}
-
-export async function getFlightPrice(origin: string, destination: string, date: string, adults: number) {
-  if (!amadeus) return null;
+export async function getFlightPrice(origin: string, destination: string, date: string, adults: number): Promise<number | null> {
+  if (!config.gatewayUrl) return null;
 
   try {
-    const response = await amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: origin,
-      destinationLocationCode: destination,
-      departureDate: date,
-      adults: adults.toString(),
-      max: "5",
-      currencyCode: "INR",
+    const res = await fetch(`${config.gatewayUrl}/v1/travel/flights`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${config.gatewayApiKey}`,
+      },
+      body: JSON.stringify({
+        originLocationCode: origin,
+        destinationLocationCode: destination,
+        departureDate: date,
+        adults,
+        max: 5,
+        currencyCode: "INR",
+      }),
     });
 
-    if (response.data && response.data.length > 0) {
-      // Return the cheapest price found
-      return Math.round(parseFloat(response.data[0].price.total));
-    }
-    return null;
+    if (!res.ok) return null;
+    const data = await res.json() as { price?: number | null };
+    return data.price != null ? Math.round(data.price) : null;
   } catch (error) {
-    console.error("Amadeus flight search error:", error);
+    console.error("Gateway flight search error:", error);
     return null;
   }
 }
 
-export async function getHotelPrice(cityCode: string, adults: number) {
-  if (!amadeus) return null;
+export async function getHotelPrice(cityCode: string, adults: number): Promise<number | null> {
+  if (!config.gatewayUrl) return null;
 
   try {
-    // 1. Get list of hotels in the city
-    const hotelListResponse = await amadeus.referenceData.locations.hotels.byCity.get({
-      cityCode: cityCode,
+    const res = await fetch(`${config.gatewayUrl}/v1/travel/hotels`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${config.gatewayApiKey}`,
+      },
+      body: JSON.stringify({
+        cityCode,
+        adults,
+      }),
     });
 
-    if (!hotelListResponse.data || hotelListResponse.data.length === 0) return null;
-
-    // 2. Get offers for the first few hotels (as a sample)
-    const hotelIds = hotelListResponse.data.slice(0, 3).map((h: any) => h.hotelId).join(",");
-    const offersResponse = await amadeus.shopping.hotelOffersSearch.get({
-      hotelIds: hotelIds,
-      adults: adults.toString(),
-    });
-
-    if (offersResponse.data && offersResponse.data.length > 0) {
-      // Find the average price per night from the offers
-      const prices = offersResponse.data.flatMap((h: any) =>
-        h.offers.map((o: any) => parseFloat(o.price.total))
-      );
-      if (prices.length > 0) {
-        return Math.round(prices.reduce((a: number, b: number) => a + b, 0) / prices.length);
-      }
-    }
-    return null;
+    if (!res.ok) return null;
+    const data = await res.json() as { pricePerNight?: number | null };
+    return data.pricePerNight != null ? Math.round(data.pricePerNight) : null;
   } catch (error) {
-    console.error("Amadeus hotel search error:", error);
+    console.error("Gateway hotel search error:", error);
     return null;
   }
 }

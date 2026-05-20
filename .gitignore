@@ -54,5 +54,6 @@ services/fullstack-aisquad/hermes-config/hermes-agent/
 services/fullstack-aisquad/hermes-config/*.db
 services/fullstack-aisquad/hermes-config/*.db-shm
 services/fullstack-aisquad/hermes-config/*.db-wal
+services/fullstack-aisquad/hermes-config/pastes/
 .graphify/
 services/fullstack-aisquad/hermes-config/node/bin/node

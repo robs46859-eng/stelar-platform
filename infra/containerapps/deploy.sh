@@ -16,5 +16,6 @@ az deployment group create \
     location="$LOCATION" \
     containerAppsEnvName="$CONTAINER_APPS_ENV_NAME" \
     keyVaultName="$KEY_VAULT_NAME" \
-    acrName="$ACR_NAME"
+    acrName="$ACR_NAME" \
+    ollamaBridgeUrl="http://20.10.150.44:18080"
 echo "Deployment complete."

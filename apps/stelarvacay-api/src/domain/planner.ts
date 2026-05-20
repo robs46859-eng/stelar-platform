@@ -46,8 +46,6 @@ export type PlannerQuote = {
     comfort: string;
     complexity: string;
   };
-  /** @deprecated use transparency.badge and line sources */
-  isLiveData?: boolean;
   transparency: PricingTransparency;
   /** Calendar / climate nuance in the model (contingency band). */
   seasonal: {
@@ -168,7 +166,7 @@ export function buildQuote(request: PlannerRequest, liveData: LiveDataValues = {
 
   const hasLiveFlight = Boolean(liveData.flightPrice);
   const hasLiveStay = Boolean(liveData.hotelPricePerNight);
-  const isLiveData = hasLiveFlight || hasLiveStay;
+  const isLiveData = hasLiveFlight || hasLiveStay; // local only — isLiveData field removed from PlannerQuote
 
   let badge: PricingTransparency["badge"] = "planning_estimate";
   if (hasLiveFlight && hasLiveStay) badge = "sample_fares_both";
@@ -207,7 +205,6 @@ export function buildQuote(request: PlannerRequest, liveData: LiveDataValues = {
     destination,
     request,
     travelMode,
-    isLiveData,
     transparency,
     rationale: [
       `${destination.name} fits a ${request.nights}-night trip using ${request.stayType} lodging.`,

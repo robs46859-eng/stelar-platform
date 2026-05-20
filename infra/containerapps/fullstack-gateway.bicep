@@ -2,8 +2,9 @@ param location string
 param containerAppsEnvId string
 param keyVaultName string
 param acrName string
+param ollamaBridgeUrl string
 
-var keyVaultSecretBaseUrl = 'https://${keyVaultName}.${environment().suffixes.keyvaultDns}/secrets'
+var keyVaultSecretBaseUrl = 'https://${keyVaultName}${environment().suffixes.keyvaultDns}/secrets'
 
 resource gatewayApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'fullstack-gateway'
@@ -29,7 +30,7 @@ resource gatewayApp 'Microsoft.App/containerApps@2023-05-01' = {
         env: [
           { name: 'DATABASE_URL', secretRef: 'postgres-url' }
           { name: 'REDIS_URL', secretRef: 'redis-url' }
-          { name: 'OLLAMA_BRIDGE_URL', value: 'http://20.10.150.44:18080' }
+          { name: 'OLLAMA_BRIDGE_URL', value: ollamaBridgeUrl }
           { name: 'OLLAMA_BRIDGE_SHARED_SECRET', secretRef: 'ollama-bridge-secret' }
           { name: 'FULLSTACK_INTERNAL_API_KEY', secretRef: 'fullstack-api-key' }
           { name: 'JWT_SIGNING_KEY', secretRef: 'jwt-signing-key' }

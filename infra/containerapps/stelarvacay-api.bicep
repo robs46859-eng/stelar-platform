@@ -3,7 +3,7 @@ param containerAppsEnvId string
 param keyVaultName string
 param acrName string
 
-var keyVaultSecretBaseUrl = 'https://${keyVaultName}.${environment().suffixes.keyvaultDns}/secrets'
+var keyVaultSecretBaseUrl = 'https://${keyVaultName}${environment().suffixes.keyvaultDns}/secrets'
 
 resource stelarvacayApiApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'stelarvacay-api'

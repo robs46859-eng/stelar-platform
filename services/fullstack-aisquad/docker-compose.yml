@@ -41,6 +41,8 @@ services:
   hermes-agent:
     image: nousresearch/hermes-agent:latest
     restart: unless-stopped
+    cap_add:
+      - SYS_ADMIN
     # The Hermes Agent image entrypoint defaults to the interactive CLI which exits
     # immediately under `docker compose up -d`. We override here to start the
     # gateway, which is the long-running API/health server the Workspace needs.

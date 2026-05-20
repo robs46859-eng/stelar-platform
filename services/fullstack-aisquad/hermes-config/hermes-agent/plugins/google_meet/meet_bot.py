@@ -528,6 +528,9 @@ def run_bot() -> int:  # noqa: C901 — orchestration, explicit branches
     chrome_args = [
         "--use-fake-ui-for-media-stream",
         "--disable-blink-features=AutomationControlled",
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
     ]
     if not rt["enabled"]:
         # v1-style fake device (silence) — we don't care about mic content
