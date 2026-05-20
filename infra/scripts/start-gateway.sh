@@ -31,7 +31,7 @@ nohup "$VENV/bin/uvicorn" app.main:app --port 8500 --host 0.0.0.0 \
   > /tmp/gateway.log 2>&1 &
 
 sleep 2
-if curl -sf http://localhost:8500/health > /dev/null; then
+if curl -sf http://localhost:8500/healthz > /dev/null; then
   echo "Gateway is UP — http://localhost:8500"
 else
   echo "Gateway failed to start. Check /tmp/gateway.log"
