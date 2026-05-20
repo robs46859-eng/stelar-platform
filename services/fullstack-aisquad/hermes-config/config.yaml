@@ -92,7 +92,7 @@ web:
   backend: brave-free
   search_backend: ''
   extract_backend: ''
-  use_gateway: false
+  use_gateway: true
 browser:
   inactivity_timeout: 120
   command_timeout: 30
@@ -113,7 +113,7 @@ browser:
   - --disable-setuid-sandbox
   - --disable-dev-shm-usage
   cloud_provider: local
-  use_gateway: false
+  use_gateway: true
 checkpoints:
   enabled: false
   max_snapshots: 20
@@ -302,7 +302,7 @@ tts:
     device: cpu
   piper:
     voice: en_US-lessac-medium
-  use_gateway: false
+  use_gateway: true
 stt:
   enabled: true
   provider: local
@@ -424,7 +424,7 @@ cron:
   wrap_response: true
   max_parallel_jobs: null
 kanban:
-  dispatch_in_gateway: true
+  dispatch_in_gateway: false
   dispatch_interval_seconds: 60
   failure_limit: 2
 code_execution:
@@ -509,7 +509,7 @@ platform_toolsets:
   - hermes-google_chat
 image_gen:
   provider: openai-codex
-  use_gateway: false
+  use_gateway: true
   model: gpt-image-2-medium
 known_plugin_toolsets:
   cli:
