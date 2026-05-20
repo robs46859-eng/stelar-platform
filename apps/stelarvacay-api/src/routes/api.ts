@@ -3,7 +3,7 @@ import { buildQuote, listDestinations, parsePlannerRequest, type LiveDataValues 
 import { generateWithGemma } from "../services/gateway.ts";
 import { getUserTripPlans, saveTripPlan, deleteTripPlan } from "../persistence/tripPlans.ts";
 import { getFlightPrice, getHotelPrice } from "../services/amadeus.ts";
-import { requireFirebaseUser } from "../auth/bearer.ts";
+import { requireJwtUser } from "../auth/bearer.ts";
 import { config } from "../config.ts";
 import { generalApiLimiter, quotePostLimiter } from "../middleware/rateLimits.ts";
 
@@ -24,13 +24,13 @@ export function createApiRouter() {
     res.json({ destinations: listDestinations() });
   });
 
-  router.get("/plans", requireFirebaseUser, async (req, res) => {
+  router.get("/plans", requireJwtUser, async (req, res) => {
     const userId = (req as any).userId!;
     const plans = await getUserTripPlans(userId);
     res.json({ plans });
   });
 
-  router.delete("/plans/:planId", requireFirebaseUser, async (req, res) => {
+  router.delete("/plans/:planId", requireJwtUser, async (req, res) => {
     const userId = (req as any).userId!;
     const deleted = await deleteTripPlan(req.params.planId, userId);
     if (!deleted) {
@@ -40,7 +40,7 @@ export function createApiRouter() {
     res.json({ ok: true });
   });
 
-  router.post("/planner/quote", quotePostLimiter, requireFirebaseUser, async (req, res) => {
+  router.post("/planner/quote", quotePostLimiter, requireJwtUser, async (req, res) => {
     try {
       const userId = (req as any).userId!;
       const request = parsePlannerRequest(req.body);

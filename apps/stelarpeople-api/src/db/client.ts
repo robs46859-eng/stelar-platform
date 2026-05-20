@@ -12,5 +12,5 @@ export async function queryOne<T>(text: string, params?: unknown[]): Promise<T |
   return result.rows[0];
 }
 export async function execute(text: string, params?: unknown[]) {
-  return pool.query(text, params);
+  return pool.query<Record<string, unknown>>(text, params);
 }

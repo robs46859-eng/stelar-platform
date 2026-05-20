@@ -1,6 +1,6 @@
 # SPEC.md — Stelar / FullStack Azure Gemma 4 Deployment
 
-**Version:** 2.0  
+**Version:** 2.1  
 **Date:** 2026-05-19  
 **Cloud target:** Microsoft Azure first  
 **Model host:** Azure VM with Ollama  
@@ -17,13 +17,86 @@
 
 ## 0.1 Current Deployment Status — 2026-05-19
 
-Phase 4 deployment preparation is complete: Docker images are pushed to Azure Container Registry and Bicep templates are committed. Deployment is being run from the local Mac because `gemmaco-key` does not currently have Azure CLI installed.
+Repair pass (`7f8c9db`) applied. All Node app builds clean. Azure ARM validation passed (`rg-stelar-prod`). fullstack-gateway Python test suite 11/11 passing.
 
-Operational deltas from target state:
-- `fullstack-gateway` Container App resource exists, but first revision provisioning timed out before managed identity roles were added.
-- Gateway system identity `cde15954-206f-4bdf-bee4-ff6979aace89` now has `AcrPull` on `acrstelarprod` and `Key Vault Secrets User` on `kv-stelar-prod`.
-- Remaining Container App identities may need the same role assignments once created.
-- The gateway currently points at `http://20.10.150.44:18080`; this works only if VM/network/firewall rules allow it and should be replaced with a private channel for production hardening.
+Operational state post-repair:
+- `fullstack-gateway` Container App deployed. System identity `cde15954-206f-4bdf-bee4-ff6979aace89` has `AcrPull` on `acrstelarprod` and `Key Vault Secrets User` on `kv-stelar-prod`.
+- `stelarpeople-api` and `stelarvacay-api` built and validated; Container App Bicep templates ARM-validated.
+- The gateway currently points at `http://20.10.150.44:18080` (hardcoded VM IP in Bicep — parameterize before next deploy).
+- Arkham Governance, StelarPeople web, and FullStack AiSquad have no Container App Bicep templates yet.
+- Managed infrastructure (PostgreSQL, Redis, Service Bus, Blob Storage) not provisioned from Bicep.
+
+---
+
+## 0.2 Implementation Status by Service — 2026-05-19
+
+| Service | Code State | Build | Bicep | Known Open Issues |
+|---|---|---|---|---|
+| **FullStack Gateway** | Implemented (Python/FastAPI) | ✅ | ✅ deployed | AWS S3/SQS config must be replaced with Azure Blob/Service Bus; `dev_api_key_secret` default insecure; `admin_api_token` default empty |
+| **Arkham Governance** | Implemented (Python/FastAPI) | ✅ | ❌ missing | 90-day publish block never expires; classifier patterns too broad; DB errors silently swallowed |
+| **StelarVacay API** | Implemented (TypeScript/Express) | ✅ | ✅ | Amadeus called directly — must route through gateway per SPEC §3.1.6; "CheapVacay" brand in copy |
+| **StelarVacay Web** | Implemented (React/Vite) | ✅ | ✅ | — |
+| **StelarPeople API** | Implemented (TypeScript/Express) | ✅ | ✅ | CORS wide open; no structured JSON logs; no rate limiting; income double-conversion risk in screening.ts |
+| **StelarPeople Web** | Not found | — | ❌ missing | — |
+| **StelarGem API** | `.gitkeep` only | — | ❌ missing | Not started |
+| **StelarGem Web** | Not found | — | ❌ missing | Not started |
+| **FullStack Dashboard** | Not found | — | ❌ missing | Not started |
+| **FullStack AiSquad** | Local swarm (51 workers, swarm.yaml) | ✅ (build) | ❌ missing | No Container App deployment; local hermes-only format |
+| **Ollama Bridge** | Spec only (SPEC §10) | — | — | Not deployed to VM yet |
+| **PostgreSQL** | — | — | ❌ not provisioned | Required before any app can connect |
+| **Redis** | — | — | ❌ not provisioned | Required for gateway rate limiting and cache |
+| **Service Bus** | — | — | ❌ not provisioned | Required for agent run queue and governance queue |
+| **Blob Storage** | — | — | ❌ not provisioned | Required for inspections, exports, archive |
+
+---
+
+## 0.3 Code Review Findings — 2026-05-19
+
+This section records the findings from the post-repair code review (commit `7f8c9db`). Fix these before opening beta traffic.
+
+### Priority 1 — Security and Data Correctness
+
+1. **CORS open on stelarpeople-api** (`apps/stelarpeople-api/src/server.ts:7`). `app.use(cors())` with no origin allowlist. Add `{ origin: process.env.CORS_ALLOWED_ORIGINS?.split(',') }`.
+
+2. **OLLAMA_BRIDGE_URL hardcoded VM IP** (`infra/containerapps/fullstack-gateway.bicep:32`). Raw IP `http://20.10.150.44:18080` committed to Bicep. Add `param ollamaBridgeUrl string` and pass from deploy script.
+
+3. **Gateway dev key default insecure** (`services/fullstack-gateway/app/core/config.py:41`). `dev_api_key_secret` defaults to `"change-me-now"`. Add a startup assertion that this is overridden when `BACKEND_MODE=self_hosted`.
+
+4. **Gateway admin token default empty** (`services/fullstack-gateway/app/core/config.py:40`). `admin_api_token` defaults to `""`. Admin endpoints unprotected if not set.
+
+5. **Income double-conversion risk in screening** (`apps/stelarpeople-api/src/services/screening.ts:150,176`). `evaluatePolicy` uses `incomeCents` but the INSERT re-derives from `input.gross_monthly_income`. Use `incomeCents` consistently for both the evaluation and the INSERT.
+
+### Priority 2 — Spec Compliance
+
+6. **"CheapVacay" brand violation** (`apps/stelarvacay-api/src/domain/planner.ts:189`). Replace with `StelarVacay` per SPEC §2.
+
+7. **`requireFirebaseUser` name** (`apps/stelarvacay-api/src/auth/bearer.ts:5`, `apps/stelarpeople-api/src/auth/bearer.ts:5`). Firebase is removed per SPEC §3.1.5. Rename to `requireJwtUser`.
+
+8. **Amadeus called directly from stelarvacay-api** (`apps/stelarvacay-api/src/config.ts:7`). Third-party flight APIs must route through FullStack Gateway per SPEC §3.1.6. Move Amadeus calls to a gateway route.
+
+9. **AWS S3/SQS in gateway config** (`services/fullstack-gateway/app/core/config.py:21-27`). Production audit trail must use Azure Blob Storage and Azure Service Bus, not AWS services. Replace when the audit worker is wired.
+
+### Priority 3 — Observability and Operational Safety
+
+10. **No structured JSON logs in stelarpeople-api** (`apps/stelarpeople-api/src/server.ts`). SPEC §3.3.7 requires structured JSON logs from every service. Add `express-winston` or equivalent.
+
+11. **No rate limiting in stelarpeople-api** (`apps/stelarpeople-api/src/server.ts`). stelarvacay-api has `express-rate-limit`; stelarpeople-api does not.
+
+12. **Arkham 90-day block never expires** (`services/arkham-governance/src/main.py:58`). The publish block is hardcoded and permanent. Introduce `DEPLOYMENT_START_DATE` env var and compute the 90-day window from it.
+
+13. **Arkham classifier patterns too broad** (`services/arkham-governance/src/classifier.py:7-29`). Word-list patterns fire on non-marketing content. Add a `channel` field guard — only apply hard-block word patterns when `channel` is `public_post`, `email`, or `affiliate`.
+
+14. **Arkham DB errors silently swallowed** (`services/arkham-governance/src/main.py:18`, `src/reviewer.py:16`). Replace bare `except Exception: pass` with `except Exception as exc: logger.warning("governance_db_error", exc_info=exc)`.
+
+### Priority 4 — Infrastructure Gaps
+
+15. **Arkham Governance missing from `main.bicep`** — required before product API deployment per §17.3.
+
+16. **StelarPeople web missing from `main.bicep`** — add `stelarpeople-web.bicep` module.
+
+17. **No managed infrastructure Bicep** — PostgreSQL, Redis, Service Bus, and Blob Storage must be provisioned before apps can connect. Create `infra/containerapps/storage.bicep`, `infra/containerapps/database.bicep` modules.
+
+18. **`@deprecated isLiveData`** (`apps/stelarvacay-api/src/domain/planner.ts:49`). Still populated and returned. Remove from type and return value.
 
 ## 1. Purpose
 

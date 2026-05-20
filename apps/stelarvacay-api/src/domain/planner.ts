@@ -183,7 +183,7 @@ export function buildQuote(request: PlannerRequest, liveData: LiveDataValues = {
           ? "Sample live fares (flights + stay) mixed with estimates"
           : "Mix of sample fares and benchmarks",
     bullets: [
-      "CheapVacay is not a travel agency. We do not sell tickets, rooms, or insurance.",
+      "StelarVacay is not a travel agency. We do not sell tickets, rooms, or insurance.",
       "Totals are planning numbers to compare trips—not invoices, holds, or guaranteed prices.",
       hasLiveFlight
         ? "Intercity: uses a small sample of public flight offers (lowest in the set), not a chosen airline or seat."

@@ -2,7 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { config } from "../config.ts";
 
-export async function requireFirebaseUser(req: Request, res: Response, next: NextFunction) {
+export async function requireJwtUser(req: Request, res: Response, next: NextFunction) {
   const header = req.headers.authorization;
   if (!header?.startsWith("Bearer ")) {
     res.status(401).json({ error: "Sign in required." });

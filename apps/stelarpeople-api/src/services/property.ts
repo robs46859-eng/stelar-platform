@@ -161,7 +161,7 @@ export async function createWorkOrder(input: Partial<WorkOrder> & Record<string,
     ],
   );
 
-  const id = (result as unknown as { rows?: Array<{ id: unknown }> }).rows?.[0]?.id;
+  const id = result.rows[0]?.id;
   return getWorkOrderById(Number(id));
 }
 

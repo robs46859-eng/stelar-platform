@@ -5,4 +5,7 @@ export const config = {
   gatewayApiKey: process.env.FULLSTACK_INTERNAL_API_KEY!,
   jwtSigningKey: process.env.JWT_SIGNING_KEY!,
   product: 'stelarpeople',
+  corsAllowedOrigins: (process.env.CORS_ALLOWED_ORIGINS || '').split(',').filter(Boolean),
+  rateLimitMax: Math.max(10, Number(process.env.API_RATE_LIMIT_MAX ?? 400)),
+  rateLimitWindowMs: Math.max(1000, Number(process.env.API_RATE_LIMIT_WINDOW_MS ?? 900_000)),
 };

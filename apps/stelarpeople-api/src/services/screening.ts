@@ -173,7 +173,7 @@ export async function createScreeningApplication(input: Record<string, unknown>)
       input.prospect_id,
       input.unit_id || null,
       input.policy_id || null,
-      input.gross_monthly_income == null ? null : Math.round(Number(input.gross_monthly_income) * 100),
+      incomeCents,
       input.credit_score == null ? null : Number(input.credit_score),
       input.open_collections == null ? 0 : Math.round(Number(input.open_collections) * 100),
       input.occupants_count == null ? 1 : Number(input.occupants_count),
@@ -187,7 +187,7 @@ export async function createScreeningApplication(input: Record<string, unknown>)
     ],
   );
 
-  const id = (result as unknown as { rows?: Array<{ id: unknown }> }).rows?.[0]?.id;
+  const id = result.rows[0]?.id;
 
   // Auto-advance CRM stage based on decision
   await applyScreeningOutcome(Number(input.prospect_id), decision);

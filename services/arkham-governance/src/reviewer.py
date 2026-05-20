@@ -1,6 +1,9 @@
-import os
+import logging
 from datetime import datetime, timezone
 from typing import Optional
+
+logger = logging.getLogger(__name__)
+
 
 async def record_review(
     pool,
@@ -20,5 +23,6 @@ async def record_review(
             content_hash, product, agent_name, classification, risk_score, decision, notes,
             datetime.now(timezone.utc),
         )
-    except Exception:
-        pass  # Non-blocking — governance DB write failure must never stop a block decision
+    except Exception as exc:
+        # Non-blocking — DB write failure must never stop a block decision
+        logger.warning("governance_audit_write_failed: %s", exc)

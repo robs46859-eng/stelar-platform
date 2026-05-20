@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic import Field
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -42,6 +42,21 @@ class Settings(BaseSettings):
     dev_api_key_secret: str = Field(default="change-me-now", alias="DEV_API_KEY_SECRET")
     ollama_bridge_url: str = Field(default='http://127.0.0.1:18080', alias='OLLAMA_BRIDGE_URL')
     ollama_bridge_shared_secret: str = Field(default='', alias='OLLAMA_BRIDGE_SHARED_SECRET')
+
+    @model_validator(mode='after')
+    def validate_production_security(self) -> 'Settings':
+        if self.backend_mode == 'self_hosted':
+            if self.dev_api_key_secret == 'change-me-now':
+                raise ValueError(
+                    "DEV_API_KEY_SECRET must be changed from the default value in self_hosted mode. "
+                    "Set DEV_API_KEY_SECRET to a secure random string."
+                )
+            if not self.admin_api_token:
+                raise ValueError(
+                    "ADMIN_API_TOKEN must be set in self_hosted mode. "
+                    "The admin control plane is unprotected without it."
+                )
+        return self
 
 
 @lru_cache
