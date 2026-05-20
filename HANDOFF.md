@@ -1,6 +1,6 @@
 # Stelar Platform — Handoff
 
-**Updated:** 2026-05-20 (Phase 8 deploy in progress — 8 of 10 apps live)
+**Updated:** 2026-05-20 (Phase 8 deploy complete — all 9 apps live and healthy)
 **Host:** Azure VM `gemmaco-key` · eastus2 · Standard_E8s_v3  
 **Repo:** `/mnt/gemma4/stelar-platform` → `git@github.com:robs46859-eng/stelar-platform.git`  
 **Branch:** `main` (protected) · `staging` (integration buffer)
@@ -19,70 +19,57 @@
 | 5 — Web Apps | ✅ Complete | All 4 web apps built and Bicep-ready |
 | 6 — AiSquad | ✅ Complete | Chrome sandbox fixed, inference wired to gateway via localhost:8500 |
 | 7 — Security | 🟡 Partial | All code-level security issues fixed; secrets rotated; private endpoints + VNET not yet done |
-| 8 — Launch | 🟡 In Progress | 8/10 apps live; stelargem-api activating; stelargem-web not yet deployed |
+| 8 — Launch | 🟡 In Progress | All 9 apps Running; smoke tests passing; VNET/monitoring pending |
 
 ---
 
-## Phase 8 Deploy Status — 2026-05-20
+## Phase 8 Deploy Status — 2026-05-20 ✅ COMPLETE
 
-### Container App Status (post-deploy)
+### Container App Status
 
-| App | Status | Notes |
+| App | Status | FQDN |
 |---|---|---|
-| fullstack-gateway | ✅ Running | Revision `fullstack-gateway--d15675j` |
-| stelarvacay-api | ✅ Running | Revision `stelarvacay-api--wawmjm8` |
-| stelarvacay-web | ✅ Running | Revision `stelarvacay-web--ekwberc` |
-| stelarpeople-api | ✅ Running | Revision `stelarpeople-api--0000001` |
-| stelarpeople-web | ✅ Running | Revision `stelarpeople-web--0000001` |
-| arkham-governance | ✅ Running | Revision `arkham-governance--930eaou` · internal ingress only |
-| stelargem-api | 🟡 Activating | ARM timed out on first provision; revision `stelargem-api--m2yncv0` now activating |
-| fullstack-dashboard | 🟡 Activating | ARM timed out on first provision; revision `fullstack-dashboard--y3mypmp` now activating |
-| stelargem-web | ❌ Not deployed | Skipped in ARM (dependsOn stelargem-api which failed); needs standalone deploy |
-| Storage (stelarstorageprod) | ✅ Succeeded | 3 containers: inspections, exports, archive |
-| Service Bus (sb-stelar-prod) | ✅ Succeeded | 2 queues: agent-run-queue, governance-queue |
+| fullstack-gateway | ✅ Running | internal only |
+| stelarvacay-api | ✅ Running | `stelarvacay-api.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
+| stelarvacay-web | ✅ Running | `stelarvacay-web.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
+| stelarpeople-api | ✅ Running | `stelarpeople-api.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
+| stelarpeople-web | ✅ Running | `stelarpeople-web.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
+| arkham-governance | ✅ Running | internal only |
+| stelargem-api | ✅ Running | `stelargem-api.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
+| fullstack-dashboard | ✅ Running | `fullstack-dashboard.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
+| stelargem-web | ✅ Running | `stelargem-web.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
+| Storage (stelarstorageprod) | ✅ Live | 3 containers: inspections, exports, archive |
+| Service Bus (sb-stelar-prod) | ✅ Live | 2 queues: agent-run-queue, governance-queue |
 
-### Root Cause: "Operation Expired" on 3 Apps
-ARM deployment flagged `stelargem-api`, `fullstack-dashboard`, and `arkham-governance` as failed because the first revision timed out waiting on managed identity AcrPull — same race condition as Phase 4 gateway. The apps were created; subsequent operations assigned roles and revisions are now activating. `stelargem-web` was skipped entirely because it `dependsOn` `stelargem-api`.
+### Smoke Test Results (2026-05-20 ~19:20 UTC)
+- `stelarpeople-api /health` → `{"ok":true,"service":"stelarpeople-api"}`
+- `stelarvacay-api /health` → `{"ok":true,"service":"stelarvacay-api"}`
+- `stelargem-api /health` → `{"status":"ok","service":"stelargem-api"}`
+- `stelarpeople-web /` → 200 (React app)
+- `stelarvacay-web /` → 200 (React app)
+- `stelargem-web /` → 200 · title: "StelarGem — Neighborhood Intelligence"
+- `fullstack-dashboard /` → 200 (React app)
 
-### Remaining Steps to Full Deploy
+### Issues Resolved During Deploy
+| Issue | Root Cause | Fix |
+|---|---|---|
+| 3 apps "Operation Expired" | AcrPull race: managed identity not ready before first revision | Assign roles post-deploy, redeploy |
+| stelarpeople-api / stelarvacay-api crash loop | Missing `Key Vault Secrets User` RBAC role (KV is RBAC-mode, not policy-mode) | `az role assignment create --role "Key Vault Secrets User"` for all backend identities |
+| Probe failures on startup | No `initialDelaySeconds` — probe fires before Python/Node binds | Added Startup probe + initialDelaySeconds to all API Bicep files |
+| stelargem-api `exports is not defined` | `"type":"module"` in package.json conflicts with `"module":"CommonJS"` tsconfig | Removed `"type":"module"` from package.json |
+| stelargem-web 404 via ingress | Cached Docker image pushed before React build was complete | Rebuilt with `--no-cache`, pushed new digest, redeployed |
 
-**Step 1 — Verify AcrPull is assigned for the 3 late apps**
-```bash
-for app in stelargem-api fullstack-dashboard stelargem-web; do PRINCIPAL=$(az containerapp show -n $app -g rg-stelar-prod --query identity.principalId -o tsv 2>/dev/null); echo "$app: $PRINCIPAL"; done
-```
-
-**Step 2 — Deploy stelargem-web standalone**
-```bash
-az deployment group create -g rg-stelar-prod --template-file infra/containerapps/stelargem-web.bicep --parameters location=eastus2 containerAppsEnvId=$(az containerapp env show -n cae-stelar-prod -g rg-stelar-prod --query id -o tsv) acrName=acrstelarprod
-```
-Then assign AcrPull:
-```bash
-PRINCIPAL=$(az containerapp show -n stelargem-web -g rg-stelar-prod --query identity.principalId -o tsv) && az role assignment create --assignee $PRINCIPAL --role AcrPull --scope $(az acr show -n acrstelarprod --query id -o tsv)
-```
-
-**Step 3 — Verify KV Secrets User for backend apps**
-```bash
-for app in arkham-governance stelargem-api; do PRINCIPAL=$(az containerapp show -n $app -g rg-stelar-prod --query identity.principalId -o tsv); az keyvault set-policy --name kv-stelar-prod --object-id $PRINCIPAL --secret-permissions get list; echo "KV policy set: $app"; done
-```
-
-**Step 4 — Smoke tests**
-```bash
-curl https://stelar.host/health
-curl https://people.stelar.host/health
-curl https://vacay.stelar.host/health
-```
-
-**Step 5 — AiSquad VM env setup (one-time)**
+### AiSquad VM env setup (one-time, not yet done)
 ```bash
 ssh -i ~/.ssh/id_ed25519 azureuser@20.10.150.44 "echo 'FULLSTACK_GATEWAY_KEY=ak_live_68b5f5c879fac993.68680c376e05ddced3bec1e1c0971f8c16667f306d180d7f' >> ~/.hermes/.env && echo 'TELEGRAM_BOT_TOKEN=<from_kv>' >> ~/.hermes/.env && echo 'GITHUB_TOKEN=<from_kv>' >> ~/.hermes/.env && echo 'GOOGLE_API_KEY=<from_kv>' >> ~/.hermes/.env"
 ```
 
-### Remaining for Launch
-- Deploy stelargem-web (standalone Bicep, see Step 2 above)
+### Remaining for Full Launch (Phase 8 completion)
 - Private endpoints + VNET integration (Phase 7 security)
 - Application Insights alerts wired (SPEC §21)
 - PostgreSQL automated backups enabled (SPEC §20.2)
 - Blob storage soft delete + versioning (SPEC §20.3)
+- Custom domain DNS wired to Container Apps ingress
 
 ---
 
