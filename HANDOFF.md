@@ -1,6 +1,6 @@
 # Stelar Platform — Handoff
 
-**Updated:** 2026-05-20 (Phase 8 deploy complete — all 9 apps live and healthy)
+**Updated:** 2026-05-20 (Steps 1–9 complete; security phase pending VNET/private endpoints)
 **Host:** Azure VM `gemmaco-key` · eastus2 · Standard_E8s_v3  
 **Repo:** `/mnt/gemma4/stelar-platform` → `git@github.com:robs46859-eng/stelar-platform.git`  
 **Branch:** `main` (protected) · `staging` (integration buffer)
@@ -19,7 +19,7 @@
 | 5 — Web Apps | ✅ Complete | All 4 web apps built and Bicep-ready |
 | 6 — AiSquad | ✅ Complete | Chrome sandbox fixed, inference wired to gateway via localhost:8500 |
 | 7 — Security | 🟡 Partial | All code-level security issues fixed; secrets rotated; private endpoints + VNET not yet done |
-| 8 — Launch | 🟡 In Progress | All 9 apps Running; smoke tests passing; VNET/monitoring pending |
+| 8 — Launch | 🟡 In Progress | All 9 apps live; gateway up on VM; backups/soft-delete/2 alerts done; VNET pending |
 
 ---
 
@@ -64,12 +64,26 @@
 ssh -i ~/.ssh/id_ed25519 azureuser@20.10.150.44 "echo 'FULLSTACK_GATEWAY_KEY=ak_live_68b5f5c879fac993.68680c376e05ddced3bec1e1c0971f8c16667f306d180d7f' >> ~/.hermes/.env && echo 'TELEGRAM_BOT_TOKEN=<from_kv>' >> ~/.hermes/.env && echo 'GITHUB_TOKEN=<from_kv>' >> ~/.hermes/.env && echo 'GOOGLE_API_KEY=<from_kv>' >> ~/.hermes/.env"
 ```
 
-### Remaining for Full Launch (Phase 8 completion)
-- Private endpoints + VNET integration (Phase 7 security)
-- Application Insights alerts wired (SPEC §21)
-- PostgreSQL automated backups enabled (SPEC §20.2)
-- Blob storage soft delete + versioning (SPEC §20.3)
-- Custom domain DNS wired to Container Apps ingress
+### Completed Steps (2026-05-20)
+- ✅ VM gateway started — `http://20.10.150.44:8500/healthz` responding
+- ✅ AiSquad VM env wired (`~/.hermes/.env` — FULLSTACK_GATEWAY_KEY, TELEGRAM, GITHUB, GOOGLE)
+- ✅ VM pulled latest main (`git pull origin main`)
+- ✅ Smoke tests passing — all 7 external apps responding
+- ✅ PostgreSQL backup: 7-day retention, geo-redundant backup disabled (confirmed)
+- ✅ Blob storage: soft delete 14 days + versioning enabled on stelarstorageprod
+- ✅ Alert action group `ag-stelar-ops` → robcofamily@gmail.com
+- ✅ Alert `alert-containerapp-restarts` — restart count > 3 in 5min, severity 2
+- ✅ Alert `alert-postgres-cpu` — CPU > 80% for 5min, severity 2
+- ⚠ Alert for App Insights failed requests — needs Azure Portal (CLI metric validation fails for AI components); navigate to ai-stelar-prod → Alerts → Create → requests/failed > 10 in 5min, severity 1
+
+### Gateway start-gateway.sh note
+Health check path was `/health` (wrong) — fixed to `/healthz` (commit `7eb5026`). Pull on VM before next restart.
+
+### Remaining for Security Phase (Phase 7)
+- Private endpoints for PostgreSQL, Redis, Service Bus, Storage (requires VNET with /23+ subnet)
+- VNET integration for Container Apps environment (`cae-stelar-prod`) — **destructive, do in maintenance window**
+- Disable PostgreSQL public access AFTER VNET is validated end-to-end
+- App Insights failed-request alert (Azure Portal only for now)
 
 ---
 
