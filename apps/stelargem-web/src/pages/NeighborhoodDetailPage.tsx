@@ -69,9 +69,18 @@ export default function NeighborhoodDetailPage() {
           <h1 className="text-2xl font-bold text-slate-800">{n.name}</h1>
           <p className="text-slate-500 text-sm">{n.city}, {n.state}</p>
         </div>
-        <div className="text-right text-sm text-slate-500">
-          <p>Population: <span className="font-semibold text-slate-700">{n.population.toLocaleString()}</span></p>
-          <p>Corridors: <span className="font-semibold text-slate-700">{n.corridorCount}</span></p>
+        <div className="flex flex-col items-end gap-2">
+          <Link
+            to={`/neighborhoods/${id}/tour`}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-sm"
+          >
+            <span>Tour This Neighborhood</span>
+            <span aria-hidden>→</span>
+          </Link>
+          <div className="text-right text-sm text-slate-500">
+            <p>Population: <span className="font-semibold text-slate-700">{n.population.toLocaleString()}</span></p>
+            <p>Corridors: <span className="font-semibold text-slate-700">{n.corridorCount}</span></p>
+          </div>
         </div>
       </div>
 

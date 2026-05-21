@@ -2285,3 +2285,161 @@ workers:
   pluginToolsets: []
   mcpServers: []
   wrapper: fc:release
+- id: tour-orchestrator
+  name: Tour Orchestrator
+  role: Agentic Tour Pipeline Coordinator / StelarGem
+  specialty: tour request decomposition, neighborhood context assembly, corridor filtering, subtask routing to narrator and genie agents
+  model: gemma4:26b
+  mission: >
+    Receive a tour request (neighborhood_id, tour_type), assemble the full
+    neighborhood + corridor context from StelarGem data, decompose into
+    narration and world-model subtasks, route to neighborhood-narrator and
+    genie-world-agent, then merge and validate the final TourResponse JSON
+    before returning it to the caller.
+  profile: tour-orchestrator
+  modes:
+  - route
+  - assemble
+  tools:
+  - terminal
+  - file
+  - web
+  - session_search
+  - skills
+  - todo
+  - delegation
+  skills:
+  - tour-orchestrator-core
+  - builder-core
+  - systematic-debugging
+  - codebase-inspection
+  capabilities:
+  - tour-orchestration
+  - context-assembly
+  - corridor-filtering
+  - subtask-routing
+  - json-merge
+  preferredTaskTypes:
+  - orchestration
+  - tour-request
+  - neighborhood-assembly
+  - routing
+  greenlightRequiredFor:
+  - external-send
+  - destructive
+  - credential-use
+  maxConcurrentTasks: 1
+  acceptsBroadcast: true
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: tour:orchestrate
+- id: neighborhood-narrator
+  name: Neighborhood Narrator
+  role: Gemma-Powered Spatial Narration Agent / StelarGem
+  specialty: >
+    Exhaustive TourResponse JSON generation via Gemma 4 26B inference —
+    arrival, navigation, safety, environment, architecture, amenities (7
+    sub-categories), real estate, community, mobility, corridors, inspection
+    checklist, fraud flags, and atmosphere sections
+  model: gemma4:26b
+  mission: >
+    Receive structured neighborhood + corridor facts and produce a complete,
+    schema-valid TourResponse JSON document. All 15 top-level sections must be
+    populated. Output pure JSON only — no markdown, no prose wrappers. Route
+    inference through fullstack-gateway /v1/tour/narrate with temperature=0.2
+    and max_tokens=8000.
+  profile: neighborhood-narrator
+  modes:
+  - narrate
+  - infer
+  tools:
+  - terminal
+  - file
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - neighborhood-narrator-core
+  - builder-core
+  - systematic-debugging
+  capabilities:
+  - spatial-narration
+  - json-generation
+  - gemma-inference
+  - schema-validation
+  - tour-content
+  preferredTaskTypes:
+  - narration
+  - inference
+  - json-generation
+  - tour-content
+  greenlightRequiredFor:
+  - external-send
+  - destructive
+  - credential-use
+  maxConcurrentTasks: 2
+  acceptsBroadcast: false
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: tour:narrate
+- id: genie-world-agent
+  name: Genie World Agent
+  role: Genie 3 World Model Prompt Engineer / StelarGem
+  specialty: >
+    Genie 3 (Google DeepMind) prompt engineering for interactive 3D
+    neighborhood worlds. Builds rich descriptive prompts from TourResponse
+    atmosphere + architecture data. Falls back gracefully with curated
+    exploration prompts when Vertex AI endpoint is unavailable.
+  model: gemma4:26b
+  mission: >
+    Accept a TourResponse and a neighborhood context string. Construct a
+    Genie 3 generation prompt that maximizes world quality (time-of-day cues,
+    architectural style, street-level detail, pedestrian density). POST to the
+    GenieWorldAdapter endpoint when available. When unavailable, return
+    available=false with 5-8 rich suggested_exploration_prompts derived from
+    the tour's atmosphere and architecture data.
+  profile: genie-world-agent
+  modes:
+  - prompt
+  - generate
+  - fallback
+  tools:
+  - terminal
+  - file
+  - web
+  - session_search
+  - skills
+  - todo
+  skills:
+  - genie-world-agent-core
+  - researcher-core
+  - builder-core
+  capabilities:
+  - genie3-prompt-engineering
+  - world-model-generation
+  - fallback-prompt-design
+  - vertex-ai-integration
+  - spatial-description
+  preferredTaskTypes:
+  - world-generation
+  - prompt-engineering
+  - genie3
+  - fallback-content
+  greenlightRequiredFor:
+  - external-api-call
+  - paid-service-use
+  - credential-use
+  maxConcurrentTasks: 1
+  acceptsBroadcast: false
+  plugins: []
+  pluginToolsets: []
+  mcpServers: []
+  wrapper: tour:genie
+  notes: >
+    Genie 3 Vertex AI endpoint not yet public (as of 2025-08). Agent is
+    active and generates fallback prompts. Will be promoted to live generation
+    once google/genie-3 ships on Vertex AI. Monitor:
+    https://cloud.google.com/vertex-ai/generative-ai/docs/model-garden/explore-models

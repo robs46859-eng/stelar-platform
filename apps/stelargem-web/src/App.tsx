@@ -4,6 +4,7 @@ import CorridorsPage from './pages/CorridorsPage.tsx';
 import DashboardPage from './pages/DashboardPage.tsx';
 import NeighborhoodDetailPage from './pages/NeighborhoodDetailPage.tsx';
 import NeighborhoodsPage from './pages/NeighborhoodsPage.tsx';
+import TourPage from './pages/TourPage.tsx';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/" element={<DashboardPage />} />
           <Route path="/neighborhoods" element={<NeighborhoodsPage />} />
           <Route path="/neighborhoods/:id" element={<NeighborhoodDetailPage />} />
+          <Route path="/neighborhoods/:id/tour" element={<TourPage />} />
           <Route path="/corridors" element={<CorridorsPage />} />
         </Routes>
       </main>
