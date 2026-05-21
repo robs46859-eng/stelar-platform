@@ -13,7 +13,7 @@ resource gatewayApp 'Microsoft.App/containerApps@2023-05-01' = {
   properties: {
     managedEnvironmentId: containerAppsEnvId
     configuration: {
-      ingress: { external: false, targetPort: 8000 }
+      ingress: { external: true, targetPort: 8000 }
       registries: [{ server: '${acrName}.azurecr.io', identity: 'system' }]
       secrets: [
         { name: 'postgres-url', keyVaultUrl: '${keyVaultSecretBaseUrl}/POSTGRES-URL-PSYCOPG', identity: 'system' }

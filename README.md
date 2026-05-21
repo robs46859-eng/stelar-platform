@@ -3,9 +3,12 @@
 The Stelar Platform is a multi-tenant property and travel management ecosystem powered by local LLM intelligence (Gemma 4 26B) and hosted on Azure.
 
 ## 🌐 Public Access
-- **Landing**: [https://stelar.host](https://stelar.host)
-- **StelarVacay**: [https://vacay.stelar.host](https://vacay.stelar.host)
-- **StelarPeople**: [https://people.stelar.host](https://people.stelar.host)
+- **StelarVacay**: [https://stelarvacay-web.proudbay-d7864c81.eastus2.azurecontainerapps.io](https://stelarvacay-web.proudbay-d7864c81.eastus2.azurecontainerapps.io)
+- **StelarPeople**: [https://stelarpeople-web.proudbay-d7864c81.eastus2.azurecontainerapps.io](https://stelarpeople-web.proudbay-d7864c81.eastus2.azurecontainerapps.io)
+- **StelarGem**: [https://stelargem-web.proudbay-d7864c81.eastus2.azurecontainerapps.io](https://stelargem-web.proudbay-d7864c81.eastus2.azurecontainerapps.io)
+- **FullStack Dashboard**: [https://fullstack-dashboard.proudbay-d7864c81.eastus2.azurecontainerapps.io](https://fullstack-dashboard.proudbay-d7864c81.eastus2.azurecontainerapps.io)
+
+Custom domains under `stelar.host` are not cut over to the VNET-integrated environment yet. As of 2026-05-21, `vacay.stelar.host` and `people.stelar.host` still point to the old `happycoast` Container Apps environment.
 
 ## 🏗 Architecture
 ### Infrastructure
@@ -18,8 +21,8 @@ The Stelar Platform is a multi-tenant property and travel management ecosystem p
 ## 🤖 Intelligence Integration (Phase 6: Current)
 The platform uses a hybrid-cloud model for LLM tasks:
 - **Model**: Gemma 4 26B (Ollama).
-- **Status**: Connecting AiSquad agents to Gateway proxy.
-- **Sandbox Fix**: Implementation in progress.
+- **Status**: AiSquad agents are wired to the Gateway proxy.
+- **Sandbox Fix**: Complete.
 
 ## 💳 Billing
 - **Status**: Stripe SDK scaffolded and `STRIPE-SECRET-KEY` configured in Key Vault.

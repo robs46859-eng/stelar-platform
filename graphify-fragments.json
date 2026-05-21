@@ -1,0 +1,114 @@
+{
+  "outputRoot": "graphify-out/fragments",
+  "exclude": [
+    ".git/**",
+    "node_modules/**",
+    "**/node_modules/**",
+    "dist/**",
+    "**/dist/**",
+    "build/**",
+    "**/build/**",
+    "coverage/**",
+    "**/coverage/**",
+    ".venv/**",
+    "**/.venv/**",
+    "__pycache__/**",
+    "**/__pycache__/**",
+    "graphify-out/cache/**",
+    "graphify-out/fragments/**",
+    "**/graphify-out/**",
+    "services/fullstack-aisquad/hermes-config/**",
+    "services/fullstack-aisquad/memory/**",
+    "services/fullstack-aisquad/missions/**",
+    "services/fullstack-aisquad/screenshots/**",
+    "services/fullstack-aisquad/releases/**",
+    "services/fullstack-aisquad/.wrangler/**"
+  ],
+  "fragments": [
+    {
+      "name": "gateway",
+      "phase": "03-core-services",
+      "description": "FullStack gateway, inference bridge configuration, and its Container Apps module.",
+      "paths": [
+        "services/fullstack-gateway",
+        "infra/containerapps/fullstack-gateway.bicep",
+        "infra/scripts/start-gateway.sh"
+      ]
+    },
+    {
+      "name": "stelarpeople",
+      "phase": "05-web-apps",
+      "description": "StelarPeople API, web app, and deployment templates.",
+      "paths": [
+        "apps/stelarpeople-api",
+        "apps/stelarpeople-web",
+        "infra/containerapps/stelarpeople-api.bicep",
+        "infra/containerapps/stelarpeople-web.bicep"
+      ]
+    },
+    {
+      "name": "stelarvacay",
+      "phase": "05-web-apps",
+      "description": "StelarVacay API, web app, and deployment templates.",
+      "paths": [
+        "apps/stelarvacay-api",
+        "apps/stelarvacay-web",
+        "infra/containerapps/stelarvacay-api.bicep",
+        "infra/containerapps/stelarvacay-web.bicep"
+      ]
+    },
+    {
+      "name": "stelargem",
+      "phase": "05-web-apps",
+      "description": "StelarGem API, web app, and deployment templates.",
+      "paths": [
+        "services/stelargem-api",
+        "apps/stelargem-web",
+        "infra/containerapps/stelargem-api.bicep",
+        "infra/containerapps/stelargem-web.bicep"
+      ]
+    },
+    {
+      "name": "arkham",
+      "phase": "03-core-services",
+      "description": "Arkham governance gate and deployment template.",
+      "paths": [
+        "services/arkham-governance",
+        "infra/containerapps/arkham-governance.bicep"
+      ]
+    },
+    {
+      "name": "aisquad",
+      "phase": "06-aisquad",
+      "description": "AiSquad/Hermes runtime configuration and browser tooling.",
+      "paths": [
+        "services/fullstack-aisquad/src",
+        "services/fullstack-aisquad/playground-ws-worker",
+        "infra/scripts/workers/phase1-bridge.sh"
+      ]
+    },
+    {
+      "name": "infra-azure",
+      "phase": "02-azure-cloud",
+      "description": "Azure Bicep, deployment scripts, storage, service bus, and operational docs.",
+      "paths": [
+        "infra",
+        "HANDOFF.md",
+        "SWARM_CONTROL.md",
+        "SPEC.md",
+        "PHASE_CLOSEOUT_SUMMARY.md"
+      ]
+    },
+    {
+      "name": "security-phase7",
+      "phase": "07-security",
+      "description": "Security hardening artifacts, private networking, alerts, and live verification snapshots.",
+      "paths": [
+        "infra",
+        "HANDOFF.md",
+        "SWARM_CONTROL.md",
+        "graphify-out/live"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "alertName": {
+      "type": "string",
+      "defaultValue": "alert-appinsights-failed-requests"
+    },
+    "appInsightsResourceId": {
+      "type": "string"
+    },
+    "actionGroupId": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Insights/metricAlerts",
+      "apiVersion": "2018-03-01",
+      "name": "[parameters('alertName')]",
+      "location": "global",
+      "properties": {
+        "description": "App Insights failed requests greater than 10 over 5 minutes.",
+        "severity": 1,
+        "enabled": true,
+        "scopes": [
+          "[parameters('appInsightsResourceId')]"
+        ],
+        "evaluationFrequency": "PT1M",
+        "windowSize": "PT5M",
+        "criteria": {
+          "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+          "allOf": [
+            {
+              "name": "FailedRequests",
+              "metricNamespace": "Microsoft.Insights/components",
+              "metricName": "requests/failed",
+              "operator": "GreaterThan",
+              "threshold": 10,
+              "timeAggregation": "Count",
+              "criterionType": "StaticThresholdCriterion"
+            }
+          ]
+        },
+        "autoMitigate": true,
+        "actions": [
+          {
+            "actionGroupId": "[parameters('actionGroupId')]",
+            "webHookProperties": {}
+          }
+        ]
+      }
+    }
+  ]
+}

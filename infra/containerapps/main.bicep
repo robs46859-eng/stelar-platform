@@ -1,7 +1,7 @@
 targetScope = 'resourceGroup'
 
 param location string = 'eastus2'
-param containerAppsEnvName string = 'cae-stelar-prod'
+param containerAppsEnvName string = 'cae-stelar-prod-vnet'
 param keyVaultName string = 'kv-stelar-prod'
 param acrName string = 'acrstelarprod'
 param ollamaBridgeUrl string

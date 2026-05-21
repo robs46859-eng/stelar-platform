@@ -1,6 +1,6 @@
 # Stelar Platform — Handoff
 
-**Updated:** 2026-05-20 (Security hardening partially complete; replacement ACA environment required for VNET integration)
+**Updated:** 2026-05-21 (VNET Container Apps migration complete; all 9 apps running in `cae-stelar-prod-vnet`)
 **Host:** Azure VM `gemmaco-key` · eastus2 · Standard_E8s_v3  
 **Repo:** `/mnt/gemma4/stelar-platform` → `git@github.com:robs46859-eng/stelar-platform.git`  
 **Branch:** `main` (protected) · `staging` (integration buffer)
@@ -18,8 +18,8 @@
 | 4 — Deploy to Container Apps | ✅ Complete | All 4 original images deployed, managed identities assigned, DNS live |
 | 5 — Web Apps | ✅ Complete | All 4 web apps built and Bicep-ready |
 | 6 — AiSquad | ✅ Complete | Chrome sandbox fixed, inference wired to gateway via localhost:8500 |
-| 7 — Security | 🟡 Partial | VNET + PG/Redis/Storage private endpoints done; ACA env cannot be VNET-integrated in place; Service Bus requires Premium |
-| 8 — Launch | 🟡 In Progress | All 9 apps live; gateway up on VM; backups/soft-delete/3 alerts done; private-network cutover requires replacement ACA env |
+| 7 — Security | 🟡 Partial | VNET + PG/Redis/Storage private endpoints done; all 9 apps migrated to VNET ACA env; Service Bus Premium + PG public lock-down remain |
+| 8 — Launch | 🟡 In Progress | All 9 apps live in `cae-stelar-prod-vnet`; custom domain DNS cutover still pending |
 
 ---
 
@@ -27,17 +27,19 @@
 
 ### Container App Status
 
+Current VNET-integrated environment: `cae-stelar-prod-vnet` (`proudbay-d7864c81.eastus2.azurecontainerapps.io`).
+
 | App | Status | FQDN |
 |---|---|---|
-| fullstack-gateway | ✅ Running | internal only |
-| stelarvacay-api | ✅ Running | `stelarvacay-api.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
-| stelarvacay-web | ✅ Running | `stelarvacay-web.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
-| stelarpeople-api | ✅ Running | `stelarpeople-api.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
-| stelarpeople-web | ✅ Running | `stelarpeople-web.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
-| arkham-governance | ✅ Running | internal only |
-| stelargem-api | ✅ Running | `stelargem-api.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
-| fullstack-dashboard | ✅ Running | `fullstack-dashboard.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
-| stelargem-web | ✅ Running | `stelargem-web.happycoast-5ee98aac.eastus2.azurecontainerapps.io` |
+| fullstack-gateway | ✅ Succeeded / Running | `fullstack-gateway.proudbay-d7864c81.eastus2.azurecontainerapps.io` |
+| stelarvacay-api | ✅ Succeeded / Running | `stelarvacay-api.proudbay-d7864c81.eastus2.azurecontainerapps.io` |
+| stelarvacay-web | ✅ Succeeded / Running | `stelarvacay-web.proudbay-d7864c81.eastus2.azurecontainerapps.io` |
+| stelarpeople-api | ✅ Succeeded / Running | `stelarpeople-api.proudbay-d7864c81.eastus2.azurecontainerapps.io` |
+| stelarpeople-web | ✅ Succeeded / Running | `stelarpeople-web.proudbay-d7864c81.eastus2.azurecontainerapps.io` |
+| arkham-governance | ✅ Succeeded / Running | `arkham-governance.internal.proudbay-d7864c81.eastus2.azurecontainerapps.io` |
+| stelargem-api | ✅ Succeeded / Running | `stelargem-api.proudbay-d7864c81.eastus2.azurecontainerapps.io` |
+| fullstack-dashboard | ✅ Succeeded / Running | `fullstack-dashboard.proudbay-d7864c81.eastus2.azurecontainerapps.io` |
+| stelargem-web | ✅ Succeeded / Running | `stelargem-web.proudbay-d7864c81.eastus2.azurecontainerapps.io` |
 | Storage (stelarstorageprod) | ✅ Live | 3 containers: inspections, exports, archive |
 | Service Bus (sb-stelar-prod) | ✅ Live | 2 queues: agent-run-queue, governance-queue |
 
@@ -49,6 +51,21 @@
 - `stelarvacay-web /` → 200 (React app)
 - `stelargem-web /` → 200 · title: "StelarGem — Neighborhood Intelligence"
 - `fullstack-dashboard /` → 200 (React app)
+
+### VNET Migration Smoke Test Results (2026-05-21 ~04:00 UTC)
+- `stelarvacay-api /health` → 200
+- `stelarpeople-api /health` → 200
+- `stelargem-api /health` → 200
+- `stelarvacay-web /` → 200
+- `stelarpeople-web /` → 200
+- `stelargem-web /` → 200
+- `fullstack-dashboard /` → 200
+
+### Custom Domain Status (2026-05-21)
+- `stelar.host` resolves to `57.162.42.65`, not the new `proudbay` ACA hostnames.
+- `vacay.stelar.host` still CNAMEs to `stelarvacay-web.happycoast-5ee98aac.eastus2.azurecontainerapps.io`.
+- `people.stelar.host` still CNAMEs to `stelarpeople-web.happycoast-5ee98aac.eastus2.azurecontainerapps.io`.
+- Use the `*.proudbay-d7864c81.eastus2.azurecontainerapps.io` URLs above until DNS/custom domains are cut over.
 
 ### Issues Resolved During Deploy
 | Issue | Root Cause | Fix |
@@ -101,16 +118,19 @@ Health check path was `/health` (wrong) — fixed to `/healthz` (commit `7eb5026
   - Redis `pe-redis-stelar-prod` → `10.0.2.5`
   - Storage blob `pe-stelarstorageprod-blob` → `10.0.2.6`
 - ✅ App Insights failed-request alert deployed from `infra/monitoring/appinsights-failed-requests-alert.json`
+- ✅ Replacement VNET-integrated Container Apps environment `cae-stelar-prod-vnet` created and all 9 apps migrated.
+- ✅ All 9 VNET environment apps have `AcrPull` on `acrstelarprod`; backend/web identities also have `Key Vault Secrets User` where needed.
+- ✅ VNET environment smoke tests passed for all 7 externally tested services.
 - ⚠ Service Bus private endpoint blocked by Azure SKU: `sb-stelar-prod` is not Premium. Azure error: `PrivateEndpointInvalidSku`.
 - ⚠ Existing Container Apps environment `cae-stelar-prod` cannot be VNET-integrated in place. Azure error: `ManagedEnvironmentCannotAddVnetToExistingEnv`.
-- ⛔ PostgreSQL public access was **not** disabled because Container Apps are still outside the VNET.
+- ⛔ PostgreSQL public access has **not** been disabled yet. Confirm app-to-Postgres connectivity from `cae-stelar-prod-vnet`, then disable public access.
 
 Required next path:
-1. Create a new VNET-integrated Container Apps environment, likely `cae-stelar-prod-vnet`, using `snet-containerapps`.
-2. Redeploy all 9 Container Apps into that environment or plan a controlled replace/delete/recreate cutover.
-3. Upgrade/migrate Service Bus to a Premium namespace before private endpoint creation.
-4. Run end-to-end smoke tests from the VNET-integrated apps.
-5. Disable PostgreSQL public access only after app connectivity is confirmed.
+1. Cut over `stelar.host` custom domains from the old `happycoast` environment to the new `proudbay` environment.
+2. Confirm app-to-PostgreSQL connectivity from VNET-integrated revisions.
+3. Disable PostgreSQL public access after connectivity is confirmed.
+4. Upgrade/migrate Service Bus to a Premium namespace before private endpoint creation.
+5. Create the Service Bus private endpoint and re-run end-to-end smoke tests.
 
 ---
 
