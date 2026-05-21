@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 RG="${RG:-rg-stelar-prod}"
 LOCATION="${LOCATION:-eastus2}"
-CONTAINER_APPS_ENV_NAME="${CONTAINER_APPS_ENV_NAME:-cae-stelar-prod}"
+CONTAINER_APPS_ENV_NAME="${CONTAINER_APPS_ENV_NAME:-cae-stelar-prod-vnet}"
 KEY_VAULT_NAME="${KEY_VAULT_NAME:-kv-stelar-prod}"
 ACR_NAME="${ACR_NAME:-acrstelarprod}"
 
