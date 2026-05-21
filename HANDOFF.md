@@ -1,6 +1,6 @@
 # Stelar Platform — Handoff
 
-**Updated:** 2026-05-20 (Steps 1–9 complete; security phase pending VNET/private endpoints)
+**Updated:** 2026-05-20 (Security hardening partially complete; replacement ACA environment required for VNET integration)
 **Host:** Azure VM `gemmaco-key` · eastus2 · Standard_E8s_v3  
 **Repo:** `/mnt/gemma4/stelar-platform` → `git@github.com:robs46859-eng/stelar-platform.git`  
 **Branch:** `main` (protected) · `staging` (integration buffer)
@@ -18,8 +18,8 @@
 | 4 — Deploy to Container Apps | ✅ Complete | All 4 original images deployed, managed identities assigned, DNS live |
 | 5 — Web Apps | ✅ Complete | All 4 web apps built and Bicep-ready |
 | 6 — AiSquad | ✅ Complete | Chrome sandbox fixed, inference wired to gateway via localhost:8500 |
-| 7 — Security | 🟡 Partial | All code-level security issues fixed; secrets rotated; private endpoints + VNET not yet done |
-| 8 — Launch | 🟡 In Progress | All 9 apps live; gateway up on VM; backups/soft-delete/2 alerts done; VNET pending |
+| 7 — Security | 🟡 Partial | VNET + PG/Redis/Storage private endpoints done; ACA env cannot be VNET-integrated in place; Service Bus requires Premium |
+| 8 — Launch | 🟡 In Progress | All 9 apps live; gateway up on VM; backups/soft-delete/3 alerts done; private-network cutover requires replacement ACA env |
 
 ---
 
@@ -61,7 +61,14 @@
 
 ### AiSquad VM env setup (one-time, not yet done)
 ```bash
-ssh -i ~/.ssh/id_ed25519 azureuser@20.10.150.44 "echo 'FULLSTACK_GATEWAY_KEY=ak_live_68b5f5c879fac993.68680c376e05ddced3bec1e1c0971f8c16667f306d180d7f' >> ~/.hermes/.env && echo 'TELEGRAM_BOT_TOKEN=<from_kv>' >> ~/.hermes/.env && echo 'GITHUB_TOKEN=<from_kv>' >> ~/.hermes/.env && echo 'GOOGLE_API_KEY=<from_kv>' >> ~/.hermes/.env"
+# All secrets must be fetched from Key Vault — never hardcode here
+ssh -i ~/.ssh/id_ed25519 azureuser@20.10.150.44 <<'EOF'
+  FGWK=$(az keyvault secret show --vault-name kv-stelar-prod --name FULLSTACK-INTERNAL-API-KEY --query value -o tsv)
+  echo "FULLSTACK_GATEWAY_KEY=$FGWK" >> ~/.hermes/.env
+  echo "TELEGRAM_BOT_TOKEN=$(az keyvault secret show --vault-name kv-stelar-prod --name TELEGRAM-BOT-TOKEN --query value -o tsv)" >> ~/.hermes/.env
+  echo "GITHUB_TOKEN=$(az keyvault secret show --vault-name kv-stelar-prod --name GITHUB-TOKEN --query value -o tsv)" >> ~/.hermes/.env
+  echo "GOOGLE_API_KEY=$(az keyvault secret show --vault-name kv-stelar-prod --name GOOGLE-API-KEY --query value -o tsv)" >> ~/.hermes/.env
+EOF
 ```
 
 ### Completed Steps (2026-05-20)
@@ -74,16 +81,36 @@ ssh -i ~/.ssh/id_ed25519 azureuser@20.10.150.44 "echo 'FULLSTACK_GATEWAY_KEY=ak_
 - ✅ Alert action group `ag-stelar-ops` → robcofamily@gmail.com
 - ✅ Alert `alert-containerapp-restarts` — restart count > 3 in 5min, severity 2
 - ✅ Alert `alert-postgres-cpu` — CPU > 80% for 5min, severity 2
-- ⚠ Alert for App Insights failed requests — needs Azure Portal (CLI metric validation fails for AI components); navigate to ai-stelar-prod → Alerts → Create → requests/failed > 10 in 5min, severity 1
+- ✅ Alert `alert-appinsights-failed-requests` — App Insights `requests/failed` Count > 10 in 5min, severity 1, deployed via ARM template
 
 ### Gateway start-gateway.sh note
 Health check path was `/health` (wrong) — fixed to `/healthz` (commit `7eb5026`). Pull on VM before next restart.
 
-### Remaining for Security Phase (Phase 7)
-- Private endpoints for PostgreSQL, Redis, Service Bus, Storage (requires VNET with /23+ subnet)
-- VNET integration for Container Apps environment (`cae-stelar-prod`) — **destructive, do in maintenance window**
-- Disable PostgreSQL public access AFTER VNET is validated end-to-end
-- App Insights failed-request alert (Azure Portal only for now)
+### Security Phase Update (Phase 7) — 2026-05-20
+- ✅ VNET `vnet-stelar-prod` created in `rg-stelar-prod` / `eastus2`
+  - Address space: `10.0.0.0/16`
+  - ACA subnet: `snet-containerapps` / `10.0.0.0/23`, delegated to `Microsoft.App/environments`
+  - Private endpoint subnet: `snet-private-endpoints` / `10.0.2.0/27`, private endpoint policies disabled
+- ✅ Private DNS zones created and linked to `vnet-stelar-prod`
+  - `privatelink.postgres.database.azure.com`
+  - `privatelink.redis.cache.windows.net`
+  - `privatelink.servicebus.windows.net`
+  - `privatelink.blob.core.windows.net`
+- ✅ Private endpoints approved
+  - PostgreSQL `pe-pg-stelar-prod` → `10.0.2.4`
+  - Redis `pe-redis-stelar-prod` → `10.0.2.5`
+  - Storage blob `pe-stelarstorageprod-blob` → `10.0.2.6`
+- ✅ App Insights failed-request alert deployed from `infra/monitoring/appinsights-failed-requests-alert.json`
+- ⚠ Service Bus private endpoint blocked by Azure SKU: `sb-stelar-prod` is not Premium. Azure error: `PrivateEndpointInvalidSku`.
+- ⚠ Existing Container Apps environment `cae-stelar-prod` cannot be VNET-integrated in place. Azure error: `ManagedEnvironmentCannotAddVnetToExistingEnv`.
+- ⛔ PostgreSQL public access was **not** disabled because Container Apps are still outside the VNET.
+
+Required next path:
+1. Create a new VNET-integrated Container Apps environment, likely `cae-stelar-prod-vnet`, using `snet-containerapps`.
+2. Redeploy all 9 Container Apps into that environment or plan a controlled replace/delete/recreate cutover.
+3. Upgrade/migrate Service Bus to a Premium namespace before private endpoint creation.
+4. Run end-to-end smoke tests from the VNET-integrated apps.
+5. Disable PostgreSQL public access only after app connectivity is confirmed.
 
 ---
 
@@ -103,7 +130,7 @@ All 6 agents finished 2026-05-19. Summary:
 **Gateway live (for testing on VM):**
 ```
 tenant:   stelar
-key:      ak_live_68b5f5c879fac993.68680c376e05ddced3bec1e1c0971f8c16667f306d180d7f
+key:      <from Key Vault: FULLSTACK-INTERNAL-API-KEY>
 endpoint: http://localhost:8500/v1/proxy/infer
 scope:    inference:invoke
 model:    gemma4:26b
@@ -203,10 +230,12 @@ All three leaked secrets from GitHub Secret Scanning alerts were revoked and rep
 
 One-time VM setup required (run once over SSH):
 ```bash
-echo "FULLSTACK_GATEWAY_KEY=ak_live_68b5f5c879fac993.68680c376e05ddced3bec1e1c0971f8c16667f306d180d7f" >> ~/.hermes/.env
-echo "TELEGRAM_BOT_TOKEN=<new_token_from_keyvault>" >> ~/.hermes/.env
-echo "GITHUB_TOKEN=<new_token_from_keyvault>" >> ~/.hermes/.env
-echo "GOOGLE_API_KEY=<new_key_from_keyvault>" >> ~/.hermes/.env
+# Fetch all secrets from Key Vault — never hardcode values in this file
+FGWK=$(az keyvault secret show --vault-name kv-stelar-prod --name FULLSTACK-INTERNAL-API-KEY --query value -o tsv)
+echo "FULLSTACK_GATEWAY_KEY=$FGWK" >> ~/.hermes/.env
+echo "TELEGRAM_BOT_TOKEN=$(az keyvault secret show --vault-name kv-stelar-prod --name TELEGRAM-BOT-TOKEN --query value -o tsv)" >> ~/.hermes/.env
+echo "GITHUB_TOKEN=$(az keyvault secret show --vault-name kv-stelar-prod --name GITHUB-TOKEN --query value -o tsv)" >> ~/.hermes/.env
+echo "GOOGLE_API_KEY=$(az keyvault secret show --vault-name kv-stelar-prod --name GOOGLE-API-KEY --query value -o tsv)" >> ~/.hermes/.env
 ```
 
 ---

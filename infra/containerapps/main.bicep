@@ -70,7 +70,10 @@ module storage 'storage.bicep' = {
   params: { location: location }
 }
 
-module servicebus 'servicebus.bicep' = {
-  name: 'deploy-servicebus'
-  params: { location: location }
-}
+
+// NOTE: Service Bus (sb-stelar-prod) removed — Standard SKU does not support
+// private endpoints (PrivateEndpointInvalidSku). When AiSquad wiring needs
+// message queues, use Azure Queue Storage on stelarstorageprod (already
+// private-endpoint-secured via pe-stelarstorageprod-blob).
+// See: storage.bicep → queueService / agentRunQueue / governanceQueue
+
