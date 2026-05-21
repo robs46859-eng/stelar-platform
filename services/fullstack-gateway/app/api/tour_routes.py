@@ -1,23 +1,48 @@
+import asyncio
+import base64
 import json
 import logging
-import uuid
 from datetime import datetime, timezone
+from typing import Any
 
-from fastapi import APIRouter, Header, HTTPException
+from fastapi import APIRouter, File, Form, Header, HTTPException, UploadFile
 from pydantic import BaseModel
 
 from app.core.config import get_settings
-from app.core.pipeline import build_pipeline
-from app.schemas.inference import InferenceRequest, Message
+from app.services.gemini_vision import analyze_images, generate_creative_transform
 
 logger = logging.getLogger(__name__)
 tour_router = APIRouter(prefix="/v1/tour")
-_pipeline = build_pipeline()
+
+GEMINI_NARRATE_MODEL = "gemini-2.5-flash"
+
+
+def _call_gemini_sync(system: str, user: str, api_key: str) -> str:
+    from google import genai
+    from google.genai import types as genai_types
+
+    client = genai.Client(api_key=api_key)
+    response = client.models.generate_content(
+        model=GEMINI_NARRATE_MODEL,
+        contents=[{"role": "user", "parts": [{"text": user}]}],
+        config=genai_types.GenerateContentConfig(
+            system_instruction=system,
+            temperature=0.2,
+            max_output_tokens=4096,
+            thinking_config=genai_types.ThinkingConfig(thinking_budget=0),
+        ),
+    )
+    return (response.text or "").strip()
+
+
+async def _call_gemini(system: str, user: str) -> str:
+    settings = get_settings()
+    return await asyncio.to_thread(_call_gemini_sync, system, user, settings.google_ai_api_key)
 
 SCHEMA_DESCRIPTION = """
 Return ONLY a valid JSON object — no prose, no markdown fences, no extra text.
-Populate every field. Use null for unknown numbers, empty arrays [] for unknown lists.
-Use your training knowledge about the neighborhood to fill fields you aren't given data for.
+Populate every field. Use your training knowledge about the neighborhood to fill fields you aren't given data for.
+Schema type hints: where you see "number" write a real number, "boolean" write true or false, "number|null" write a number or null, "string" write real text, "A|B|C|D|F" pick one letter grade. All values must be valid JSON.
 
 Schema (fill every key):
 {
@@ -28,7 +53,7 @@ Schema (fill every key):
     "state": "string",
     "tour_type": "string",
     "generated_at": "ISO8601",
-    "model": "gemma4:26b",
+    "model": "gemini-2.5-flash",
     "confidence_score": 0.0-1.0,
     "disclaimer": "AI-generated tour. Informational only. Not a verified source."
   },
@@ -337,28 +362,11 @@ async def narrate_tour(
         f"\n\n{SCHEMA_DESCRIPTION}"
     )
 
-    inference_req = InferenceRequest(
-        model="gemma4:26b",
-        messages=[
-            Message(role="system", content=SYSTEM_PROMPT),
-            Message(role="user", content=user_message),
-        ],
-        temperature=0.2,
-        max_tokens=8000,
-    )
-
     try:
-        result = await _pipeline.execute(
-            payload=inference_req,
-            presented_api_key=x_api_key,
-            idempotency_key=str(uuid.uuid4()),
-            client_host=None,
-        )
-    except (PermissionError, RuntimeError) as exc:
-        logger.error("tour_pipeline_error", exc_info=exc)
-        raise HTTPException(status_code=502, detail=f"Inference pipeline error: {exc}") from exc
-
-    raw = result.output_text.strip()
+        raw = (await _call_gemini(SYSTEM_PROMPT, user_message)).strip()
+    except Exception as exc:
+        logger.error("tour_gemma_error: %s", exc, exc_info=True)
+        raise HTTPException(status_code=502, detail=f"Inference error: {exc}") from exc
 
     # Strip any accidental markdown fences Gemma may add
     if raw.startswith("```"):
@@ -368,17 +376,297 @@ async def narrate_tour(
     try:
         tour_data = json.loads(raw)
     except json.JSONDecodeError as exc:
-        logger.error(
-            "tour_json_parse_error",
-            raw_preview=raw[:500],
-            exc_info=exc,
-        )
-        raise HTTPException(status_code=502, detail="Tour agent returned malformed JSON.") from exc
+        logger.error("tour_json_parse_error raw=%s", raw[:500], exc_info=True)
+        tour_data = {
+            "meta": {
+                "tour_id": body.tour_id,
+                "neighborhood": body.neighborhood,
+                "city": body.city,
+                "state": body.state,
+                "tour_type": body.tour_type,
+                "generated_at": datetime.now(timezone.utc).isoformat(),
+                "model": "gemini-2.5-flash",
+            },
+            "narration": raw,
+        }
 
-    logger.info(
-        "tour_generated",
-        tour_id=body.tour_id,
-        neighborhood=body.neighborhood,
-        tour_type=body.tour_type,
-    )
+    logger.info("tour_generated tour_id=%s neighborhood=%s type=%s", body.tour_id, body.neighborhood, body.tour_type)
     return tour_data
+
+
+# ─── Street-Narrate: Gemma4 property arrival script ──────────────────────────
+
+STREET_NARRATE_SYSTEM = (
+    "You are StelarPeople Tour Agent. Generate a structured JSON arrival script for a property. "
+    "Be conversational, warm, and specific — like a knowledgeable local friend guiding someone. "
+    "For each segment: route_to_door, parking, transit_access, exterior_condition, entry_points, "
+    "neighborhood_pulse, fraud_check. "
+    "Assign heading_deg (0-359, compass degrees) to each segment so it can be synced to Street View rotation. "
+    "0=North, 90=East, 180=South, 270=West. Point toward the relevant feature. "
+    "Return ONLY valid JSON. No markdown, no code fences, no explanation. "
+    "All values must be valid JSON: write real numbers not 'number', true/false not 'boolean'."
+)
+
+STREET_NARRATE_SCHEMA = """{
+  "tour_id": "<tour_id>",
+  "model": "gemini-2.5-flash",
+  "narration": "2-3 sentence arrival description of the property and its immediate surroundings",
+  "route_to_door": "how to approach and enter the property",
+  "parking": "nearby parking options",
+  "neighborhood_vibe": "character and feel of the neighborhood",
+  "safety_grade": "A",
+  "commute_notes": "walkability and transit access summary",
+  "what_to_inspect": ["key thing to check in person"],
+  "disclaimer": "AI-generated tour. Informational only. Not a verified source."
+}"""
+
+
+class StreetNarrateRequest(BaseModel):
+    tour_id: str
+    address: str
+    neighborhood: str | None = None
+    city: str | None = None
+    state: str | None = None
+    lat: float | None = None
+    lon: float | None = None
+    listing_facts: dict[str, Any] = {}
+    tour_type: str = "property_arrival"
+
+
+@tour_router.post("/street-narrate")
+async def street_narrate(
+    body: StreetNarrateRequest,
+    x_api_key: str = Header(..., alias="X-API-Key"),
+) -> dict:
+    settings = get_settings()
+    if x_api_key != settings.dev_api_key_secret:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    coords = f"Coordinates: {body.lat}, {body.lon}. " if body.lat and body.lon else ""
+    facts = "; ".join(f"{k}: {v}" for k, v in list(body.listing_facts.items())[:15])
+    listing_block = f"Listing claims: {facts}. " if facts else ""
+
+    user_message = (
+        f"Generate an arrival tour script for: {body.address}. "
+        f"Tour ID: {body.tour_id}. "
+        f"Tour type: {body.tour_type}. "
+        f"{coords}{listing_block}"
+        f"Generated at: {datetime.now(timezone.utc).isoformat()}. "
+        f"\n\nSchema to fill:\n{STREET_NARRATE_SCHEMA}"
+    )
+
+    try:
+        raw = (await _call_gemini(STREET_NARRATE_SYSTEM, user_message)).strip()
+    except Exception as exc:
+        logger.error("street_narrate_gemma_error: %s", exc, exc_info=True)
+        raise HTTPException(status_code=502, detail=f"Inference error: {exc}") from exc
+    if raw.startswith("```"):
+        raw = raw.split("\n", 1)[1] if "\n" in raw else raw
+        raw = raw.rsplit("```", 1)[0].strip()
+
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        logger.error("street_narrate_json_error raw=%s", raw[:300], exc_info=True)
+        data = {
+            "tour_id": body.tour_id,
+            "address": body.address,
+            "model": "gemini-2.5-flash",
+            "narration": raw,
+        }
+
+    logger.info("street_narrate_generated tour_id=%s address=%s", body.tour_id, body.address)
+    return data
+
+
+# ─── Image-Analyze: Gemini Vision property photo analysis ────────────────────
+
+@tour_router.post("/image-analyze")
+async def image_analyze(
+    tour_id: str = Form(...),
+    listing_facts: str = Form(default="{}"),
+    images: list[UploadFile] = File(default=[]),
+    x_api_key: str = Header(..., alias="X-API-Key"),
+) -> dict:
+    settings = get_settings()
+    if x_api_key != settings.dev_api_key_secret:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    if not settings.google_ai_api_key:
+        raise HTTPException(status_code=503, detail="Google AI not configured on this gateway.")
+
+    if len(images) > 6:
+        raise HTTPException(status_code=400, detail="Maximum 6 images allowed.")
+
+    image_data: list[tuple[str, bytes]] = []
+    for img in images:
+        if img.size and img.size > 10 * 1024 * 1024:
+            raise HTTPException(status_code=400, detail=f"Image {img.filename} exceeds 10MB limit.")
+        content = await img.read()
+        mime = img.content_type or "image/jpeg"
+        image_data.append((mime, content))
+
+    try:
+        facts = json.loads(listing_facts)
+    except json.JSONDecodeError:
+        facts = {}
+
+    try:
+        result = await analyze_images(
+            tour_id=tour_id,
+            image_data=image_data,
+            listing_facts=facts,
+            api_key=settings.google_ai_api_key,
+        )
+    except Exception as exc:
+        logger.error("image_analyze_error tour_id=%s: %s", tour_id, exc, exc_info=True)
+        raise HTTPException(status_code=502, detail=f"Image analysis failed: {exc}") from exc
+
+    logger.info("image_analyzed tour_id=%s count=%d", tour_id, len(images))
+    return result
+
+
+# ─── Genie-Transform: Imagen3 / Genie creative property preview ──────────────
+
+VALID_TRANSFORMS = {"staged", "renovated", "seasonal_spring", "seasonal_winter", "potential_max", "curb_appeal"}
+
+
+class GenieTransformRequest(BaseModel):
+    tour_id: str
+    source_image_b64: str
+    transform_type: str
+    product: str = "stelarpeople"
+
+
+@tour_router.post("/genie-transform")
+async def genie_transform(
+    body: GenieTransformRequest,
+    x_api_key: str = Header(..., alias="X-API-Key"),
+) -> dict:
+    settings = get_settings()
+    if x_api_key != settings.dev_api_key_secret:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    if not settings.google_ai_api_key:
+        raise HTTPException(status_code=503, detail="Google AI not configured on this gateway.")
+
+    if body.transform_type not in VALID_TRANSFORMS:
+        raise HTTPException(status_code=400, detail=f"Invalid transform_type. Must be one of: {', '.join(sorted(VALID_TRANSFORMS))}")
+
+    try:
+        image_bytes = base64.b64decode(body.source_image_b64)
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail="Invalid base64 image data.") from exc
+
+    try:
+        result = await generate_creative_transform(
+            tour_id=body.tour_id,
+            image_bytes=image_bytes,
+            transform_type=body.transform_type,
+            api_key=settings.google_ai_api_key,
+        )
+    except Exception as exc:
+        logger.error("genie_transform_error tour_id=%s transform=%s: %s", body.tour_id, body.transform_type, exc, exc_info=True)
+        raise HTTPException(status_code=502, detail=f"Creative transform failed: {exc}") from exc
+
+    logger.info("genie_transform_generated tour_id=%s transform=%s", body.tour_id, body.transform_type)
+    return result
+
+
+# ─── Vacay-Route: Gemma4 route narrative for StelarVacay ────────────────────
+
+VACAY_ROUTE_SYSTEM = (
+    "You are StelarVacay Route Agent — a travel guide AI. "
+    "Generate a friendly, practical route narrative from a stay to a destination. "
+    "Include: step-by-step directions, transit options, cost estimates, safety notes, local tips. "
+    "Assign street_view_lat/lon and heading_deg to each step so they can be displayed in Google Maps Street View. "
+    "Be warm and helpful — like a well-traveled local friend. "
+    "Return ONLY valid JSON. No markdown, no code fences."
+)
+
+VACAY_ROUTE_SCHEMA = """{
+  "tour_id": "<tour_id>",
+  "model": "gemini-2.5-flash",
+  "route_narrative": "2-3 sentence summary of the journey",
+  "steps": [
+    {
+      "step": 1,
+      "instruction": "step description",
+      "mode": "walk",
+      "street_view_lat": 40.7128,
+      "street_view_lon": -74.006,
+      "heading_deg": 90,
+      "duration_min": 5,
+      "distance_m": 400,
+      "cost_usd": 0,
+      "tip": "optional local tip"
+    }
+  ],
+  "total_estimated_minutes": 20,
+  "cost_estimate_usd": 5.0,
+  "safety_notes": "general safety note",
+  "local_tips": ["local tip"],
+  "accessibility_notes": "wheelchair accessibility info or null",
+  "disclaimer": "AI-generated route estimate. Verify with live maps before travel."
+}"""
+
+
+class VacayRouteRequest(BaseModel):
+    tour_id: str
+    from_address: str
+    from_lat: float | None = None
+    from_lon: float | None = None
+    to_address: str
+    to_lat: float | None = None
+    to_lon: float | None = None
+    transit_preference: str = "balanced"
+    traveler_count: int = 1
+    departure_time: str | None = None
+
+
+@tour_router.post("/vacay-route")
+async def vacay_route(
+    body: VacayRouteRequest,
+    x_api_key: str = Header(..., alias="X-API-Key"),
+) -> dict:
+    settings = get_settings()
+    if x_api_key != settings.dev_api_key_secret:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    from_coords = f"({body.from_lat}, {body.from_lon})" if body.from_lat and body.from_lon else ""
+    to_coords = f"({body.to_lat}, {body.to_lon})" if body.to_lat and body.to_lon else ""
+
+    user_message = (
+        f"Generate a route narrative from '{body.from_address}' {from_coords} "
+        f"to '{body.to_address}' {to_coords}. "
+        f"Transit preference: {body.transit_preference}. "
+        f"Travelers: {body.traveler_count}. "
+        f"Departure time: {body.departure_time or 'flexible'}. "
+        f"Tour ID: {body.tour_id}. "
+        f"\n\nSchema to fill:\n{VACAY_ROUTE_SCHEMA}"
+    )
+
+    try:
+        raw = (await _call_gemini(VACAY_ROUTE_SYSTEM, user_message)).strip()
+    except Exception as exc:
+        logger.error("vacay_route_gemma_error: %s", exc, exc_info=True)
+        raise HTTPException(status_code=502, detail=f"Inference error: {exc}") from exc
+    if raw.startswith("```"):
+        raw = raw.split("\n", 1)[1] if "\n" in raw else raw
+        raw = raw.rsplit("```", 1)[0].strip()
+
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        logger.error("vacay_route_json_error raw=%s", raw[:300], exc_info=True)
+        data = {
+            "tour_id": body.tour_id,
+            "neighborhood": body.neighborhood,
+            "city": body.city,
+            "state": body.state,
+            "model": "gemini-2.5-flash",
+            "route_narration": raw,
+        }
+
+    logger.info("vacay_route_generated tour_id=%s from=%s", body.tour_id, body.from_address)
+    return data

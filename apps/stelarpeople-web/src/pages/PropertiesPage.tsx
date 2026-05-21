@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import StatusBadge from '../components/StatusBadge.tsx';
 import { api } from '../lib/api.ts';
 import type { Property } from '../types.ts';
@@ -55,6 +56,7 @@ export default function PropertiesPage() {
                 <th className="text-right px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Occupancy</th>
                 <th className="text-right px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Revenue/mo</th>
                 <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Status</th>
+                <th className="px-4 py-3"></th>
               </tr>
             </thead>
             <tbody>
@@ -71,6 +73,14 @@ export default function PropertiesPage() {
                   </td>
                   <td className="px-4 py-3">
                     <StatusBadge status={p.status} />
+                  </td>
+                  <td className="px-4 py-3">
+                    <Link
+                      to={`/properties/${p.id}/tour`}
+                      className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-lg transition-colors whitespace-nowrap"
+                    >
+                      🗺 Preview Unit Area
+                    </Link>
                   </td>
                 </tr>
               ))}

@@ -42,3 +42,27 @@ export async function fetchSavedPlans() {
   });
   return parseJson<{ plans: SavedTripPlan[] }>(response);
 }
+
+export async function fetchNeighborhoodTour(params: {
+  neighborhood: string;
+  city: string;
+  state: string;
+  lat: number | null;
+  lon: number | null;
+}) {
+  const response = await fetch(`${BASE_URL}/stays/tour-neighborhood`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+    body: JSON.stringify(params),
+  });
+  return parseJson<unknown>(response);
+}
+
+export async function fetchRoutePreview(params: { from_address: string; to_address: string; [key: string]: unknown }) {
+  const response = await fetch(`${BASE_URL}/tour/route-preview`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+    body: JSON.stringify(params),
+  });
+  return parseJson<unknown>(response);
+}

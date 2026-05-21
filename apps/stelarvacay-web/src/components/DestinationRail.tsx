@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Destination } from "../types";
 import { formatInr } from "../lib/format";
 
@@ -40,6 +41,25 @@ export function DestinationRail({ destinations, selectedId, onSelect }: Destinat
                   <span>{formatInr(destination.averageNightlyStay)}/n</span>
                   <span>{destination.tags.slice(0, 1).join("")}</span>
                 </div>
+                <Link
+                  to={`/tour?mode=neighborhood&dest=${encodeURIComponent(destination.name)}&city=${encodeURIComponent(destination.region)}&state=IN`}
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    display: 'block',
+                    marginTop: '10px',
+                    padding: '6px 10px',
+                    background: 'rgba(16,185,129,0.12)',
+                    border: '1px solid rgba(16,185,129,0.3)',
+                    borderRadius: '8px',
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    color: '#059669',
+                    textAlign: 'center',
+                    textDecoration: 'none',
+                  }}
+                >
+                  🌆 Walk the Neighborhood
+                </Link>
               </div>
             </button>
           );

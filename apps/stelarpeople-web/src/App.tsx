@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar.tsx';
 import DashboardPage from './pages/DashboardPage.tsx';
 import PropertiesPage from './pages/PropertiesPage.tsx';
+import PropertyTourPage from './pages/PropertyTourPage.tsx';
 import ScreeningPage from './pages/ScreeningPage.tsx';
 import TenantsPage from './pages/TenantsPage.tsx';
 
@@ -13,6 +14,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/properties" element={<PropertiesPage />} />
+          <Route path="/properties/:id/tour" element={<PropertyTourPage />} />
           <Route path="/screening" element={<ScreeningPage />} />
           <Route path="/tenants" element={<TenantsPage />} />
         </Routes>

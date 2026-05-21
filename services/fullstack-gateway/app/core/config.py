@@ -42,6 +42,10 @@ class Settings(BaseSettings):
     dev_api_key_secret: str = Field(default="change-me-now", alias="DEV_API_KEY_SECRET")
     ollama_bridge_url: str = Field(default='http://127.0.0.1:18080', alias='OLLAMA_BRIDGE_URL')
     ollama_bridge_shared_secret: str = Field(default='', alias='OLLAMA_BRIDGE_SHARED_SECRET')
+    google_ai_api_key: str = Field(default='', alias='GOOGLE_AI_API_KEY')
+    google_cloud_project_id: str = Field(default='', alias='GOOGLE_CLOUD_PROJECT_ID')
+    google_cloud_region: str = Field(default='us-central1', alias='GOOGLE_CLOUD_REGION')
+    openrouter_api_key: str = Field(default='', alias='OPENROUTER_API_KEY')
 
     @model_validator(mode='after')
     def validate_production_security(self) -> 'Settings':

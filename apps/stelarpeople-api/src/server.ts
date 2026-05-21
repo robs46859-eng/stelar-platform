@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import { config } from './config.js';
 import { httpLogger } from './middleware/httpLogger.js';
 import { generalApiLimiter } from './middleware/rateLimits.js';
+import { tourRouter } from './routes/tours.js';
 
 const app = express();
 app.use(cors({ origin: config.corsAllowedOrigins.length > 0 ? config.corsAllowedOrigins : false }));
@@ -24,5 +25,6 @@ app.get('/api/health', healthHandler);
 app.get('/api/ready', readyHandler);
 
 app.use(generalApiLimiter);
+app.use('/api', tourRouter);
 
 app.listen(config.port, () => console.log(`stelarpeople-api on :${config.port}`));
